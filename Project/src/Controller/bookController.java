@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import command.searchCommand;
 import client.DBSQLhandler;
+import client.DBgenericObject;
 import Book.book;
 
 public class bookController {
@@ -23,7 +24,8 @@ public class bookController {
 			}
 		}
 		try {
-			return (ArrayList<book>)client.getResultObject();
+			
+			return book.convertBack((ArrayList<DBgenericObject>) client.getResultObject());
 		} catch (SQLException e) {
 			return null;
 		}
