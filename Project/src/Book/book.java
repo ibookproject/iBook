@@ -109,7 +109,7 @@ public class book extends DBtranslation {
 		 ArrayList<book> convertedArr=new ArrayList<book>();
 		for(DBgenericObject ob:arr)
 		{
-			convertedArr.add(new book((int)ob.getValtoArray(0),(String)ob.getValtoArray(1),(String)ob.getValtoArray(2),(String)ob.getValtoArray(3),(String)ob.getValtoArray(4),(boolean)((int)ob.getValtoArray(5)==1)));
+				convertedArr.add(new book((int)ob.getValtoArray(0),(String)ob.getValtoArray(1),(String)ob.getValtoArray(2),(String)ob.getValtoArray(3),(String)ob.getValtoArray(4),(boolean)((int)ob.getValtoArray(5)==1)));
 		}
 		return convertedArr;
 		

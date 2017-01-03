@@ -33,4 +33,8 @@ public class DBgenericObject implements Serializable{
 	public String toString() {
 		return Arrays.toString(arr);
 	}
+	public int getNumVals()
+	{
+		return numVals;
+	}
 }

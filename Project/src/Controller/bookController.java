@@ -25,7 +25,7 @@ public class bookController {
 		}
 		try {
 			
-			return book.convertBack((ArrayList<DBgenericObject>) client.getResultObject());
+			return  (ArrayList<book>) client.getResultObject();
 		} catch (SQLException e) {
 			return null;
 		}
