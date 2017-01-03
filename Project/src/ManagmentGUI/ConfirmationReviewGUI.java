@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 
+import MenuGUI.LoginGUI;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -21,11 +23,11 @@ public class ConfirmationReviewGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
-	private JFrame screen;
+	private LoginGUI screen;
 	private JPanel pann;
 	private int Permission;
 	
-	public ConfirmationReviewGUI(JFrame screen,int permission) {
+	public ConfirmationReviewGUI(LoginGUI screen,int permission) {
 		super();
 		this.screen=screen;
 		pann=this;
