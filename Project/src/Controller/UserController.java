@@ -3,17 +3,18 @@ package Controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import command.searchCommand;
-import client.DBSQLhandler;
 import Book.book;
+import Role.user;
+import client.DBSQLhandler;
+import command.searchCommand;
 
 public class UserController {
-
-/*	public static ArrayList<user> SearchBook(book b,String condition,DBSQLhandler client)
+	
+	public static ArrayList<user> SearchUser(user u,String condition,DBSQLhandler client)
 	{
-		// filed is need to look like "bookID,author,..."
-		client.searchInDB(new insertCommand<User>("user",condition, "userID, author"));//call command and client ask to search a book
-		while(!client.GetGotMessag()){//search book in db
+		// filed is need to look like "userID,password,..."
+		client.searchInDB(new searchCommand<user>(u,condition, "UserID"));//call command and client ask to search a book
+		while(!client.GetGotMessag()){//search user in db
 			try{
 			Thread.sleep(500);
 			}
@@ -23,10 +24,10 @@ public class UserController {
 			}
 		}
 		try {
-			return (ArrayList<book>)client.getResultObject();
+			return (ArrayList<user>)client.getResultObject();
 		} catch (SQLException e) {
 			return null;
 		}
-	}*/
-}
+	}
 
+}

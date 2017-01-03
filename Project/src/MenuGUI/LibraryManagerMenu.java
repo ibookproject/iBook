@@ -26,7 +26,7 @@ public class LibraryManagerMenu extends LibrarianMenu {
 
 
 	private static final long serialVersionUID = 1L;
-	private JFrame screen;
+	private LoginGUI screen;
 	private JPanel pann;
 	private int Permission;
 	
