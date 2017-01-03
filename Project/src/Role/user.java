@@ -21,11 +21,18 @@ public class user extends DBtranslation implements UserStatus {
 		this.userStatus=DISCONNECTED;
 	}
 
+	public user(String userID, String password) {
+		setUserID(userID);
+		setPassword(password);
+	}
+
 	public String getUserID() {
 		return userID;
 	}
 
 	public void setUserID(String userID) {
+		if(userID==null||userID.equals(""))
+			throw new InputMismatchException("forget to insert  userId");
 		this.userID = userID;
 	}
 
@@ -34,6 +41,8 @@ public class user extends DBtranslation implements UserStatus {
 	}
 
 	public void setPassword(String password) {
+		if(password==null||password.equals(""))
+			throw new InputMismatchException("forget to insert  password");
 		this.password = password;
 	}
 

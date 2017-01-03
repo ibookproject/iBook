@@ -10,10 +10,10 @@ import command.searchCommand;
 
 public class UserController {
 	
-	public static ArrayList<user> SearchUser(user u,String condition,DBSQLhandler client)
+	public static ArrayList<?> SearchUser(user u,String condition,DBSQLhandler client)
 	{
 		// filed is need to look like "userID,password,..."
-		client.searchInDB(new searchCommand<user>(u,condition, "UserID"));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<user>(u,condition, "userID,privilege"));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
 			Thread.sleep(500);

@@ -22,6 +22,7 @@ import Controller.bookController;
 import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;
 import Role.user;
+import client.DBgenericObject;
 
 
 
@@ -37,7 +38,7 @@ public class StatisticsUserReportGUI extends JPanel {
 	private JButton btnGetReports;
 	private JLabel lblListOfBook;
 	private JTextArea txtReport;
-	private ArrayList<user> searchRes;
+	private ArrayList<DBgenericObject> searchRes;
 	private JTextField textFieldName;
 	private JTextField textFieldDate;
 	private JTextField textFieldLastName;
@@ -133,7 +134,7 @@ public class StatisticsUserReportGUI extends JPanel {
 				//}
 				if (!condition.equals("")) 
 				{//if have some condition
-					ArrayList<user> temp = UserController.SearchUser(u,condition, screen.getClient());//call search book method from book controller
+					ArrayList<DBgenericObject> temp = (ArrayList<DBgenericObject>) UserController.SearchUser(u,condition, screen.getClient());//call search book method from book controller
 					if (temp != null) 
 					{
 						setList(temp);
@@ -152,7 +153,7 @@ public class StatisticsUserReportGUI extends JPanel {
 	
 	}
 	
-	public void setList(ArrayList<user> list)
+	public void setList(ArrayList<DBgenericObject> list)
 	{
 		this.searchRes=list;
 		//JList<book> bookList = new JList<book>();

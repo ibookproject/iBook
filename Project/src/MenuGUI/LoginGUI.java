@@ -7,19 +7,25 @@ import javax.swing.JButton;
 import java.awt.Rectangle;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import MemberGUI.SearchBookGUI;
+import Role.user;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.StringTokenizer;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import javax.swing.JTextPane;
 
+import Controller.UserController;
 import client.DBSQLhandler;
+import client.DBgenericObject;
 
 public class LoginGUI extends JFrame {
 
@@ -35,6 +41,7 @@ public class LoginGUI extends JFrame {
 	private JTextField textField_1;
 	private LoginGUI screen;
 	private DBSQLhandler client;// client attribute
+	private int counteEnrty=0;
 
 	/**
 	 * This is the default constructor
@@ -47,8 +54,7 @@ public class LoginGUI extends JFrame {
 			client = new DBSQLhandler(host, DEFAULT_PORT);// connection to
 															// server
 		} catch (IOException exception) {
-			System.out.println("Error: Can't setup connection!"
-					+ " Terminating client.");
+			System.out.println("Error: Can't setup connection!" + " Terminating client.");
 			System.exit(1);
 		}
 	}
@@ -73,7 +79,28 @@ public class LoginGUI extends JFrame {
 			JButton btnLogin = new JButton("Login");
 			btnLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String s = textField.getText();
+					user u=null;
+					try{
+					u=new user(textField.getText(), textField_1.getText());
+					}
+					catch(InputMismatchException ex){
+					System.out.println(ex);
+					}
+					ArrayList<DBgenericObject> temp= (ArrayList<DBgenericObject>) UserController.SearchUser(u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"", client);
+					if(temp==null||temp.isEmpty()){
+						JOptionPane.showMessageDialog(screen,"wrong password/username", "Warning",
+								JOptionPane.WARNING_MESSAGE);
+						if(counteEnrty++>=3){
+							JOptionPane.showMessageDialog(screen,"this user name is locked!", "Warning",
+									JOptionPane.WARNING_MESSAGE);
+							client.quit();
+							System.exit(1);
+						}
+						//here need to write sql to update
+						
+					}
+					else{
+					String s=(temp.get(0).getValtoArray(1).toString());
 					switch (s) {
 					case "1": {
 
@@ -174,6 +201,7 @@ public class LoginGUI extends JFrame {
 
 					// //////////////////////button go to panel from
 					// JFram/////////////////////////////////////////////
+				}
 				}
 			});
 			btnLogin.setBounds(386, 321, 89, 23);

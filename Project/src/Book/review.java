@@ -62,6 +62,6 @@ public class review extends DBtranslation {
 	@Override
 	public String getValToInsert() {
 
-		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\")",reviewDate,reviewContent,reviewStatus,bookID);
+		return String.format("(\"%s\",\"%s\",0,\"%s\")",reviewDate,reviewContent,reviewStatus,bookID);
 	}
 }
