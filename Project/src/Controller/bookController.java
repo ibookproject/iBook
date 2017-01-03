@@ -12,7 +12,7 @@ public class bookController {
 	public static ArrayList<book> SearchBook(book b,String condition,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
-		client.searchInDB(new searchCommand<book>(condition, "bookID, author"));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<book>(b,condition, "bookID, author"));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search book in db
 			try{
 			Thread.sleep(500);
@@ -31,7 +31,7 @@ public class bookController {
 	public static ArrayList<book> GetAllDomain(book b,String condition,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
-		client.searchInDB(new searchCommand<book>(condition, "bookID, author"));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<book>(b,condition, "bookID, author"));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search book in db
 			try{
 			Thread.sleep(500);

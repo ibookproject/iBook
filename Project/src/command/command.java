@@ -14,6 +14,7 @@ public abstract class command<E extends DBtranslation> implements Serializable {
 		this.table=table1;
 	}
 	public command(){
+		
 	}
 	
 	public String getTable()
