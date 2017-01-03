@@ -9,7 +9,7 @@ public interface UserStatus {
 	public static final int LIBRRIAN=5;
 	public static final int MANAGER=6;
 	
-	//sagi&kfir
+	//sagi&kfir&hen
 	///
 	public static final int CONNECTED=1;
 	public static final int DISCONNECTED=0;
