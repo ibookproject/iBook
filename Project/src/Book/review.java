@@ -1,7 +1,9 @@
 package Book;
 
 import java.util.Date;
-public class review {
+
+import command.DBtranslation;
+public class review extends DBtranslation {
 
 	private int reviewID;
 	private Date reviewDate;
@@ -47,5 +49,20 @@ public class review {
 	}
 	public void setBookID(int bookID) {
 		this.bookID = bookID;
+	}
+	@Override
+	public String getClassName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getAttributeToInsert() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getValToInsert() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
