@@ -1,10 +1,32 @@
 package Role;
 
-public class Reader extends User{
+import java.util.InputMismatchException;
 
-	public Reader(String userID, String password, String firstName, String lastName, int userStatus) {
-		super(userID, password, firstName, lastName, userStatus);
-		// TODO Auto-generated constructor stub
+public class Reader extends user{
+
+	private int subscriptionMethod;
+	public Reader(String userID, String password, String firstName, String lastName, int privilege,int subscriptionMethod) {
+		super(userID, password, firstName, lastName, privilege);
+		setSubscriptionMethod(subscriptionMethod);
+	}
+	public int getSubscriptionMethod() {
+		return subscriptionMethod;
+	}
+	public void setSubscriptionMethod(int subscriptionMethod) {
+		switch(subscriptionMethod)
+		{
+		case YEARLY:
+			this.subscriptionMethod=YEARLY;
+			break;
+		case MONTHLY:
+			this.subscriptionMethod=MONTHLY;
+			break;
+		case SINGLE:
+			this.subscriptionMethod=SINGLE;
+		break;
+		default:
+			throw new InputMismatchException("wrong subscription inserted");
+		}
 	}
 
 }

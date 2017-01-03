@@ -2,19 +2,21 @@ package Role;
 
 import java.util.InputMismatchException;
 
-public class User implements Privilege {
+public class user implements UserStatus {
 	private String userID;
 	private String password;
 	private String firstName;
 	private String lastName;
 	private int userStatus;
+	private int privilege;
 	
-	public User(String userID, String password, String firstName, String lastName, int userStatus) {
+	public user(String userID, String password, String firstName, String lastName, int privilege) {
 		setUserID(userID);
 		setPassword(password);
 		setFirstName(firstName);
 		setLastName(lastName);
-		setUserStatus(userStatus);
+		setPrivilege(privilege);
+		this.userStatus=DISCONNECTED;
 	}
 
 	public String getUserID() {
@@ -54,28 +56,45 @@ public class User implements Privilege {
 	}
 
 	public void setUserStatus(int userStatus) {
-		switch(userStatus)
-		{
-		case USER:
-			userStatus=USER;
+		switch(userStatus){
+		case CONNECTED:
+			this.userStatus=CONNECTED;
 			break;
-		case READER:
-			userStatus=READER;
+		case DISCONNECTED:
+			this.userStatus=DISCONNECTED;
 			break;
-		case LIBARYWORKER:
-			userStatus=LIBARYWORKER;
-			break;
-		case QUALIFIEDEDITOR:
-			userStatus=QUALIFIEDEDITOR;
-			break;
-		case LIBRRIAN:
-			userStatus=LIBRRIAN;
-			break;
-		case MANAGER:
-			userStatus=MANAGER;
+		case LOCK:
+			this.userStatus=LOCK;
 			break;
 			default:
-				throw new InputMismatchException("wrong status inserted");
+			throw new InputMismatchException("wrong status inserted");
+			
+		}
+	}
+
+	public void setPrivilege(int privilege) {
+		switch(privilege)
+		{
+		case USER:
+			this.privilege=USER;
+			break;
+		case READER:
+			this.privilege=READER;
+			break;
+		case LIBARYWORKER:
+			this.privilege=LIBARYWORKER;
+			break;
+		case QUALIFIEDEDITOR:
+			this.privilege=QUALIFIEDEDITOR;
+			break;
+		case LIBRRIAN:
+			this.privilege=LIBRRIAN;
+			break;
+		case MANAGER:
+			this.privilege=MANAGER;
+			break;
+			default:
+				throw new InputMismatchException("wrong privilege inserted");
 			}
 		}
 	}
