@@ -4,7 +4,7 @@ package command;
 public class updateCommand<E extends DBtranslation> extends deleteCommand<E> {
 
 	private String[] setCondition;
-	public updateCommand(String table1, String searchCondition,String updateCondition) {
+	public updateCommand(E table1, String searchCondition,String updateCondition) {
 		super(table1, searchCondition);
 		setCondition=updateCondition.split(" && ");
 	}

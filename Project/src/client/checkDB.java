@@ -35,12 +35,12 @@ public static void main(String[] args) throws InterruptedException, SQLException
 	
 	//insert
 	book b=new book("kofiko", "HEB", "j.k. roling", "best to know", true);
-	client.insertToDB(new insertCommand<book>("book", b));//insert new book to db
+	client.insertToDB(new insertCommand<book>(b));//insert new book to db
 	while(!client.GetGotMessag())// client wait for confirm the sql
 		Thread.sleep(500);
 	
 	//
-	client.getAllTable(new showAllCommand<book>("book"));//get all book from db
+	client.getAllTable(new showAllCommand<book>());//get all book from db
 	while(!client.GetGotMessag())
 		Thread.sleep(500);
 	
@@ -49,7 +49,7 @@ public static void main(String[] args) throws InterruptedException, SQLException
 		System.out.println(d+"\n");
 	}
 	//client.UpdateInDB(new updateCommand<book>("book", "title=\""+b.getTitle()+"\" && language=\""+b.getLanguage()+"\" && author=\""+b.getAuthor()+"\" && summary=\""+b.getSummary()+"\"","title='narnita' && language='ENG'"));
-	client.searchInDB(new searchCommand<book>("book", "title=\""+b.getTitle()+"\" && language=\""+b.getLanguage()+"\" && author=\""+b.getAuthor()+"\" && summary=\""+b.getSummary()+"\"", "bookID"));
+	client.searchInDB(new searchCommand<book>("title=\""+b.getTitle()+"\" && language=\""+b.getLanguage()+"\" && author=\""+b.getAuthor()+"\" && summary=\""+b.getSummary()+"\"", "bookID"));
 	while(!client.GetGotMessag())//search book in db
 		Thread.sleep(500);
 	System.out.println(client.getResultObject());

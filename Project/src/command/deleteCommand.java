@@ -7,8 +7,12 @@ public class deleteCommand<E extends DBtranslation> extends command<E> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public deleteCommand(String table1,String conds) {
+	public deleteCommand(E table1,String conds) {
 		super(table1);
+		conditions=conds.split(" && ");
+	}
+	public deleteCommand(String conds) {
+		super();
 		conditions=conds.split(" && ");
 	}
 	public String getCondition()

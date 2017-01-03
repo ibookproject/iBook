@@ -8,16 +8,19 @@ public abstract class command<E extends DBtranslation> implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String table;
+	protected E table;
 	
-	public command(String table1){
+	public command(E table1){
 		this.table=table1;
 	}
+	public command(){
+	}
+	
 	public String getTable()
 	{
-		return table;
+		return table.getClassName();
 	}
-	public void setTable(String td){
+	public void setTable(E td){
 		this.table=td;
 	}
 }

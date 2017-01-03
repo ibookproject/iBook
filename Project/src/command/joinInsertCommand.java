@@ -12,8 +12,8 @@ public class joinInsertCommand<E extends DBtranslation> extends insertCommand<E>
 	private ArrayList<joinObject> tablesToJoin;
 	
 	
-	public joinInsertCommand(String table1, E temp) {
-		super(table1, temp);
+	public joinInsertCommand(E temp) {
+		super(temp);
 	
 	}
 	

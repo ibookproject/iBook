@@ -98,13 +98,13 @@ public class user extends DBtranslation implements UserStatus {
 				throw new InputMismatchException("wrong privilege inserted");
 			}
 		}
-
-	public static String getClassName() {
+	@Override
+	public String getClassName() {
 		return "user";
 	}
 
-	
-	public static String getAttributeToInsert() {
+	@Override
+	public String getAttributeToInsert() {
 		return "(userID,password,firstName,lastName,privilege)";
 	}
 
