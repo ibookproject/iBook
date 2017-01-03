@@ -110,7 +110,6 @@ public class user extends DBtranslation implements UserStatus {
 
 	@Override
 	public String getValToInsert() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",%d)",userID,password,firstName,lastName,privilege);
 	}
 	}
