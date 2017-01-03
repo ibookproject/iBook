@@ -71,7 +71,7 @@ public class user implements UserStatus {
 			
 		}
 	}
-
+///tempp
 	public void setPrivilege(int privilege) {
 		switch(privilege)
 		{
