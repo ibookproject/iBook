@@ -52,17 +52,16 @@ public class review extends DBtranslation {
 	}
 	@Override
 	public String getClassName() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "review";
 	}
 	@Override
 	public String getAttributeToInsert() {
-		// TODO Auto-generated method stub
-		return null;
+		return "(reviewDate,reviewContent,reviewStatus,bookID)";
 	}
 	@Override
 	public String getValToInsert() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\")",reviewDate,reviewContent,reviewStatus,bookID);
 	}
 }
