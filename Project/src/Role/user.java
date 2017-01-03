@@ -2,7 +2,9 @@ package Role;
 
 import java.util.InputMismatchException;
 
-public class user implements UserStatus {
+import command.DBtranslation;
+
+public class user extends DBtranslation implements UserStatus {
 	private String userID;
 	private String password;
 	private String firstName;
@@ -96,4 +98,19 @@ public class user implements UserStatus {
 				throw new InputMismatchException("wrong privilege inserted");
 			}
 		}
+
+	public static String getClassName() {
+		return "user";
+	}
+
+	
+	public static String getAttributeToInsert() {
+		return "(userID,password,firstName,lastName,privilege)";
+	}
+
+	@Override
+	public String getValToInsert() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	}

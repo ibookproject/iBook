@@ -87,9 +87,8 @@ public class book extends DBtranslation {
 	public void setBookEnable(boolean bookEnable) {
 		this.bookEnable = bookEnable;
 	}
-
-	@Override
-	public String getClassName() {
+	
+	public static String getClassName() {
 		return "book";
 	}
 	
@@ -101,8 +100,7 @@ public class book extends DBtranslation {
 		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",%d)",title,language,author,summary,temp);
 	}
 
-	@Override
-	public String getAttributeToInsert() {
+	public static String getAttributeToInsert() {
 		return "(title,language,author,summary,bookEnable)";
 	}
 
