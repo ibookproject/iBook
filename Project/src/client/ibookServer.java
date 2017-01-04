@@ -29,6 +29,11 @@ import ocsf.server.ConnectionToClient;
  * @version July 2000
  */
 public class ibookServer extends AbstractServer {
+	/*
+	 * HandleMessageFromClient
+	 * ServerStarted
+	 * ServerStopped
+	 * */
 	// Class variables *************************************************
 
 	public String sendMessage;

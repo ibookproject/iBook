@@ -9,6 +9,18 @@ import client.DBSQLhandler;
 import command.searchCommand;
 
 public class UserController {
+	/*
+	 * SearchUser - Done
+	 * Login
+	 * UpdateUserInfo
+	 * CreateNewAccount
+	 * RequestStatisticUserReport
+	 * RequestSubscription
+	 * SetStatusSubscription
+	 * GetUserList
+	 * CheckUserDetails
+	 * UpdateUserStatus
+	 * */
 	
 	public static ArrayList<?> SearchUser(user u,String condition,DBSQLhandler client)
 	{

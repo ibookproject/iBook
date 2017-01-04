@@ -20,6 +20,17 @@ import ocsf.client.AbstractClient;
  */
 public class DBSQLhandler extends AbstractClient
 {
+	/*
+	 * GetAllTable
+	 * AddToDB
+	 * SearchInDB
+	 * RemoveFromDB
+	 * UpdateDB
+	 * HandleMessageFromServer
+	 * GetResultObject
+	 * SetResultObject
+	 * GetReports
+	 * */
   //Instance variables **********************************************
   
   /**

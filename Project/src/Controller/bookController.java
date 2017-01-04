@@ -11,6 +11,18 @@ import Book.book;
 
 
 public class bookController {
+	/*
+	 * SearchBook - Done
+	 * TemporaryRemove
+	 * DeleteBook
+	 * GetBookList
+	 * RequestStatisticBookReport
+	 * RequestBookRate
+	 * CheckDetailsInventoryManagment
+	 * AddBook
+	 * UpdateBook
+	 * GetAllDomain- Done
+	 * */
 
 	public static ArrayList<book> SearchBook(book b,String condition,DBSQLhandler client)
 	{
