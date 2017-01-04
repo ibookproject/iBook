@@ -2,6 +2,6 @@ package Controller;
 
 public class ReaderController {
 	/*
-	 * haveSubscription
+	 * haveSubscription-sagi
 	 * */
 }

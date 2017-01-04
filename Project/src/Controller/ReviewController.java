@@ -2,11 +2,11 @@ package Controller;
 
 public class ReviewController {
 	/*
-	 * AddReview
-	 * SearchReviews
-	 * CheckReview
-	 * EditReviewDetails
-	 * UpdateReviewContent
+	 * AddReview-almog
+	 * SearchReviews-almog
+	 * CheckReview-almog
+	 * EditReviewDetails-almog
+	 * UpdateReviewContent-
 	 * SetConfirmationReviewStatus
 	 * RequsetPostReview
 	 * GetCategorysList
