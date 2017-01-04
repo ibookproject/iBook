@@ -11,8 +11,7 @@ public class review extends DBtranslation {
 	private boolean reviewStatus;
 	private int bookID;
 	
-	public review(int reviewID, Date reviewDate, String reviewContent,
-			boolean reviewStatus, int bookID) {
+	public review(int reviewID, Date reviewDate, String reviewContent,boolean reviewStatus, int bookID) {
 		super();
 		this.reviewID = reviewID;
 		this.reviewDate = reviewDate;
