@@ -7,6 +7,13 @@ public class Subject extends DBtranslation {
 	int domainID;
 	String nameSubject;
 	
+	
+	public Subject(int bookID, int domainID, String nameSubject) {
+		super();
+		this.bookID = bookID;
+		this.domainID = domainID;
+		this.nameSubject = nameSubject;
+	}
 	public int getBookID() {
 		return bookID;
 	}

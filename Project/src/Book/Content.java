@@ -3,9 +3,15 @@ package Book;
 import command.DBtranslation;
 
 public class Content extends DBtranslation {
-
+	
 	private String content;
 	private int bookID;
+
+	public Content(String content, int bookID) {
+		super();
+		this.content = content;
+		this.bookID = bookID;
+	}
 	
 	public String getContent() {
 		return content;

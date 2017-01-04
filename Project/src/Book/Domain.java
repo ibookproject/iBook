@@ -3,10 +3,15 @@ package Book;
 import command.DBtranslation;
 
 public class Domain extends DBtranslation {
-
+	
 	private int DomainID;
 	private String DomainName;
 	
+	public Domain(int domainID, String domainName) {
+		super();
+		DomainID = domainID;
+		DomainName = domainName;
+	}
 	
 	public int getDomainID() {
 		return DomainID;
