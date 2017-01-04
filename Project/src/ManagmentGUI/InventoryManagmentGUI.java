@@ -2,6 +2,9 @@ package ManagmentGUI;
 
 
 import javax.swing.JPanel;
+
+import MenuGUI.LoginGUI;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
@@ -19,10 +22,10 @@ public class InventoryManagmentGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack;
-	private JFrame screen;
+	private LoginGUI screen;
 	private JPanel pann;
 
-	public InventoryManagmentGUI(JFrame screen) {
+	public InventoryManagmentGUI(LoginGUI screen) {
 		super();
 		this.screen=screen;
 		pann=this;

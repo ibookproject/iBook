@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import Book.book;
+import MenuGUI.LoginGUI;
 
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
@@ -23,12 +24,12 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
-	private JFrame screen;
+	private LoginGUI screen;
 	private JPanel pann;
 	ArrayList<book> books;	// return the books that choosen
 
 
-	public InventoryManagmentSearchForUpdateGUI(JFrame screen) {
+	public InventoryManagmentSearchForUpdateGUI(LoginGUI screen) {
 		super();
 
 		this.screen=screen;
@@ -83,10 +84,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		comboBox_1.setBounds(335, 248, 105, 23);
 		add(comboBox_1);
 		
-		
-		
-		
-		
+	
 		
 		JButton btnSend = new JButton("Select");
 		btnSend.addActionListener(new ActionListener() {

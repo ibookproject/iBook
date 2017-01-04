@@ -4,10 +4,17 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import Book.book;
+import Book.domain;
+import Controller.bookController;
+import MenuGUI.LoginGUI;
+
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -20,9 +27,11 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	public JButton btnBack ;
+	LoginGUI screen;
 
-	public InventoryManagmentDeleteGUI(JFrame screen ) {
+	public InventoryManagmentDeleteGUI(LoginGUI screen ) {
 		super();
+		this.screen=screen;
 		initialize();
 	}
 
@@ -70,6 +79,25 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		comboBox_1.setBounds(335, 248, 105, 23);
 		add(comboBox_1);
 		
+		
+		
+
+		
+		
+		//ArrayList<domain> result = bookController.GetAllDomain(screen.getClient());//call search book method from book controller
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -79,7 +107,6 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				{
 					//means delete ..... 
 				}// if it 0 mean no so do nothing . 
-				
 			}
 		});
 		btnDelete.setBounds(335, 303, 101, 30);
