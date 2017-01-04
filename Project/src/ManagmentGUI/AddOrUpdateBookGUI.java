@@ -139,10 +139,15 @@ public class AddOrUpdateBookGUI extends JPanel {
 
 				 if(ISUpdateOrAdd==1)//means its add flag page 
 				 {
-				 	book b = new book(title.getText(),lang.getText(),author.getText(),summary.getText(),true); // create new book
-				 	screen.getClient().insertToDB(new insertCommand<DBtranslation>(b)); //		
-				 }	
-			}
+				 	book b = new book(title.getText(),lang.getText(),author.getText(),summary.getText(),true); // create new book	
+				 	boolean result=bookController.AddBook(b,screen.getClient()); // return true or false from the controller DB 
+				 	if (result==false)
+						JOptionPane.showMessageDialog(screen,"the add book procces FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+				 	else
+					JOptionPane.showMessageDialog(screen,"The book was add susccefuly to the system !", "done",JOptionPane.INFORMATION_MESSAGE);
+					
+				 }
+			 }
 		});
 		if(ISUpdateOrAdd==1)
 			btnAdd.setText("Add book");

@@ -55,6 +55,11 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		lblDeleteBook.setBounds(365, 33, 159, 39);
 		add(lblDeleteBook);
 		
+		
+		
+		//ArrayList<Domain> result = bookController.GetAllDomain(screen.getClient());//
+	//	System.out.println(result);
+		
 		JLabel lblChooseDomain = new JLabel("Choose Domain :");
 		lblChooseDomain.setBounds(335, 120, 116, 23);
 		add(lblChooseDomain);
@@ -80,21 +85,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		add(comboBox_1);
 		
 		
-		
 
-		
-		
-		//ArrayList<domain> result = bookController.GetAllDomain(screen.getClient());//call search book method from book controller
-		
-		
-	
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		

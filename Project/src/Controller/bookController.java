@@ -3,7 +3,10 @@ package Controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import command.DBtranslation;
+import command.insertCommand;
 import command.searchCommand;
+import command.showAllCommand;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 import Book.Domain;
@@ -19,7 +22,7 @@ public class bookController {
 	 * RequestStatisticBookReport
 	 * RequestBookRate
 	 * CheckDetailsInventoryManagment
-	 * AddBook
+	 * AddBook - Done
 	 * UpdateBook
 	 * GetAllDomain- Done
 	 * */
@@ -45,11 +48,41 @@ public class bookController {
 		}
 	}
 	
-	public static ArrayList<Domain> GetAllDomain(DBSQLhandler client)
+	// my try to get all Domain from Domain table ... not work for now , if you want to try just make a copy or dont remove this 
+/*	public static ArrayList<Domain> GetAllDomain(DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
-		//client.getAllTable((new showAllCommand<domain>("domain")));
+		client.getAllTable((new showAllCommand<Domain>()));
+		try{
+		Thread.sleep(500);
+		}
+		catch(InterruptedException ex)
+		{
+			System.out.println("InterruptedException "+ex);
+		}
+		try {
+		return  (ArrayList<Domain>)client.getResultObject();
+	} 	
+	catch (SQLException e) {
 		return null;
-
+	}
+	//	return null;
+	}
+	*/
+	
+	public static boolean AddBook(book b,DBSQLhandler client) // boolean function that return true if the add book done else false.
+	{
+			client.insertToDB(new insertCommand<DBtranslation>(b)); 	
+			while(!client.GetGotMessag()){//add book to DB
+				try{
+				Thread.sleep(500);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+					return false;
+				}
+			}
+			return true;	// means the book add successful	
 	}
 }
