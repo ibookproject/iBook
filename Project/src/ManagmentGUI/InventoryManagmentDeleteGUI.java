@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Book.book;
-import Book.domain;
+import Book.Domain;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
 

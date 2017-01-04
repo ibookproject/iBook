@@ -1,9 +1,12 @@
 package Book;
 
-public class Subject {
+import command.DBtranslation;
+
+public class Subject extends DBtranslation {
 	int bookID;
-	String nameSubject;
 	int domainID;
+	String nameSubject;
+	
 	public int getBookID() {
 		return bookID;
 	}
@@ -21,6 +24,20 @@ public class Subject {
 	}
 	public void setDomainID(int domainID) {
 		this.domainID = domainID;
+	}
+	@Override
+	public String getClassName() {
+		return "Subject";
+	}
+	@Override
+	public String getAttributeToInsert() {
+		
+		return "(bookID,domainID,nameSubject)";
+	}
+	@Override
+	public String getValToInsert() {
+		return String.format("(\"%s\",\"%s\",\"%s\")",bookID,domainID,nameSubject);
+		
 	}
 	
 }

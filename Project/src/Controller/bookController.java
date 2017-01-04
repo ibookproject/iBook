@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import command.searchCommand;
 import client.DBSQLhandler;
 import client.DBgenericObject;
+import Book.Domain;
 import Book.book;
-import Book.domain;
+
 
 public class bookController {
 
@@ -32,7 +33,7 @@ public class bookController {
 		}
 	}
 	
-	public static ArrayList<domain> GetAllDomain(DBSQLhandler client)
+	public static ArrayList<Domain> GetAllDomain(DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
 		//client.getAllTable((new showAllCommand<domain>("domain")));

@@ -1,9 +1,6 @@
-/ManagmentGUI/
-/MemberGUI/
-/MenuGUI/
-/Role/
-/client/
-/command/
-/ocsf/
-/templateGUI.class
+/Book/
 /Controller/
+/DB/
+/ManagmentGUI/
+/client/
+/MemberGUI/
