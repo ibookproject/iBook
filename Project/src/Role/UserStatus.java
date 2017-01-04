@@ -17,8 +17,9 @@ public interface UserStatus {
 	
 	
 	//
-	public static final int YEARLY=1;
-	public static final int MONTHLY=0;
-	public static final int SINGLE=2;
+	public static final int NONE=0; //for new user without subscription (user but not reader)
+	public static final int SINGLE=1;
+	public static final int MONTHLY=2;
+	public static final int YEARLY=3;
 	//
 }

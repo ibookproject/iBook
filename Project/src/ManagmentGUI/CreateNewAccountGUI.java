@@ -1,37 +1,39 @@
 package ManagmentGUI;
 
-
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JTextField;
 
-
-
+import Book.book;
+import Controller.UserController;
+import MenuGUI.LoginGUI;
+import Role.user;
 
 public class CreateNewAccountGUI extends JPanel {
 
-	
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack;
-	private JFrame screen;
+	private LoginGUI screen;
 	private JPanel pann;
+	private JTextField txtUserID;
 	private JTextField txtFirstName;
 	private JTextField txtLastName;
 	private JTextField txtPassword;
 	private JTextField txtSecondPassword;
-	private JTextField txtEmail;
 
-	public CreateNewAccountGUI(JFrame screen) {
+	public CreateNewAccountGUI(LoginGUI screen) {
 		super();
-		this.screen=screen;
-		pann=this;
+		this.screen = screen;
+		pann = this;
 
 		initialize();
 	}
@@ -52,7 +54,8 @@ public class CreateNewAccountGUI extends JPanel {
 		add(btnBack);
 		
 		JButton btnCreate = new JButton("Create");
-		btnCreate.setBounds(707, 540, 89, 23);
+
+		btnCreate.setBounds(342, 326, 89, 23);
 		add(btnCreate);
 		
 		JLabel lblFirstName = new JLabel("First Name");
@@ -70,10 +73,6 @@ public class CreateNewAccountGUI extends JPanel {
 		JLabel lblPasswordAgain = new JLabel("Password Again");
 		lblPasswordAgain.setBounds(39, 211, 89, 14);
 		add(lblPasswordAgain);
-		
-		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(39, 236, 89, 14);
-		add(lblEmail);
 		
 		txtFirstName = new JTextField();
 		txtFirstName.setBounds(204, 133, 118, 20);
@@ -95,10 +94,59 @@ public class CreateNewAccountGUI extends JPanel {
 		add(txtSecondPassword);
 		txtSecondPassword.setColumns(10);
 		
-		txtEmail = new JTextField();
-		txtEmail.setBounds(204, 233, 118, 20);
-		add(txtEmail);
-		txtEmail.setColumns(10);
-	
+		JLabel lblUserId = new JLabel("User ID");
+		lblUserId.setBounds(39, 111, 46, 14);
+		add(lblUserId);
+		
+		txtUserID = new JTextField();
+		txtUserID.setBounds(204, 108, 118, 20);
+		add(txtUserID);
+		txtUserID.setColumns(10);
+		
+		JLabel lblAnswermessage = new JLabel("");
+		lblAnswermessage.setBounds(169, 287, 443, 14);
+		add(lblAnswermessage);
+		
+		
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					/*	
+	private JTextField txtUserID;
+	private JTextField txtFirstName;
+	private JTextField txtLastName;
+	private JTextField txtPassword;
+	private JTextField txtSecondPassword;*/
+				
+				user u = new user(txtUserID.getText(), txtPassword.getText(), txtFirstName.getText(),
+						txtLastName.getText(), 1);//create book from text fields
+				String condition = "";//initialize the condition
+			/*	if (txtUserID.isSelected())
+					condition += "title=\"" + u.getTitle() + "\"";//add "title" to condition
+				if (chckbxLanguage.isSelected()) {
+					if (!condition.equals(""))
+						condition += " && ";
+					condition += "language=\"" + b.getLanguage() + "\"";//add "language" to condition
+				}
+				if (chckbxAuthor.isSelected()) {
+					if (!condition.equals(""))
+						condition += " && ";
+					condition += "author=\"" + b.getAuthor() + "\"";//add "author" to condition
+				}
+				if (chckbxSummary.isSelected()) {
+					if (!condition.equals(""))
+						condition += " && ";
+					condition += "summary=\"" + b.getSummary() + "\"";//add "summary" to condition
+				}*/
+				if (!condition.equals("")) {//if have some condition
+					boolean result = UserController.CreateNewAccount(u, screen.getClient());//call search book method from book controller
+				 	if (result==false)
+						JOptionPane.showMessageDialog(screen,"Add user process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+				 	else
+				 		JOptionPane.showMessageDialog(screen,"The book was add successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
+					
+					}
+
+		}});
+		
 	}
 }

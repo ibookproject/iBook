@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import Book.book;
 import Role.user;
 import client.DBSQLhandler;
+import command.DBtranslation;
+import command.insertCommand;
 import command.searchCommand;
 
 public class UserController {
@@ -40,6 +42,21 @@ public class UserController {
 		} catch (SQLException e) {
 			return null;
 		}
+	}
+	public static boolean CreateNewAccount(user b,DBSQLhandler client) // boolean function that return true if user added else false.
+	{
+			client.insertToDB(new insertCommand<DBtranslation>(b)); 	
+			while(!client.GetGotMessag()){//add book to DB
+				try{
+				Thread.sleep(500);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+					return false;
+				}
+			}
+			return true;	// means the book add successful	
 	}
 
 }
