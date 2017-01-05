@@ -50,7 +50,7 @@ public class bookController {
 	}
 	
 	// my try to get all Domain from Domain table ... not work for now , if you want to try just make a copy or dont remove this 
-	public static ArrayList<Domain> GetAllDomain(Domain d,DBSQLhandler client)
+	public static ArrayList<DBgenericObject> GetAllDomain(Domain d,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
 		client.getAllTable((new showAllCommand<Domain>(d)));
@@ -62,7 +62,7 @@ public class bookController {
 			System.out.println("InterruptedException "+ex);
 		}
 		try {
-		return  (ArrayList<Domain>)client.getResultObject();
+		return  (ArrayList<DBgenericObject>)client.getResultObject();
 	} 	
 	catch (SQLException e) {
 		return null;

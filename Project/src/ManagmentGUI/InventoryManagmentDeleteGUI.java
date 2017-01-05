@@ -10,6 +10,7 @@ import Book.Domain;
 import Book.Subject;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
+import client.DBgenericObject;
 
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
@@ -58,7 +59,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		
 		
 		Domain d = new Domain("1");
-		ArrayList<Domain> result = bookController.GetAllDomain(d,screen.getClient());//
+		ArrayList<DBgenericObject> result = bookController.GetAllDomain(d,screen.getClient());//
 		System.out.println(result);
 		
 		JLabel lblChooseDomain = new JLabel("Choose Domain :");
