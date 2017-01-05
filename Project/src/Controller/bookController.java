@@ -10,6 +10,7 @@ import command.showAllCommand;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 import Book.Domain;
+import Book.Subject;
 import Book.book;
 
 
@@ -49,10 +50,10 @@ public class bookController {
 	}
 	
 	// my try to get all Domain from Domain table ... not work for now , if you want to try just make a copy or dont remove this 
-/*	public static ArrayList<Domain> GetAllDomain(DBSQLhandler client)
+	public static ArrayList<Domain> GetAllDomain(Domain d,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
-		client.getAllTable((new showAllCommand<Domain>()));
+		client.getAllTable((new showAllCommand<Domain>(d)));
 		try{
 		Thread.sleep(500);
 		}
@@ -68,7 +69,7 @@ public class bookController {
 	}
 	//	return null;
 	}
-	*/
+	
 	
 	public static boolean AddBook(book b,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{
@@ -85,4 +86,29 @@ public class bookController {
 			}
 			return true;	// means the book add successful	
 	}
+	
+	/* not work 
+	public static ArrayList<Subject> GetSubjectsOfChoosenDomain(Subject d,DBSQLhandler client)
+	{
+		// filed is need to look like "bookID,author,..."
+		client.searchInDB(new searchCommand<book>(d,condition, "bookID, author"));
+		//client.getAllTable((new showAllCommand<Subject>(d)));
+		try{
+		Thread.sleep(500);
+		}
+		catch(InterruptedException ex)
+		{
+			System.out.println("InterruptedException "+ex);
+		}
+		try {
+		return  (ArrayList<Subject>)client.getResultObject();
+	} 	
+	catch (SQLException e) {
+		return null;
+	}
+	//	return null;
+	}
+	*/
+	
+	
 }

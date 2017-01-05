@@ -13,6 +13,11 @@ public class Domain extends DBtranslation {
 		DomainName = domainName;
 	}
 	
+	public Domain( String domainName) {
+		super();
+		DomainName = domainName;
+	}
+	
 	public int getDomainID() {
 		return DomainID;
 	}

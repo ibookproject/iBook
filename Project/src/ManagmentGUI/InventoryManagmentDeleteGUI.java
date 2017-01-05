@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 
 import Book.book;
 import Book.Domain;
+import Book.Subject;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
 
@@ -56,9 +57,9 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		add(lblDeleteBook);
 		
 		
-		
-		//ArrayList<Domain> result = bookController.GetAllDomain(screen.getClient());//
-	//	System.out.println(result);
+		Domain d = new Domain("1");
+		ArrayList<Domain> result = bookController.GetAllDomain(d,screen.getClient());//
+		System.out.println(result);
 		
 		JLabel lblChooseDomain = new JLabel("Choose Domain :");
 		lblChooseDomain.setBounds(335, 120, 116, 23);
@@ -66,7 +67,36 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(335, 142, 101, 20);
+		//int len=result.size();
+		/*
+		String [] arr=new String[len];
+		for(int i=0;i<len;i++)
+		{
+			String s=(String)result.get(i).getDomainName(); // not work 
+			arr[i]=s;
+		}
+		System.out.println(arr);
+		/*
+		
+	/*	for(int i=0;i<result.size();i++)
+		{
+			s=result.get(i).getDomainName();
+			comboBox.addItem(s);
+		}
+		*/
 		add(comboBox);
+	
+		
+		
+		
+		
+		/*
+		String cond="nameSubject=\"" +"goog" +"&&"+ "domainID=\"" + "1";
+		
+		Subject d = new Subject(1,"1");
+		ArrayList<Domain> result1 = bookController.GetSubjectsOfChoosenDomain(d,screen.getClient());//
+		System.out.println(result);
+		*/
 		
 		JLabel lblChooseSubject = new JLabel("Choose Subject : ");
 		lblChooseSubject.setBounds(335, 173, 95, 14);
