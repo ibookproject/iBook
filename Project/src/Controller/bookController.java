@@ -43,7 +43,7 @@ public class bookController {
 		}
 		try {
 			
-			return  (ArrayList<Book>) client.getResultObject();
+			return  Book.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), fromSentence);
 		} catch (SQLException e) {
 			return null;
 		}

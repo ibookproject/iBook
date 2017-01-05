@@ -200,8 +200,23 @@ public class Book extends DBtranslation {
 	
 	@Override
 	public String toString() {
-		return "book [bookID=" + bookID + ", title=" + title + ", language=" + language + ", author=" + author
+		/*return "book [bookID=" + bookID + ", title=" + title + ", language=" + language + ", author=" + author
 				+ ", summary=" + summary + ", bookEnable=" + bookEnable + "]";
-	}
+	*/
+	String temp=String.format("%d",bookID);
+	if(title!=null)
+		temp+=", "+title;
+	if(language!=null)
+		temp+=", "+language;
+	if(author!=null)
+		temp+=", "+author;
+	if(summary!=null)
+		temp+=", "+summary;
+	if(bookEnable==true)
+		temp+=", yes";
+	else
+		temp+=", no";
+	return temp;
+	}//rnd toString
 
-}
+}//end Book class

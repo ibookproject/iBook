@@ -81,6 +81,10 @@ public class SearchBook extends JPanel {
 	public void setList(ArrayList<Book> list)
 	{
 		this.searchRes=list;
-		textArea.setText(searchRes.toString());
+		String temp = "";
+		for(Book b:list)		
+			temp+=String.format("%s \n",b.toString());
+		textArea.setText(temp);
+		
 	}
 }

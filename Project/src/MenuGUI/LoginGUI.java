@@ -230,6 +230,7 @@ public class LoginGUI extends JFrame {
 			FirstPanel.add(lblPassword);
 
 			JTextPane txtpnUser = new JTextPane();
+			txtpnUser.setEditable(false);
 			txtpnUser
 					.setText("1-user menu 2-reader menu 3-librarian worker 4-qualified editor 5-librarian menu 6-librarian meneger menu");
 			txtpnUser.setBounds(597, 208, 112, 136);
