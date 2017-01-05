@@ -34,7 +34,7 @@ public class Subject extends DBtranslation {
 	}
 	@Override
 	public String getClassName() {
-		return "Subject";
+		return "subjecttobook";
 	}
 	@Override
 	public String getAttributeToInsert() {
