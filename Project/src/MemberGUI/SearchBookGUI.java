@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import client.DBgenericObject;
 import command.searchCommand;
 import command.showAllCommand;
-import Book.book;
+import Book.Book;
 import Controller.bookController;
 import ManagmentGUI.RemovePartReviewGUI;
 import MenuGUI.LoginGUI;
@@ -176,7 +176,7 @@ public class SearchBookGUI extends JPanel {
 					// //////////////////////button back to Search book
 					// GUI/////////////////////////////////////////////
 				});
-				book b = new book(textTitle.getText(), textField_2.getText(),
+				Book b = new Book(textTitle.getText(), textField_2.getText(),
 						textAuthor.getText(), textFieldSummary.getText(), true);//create book from text fields
 				String condition = "";//initialize the condition
 				if (chckbxTitle.isSelected())
@@ -197,7 +197,7 @@ public class SearchBookGUI extends JPanel {
 					condition += "summary=\"" + b.getSummary() + "\"";//add "summary" to condition
 				}
 				if (!condition.equals("")) {//if have some condition
-					ArrayList<book> temp = bookController.SearchBook(b,condition, screen.getClient());//call search book method from book controller
+					ArrayList<Book> temp = bookController.SearchBook("title,language,author,summary",b,condition, screen.getClient());//call search book method from book controller
 					if (temp != null) {
 						sb.setList(temp);
 						screen.setContentPane(sb);

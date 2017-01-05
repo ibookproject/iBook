@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import Book.book;
+import Book.Book;
 import MenuGUI.LoginGUI;
 
 import javax.swing.JFrame;
@@ -26,7 +26,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 	public JButton btnBack ;
 	private LoginGUI screen;
 	private JPanel pann;
-	ArrayList<book> books;	// return the books that choosen
+	ArrayList<Book> books;	// return the books that choosen
 
 
 	public InventoryManagmentSearchForUpdateGUI(LoginGUI screen) {

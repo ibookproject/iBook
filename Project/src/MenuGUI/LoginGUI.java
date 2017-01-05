@@ -3,25 +3,23 @@ package MenuGUI;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JButton;
-
-import java.awt.Rectangle;
-
+import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import MemberGUI.SearchBookGUI;
-import Role.user;
+import Role.User;
+import Role.UserStatus;
+import Role.UserStatus.*;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.StringTokenizer;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import javax.swing.JTextPane;
+
 
 import Controller.UserController;
 import client.DBSQLhandler;
@@ -79,14 +77,14 @@ public class LoginGUI extends JFrame {
 			JButton btnLogin = new JButton("Login");
 			btnLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					user u=null;
+					User u=null;
 					try{
-					u=new user(textField.getText(), textField_1.getText());
+					u=new User(textField.getText(), textField_1.getText());
 					}
 					catch(InputMismatchException ex){
 					System.out.println(ex);
 					}
-					ArrayList<DBgenericObject> temp= (ArrayList<DBgenericObject>) UserController.SearchUser(u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"", client);
+					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID,privilege",u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"",client);
 					if(temp==null||temp.isEmpty()){
 						JOptionPane.showMessageDialog(screen,"wrong password/username", "Warning",
 								JOptionPane.WARNING_MESSAGE);
@@ -100,9 +98,10 @@ public class LoginGUI extends JFrame {
 						
 					}
 					else{
-					String s=(temp.get(0).getValtoArray(1).toString());
-					switch (s) {
-					case "1": {
+						if(temp.size()>1)
+							throw new InputMismatchException("there is more then one User with userID"+temp.get(0).getUserID());
+					switch (temp.get(0).getPriviliege()) {
+					case UserStatus.USER: {
 
 						// //////////////////////button to back panel from panel
 						// /////////////////////////////////////////////
@@ -120,7 +119,7 @@ public class LoginGUI extends JFrame {
 
 					}
 						break;
-					case "2": {
+					case UserStatus.READER: {
 						ReaderMenu usm = new ReaderMenu(screen);
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
@@ -134,7 +133,7 @@ public class LoginGUI extends JFrame {
 						setContentPane(usm);
 					}
 						break;
-					case "3": {
+					case UserStatus.LIBARYWORKER: {
 						LibraryWorkerMenu usm = new LibraryWorkerMenu(screen);
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
@@ -148,7 +147,7 @@ public class LoginGUI extends JFrame {
 						setContentPane(usm);
 					}
 						break;
-					case "4": {
+					case UserStatus.QUALIFIEDEDITOR: {
 						QualifiedEditorMenu usm = new QualifiedEditorMenu(
 								screen, 4);
 						usm.btnDisconnect
@@ -163,7 +162,7 @@ public class LoginGUI extends JFrame {
 						setContentPane(usm);
 					}
 						break;
-					case "5": {
+					case UserStatus.LIBRRIAN: {
 						LibrarianMenu usm = new LibrarianMenu(screen, 5);
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
@@ -177,7 +176,7 @@ public class LoginGUI extends JFrame {
 						setContentPane(usm);
 					}
 						break;
-					case "6": {
+					case UserStatus.MANAGER: {
 						LibraryManagerMenu usm = new LibraryManagerMenu(screen,
 								6);
 						usm.btnDisconnect

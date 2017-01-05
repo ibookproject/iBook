@@ -3,9 +3,10 @@ package Controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Book.book;
-import Role.user;
+import Book.Book;
+import Role.User;
 import client.DBSQLhandler;
+import client.DBgenericObject;
 import command.DBtranslation;
 import command.insertCommand;
 import command.searchCommand;
@@ -24,10 +25,10 @@ public class UserController {
 	 * UpdateUserStatus
 	 * */
 	
-	public static ArrayList<?> SearchUser(user u,String condition,DBSQLhandler client)
+	public static ArrayList<User> SearchUser(String fromSentence,User u,String whereSentence,DBSQLhandler client)
 	{
 		// filed is need to look like "userID,password,..."
-		client.searchInDB(new searchCommand<user>(u,condition, "userID,privilege"));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<User>(fromSentence,u,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
 			Thread.sleep(500);
@@ -38,12 +39,12 @@ public class UserController {
 			}
 		}
 		try {
-			return (ArrayList<user>)client.getResultObject();
+			return User.convertBack((ArrayList<DBgenericObject>) client.getResultObject(),fromSentence);
 		} catch (SQLException e) {
 			return null;
 		}
 	}
-	public static boolean CreateNewAccount(user b,DBSQLhandler client) // boolean function that return true if user added else false.
+	public static boolean CreateNewAccount(User b,DBSQLhandler client) // boolean function that return true if user added else false.
 	{
 			client.insertToDB(new insertCommand<DBtranslation>(b)); 	
 			while(!client.GetGotMessag()){//add book to DB

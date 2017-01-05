@@ -2,7 +2,7 @@ package Role;
 
 import java.util.InputMismatchException;
 
-public class Reader extends user{
+public class Reader extends User{
 
 	private int subscriptionMethod;
 	public Reader(String userID, String password, String firstName, String lastName, int privilege,int subscriptionMethod) {

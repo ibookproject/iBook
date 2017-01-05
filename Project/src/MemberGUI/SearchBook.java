@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import Book.book;
+import Book.Book;
 import MenuGUI.LoginGUI;
 import client.DBgenericObject;
 import command.showAllCommand;
@@ -24,7 +24,7 @@ public class SearchBook extends JPanel {
 	public JButton btnBack ;
 	private LoginGUI screen;
 	private JPanel pann;
-	private ArrayList<book> searchRes;
+	private ArrayList<Book> searchRes;
 	private JTextArea textArea;
 	
 	public SearchBook(LoginGUI screen) {
@@ -78,7 +78,7 @@ public class SearchBook extends JPanel {
 	
 		
 	}
-	public void setList(ArrayList<book> list)
+	public void setList(ArrayList<Book> list)
 	{
 		this.searchRes=list;
 		textArea.setText(searchRes.toString());

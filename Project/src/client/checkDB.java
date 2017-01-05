@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Book.book;
+import Book.*;
 import command.deleteCommand;
 import command.insertCommand;
 import command.searchCommand;
@@ -34,24 +34,26 @@ public static void main(String[] args) throws InterruptedException, SQLException
 	}
 	
 	//insert
-	book b=new book("kofiko", "HEB", "j.k. roling", "best to know", true);
-	client.insertToDB(new insertCommand<book>(b));//insert new book to db
+	/*
+	Book b=new Book("kofiko", "HEB", "j.k. roling", "best to know", true);
+	client.insertToDB(new insertCommand<Book>(b));//insert new book to db
 	while(!client.GetGotMessag())// client wait for confirm the sql
 		Thread.sleep(500);
 	
 	//
-	client.getAllTable(new showAllCommand<book>());//get all book from db
+	client.getAllTable(new showAllCommand<Book>());//get all book from db
 	while(!client.GetGotMessag())
 		Thread.sleep(500);
 	
-	ArrayList<book> res=book.convertBack((ArrayList<DBgenericObject>) client.getResultObject());
-	for(book d:res){
+	ArrayList<Book> res=Book.convertBack((ArrayList<DBgenericObject>) client.getResultObject());
+	for(Book d:res){
 		System.out.println(d+"\n");
 	}
 	//client.UpdateInDB(new updateCommand<book>("book", "title=\""+b.getTitle()+"\" && language=\""+b.getLanguage()+"\" && author=\""+b.getAuthor()+"\" && summary=\""+b.getSummary()+"\"","title='narnita' && language='ENG'"));
-	client.searchInDB(new searchCommand<book>("title=\""+b.getTitle()+"\" && language=\""+b.getLanguage()+"\" && author=\""+b.getAuthor()+"\" && summary=\""+b.getSummary()+"\"", "bookID"));
+	client.searchInDB(new searchCommand<Book>("title=\""+b.getTitle()+"\" && language=\""+b.getLanguage()+"\" && author=\""+b.getAuthor()+"\" && summary=\""+b.getSummary()+"\"", "bookID"));
 	while(!client.GetGotMessag())//search book in db
 		Thread.sleep(500);
 	System.out.println(client.getResultObject());
+	*/
 }
 }

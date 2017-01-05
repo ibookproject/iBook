@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import Book.book;
+import Book.Book;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
 import command.DBtranslation;
@@ -32,7 +32,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 	private JTextField keyword;
 	private JTextField author;
 	public JButton btnBack ;
-	public ArrayList<book> books;
+	public ArrayList<Book> books;
 	public LoginGUI screen;
 
 	private int ISUpdateOrAdd;
@@ -49,7 +49,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 		lblEmptyLabelFor.setBounds(188, 290, 179, 14);
 		add(lblEmptyLabelFor);
 	}
-	public AddOrUpdateBookGUI(LoginGUI screen ,int ISUpdateOrAdd,ArrayList<book> books) {
+	public AddOrUpdateBookGUI(LoginGUI screen ,int ISUpdateOrAdd,ArrayList<Book> books) {
 		super();
 		this.books=books; // get back the book from the search and now upddate 
 		this.screen=screen;
@@ -139,7 +139,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 
 				 if(ISUpdateOrAdd==1)//means its add flag page 
 				 {
-				 	book b = new book(title.getText(),lang.getText(),author.getText(),summary.getText(),true); // create new book	
+				 	Book b = new Book(title.getText(),lang.getText(),author.getText(),summary.getText(),true); // create new book	
 				 	boolean result=bookController.AddBook(b,screen.getClient()); // return true or false from the controller DB 
 				 	if (result==false)
 						JOptionPane.showMessageDialog(screen,"Add book process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);

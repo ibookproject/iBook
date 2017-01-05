@@ -1,7 +1,10 @@
 package Book;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 
+import client.DBgenericObject;
 import command.DBtranslation;
 public class Review extends DBtranslation {
 
@@ -10,6 +13,12 @@ public class Review extends DBtranslation {
 	private String reviewContent;
 	private boolean reviewStatus;
 	private int bookID;
+	
+	
+	//empty constactor
+	private Review(){
+		super();
+	}
 	
 	public Review(int reviewID, Date reviewDate, String reviewContent,boolean reviewStatus, int bookID) {
 		super();
@@ -63,4 +72,55 @@ public class Review extends DBtranslation {
 
 		return String.format("(\"%s\",\"%s\",0,\"%s\")",reviewDate,reviewContent,reviewStatus,bookID);
 	}
+
+	//convert array Which was obtained from DB to an actual Review
+	//need to implement in all tables.!!!
+		
+		public static ArrayList<Review> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
+			 ArrayList<Review> convertedArr=new ArrayList<Review>();
+			 
+			for(DBgenericObject ob:arr)
+					convertedArr.add(convertDBObject(ob, fromSentence));//for each val in arr this convert back to book
+			
+			return convertedArr;
+			
+		}
+		
+		//this convert specific  DBgenericObject to book according the fromSentence
+		private static Review convertDBObject(DBgenericObject ob,String fromSentenceArray)
+		{
+			Review recover=new Review();
+			 String[] fromSentence=fromSentenceArray.split(",");
+			 for(int i=0;i<fromSentence.length;i++)
+			 {
+				 switch (fromSentence[i]) {
+				case "reviewID":
+					recover.setReviewID((int)ob.getValtoArray(i));
+					break;
+				case "reviewDate":
+					recover.setReviewDate((Date)ob.getValtoArray(i));
+					break;
+				case "reviewContent":
+					recover.setReviewContent((String)ob.getValtoArray(i));
+					break;
+				case "reviewStatus":
+					recover.setReviewStatus(((int)ob.getValtoArray(i))==1);
+					break;
+				case "bookID":
+					recover.setBookID((int)ob.getValtoArray(i));
+					break;
+
+				default:
+					throw new InputMismatchException("you have inserred wrong to search statment");
+				 }//end switch
+			 }//end for
+			 return recover;
+			
+		}
+		@Override
+		public String toString() {
+			return "Review [reviewID=" + reviewID + ", reviewDate=" + reviewDate + ", reviewContent=" + reviewContent
+					+ ", reviewStatus=" + reviewStatus + ", bookID=" + bookID + "]";
+		}
+		
 }

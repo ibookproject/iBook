@@ -11,7 +11,7 @@ import client.DBSQLhandler;
 import client.DBgenericObject;
 import Book.Domain;
 import Book.Subject;
-import Book.book;
+import Book.Book;
 
 
 public class bookController {
@@ -28,10 +28,10 @@ public class bookController {
 	 * GetAllDomain- Done
 	 * */
 
-	public static ArrayList<book> SearchBook(book b,String condition,DBSQLhandler client)
+	public static ArrayList<Book> SearchBook(String fromSentence,Book b,String condition,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
-		client.searchInDB(new searchCommand<book>(b,condition, "bookID, author"));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<Book>(fromSentence,b,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search book in db
 			try{
 			Thread.sleep(500);
@@ -43,7 +43,7 @@ public class bookController {
 		}
 		try {
 			
-			return  (ArrayList<book>) client.getResultObject();
+			return  (ArrayList<Book>) client.getResultObject();
 		} catch (SQLException e) {
 			return null;
 		}
@@ -71,7 +71,7 @@ public class bookController {
 	}
 	
 	
-	public static boolean AddBook(book b,DBSQLhandler client) // boolean function that return true if the add book done else false.
+	public static boolean AddBook(Book b,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{
 			client.insertToDB(new insertCommand<DBtranslation>(b)); 	
 			while(!client.GetGotMessag()){//add book to DB

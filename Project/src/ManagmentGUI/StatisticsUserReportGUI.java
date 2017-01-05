@@ -16,12 +16,12 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import Book.book;
+import Book.Book;
 import Controller.UserController;
 import Controller.bookController;
 import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;
-import Role.user;
+import Role.User;
 import client.DBgenericObject;
 
 
@@ -38,7 +38,7 @@ public class StatisticsUserReportGUI extends JPanel {
 	private JButton btnGetReports;
 	private JLabel lblListOfBook;
 	private JTextArea txtReport;
-	private ArrayList<DBgenericObject> searchRes;
+	private ArrayList<User> searchRes;
 	private JTextField textFieldName;
 	private JTextField textFieldDate;
 	private JTextField textFieldLastName;
@@ -113,7 +113,7 @@ public class StatisticsUserReportGUI extends JPanel {
 				});*/
 				
 				// User(String userID, String password, String firstName, String lastName, int userStatus)
-				user u = new user(null, null,textFieldName.getText(), textFieldLastName.getText(),0);//create book from text fields
+				User u = new User(null, null,textFieldName.getText(), textFieldLastName.getText(),0);//create book from text fields
 				String condition = "";//initialize the condition
 			//	if (chckbxTitle.isSelected())
 					condition += "userID=\"" + "" + "\"";//add "title" to condition
@@ -134,7 +134,7 @@ public class StatisticsUserReportGUI extends JPanel {
 				//}
 				if (!condition.equals("")) 
 				{//if have some condition
-					ArrayList<DBgenericObject> temp = (ArrayList<DBgenericObject>) UserController.SearchUser(u,condition, screen.getClient());//call search book method from book controller
+					ArrayList<User> temp = (ArrayList<User>) UserController.SearchUser("userID,firstName",u,condition, screen.getClient());//call search book method from book controller
 					if (temp != null) 
 					{
 						setList(temp);
@@ -153,11 +153,9 @@ public class StatisticsUserReportGUI extends JPanel {
 	
 	}
 	
-	public void setList(ArrayList<DBgenericObject> list)
+	public void setList(ArrayList<User> list)
 	{
 		this.searchRes=list;
-		//JList<book> bookList = new JList<book>();
-
 		//textArea.setText(list.toString());
 	//	add(textArea);
 		

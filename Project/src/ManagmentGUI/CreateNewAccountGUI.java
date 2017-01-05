@@ -13,10 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JTextField;
 
-import Book.book;
+import Book.Book;
 import Controller.UserController;
 import MenuGUI.LoginGUI;
-import Role.user;
+import Role.User;
 
 public class CreateNewAccountGUI extends JPanel {
 
@@ -117,7 +117,7 @@ public class CreateNewAccountGUI extends JPanel {
 	private JTextField txtPassword;
 	private JTextField txtSecondPassword;*/
 				
-				user u = new user(txtUserID.getText(), txtPassword.getText(), txtFirstName.getText(),
+				User u = new User(txtUserID.getText(), txtPassword.getText(), txtFirstName.getText(),
 						txtLastName.getText(), 1);//create book from text fields
 				String condition = "";//initialize the condition
 			/*	if (txtUserID.isSelected())
