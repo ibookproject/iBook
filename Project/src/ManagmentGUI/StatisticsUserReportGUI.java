@@ -37,13 +37,11 @@ public class StatisticsUserReportGUI extends JPanel
 	private JLabel lblDate;
 	private JLabel userReportLbl;
 	private JButton btnGetReports;
-	private JLabel lblListOfBook;
+	private JLabel lblUserID;
 	private JTextArea txtReport;
 	private ArrayList<User> searchRes;
-	private JTextField textFieldName;
+	private JTextField textFieldID;
 	private JTextField textFieldDate;
-	private JTextField textFieldLastName;
-	private JLabel lblLastName;
 	
 	public StatisticsUserReportGUI(LoginGUI screen) 
 	{
@@ -72,35 +70,26 @@ public class StatisticsUserReportGUI extends JPanel
 		add(btnBack);
 		
 
-		textFieldName = new JTextField();
-		textFieldName.setBounds(349, 129, 116, 22);
-		add(textFieldName);
-		textFieldName.setColumns(10);
-		
-		textFieldLastName = new JTextField();
-		textFieldLastName.setBounds(349, 168, 116, 22);
-		add(textFieldLastName);
-		textFieldLastName.setColumns(10);
-		
-		lblLastName = new JLabel("User Last Name");
-		lblLastName.setBounds(238, 174, 99, 16);
-		add(lblLastName);
+		textFieldID = new JTextField();
+		textFieldID.setBounds(320, 129, 116, 22);
+		add(textFieldID);
+		textFieldID.setColumns(10);
 
 		
-		lblListOfBook = new JLabel("User Name");
-		lblListOfBook.setBounds(238, 133, 70, 14);
-		add(lblListOfBook);
+		lblUserID = new JLabel("User ID");
+		lblUserID.setBounds(238, 133, 70, 14);
+		add(lblUserID);
 		
 		txtReport = new JTextArea();
 		txtReport.setBounds(206, 294, 500, 300);
 		add(txtReport);
 		
 		lblDate = new JLabel("Date");
-		lblDate.setBounds(238, 203, 48, 22);
+		lblDate.setBounds(238, 180, 48, 22);
 		add(lblDate);
 		
 		textFieldDate = new JTextField();
-		textFieldDate.setBounds(349, 203, 116, 21);
+		textFieldDate.setBounds(320, 180, 116, 21);
 		add(textFieldDate);
 		textFieldDate.setColumns(10);
 		
@@ -112,13 +101,13 @@ public class StatisticsUserReportGUI extends JPanel
 				User u=null;
 				try
 				{
-				u=new User("1","2",textFieldName.getText(), textFieldLastName.getText(),1);
+				u=new User(textFieldID.getText(),"2","1","1",1);
 				}
 				catch(InputMismatchException ex)
 				{
 				System.out.println(ex);
 				}
-				ArrayList<User> temp= (ArrayList<User>)UserController.SearchUser("firstName,lastName",u,"firstName=\""+u.getFirstName()+"\" && lastName=\""+u.getLastName()+"\"",screen.getClient());
+				ArrayList<User> temp= (ArrayList<User>)UserController.SearchUser("userID,password,firstName,lastName",u,"userID=\""+textFieldID.getText()+"\"" ,screen.getClient());
 				if(temp==null||temp.isEmpty())
 				{
 					setList(temp);
@@ -127,13 +116,20 @@ public class StatisticsUserReportGUI extends JPanel
 				}
 			
 				else
+				{
+					setTextArea(temp);
 					JOptionPane.showMessageDialog(screen,"User Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
+				}
 			}		
 		});
 		btnGetReports.setBounds(598, 129, 107, 23);
 		add(btnGetReports);
 	}
 	
+	public void setTextArea(ArrayList<User> user)
+	{
+		txtReport.setText(user.get(0).toString());
+	}
 	public void setList(ArrayList<User> list)
 	{
 		this.searchRes=list;

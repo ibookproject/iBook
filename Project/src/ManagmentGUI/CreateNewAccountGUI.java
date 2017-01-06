@@ -108,9 +108,9 @@ public class CreateNewAccountGUI extends JPanel {
 
 					boolean result = UserController.CreateNewAccount(u, screen.getClient());//call search book method from book controller
 				 	if (result==false)
-						JOptionPane.showMessageDialog(screen,"Add user process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(screen,"Add user process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 				 	else
-				 		JOptionPane.showMessageDialog(screen,"The book was add successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
+				 		JOptionPane.showMessageDialog(screen,"The user was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
 					}
 			
 				else
