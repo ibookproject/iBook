@@ -28,7 +28,6 @@ public class CreateNewAccountGUI extends JPanel {
 	private JTextField txtFirstName;
 	private JTextField txtLastName;
 	private JTextField txtPassword;
-	private JTextField txtSecondPassword;
 
 	public CreateNewAccountGUI(LoginGUI screen) {
 		super();
@@ -70,10 +69,6 @@ public class CreateNewAccountGUI extends JPanel {
 		lblPassword.setBounds(39, 186, 89, 14);
 		add(lblPassword);
 		
-		JLabel lblPasswordAgain = new JLabel("Password Again");
-		lblPasswordAgain.setBounds(39, 211, 89, 14);
-		add(lblPasswordAgain);
-		
 		txtFirstName = new JTextField();
 		txtFirstName.setBounds(204, 133, 118, 20);
 		add(txtFirstName);
@@ -88,11 +83,6 @@ public class CreateNewAccountGUI extends JPanel {
 		txtPassword.setBounds(204, 183, 118, 20);
 		add(txtPassword);
 		txtPassword.setColumns(10);
-		
-		txtSecondPassword = new JTextField();
-		txtSecondPassword.setBounds(204, 208, 118, 20);
-		add(txtSecondPassword);
-		txtSecondPassword.setColumns(10);
 		
 		JLabel lblUserId = new JLabel("User ID");
 		lblUserId.setBounds(39, 111, 46, 14);
@@ -110,43 +100,25 @@ public class CreateNewAccountGUI extends JPanel {
 		
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					/*	
-	private JTextField txtUserID;
-	private JTextField txtFirstName;
-	private JTextField txtLastName;
-	private JTextField txtPassword;
-	private JTextField txtSecondPassword;*/
-				
 				User u = new User(txtUserID.getText(), txtPassword.getText(), txtFirstName.getText(),
 						txtLastName.getText(), 1);//create book from text fields
-				String condition = "";//initialize the condition
-			/*	if (txtUserID.isSelected())
-					condition += "title=\"" + u.getTitle() + "\"";//add "title" to condition
-				if (chckbxLanguage.isSelected()) {
-					if (!condition.equals(""))
-						condition += " && ";
-					condition += "language=\"" + b.getLanguage() + "\"";//add "language" to condition
-				}
-				if (chckbxAuthor.isSelected()) {
-					if (!condition.equals(""))
-						condition += " && ";
-					condition += "author=\"" + b.getAuthor() + "\"";//add "author" to condition
-				}
-				if (chckbxSummary.isSelected()) {
-					if (!condition.equals(""))
-						condition += " && ";
-					condition += "summary=\"" + b.getSummary() + "\"";//add "summary" to condition
-				}*/
-				if (condition.equals("")) {//if have some condition
+				ArrayList<User> temp= (ArrayList<User>)UserController.SearchUser("userID",u,"userID=\""+u.getUserID()+"\"",screen.getClient());
+				if(temp==null||temp.isEmpty())
+				{
+
 					boolean result = UserController.CreateNewAccount(u, screen.getClient());//call search book method from book controller
 				 	if (result==false)
 						JOptionPane.showMessageDialog(screen,"Add user process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 				 	else
 				 		JOptionPane.showMessageDialog(screen,"The book was add successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
-					
+					}
+			
+				else
+					JOptionPane.showMessageDialog(screen,"User name already exist. Try another user name\n", "Warning",JOptionPane.WARNING_MESSAGE);
+
 					}
 
-		}});
+		});
 		
 	}
 }
