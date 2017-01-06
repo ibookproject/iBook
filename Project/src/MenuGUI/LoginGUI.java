@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -24,6 +25,8 @@ import java.io.IOException;
 import Controller.UserController;
 import client.DBSQLhandler;
 import client.DBgenericObject;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginGUI extends JFrame {
 
@@ -47,6 +50,7 @@ public class LoginGUI extends JFrame {
 	public LoginGUI(String host) {
 		super();
 		initialize();
+
 		this.screen = this;
 		try {
 			client = new DBSQLhandler(host, DEFAULT_PORT);// connection to
@@ -55,6 +59,7 @@ public class LoginGUI extends JFrame {
 			System.out.println("Error: Can't setup connection!" + " Terminating client.");
 			System.exit(1);
 		}
+		
 	}
 
 	/**
@@ -64,16 +69,20 @@ public class LoginGUI extends JFrame {
 		this.setSize(850, 625);
 		this.setContentPane(getFirstPanel());
 		this.setTitle("iBOOK");
+		
+	
 	}
 
 	/**
 	 * This method initializes FirstPanel
 	 */
 	private JPanel getFirstPanel() {
+		
+ 
 		if (FirstPanel == null) {
 			FirstPanel = new JPanel();
 			FirstPanel.setLayout(null);
-
+			
 			JButton btnLogin = new JButton("Login");
 			btnLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -215,8 +224,148 @@ public class LoginGUI extends JFrame {
 			textField.setBounds(374, 232, 112, 20);
 			FirstPanel.add(textField);
 			textField.setColumns(10);
+			
+			
+			
+		
 
 			textField_1 = new JTextField();
+			//////////////////////enter listener///////////////////////
+			textField_1.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode()==KeyEvent.VK_ENTER)
+					{
+						User u=null;
+						try{
+						u=new User(textField.getText(), textField_1.getText());
+						}
+						catch(InputMismatchException ex){
+						System.out.println(ex);
+						}
+						ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID,privilege",u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"",client);
+						if(temp==null||temp.isEmpty()){
+							JOptionPane.showMessageDialog(screen,"wrong password/username", "Warning",
+									JOptionPane.WARNING_MESSAGE);
+							if(counteEnrty++>=3){
+								JOptionPane.showMessageDialog(screen,"this user name is locked!", "Warning",
+										JOptionPane.WARNING_MESSAGE);
+								client.quit();
+								System.exit(1);
+							}
+							//here need to write sql to update
+							
+						}
+						else{
+							if(temp.size()>1)
+								throw new InputMismatchException("there is more then one User with userID"+temp.get(0).getUserID());
+						switch (temp.get(0).getPriviliege()) {
+						case UserStatus.USER: {
+
+							// //////////////////////button to back panel from panel
+							// /////////////////////////////////////////////
+							UserMenu usm = new UserMenu(screen);
+							usm.btnDisconnect
+									.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e) {
+											setContentPane(FirstPanel);
+										}
+										// //////////////////////button to back
+										// panel from
+										// panel/////////////////////////////////////////////
+									});
+							setContentPane(usm);// send to search book window
+
+						}
+							break;
+						case UserStatus.READER: {
+							ReaderMenu usm = new ReaderMenu(screen);
+							usm.btnDisconnect
+									.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e) {
+											setContentPane(FirstPanel);
+										}
+										// //////////////////////button to back
+										// panel from
+										// panel/////////////////////////////////////////////
+									});
+							setContentPane(usm);
+						}
+							break;
+						case UserStatus.LIBARYWORKER: {
+							LibraryWorkerMenu usm = new LibraryWorkerMenu(screen);
+							usm.btnDisconnect
+									.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e) {
+											setContentPane(FirstPanel);
+										}
+										// //////////////////////button to back
+										// panel from
+										// panel/////////////////////////////////////////////
+									});
+							setContentPane(usm);
+						}
+							break;
+						case UserStatus.QUALIFIEDEDITOR: {
+							QualifiedEditorMenu usm = new QualifiedEditorMenu(
+									screen, 4);
+							usm.btnDisconnect
+									.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e) {
+											setContentPane(FirstPanel);
+										}
+										// //////////////////////button to back
+										// panel from
+										// panel/////////////////////////////////////////////
+									});
+							setContentPane(usm);
+						}
+							break;
+						case UserStatus.LIBRRIAN: {
+							LibrarianMenu usm = new LibrarianMenu(screen, 5);
+							usm.btnDisconnect
+									.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e) {
+											setContentPane(FirstPanel);
+										}
+										// //////////////////////button to back
+										// panel from
+										// panel/////////////////////////////////////////////
+									});
+							setContentPane(usm);
+						}
+							break;
+						case UserStatus.MANAGER: {
+							LibraryManagerMenu usm = new LibraryManagerMenu(screen,
+									6);
+							usm.btnDisconnect
+									.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e) {
+											setContentPane(FirstPanel);
+										}
+										// //////////////////////button to back
+										// panel from
+										// panel/////////////////////////////////////////////
+									});
+							setContentPane(usm);
+						}
+							break;
+
+						// //////////////////////button go to panel from
+						// JFram/////////////////////////////////////////////
+						// LibrarianMenu usm=new LibrarianMenu(screen);
+						// setContentPane(usm);
+						}
+
+						// //////////////////////button go to panel from
+						// JFram/////////////////////////////////////////////
+						}
+					}
+					
+						
+				}
+			});
+				//////////////////////enter listener///////////////////////
 			textField_1.setBounds(374, 263, 112, 20);
 			FirstPanel.add(textField_1);
 			textField_1.setColumns(10);

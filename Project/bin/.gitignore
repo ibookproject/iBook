@@ -1,8 +1,5 @@
-/Controller/
-/ManagmentGUI/
-/Book/
-/MemberGUI/
 /client/
-/Role/
-/MenuGUI/
 /command/
+/ocsf/
+/ManagmentGUI/
+/MenuGUI/

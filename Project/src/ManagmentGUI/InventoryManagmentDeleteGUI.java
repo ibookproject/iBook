@@ -68,7 +68,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(335, 142, 101, 20);
-		//int len=result.size();
+		int len=result.size();
 		/*
 		String [] arr=new String[len];
 		for(int i=0;i<len;i++)
