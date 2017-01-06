@@ -70,6 +70,27 @@ public class bookController {
 	//	return null;
 	}
 	
+	//get all domain by there names
+	public static ArrayList<DBgenericObject> GetAllDomainByNames(String selectSentence,Domain from,String whereSentence,DBSQLhandler client)
+	{
+		// filed is need to look like "bookID,author,..."
+		client.searchInDB(new searchCommand<Domain>(selectSentence,from,whereSentence));
+		try{
+		Thread.sleep(500);
+		}
+		catch(InterruptedException ex)
+		{
+			System.out.println("InterruptedException "+ex);
+		}
+		try {
+		return  (ArrayList<DBgenericObject>)client.getResultObject();
+	} 	
+	catch (SQLException e) {
+		return null;
+	}
+	//	return null;
+	}
+	
 	
 	public static boolean AddBook(Book b,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{

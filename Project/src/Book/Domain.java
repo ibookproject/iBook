@@ -13,7 +13,7 @@ public class Domain extends DBtranslation {
 	
 	
 	//empty constactor
-	private Domain() {
+	public Domain() {
 		super();
 	}
 	

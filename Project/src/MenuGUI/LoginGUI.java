@@ -27,6 +27,7 @@ import client.DBSQLhandler;
 import client.DBgenericObject;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JPasswordField;
 
 public class LoginGUI extends JFrame {
 
@@ -38,11 +39,12 @@ public class LoginGUI extends JFrame {
 	final public static int DEFAULT_PORT = 5555;
 
 	private JPanel FirstPanel = null;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtUserID;
+	private JPasswordField pwdPassword;
 	private LoginGUI screen;
 	private DBSQLhandler client;// client attribute
 	private int counteEnrty=0;
+
 
 	/**
 	 * This is the default constructor
@@ -88,7 +90,7 @@ public class LoginGUI extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					User u=null;
 					try{
-					u=new User(textField.getText()/*ID*/, textField_1.getText()/*Password*/);
+					u=new User(txtUserID.getText()/*ID*/, pwdPassword.getText()/*Password*/);
 					}
 					catch(InputMismatchException ex){
 					System.out.println(ex);
@@ -217,21 +219,22 @@ public class LoginGUI extends JFrame {
 			lblLogin.setBounds(401, 28, 85, 23);
 			FirstPanel.add(lblLogin);
 
-			textField = new JTextField();
-			textField.setBounds(374, 232, 112, 20);
-			FirstPanel.add(textField);
-			textField.setColumns(10);
+			txtUserID = new JTextField();
+			txtUserID.setBounds(374, 232, 112, 20);
+			FirstPanel.add(txtUserID);
+			txtUserID.setColumns(10);
 			
-			textField_1 = new JTextField();
+			pwdPassword = new JPasswordField();
+		//	pwdPassword = new JTextField();
 			//////////////////////enter listener///////////////////////
-			textField_1.addKeyListener(new KeyAdapter() {
+			pwdPassword.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if(e.getKeyCode()==KeyEvent.VK_ENTER)
 					{
 						User u=null;
 						try{
-						u=new User(textField.getText(), textField_1.getText());
+						u=new User(txtUserID.getText(), pwdPassword.getText());
 						}
 						catch(InputMismatchException ex){
 						System.out.println(ex);
@@ -360,9 +363,10 @@ public class LoginGUI extends JFrame {
 				}
 			});
 				//////////////////////enter listener///////////////////////
-			textField_1.setBounds(374, 263, 112, 20);
-			FirstPanel.add(textField_1);
-			textField_1.setColumns(10);
+
+			pwdPassword.setText("");
+			pwdPassword.setBounds(374, 263, 112, 20);
+			FirstPanel.add(pwdPassword);
 
 			JLabel lblUserId = new JLabel("USER ID:");
 			lblUserId.setBounds(279, 235, 87, 14);
@@ -383,6 +387,8 @@ public class LoginGUI extends JFrame {
 					"\u05EA\u05DB\u05E0\u05D9\u05E1\u05D5 \u05D1\u05D9\u05D5\u05E1\u05E8 \u05D0\u05D9\u05D9\u05D3\u05D9 \u05D0\u05EA \u05D0\u05D7\u05D3 \u05DE\u05D4\u05DE\u05E1\u05E4\u05E8\u05D9\u05DD \u05D4\u05D0\u05DC\u05D5 \u05DB\u05D3\u05D9 \u05DC\u05D4\u05D9\u05DB\u05E0\u05E1 \u05DC\u05EA\u05E4\u05E8\u05D9\u05D8 \u05D4\u05DE\u05EA\u05D0\u05D9\u05DD");
 			label.setBounds(438, 137, 415, 80);
 			FirstPanel.add(label);
+			
+
 		}
 		return FirstPanel;
 	}

@@ -101,12 +101,12 @@ public class CreateNewAccountGUI extends JPanel {
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				User u = new User(txtUserID.getText(), txtPassword.getText(), txtFirstName.getText(),
-						txtLastName.getText(), 1);//create book from text fields
+						txtLastName.getText(), 1);//create user from text fields
 				ArrayList<User> temp= (ArrayList<User>)UserController.SearchUser("userID",u,"userID=\""+u.getUserID()+"\"",screen.getClient());
 				if(temp==null||temp.isEmpty())
 				{
 
-					boolean result = UserController.CreateNewAccount(u, screen.getClient());//call search book method from book controller
+					boolean result = UserController.CreateNewAccount(u, screen.getClient());//
 				 	if (result==false)
 						JOptionPane.showMessageDialog(screen,"Add user process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 				 	else
