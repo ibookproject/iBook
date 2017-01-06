@@ -36,6 +36,9 @@ public class User extends DBtranslation implements UserStatus {
 		setUserID(userID);
 		setPassword(password);
 	}
+	public User(String userID) {
+		setUserID(userID);
+	}
 
 	public String getUserID() {
 		return userID;

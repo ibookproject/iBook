@@ -109,12 +109,6 @@ public class StatisticsBookReportGUI extends JPanel {
 		txtToDate.setBounds(109, 444, 86, 20);
 		add(txtToDate);
 		txtToDate.setColumns(10);
-		
-		Domain d = new Domain();
-	/*	ArrayList<DBgenericObject> tempDomain = bookController.GetAllDomainByNames("*",d,, screen.getClient());//call search book method from book controller
-		int sizeDomain = tempDomain.size();
-		for(int i = 0 ; i<sizeDomain ; i++)
-			comboBoxDomain.addItem(tempDomain.get(i).toString());*/
-	
+			
 	}
 }
