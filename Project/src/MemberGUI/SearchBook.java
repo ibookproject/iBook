@@ -24,6 +24,9 @@ public class SearchBook extends JPanel {
 	public JButton btnBack ;
 	private LoginGUI screen;
 	private JPanel pann;
+	private ImageIcon backIcon;
+	private JButton btnPostReview;
+	private JLabel lblSearchBook;
 	private ArrayList<Book> searchRes;
 	private JTextArea textArea;
 	
@@ -40,8 +43,8 @@ public class SearchBook extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);	
 		
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
-		JButton btnPostReview = new JButton("Post Review");
+		backIcon =new ImageIcon("src/images/backIcon.png");
+		btnPostReview = new JButton("Post Review");
 		btnPostReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 ////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -62,7 +65,7 @@ public class SearchBook extends JPanel {
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 		
-		JLabel lblSearchBook = new JLabel("Search Book");
+		lblSearchBook = new JLabel("Search Book");
 		lblSearchBook.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblSearchBook.setBounds(355, 49, 175, 22);
 		add(lblSearchBook);
@@ -72,10 +75,6 @@ public class SearchBook extends JPanel {
 		textArea.setBounds(179, 121, 488, 456);
 		add(textArea);
 		
-		
-
-		
-	
 		
 	}
 	public void setList(ArrayList<Book> list)

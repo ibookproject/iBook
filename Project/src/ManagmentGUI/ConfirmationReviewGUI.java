@@ -26,6 +26,12 @@ public class ConfirmationReviewGUI extends JPanel {
 	private LoginGUI screen;
 	private JPanel pann;
 	private int Permission;
+	private ImageIcon backIcon;
+	private JLabel confirmLbl ;
+	private JTextArea textArea ;
+	private JButton btnRemovePartReview;
+	private JButton btnNotConfirm;
+	private JButton btnConfirm ;
 	
 	public ConfirmationReviewGUI(LoginGUI screen,int permission) {
 		super();
@@ -40,21 +46,22 @@ public class ConfirmationReviewGUI extends JPanel {
 		
 		this.setSize(850, 625);
 		this.setLayout(null);	
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
+		
+		backIcon =new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 		
-		JLabel confirmLbl = new JLabel("Confirmation Review");
+		confirmLbl = new JLabel("Confirmation Review");
 		confirmLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		confirmLbl.setBounds(355, 49, 175, 22);
 		add(confirmLbl);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setBounds(174, 109, 549, 387);
 		add(textArea);
 		if(this.Permission==5){
-		JButton btnRemovePartReview = new JButton("Remove Part Of Review");
+		btnRemovePartReview = new JButton("Remove Part Of Review");
 		btnRemovePartReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 ////////////////////////button to back to confirmation review from remove part of review /////////////////////////////////////////////
@@ -75,7 +82,7 @@ public class ConfirmationReviewGUI extends JPanel {
 		add(btnRemovePartReview);}
 		
 	
-		JButton btnNotConfirm = new JButton("Not Confirm");
+		btnNotConfirm = new JButton("Not Confirm");
 		btnNotConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -83,7 +90,7 @@ public class ConfirmationReviewGUI extends JPanel {
 		btnNotConfirm.setBounds(388, 509, 109, 25);
 		add(btnNotConfirm);
 		
-		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

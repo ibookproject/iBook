@@ -44,10 +44,10 @@ public class UserController {
 			return null;
 		}
 	}
-	public static boolean CreateNewAccount(User b,DBSQLhandler client) // boolean function that return true if user added else false.
+	public static boolean CreateNewAccount(User u,DBSQLhandler client) // boolean function that return true if user added else false.
 	{
-			client.insertToDB(new insertCommand<DBtranslation>(b)); 	
-			while(!client.GetGotMessag()){//add book to DB
+			client.insertToDB(new insertCommand<DBtranslation>(u)); 	
+			while(!client.GetGotMessag()){//add user to DB
 				try{
 				Thread.sleep(500);
 				}
@@ -57,7 +57,7 @@ public class UserController {
 					return false;
 				}
 			}
-			return true;	// means the book add successful	
+			return true;	// means the user add successful	
 	}
 
 }

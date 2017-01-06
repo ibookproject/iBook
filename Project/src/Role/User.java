@@ -21,7 +21,8 @@ public class User extends DBtranslation implements UserStatus {
 		super();
 	}
 	
-	public User(String userID, String password, String firstName, String lastName, int privilege) {
+	public User(String userID, String password, String firstName, String lastName, int privilege) 
+	{
 		setUserID(userID);
 		setPassword(password);
 		setFirstName(firstName);
@@ -30,6 +31,7 @@ public class User extends DBtranslation implements UserStatus {
 		this.userStatus=DISCONNECTED;
 	}
 
+	
 	public User(String userID, String password) {
 		setUserID(userID);
 		setPassword(password);

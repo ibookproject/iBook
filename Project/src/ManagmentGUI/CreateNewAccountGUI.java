@@ -137,7 +137,7 @@ public class CreateNewAccountGUI extends JPanel {
 						condition += " && ";
 					condition += "summary=\"" + b.getSummary() + "\"";//add "summary" to condition
 				}*/
-				if (!condition.equals("")) {//if have some condition
+				if (condition.equals("")) {//if have some condition
 					boolean result = UserController.CreateNewAccount(u, screen.getClient());//call search book method from book controller
 				 	if (result==false)
 						JOptionPane.showMessageDialog(screen,"Add user process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);

@@ -10,15 +10,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
+import MenuGUI.LoginGUI;
+
 
 public class ShowBookRate extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
-	private JFrame screen;
+	private LoginGUI screen;
 	private JPanel pann;
+	private ImageIcon backIcon;
+	private JLabel lblNewLabel;
+	private JTextArea textArea;
 	
-	public ShowBookRate(JFrame screen) {
+	public ShowBookRate(LoginGUI screen) {
 		super();
 		this.screen=screen;
 		pann=this;
@@ -31,18 +36,18 @@ public class ShowBookRate extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);	
 		
-		JLabel lblNewLabel = new JLabel("Book Rate");
+		lblNewLabel = new JLabel("Book Rate");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setBounds(355, 49, 175, 22);
 		add(lblNewLabel);
 		
 		
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
+		backIcon =new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setBounds(124, 130, 628, 457);
 		add(textArea);
 		

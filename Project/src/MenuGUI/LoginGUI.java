@@ -50,7 +50,7 @@ public class LoginGUI extends JFrame {
 	public LoginGUI(String host) {
 		super();
 		initialize();
-
+	
 		this.screen = this;
 		try {
 			client = new DBSQLhandler(host, DEFAULT_PORT);// connection to
@@ -88,7 +88,7 @@ public class LoginGUI extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					User u=null;
 					try{
-					u=new User(textField.getText(), textField_1.getText());
+					u=new User(textField.getText()/*ID*/, textField_1.getText()/*Password*/);
 					}
 					catch(InputMismatchException ex){
 					System.out.println(ex);
@@ -112,17 +112,14 @@ public class LoginGUI extends JFrame {
 					switch (temp.get(0).getPriviliege()) {
 					case UserStatus.USER: {
 
-						// //////////////////////button to back panel from panel
-						// /////////////////////////////////////////////
+// //////////////////////button to back panel from panel// /////////////////////////////////////////////
 						UserMenu usm = new UserMenu(screen);
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
 										setContentPane(FirstPanel);
 									}
-									// //////////////////////button to back
-									// panel from
-									// panel/////////////////////////////////////////////
+// //////////////////////button to back panel from panel/////////////////////////////////////////////
 								});
 						setContentPane(usm);// send to search book window
 
@@ -225,10 +222,6 @@ public class LoginGUI extends JFrame {
 			FirstPanel.add(textField);
 			textField.setColumns(10);
 			
-			
-			
-		
-
 			textField_1 = new JTextField();
 			//////////////////////enter listener///////////////////////
 			textField_1.addKeyListener(new KeyAdapter() {
@@ -397,6 +390,7 @@ public class LoginGUI extends JFrame {
 	public void setpann(JPanel pnl) {
 		setContentPane(pnl);
 	}
+
 
 	public DBSQLhandler getClient()// return client
 	{

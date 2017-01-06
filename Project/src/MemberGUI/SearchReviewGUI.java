@@ -34,9 +34,6 @@ public class SearchReviewGUI extends JPanel {
 		lblNewLabel.setBounds(352, 59, 211, 14);
 		add(lblNewLabel);
 		
-		
-		
-		
 		JLabel lblChooseDomain = new JLabel("Choose Domain :");
 		lblChooseDomain.setBounds(335, 120, 116, 23);
 		add(lblChooseDomain);

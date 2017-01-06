@@ -3,6 +3,7 @@ package ManagmentGUI;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -17,24 +18,24 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Book.Book;
+import java.util.InputMismatchException;
 import Controller.UserController;
 import Controller.bookController;
 import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;
 import Role.User;
+import client.DBSQLhandler;
 import client.DBgenericObject;
 
-
-
-
-public class StatisticsUserReportGUI extends JPanel {
-
-	
+public class StatisticsUserReportGUI extends JPanel
+{
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
 	private LoginGUI screen;
 	private JPanel pann;
+	private ImageIcon backIcon;
 	private JLabel lblDate;
+	private JLabel userReportLbl;
 	private JButton btnGetReports;
 	private JLabel lblListOfBook;
 	private JTextArea txtReport;
@@ -42,13 +43,35 @@ public class StatisticsUserReportGUI extends JPanel {
 	private JTextField textFieldName;
 	private JTextField textFieldDate;
 	private JTextField textFieldLastName;
+	private JLabel lblLastName;
 	
-	public StatisticsUserReportGUI(LoginGUI screen) {
+	public StatisticsUserReportGUI(LoginGUI screen) 
+	{
 		super();
-		initialize();
+		
 		this.screen=screen;
 		pann=this;
 		
+		initialize();
+		
+	}
+
+	private void initialize() 
+	{
+		this.setSize(850, 625);
+		this.setLayout(null);	
+		
+		userReportLbl = new JLabel("Statistics User Report");
+		userReportLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		userReportLbl.setBounds(355, 49, 175, 22);
+		add(userReportLbl);
+		
+		backIcon =new ImageIcon("src/images/backIcon.png");
+		btnBack = new JButton(backIcon);// declaration of back button
+		btnBack.setBounds(39, 52, 89, 23);
+		add(btnBack);
+		
+
 		textFieldName = new JTextField();
 		textFieldName.setBounds(349, 129, 116, 22);
 		add(textFieldName);
@@ -59,27 +82,10 @@ public class StatisticsUserReportGUI extends JPanel {
 		add(textFieldLastName);
 		textFieldLastName.setColumns(10);
 		
-		JLabel lblLastName = new JLabel("User Last Name");
+		lblLastName = new JLabel("User Last Name");
 		lblLastName.setBounds(238, 174, 99, 16);
 		add(lblLastName);
 
-	}
-
-
-	private void initialize() {
-		
-		this.setSize(850, 625);
-		this.setLayout(null);	
-		
-		JLabel userReportLbl = new JLabel("Statistics User Report");
-		userReportLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		userReportLbl.setBounds(355, 49, 175, 22);
-		add(userReportLbl);
-		
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
-		btnBack = new JButton(backIcon);// declaration of back button
-		btnBack.setBounds(39, 52, 89, 23);
-		add(btnBack);
 		
 		lblListOfBook = new JLabel("User Name");
 		lblListOfBook.setBounds(238, 133, 70, 14);
@@ -99,66 +105,38 @@ public class StatisticsUserReportGUI extends JPanel {
 		textFieldDate.setColumns(10);
 		
 		btnGetReports = new JButton("Get report");
-		btnGetReports.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// //////////////////////button back to Search book GUI
-				// /////////////////////////////////////////////
-		//		SearchBook sb = new SearchBook(screen);
-			/*	sb.btnBack.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						screen.setContentPane(pann);
-					}
-					// //////////////////////button back to Search book
-					// GUI/////////////////////////////////////////////
-				});*/
-				
-				// User(String userID, String password, String firstName, String lastName, int userStatus)
-				User u = new User(null, null,textFieldName.getText(), textFieldLastName.getText(),0);//create book from text fields
-				String condition = "";//initialize the condition
-			//	if (chckbxTitle.isSelected())
-					condition += "userID=\"" + "" + "\"";//add "title" to condition
-				//if (chckbxLanguage.isSelected()) {
-					if (!condition.equals(""))
-						condition += " && ";
-					condition += "password=\"" + "" + "\"";//add "language" to condition
-				//}
-			//	if (chckbxAuthor.isSelected()) {
-					if (!condition.equals(""))
-						condition += " && ";
-					condition += "firstName=\"" + u.getFirstName() + "\"";//add "author" to condition
-			//	}
-				//if (chckbxSummary.isSelected()) {
-					if (!condition.equals(""))
-						condition += " && ";
-					condition += "lastName=\"" + u.getLastName() + "\"";//add "summary" to condition
-				//}
-				if (!condition.equals("")) 
-				{//if have some condition
-					ArrayList<User> temp = (ArrayList<User>) UserController.SearchUser("userID,firstName",u,condition, screen.getClient());//call search book method from book controller
-					if (temp != null) 
-					{
-						setList(temp);
-						screen.setContentPane(pann);
-					} 
-					else //
-						JOptionPane.showMessageDialog(screen,"Not found any user result\n", "Warning",JOptionPane.WARNING_MESSAGE);
-				} 
-				else //(condition)=="")empty
-					JOptionPane.showMessageDialog(screen,"Nothing has selected", "Warning",JOptionPane.WARNING_MESSAGE);
-			}
-
+		btnGetReports.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				User u=null;
+				try
+				{
+				u=new User("1","2",textFieldName.getText(), textFieldLastName.getText(),1);
+				}
+				catch(InputMismatchException ex)
+				{
+				System.out.println(ex);
+				}
+				ArrayList<User> temp= (ArrayList<User>)UserController.SearchUser("firstName,lastName",u,"firstName=\""+u.getFirstName()+"\" && lastName=\""+u.getLastName()+"\"",screen.getClient());
+				if(temp==null||temp.isEmpty())
+				{
+					setList(temp);
+					screen.setContentPane(pann);
+					JOptionPane.showMessageDialog(screen,"User was not Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
+				}
+			
+				else
+					JOptionPane.showMessageDialog(screen,"User Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
+			}		
 		});
 		btnGetReports.setBounds(598, 129, 107, 23);
 		add(btnGetReports);
-	
 	}
 	
 	public void setList(ArrayList<User> list)
 	{
 		this.searchRes=list;
-		//textArea.setText(list.toString());
-	//	add(textArea);
-		
 		
 	}
 }

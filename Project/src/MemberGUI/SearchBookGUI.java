@@ -38,12 +38,25 @@ public class SearchBookGUI extends JPanel {
 	public JButton btnBack;
 	private LoginGUI screen;
 	private JPanel pann;
+	private ImageIcon backIcon;
+	private JLabel lblSearchBook;
+	private JCheckBox chckbxTitle;
+	private JCheckBox chckbxAuthor;
+	private JCheckBox chckbxLanguage;
+	private JCheckBox chckbxSummary;
+	private JCheckBox chckbxContents ;
 	private JTextField textTitle;
 	private JTextField textAuthor;
-	private JTextField textField_2;
+	private JCheckBox chckbxKeywords;
+	private JCheckBox chckbxDomain;
+	private JCheckBox chckbxFormat;
+	private JComboBox<String> comboBoxDomain;
+	private JComboBox<String> comboBoxFormat ;
+	private JTextField textFieldLanguage;
 	private JTextField textFieldKeywords;
 	private JTextField textFieldSummary;
 	private JTextField textFieldContents;
+	private JButton btnSearch;
 
 	public SearchBookGUI(LoginGUI screen) {
 		super();
@@ -66,57 +79,57 @@ public class SearchBookGUI extends JPanel {
 			domains[i] = "Domain " + i;
 		}
 
-		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
+		backIcon = new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 
-		JLabel lblSearchBook = new JLabel("Search Book");
+		lblSearchBook = new JLabel("Search Book");
 		lblSearchBook.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblSearchBook.setBounds(355, 49, 175, 22);
 		add(lblSearchBook);
 
-		JCheckBox chckbxTitle = new JCheckBox("Title");
+		chckbxTitle = new JCheckBox("Title");
 		chckbxTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		chckbxTitle.setBounds(257, 150, 111, 25);
 		add(chckbxTitle);
 
-		JCheckBox chckbxAuthor = new JCheckBox("Author");
+		chckbxAuthor = new JCheckBox("Author");
 		chckbxAuthor.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		chckbxAuthor.setBounds(257, 200, 111, 25);
 		add(chckbxAuthor);
 
-		JCheckBox chckbxLanguage = new JCheckBox("Language");
+		chckbxLanguage = new JCheckBox("Language");
 		chckbxLanguage.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		chckbxLanguage.setBounds(257, 250, 111, 25);
 		add(chckbxLanguage);
 
-		JCheckBox chckbxSummary = new JCheckBox("Summary");
+		chckbxSummary = new JCheckBox("Summary");
 		chckbxSummary.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		chckbxSummary.setBounds(257, 300, 111, 25);
 		add(chckbxSummary);
 
-		JCheckBox chckbxContents = new JCheckBox("Contents");
+		chckbxContents = new JCheckBox("Contents");
 		chckbxContents.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		chckbxContents.setBounds(257, 350, 111, 25);
 		add(chckbxContents);
 
-		JCheckBox chckbxKeywords = new JCheckBox("Keywords");
+		chckbxKeywords = new JCheckBox("Keywords");
 		chckbxKeywords.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		chckbxKeywords.setBounds(257, 400, 111, 25);
 		add(chckbxKeywords);
 
-		JCheckBox chckbxDomain = new JCheckBox("Domain");
+		chckbxDomain = new JCheckBox("Domain");
 		chckbxDomain.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		chckbxDomain.setBounds(257, 450, 111, 25);
 		add(chckbxDomain);
 
-		JCheckBox chckbxFormat = new JCheckBox("Format");
+		chckbxFormat = new JCheckBox("Format");
 		chckbxFormat.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		chckbxFormat.setBounds(257, 500, 111, 25);
 		add(chckbxFormat);
 
-		JComboBox<String> comboBoxDomain = new JComboBox<String>();
+		comboBoxDomain = new JComboBox<String>();
 		comboBoxDomain.addItem(" ");
 		for (int i = 0; i < 3; i++) {
 			comboBoxDomain.addItem(domains[i]);
@@ -124,7 +137,7 @@ public class SearchBookGUI extends JPanel {
 		comboBoxDomain.setBounds(393, 452, 116, 22);
 		add(comboBoxDomain);
 
-		JComboBox<String> comboBoxFormat = new JComboBox<String>();
+		comboBoxFormat = new JComboBox<String>();
 		comboBoxFormat.addItem(" ");
 		comboBoxFormat.addItem("PDF");
 		comboBoxFormat.addItem("DOC");
@@ -158,12 +171,12 @@ public class SearchBookGUI extends JPanel {
 		add(textAuthor);
 		textAuthor.setColumns(10);
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(393, 252, 116, 22);
-		add(textField_2);
-		textField_2.setColumns(10);
+		textFieldLanguage = new JTextField();
+		textFieldLanguage.setBounds(393, 252, 116, 22);
+		add(textFieldLanguage);
+		textFieldLanguage.setColumns(10);
 
-		JButton btnSearch = new JButton("Search");
+		btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// //////////////////////button back to Search book GUI
@@ -176,7 +189,7 @@ public class SearchBookGUI extends JPanel {
 					// //////////////////////button back to Search book
 					// GUI/////////////////////////////////////////////
 				});
-				Book b = new Book(textTitle.getText(), textField_2.getText(),
+				Book b = new Book(textTitle.getText(), textFieldLanguage.getText(),
 						textAuthor.getText(), textFieldSummary.getText(), true);//create book from text fields
 				String condition = "";//initialize the condition
 				if (chckbxTitle.isSelected())
