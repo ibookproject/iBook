@@ -29,7 +29,11 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	public JButton btnBack ;
-	LoginGUI screen;
+	private ArrayList<Subject>resultSubjects; // array of subjects of some domain
+	private ArrayList<Domain> resultDomains; // array of domains
+	private JComboBox comboBoxSubject;
+	private JComboBox comboBoxBook;
+	private LoginGUI screen;
 
 	public InventoryManagmentDeleteGUI(LoginGUI screen ) {
 		super();
@@ -37,12 +41,9 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		initialize();
 	}
 
-	
 	private void initialize() {
-		
 		this.setSize(850, 625);
 		this.setLayout(null);	
-
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png"); 
 		 btnBack = new JButton(backIcon);
 		btnBack.addActionListener(new ActionListener() {
@@ -59,67 +60,51 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		
 		
 		Domain d = new Domain("1");
-		ArrayList<DBgenericObject> result = bookController.GetAllDomain(d,screen.getClient());//
-		System.out.println(result);
+		 resultDomains = bookController.GetAllDomain(d,screen.getClient());//
+		//System.out.println(result);
 		
 		JLabel lblChooseDomain = new JLabel("Choose Domain :");
 		lblChooseDomain.setBounds(335, 120, 116, 23);
 		add(lblChooseDomain);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(335, 142, 101, 20);
-		int len=result.size();
-		/*
-		String [] arr=new String[len];
-		for(int i=0;i<len;i++)
-		{
-			String s=(String)result.get(i).getDomainName(); // not work 
-			arr[i]=s;
-		}
-		System.out.println(arr);
-		/*
-		
-	/*	for(int i=0;i<result.size();i++)
-		{
-			s=result.get(i).getDomainName();
-			comboBox.addItem(s);
-		}
-		*/
-		add(comboBox);
-	
-		
-		
-		
-		
-		/*
-		String cond="nameSubject=\"" +"goog" +"&&"+ "domainID=\"" + "1";
-		
-		Subject d = new Subject(1,"1");
-		ArrayList<Domain> result1 = bookController.GetSubjectsOfChoosenDomain(d,screen.getClient());//
-		System.out.println(result);
-		*/
+		JComboBox comboBoxDomain = new JComboBox();
+
+		comboBoxDomain.setBounds(335, 142, 101, 20);
+
+		for(Domain dd:resultDomains) // adding all the Domain names to the checkbox
+			comboBoxDomain.addItem(dd);
+
+		comboBoxDomain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Subject s=new Subject(3,3,"1");  //create empty project
+				// select Subject of the specific domain ! 
+				resultSubjects=bookController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) comboBoxDomain.getSelectedItem()).getDomainID(), screen.getClient());
+				System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
+				//resultDomains.clear();// maybe not need .... 		
+			}
+		});
+		add(comboBoxDomain);
 		
 		JLabel lblChooseSubject = new JLabel("Choose Subject : ");
 		lblChooseSubject.setBounds(335, 173, 95, 14);
 		add(lblChooseSubject);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(335, 190, 103, 20);
-		add(comboBox_2);
+		comboBoxSubject = new JComboBox();///////////
+		// not work
+		//for(Subject sub:resultSubjects)
+			//comboBoxSubject.addItem(resultSubjects.get(0));
+		comboBoxSubject.setBounds(335, 190, 103, 20);
+		add(comboBoxSubject);
 		
 		JLabel lblChooseBook = new JLabel("Choose Book :");
 		lblChooseBook.setBounds(335, 230, 91, 23);
 		add(lblChooseBook);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(335, 248, 105, 23);
-		add(comboBox_1);
-		
+		comboBoxBook = new JComboBox();
+		comboBoxBook.setBounds(335, 248, 105, 23);
+		add(comboBoxBook);
 		
 
-		
-		
-		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -23,6 +23,8 @@ public class Subject extends DBtranslation {
 		this.domainID = domainID;
 		this.nameSubject = nameSubject;
 	}
+
+	
 	public int getBookID() {
 		return bookID;
 	}
@@ -96,7 +98,8 @@ public class Subject extends DBtranslation {
 	}
 	@Override
 	public String toString() {
-		return "Subject [bookID=" + bookID + ", domainID=" + domainID + ", nameSubject=" + nameSubject + "]";
+		//return "Subject [bookID=" + bookID + ", domainID=" + domainID + ", nameSubject=" + nameSubject + "]";
+		 return String.format("%s", nameSubject);
 	}
 	
 }

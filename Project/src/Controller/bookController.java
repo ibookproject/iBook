@@ -50,7 +50,7 @@ public class bookController {
 	}
 	
 	// my try to get all Domain from Domain table ... not work for now , if you want to try just make a copy or dont remove this 
-	public static ArrayList<DBgenericObject> GetAllDomain(Domain d,DBSQLhandler client)
+	public static ArrayList<Domain> GetAllDomain(Domain d,DBSQLhandler client)// changes
 	{
 		// filed is need to look like "bookID,author,..."
 		client.getAllTable((new showAllCommand<Domain>(d)));
@@ -62,7 +62,7 @@ public class bookController {
 			System.out.println("InterruptedException "+ex);
 		}
 		try {
-		return  (ArrayList<DBgenericObject>)client.getResultObject();
+		return  Domain.convertBack((ArrayList<DBgenericObject>) client.getResultObject(),"DomainID,DomainName");
 	} 	
 	catch (SQLException e) {
 		return null;
@@ -88,28 +88,28 @@ public class bookController {
 			return true;	// means the book add successful	
 	}
 	
-	/* not work 
-	public static ArrayList<Subject> GetSubjectsOfChoosenDomain(Subject d,DBSQLhandler client)
+	////////////////////new/////////////////////
+	public static ArrayList<Subject> SearchSubjectAtDomain(String fromSentence,Subject s,String condition,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
-		client.searchInDB(new searchCommand<book>(d,condition, "bookID, author"));
-		//client.getAllTable((new showAllCommand<Subject>(d)));
-		try{
-		Thread.sleep(500);
-		}
-		catch(InterruptedException ex)
-		{
-			System.out.println("InterruptedException "+ex);
+		client.searchInDB(new searchCommand<Subject>(fromSentence,s,condition));//call command and client ask to search a book
+		while(!client.GetGotMessag()){//search Subject in db
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+			}
 		}
 		try {
-		return  (ArrayList<Subject>)client.getResultObject();
-	} 	
-	catch (SQLException e) {
-		return null;
+			
+			return  Subject.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), fromSentence);
+		} catch (SQLException e) {
+			return null;
+		}
 	}
-	//	return null;
-	}
-	*/
+	////////////////////new/////////////////////
 	
 	
 }

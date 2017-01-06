@@ -13,7 +13,7 @@ public class Domain extends DBtranslation {
 	
 	
 	//empty constactor
-	public Domain() {
+	private Domain() {
 		super();
 	}
 	
@@ -75,10 +75,10 @@ public class Domain extends DBtranslation {
 			 for(int i=0;i<fromSentence.length;i++)
 			 {
 				 switch (fromSentence[i]) {
-				case "domainID":
+				case "DomainID":
 					recover.setDomainID((int)ob.getValtoArray(i));
 					break;
-				case "domainName":
+				case "DomainName":
 					recover.setDomainName((String)ob.getValtoArray(i));
 					break;
 				default:
@@ -92,7 +92,8 @@ public class Domain extends DBtranslation {
 
 		@Override
 		public String toString() {
-			return "Domain [DomainID=" + DomainID + ", DomainName=" + DomainName + "]";
+			//return "Domain [DomainID=" + DomainID + ", DomainName=" + DomainName + "]";
+			return String.format("%s", DomainName);
 		}
 		
 	
