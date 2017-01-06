@@ -10,6 +10,7 @@ import client.DBgenericObject;
 import command.DBtranslation;
 import command.insertCommand;
 import command.searchCommand;
+import command.updateCommand;
 
 public class UserController {
 	/*
@@ -47,6 +48,22 @@ public class UserController {
 	public static boolean CreateNewAccount(User u,DBSQLhandler client) // boolean function that return true if user added else false.
 	{
 			client.insertToDB(new insertCommand<DBtranslation>(u)); 	
+			while(!client.GetGotMessag()){//add user to DB
+				try{
+				Thread.sleep(500);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+					return false;
+				}
+			}
+			return true;	// means the user add successful	
+	}
+	
+	public static boolean SetStatusSubscription(User u , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
+	{
+			client.UpdateInDB(new updateCommand<DBtranslation>(u, searchCondition, updateCondition));
 			while(!client.GetGotMessag()){//add user to DB
 				try{
 				Thread.sleep(500);

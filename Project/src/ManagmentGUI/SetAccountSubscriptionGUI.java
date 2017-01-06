@@ -2,6 +2,7 @@ package ManagmentGUI;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -12,11 +13,13 @@ import javax.swing.JTextField;
 import Controller.UserController;
 import MenuGUI.LoginGUI;
 import Role.User;
-
+import Role.UserStatus;
 import javax.swing.JRadioButton;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SetAccountSubscriptionGUI extends JPanel {
 
@@ -26,6 +29,10 @@ public class SetAccountSubscriptionGUI extends JPanel {
 	private LoginGUI screen;
 	private JPanel pann;
 	private JTextField txtUserID;
+	private int radioButtonChoose = 0;// integer to sent what the radio button
+										// that
+										// choose
+	private User u;
 
 	public SetAccountSubscriptionGUI(LoginGUI screen) {
 		super();
@@ -61,20 +68,24 @@ public class SetAccountSubscriptionGUI extends JPanel {
 		JLabel lblUserCheck = new JLabel("");
 		lblUserCheck.setBounds(310, 160, 481, 14);
 		add(lblUserCheck);
-		
+
 		txtUserID = new JTextField();
 		txtUserID.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				User u = new User(txtUserID.getText());// create user from text
-														// fields
-				ArrayList<User> temp = (ArrayList<User>) UserController.SearchUser("userID", u,
-						"userID=\"" + u.getUserID() + "\"", screen.getClient());
-				if (temp == null || temp.isEmpty()) {
-					lblUserCheck.setText(temp.get(0).getFirstName() + temp.get(0).getLastName());
-				} else {
-					lblUserCheck.setText("User was not found!");
-				}
+				if (!txtUserID.getText().isEmpty()) {// check if text field is
+														// not empty user id
+					u = new User(txtUserID.getText());// create user
+					ArrayList<User> temp = (ArrayList<User>) UserController.SearchUser("userID,firstName,lastName", u,
+							"userID=\"" + u.getUserID() + "\"", screen.getClient());
+					if (temp == null || temp.isEmpty()) {
+						lblUserCheck.setText("User was not found!");
+						u = null;// reset the user that need to update
+					} else
+						lblUserCheck.setText(
+								temp.get(0).getFirstName().toString() + " " + temp.get(0).getLastName().toString());
+				} else
+					u = null;// reset the user that need to update
 			}
 		});
 		txtUserID.setBounds(165, 157, 86, 20);
@@ -82,14 +93,29 @@ public class SetAccountSubscriptionGUI extends JPanel {
 		txtUserID.setColumns(10);
 
 		JRadioButton rdbtnOne = new JRadioButton("One Time Purchase");
+		rdbtnOne.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				radioButtonChoose = UserStatus.SINGLE;
+			}
+		});
 		rdbtnOne.setBounds(165, 181, 145, 23);
 		add(rdbtnOne);
 
 		JRadioButton rdbtnMonthly = new JRadioButton("Monthly");
+		rdbtnMonthly.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				radioButtonChoose = UserStatus.MONTHLY;
+			}
+		});
 		rdbtnMonthly.setBounds(165, 207, 109, 23);
 		add(rdbtnMonthly);
 
 		JRadioButton rdbtnYearly = new JRadioButton("Yearly");
+		rdbtnYearly.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				radioButtonChoose = UserStatus.YEARLY;
+			}
+		});
 		rdbtnYearly.setBounds(165, 233, 109, 23);
 		add(rdbtnYearly);
 
@@ -100,10 +126,31 @@ public class SetAccountSubscriptionGUI extends JPanel {
 		group.add(rdbtnYearly);
 
 		JButton btnSet = new JButton("Set");
+		btnSet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(u==null||radioButtonChoose==0)
+					JOptionPane.showMessageDialog(screen,"Update user process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+				else
+				{
+					/*UPDATE user
+					SET City='Hamburg'
+					WHERE CustomerID=1;*/
+					boolean result = UserController.SetStatusSubscription(u, "subscriptionMethod=\""+radioButtonChoose+"\" && privilege=\""+ UserStatus.READER +"\"", "userID=\""+u.getUserID()+"\"", screen.getClient());
+					// update user by the new subscription method from the radio button that choosen
+					// and set privilege to 2 (READER)
+					if(result)
+						JOptionPane.showMessageDialog(screen,"Subscription method set sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+					else JOptionPane.showMessageDialog(screen,"Update user process FAILED", "Warning",JOptionPane.WARNING_MESSAGE);
+
+				}
+			}
+		});
 		btnSet.setBounds(422, 328, 89, 23);
 		add(btnSet);
 
-
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBounds(422, 185, 46, 14);
+		add(lblNewLabel_1);
 
 		/*
 		 * דוגמא להשתמש ברדיו באטן JRadioButton catButton = new
