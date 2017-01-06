@@ -277,6 +277,7 @@ public class LoginGUI extends JFrame {
 							setContentPane(usm);// send to search book window
 
 						}
+						
 							break;
 						case UserStatus.READER: {
 							ReaderMenu usm = new ReaderMenu(screen);
