@@ -19,6 +19,7 @@ public class UserMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
 	/// hen- i change all to protected because we extends this ... ( it was private)
 	protected LoginGUI screen;
+	//protected int UserIdAtDataBase; // this is the user id from the loging , for the cart , i need what is the current Userid at database
 	protected JPanel pann;
 	protected JButton btnSearchBook;
 	protected JButton btnSearchReview;
@@ -30,12 +31,13 @@ public class UserMenu extends JPanel {
 	 * This is the default constructor
 	 * @param screen 
 	 */
-	public UserMenu(LoginGUI screen) {
+
+	
+	public UserMenu(LoginGUI screen ) {
 		super();
 		initialize();
 		this.screen=screen;
 		pann=this;
-		
 		lblUserMenu = new JLabel("iBOOK Menu");
 		lblUserMenu.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblUserMenu.setBounds(387, 11, 116, 14);

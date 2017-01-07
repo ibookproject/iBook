@@ -30,8 +30,8 @@ public class LibraryManagerMenu extends LibrarianMenu {
 	private JPanel pann;
 	private int Permission;
 	
-	public LibraryManagerMenu(LoginGUI screen,int permission) {
-		super(screen,permission);
+	public LibraryManagerMenu(LoginGUI screen,int permission ,int UserIdAtDataBase) {
+		super(screen,permission,UserIdAtDataBase);
 		this.screen=screen;
 		pann=this;
 		this.Permission=permission;

@@ -34,6 +34,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	private JComboBox comboBoxSubject;
 	private JComboBox comboBoxBook;
 	private LoginGUI screen;
+	
 
 	public InventoryManagmentDeleteGUI(LoginGUI screen ) {
 		super();
@@ -68,9 +69,9 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		add(lblChooseDomain);
 		
 		JComboBox comboBoxDomain = new JComboBox();
-
+		JComboBox comboBoxSubject=new JComboBox();
 		comboBoxDomain.setBounds(335, 142, 101, 20);
-
+		//comboBoxDomain.addItem("1111");
 		for(Domain dd:resultDomains) // adding all the Domain names to the checkbox
 			comboBoxDomain.addItem(dd);
 
@@ -78,21 +79,32 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Subject s=new Subject(3,3,"1");  //create empty project
 				// select Subject of the specific domain ! 
+				
 				resultSubjects=bookController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) comboBoxDomain.getSelectedItem()).getDomainID(), screen.getClient());
 				System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
-				//resultDomains.clear();// maybe not need .... 		
+				//resultDomains.clear();// maybe not need .... 	
+				if(resultSubjects!=null)
+				{
+					comboBoxSubject.removeAllItems();
+					for(Subject ss:resultSubjects) // adding all the Domain names to the checkbox
+						comboBoxSubject.addItem(ss);
+				}
+				else comboBoxSubject.removeAllItems();
+			
+				
+				
 			}
 		});
+		
 		add(comboBoxDomain);
 		
 		JLabel lblChooseSubject = new JLabel("Choose Subject : ");
 		lblChooseSubject.setBounds(335, 173, 95, 14);
 		add(lblChooseSubject);
 		
-		comboBoxSubject = new JComboBox();///////////
-		// not work
-		//for(Subject sub:resultSubjects)
-			//comboBoxSubject.addItem(resultSubjects.get(0));
+	
+		
+		
 		comboBoxSubject.setBounds(335, 190, 103, 20);
 		add(comboBoxSubject);
 		

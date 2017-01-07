@@ -25,8 +25,8 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 	//private JFrame screen;
 	private JPanel pann;
 	
-	public LibrarianMenu(LoginGUI screen,int permission) {
-		super(screen,permission);
+	public LibrarianMenu(LoginGUI screen,int permission,int UserIdAtDataBase) {
+		super(screen,permission,UserIdAtDataBase);
 		this.screen=screen;
 		pann=this;
 		this.Permission=permission;
@@ -64,7 +64,7 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 		btnFormatManagment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
-				FormatManagmentGUI Fm=new FormatManagmentGUI();
+				FormatManagmentGUI Fm=new FormatManagmentGUI(screen);
 				Fm.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);

@@ -11,8 +11,7 @@ public class Subject extends DBtranslation {
 	private int bookID;
 	private int domainID;
 	private String nameSubject;
-	
-	
+
 	//empty constactor
 	private Subject(){
 		super();
@@ -23,8 +22,13 @@ public class Subject extends DBtranslation {
 		this.domainID = domainID;
 		this.nameSubject = nameSubject;
 	}
+	public Subject(int domainID, String nameSubject) {
+		super();
+		this.bookID = bookID;
+		this.domainID = domainID;
+		this.nameSubject = nameSubject;
+	}
 
-	
 	public int getBookID() {
 		return bookID;
 	}

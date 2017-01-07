@@ -128,7 +128,7 @@ public class LoginGUI extends JFrame {
 					}
 						break;
 					case UserStatus.READER: {
-						ReaderMenu usm = new ReaderMenu(screen);
+						ReaderMenu usm = new ReaderMenu(screen,Integer.parseInt(txtUserID.getText()));
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
@@ -142,7 +142,7 @@ public class LoginGUI extends JFrame {
 					}
 						break;
 					case UserStatus.LIBARYWORKER: {
-						LibraryWorkerMenu usm = new LibraryWorkerMenu(screen);
+						LibraryWorkerMenu usm = new LibraryWorkerMenu(screen,Integer.parseInt(txtUserID.getText()));
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
@@ -157,7 +157,7 @@ public class LoginGUI extends JFrame {
 						break;
 					case UserStatus.QUALIFIEDEDITOR: {
 						QualifiedEditorMenu usm = new QualifiedEditorMenu(
-								screen, 4);
+								screen, 4,Integer.parseInt(txtUserID.getText()));
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
@@ -171,7 +171,7 @@ public class LoginGUI extends JFrame {
 					}
 						break;
 					case UserStatus.LIBRRIAN: {
-						LibrarianMenu usm = new LibrarianMenu(screen, 5);
+						LibrarianMenu usm = new LibrarianMenu(screen, 5,Integer.parseInt(txtUserID.getText()));
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
@@ -186,7 +186,7 @@ public class LoginGUI extends JFrame {
 						break;
 					case UserStatus.MANAGER: {
 						LibraryManagerMenu usm = new LibraryManagerMenu(screen,
-								6);
+								6,Integer.parseInt(txtUserID.getText()));
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
@@ -276,7 +276,7 @@ public class LoginGUI extends JFrame {
 						
 							break;
 						case UserStatus.READER: {
-							ReaderMenu usm = new ReaderMenu(screen);
+							ReaderMenu usm = new ReaderMenu(screen,Integer.parseInt(txtUserID.getText()));
 							usm.btnDisconnect
 									.addActionListener(new ActionListener() {
 										public void actionPerformed(ActionEvent e) {
@@ -290,7 +290,7 @@ public class LoginGUI extends JFrame {
 						}
 							break;
 						case UserStatus.LIBARYWORKER: {
-							LibraryWorkerMenu usm = new LibraryWorkerMenu(screen);
+							LibraryWorkerMenu usm = new LibraryWorkerMenu(screen,Integer.parseInt(txtUserID.getText()));
 							usm.btnDisconnect
 									.addActionListener(new ActionListener() {
 										public void actionPerformed(ActionEvent e) {
@@ -305,7 +305,7 @@ public class LoginGUI extends JFrame {
 							break;
 						case UserStatus.QUALIFIEDEDITOR: {
 							QualifiedEditorMenu usm = new QualifiedEditorMenu(
-									screen, 4);
+									screen, 4,Integer.parseInt(txtUserID.getText()));
 							usm.btnDisconnect
 									.addActionListener(new ActionListener() {
 										public void actionPerformed(ActionEvent e) {
@@ -319,7 +319,7 @@ public class LoginGUI extends JFrame {
 						}
 							break;
 						case UserStatus.LIBRRIAN: {
-							LibrarianMenu usm = new LibrarianMenu(screen, 5);
+							LibrarianMenu usm = new LibrarianMenu(screen, 5,Integer.parseInt(txtUserID.getText()));
 							usm.btnDisconnect
 									.addActionListener(new ActionListener() {
 										public void actionPerformed(ActionEvent e) {
@@ -334,7 +334,7 @@ public class LoginGUI extends JFrame {
 							break;
 						case UserStatus.MANAGER: {
 							LibraryManagerMenu usm = new LibraryManagerMenu(screen,
-									6);
+									6,Integer.parseInt(txtUserID.getText()));
 							usm.btnDisconnect
 									.addActionListener(new ActionListener() {
 										public void actionPerformed(ActionEvent e) {

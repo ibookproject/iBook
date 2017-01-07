@@ -12,20 +12,24 @@ import java.awt.Font;
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 
 
 
 
 public class CartManagerGUI extends JPanel {
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
-	public CartManagerGUI(JFrame screen) {
+	private int UserIdAtDataBase;
+	public CartManagerGUI(JFrame screen,int UserIdAtDataBase) {
 		super();
 		initialize();
+		this.UserIdAtDataBase=UserIdAtDataBase;
+		System.out.println(this.UserIdAtDataBase);
 	}
 
 	/**
@@ -52,6 +56,10 @@ public class CartManagerGUI extends JPanel {
 		JButton btnBuy = new JButton("Buy");
 		btnBuy.setBounds(402, 284, 59, 23);
 		add(btnBuy);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(368, 132, 142, 20);
+		add(comboBox);
 		
 		
 		

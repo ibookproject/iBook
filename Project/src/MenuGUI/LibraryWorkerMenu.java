@@ -24,8 +24,8 @@ import java.awt.event.ActionEvent;
 public class LibraryWorkerMenu extends ReaderMenu {
 
 
-	public LibraryWorkerMenu(LoginGUI screen) {
-		super(screen);
+	public LibraryWorkerMenu(LoginGUI screen ,int UserIdAtDataBase) {
+		super(screen,UserIdAtDataBase);
 		this.screen=screen;
 		pann=this;
 		initialize();

@@ -26,7 +26,15 @@ import java.awt.event.ActionEvent;
 
 public class ReaderMenu extends UserMenu {
 
-
+		public int UserIdAtDataBase1; // save the user id at the data base , need it for the buy from cart query
+	public ReaderMenu(LoginGUI screen,int UserIdAtDataBase) {
+		super(screen);
+		this.screen=screen;
+		pann=this;
+		initialize();
+		this.UserIdAtDataBase1=UserIdAtDataBase;
+	}
+	
 	public ReaderMenu(LoginGUI screen) {
 		super(screen);
 		this.screen=screen;
@@ -64,7 +72,7 @@ public class ReaderMenu extends UserMenu {
 		btnDisplayCartManager.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
-				CartManagerGUI Bfc=new CartManagerGUI(screen);
+				CartManagerGUI Bfc=new CartManagerGUI(screen,UserIdAtDataBase1);
 				Bfc.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
