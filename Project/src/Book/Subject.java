@@ -24,7 +24,6 @@ public class Subject extends DBtranslation {
 	}
 	public Subject(int domainID, String nameSubject) {
 		super();
-		this.bookID = bookID;
 		this.domainID = domainID;
 		this.nameSubject = nameSubject;
 	}

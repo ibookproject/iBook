@@ -76,20 +76,32 @@ public class FormatManagmentGUI extends JPanel {
 		add(lblChooseDomain);
 		
 		JComboBox DomainBox = new JComboBox();
+		SubjectBox = new JComboBox();
 		Domain d = new Domain("1");
-		 resultDomains = bookController.GetAllDomain(d,screen.getClient());//
 		
+		 resultDomains = FormatController.GetAllDomain(d,screen.getClient());//
 			for(Domain dd:resultDomains) // adding all the Domain names to the checkbox
 				DomainBox.addItem(dd);
-
-			SubjectBox = new JComboBox();
 			
+			// this is for the first time that we get in the format managar , if the domain list is not null..->
+			//..-> we will do " selected item " for to show all the subject list for the first time ! 
+			if(resultDomains!=null)
+			{
+				DomainBox.setSelectedIndex(0);
+				Subject s=new Subject(3,3,"1");  //create empty project
+				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
+				for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
+					SubjectBox.addItem(ddd);
+			}
+			// this is for the first time that we get in the format managar , if the domain list is not null..
+			//we will do " selected item " for to show all the subject list for the first time ! 
+		
 		DomainBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				Subject s=new Subject(3,3,"1");  //create empty project
-				resultSubjects=bookController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
+				if(DomainBox.getItemAt(0)!=null)
+				{	
+				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
 				System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
 				if(resultSubjects!=null) // if there is no result 
 				{
@@ -98,6 +110,7 @@ public class FormatManagmentGUI extends JPanel {
 					SubjectBox.addItem(ddd);
 				}
 				else SubjectBox.removeAllItems();
+			}
 			}
 		});
 		DomainBox.setBounds(265, 115, 75, 20);
@@ -151,21 +164,27 @@ public class FormatManagmentGUI extends JPanel {
 				if(!s.isEmpty())
 					{
 					Domain d = new Domain(DomainTextField.getText()); //   	
+					ArrayList<Domain> temp = FormatController.SearchDomain("DomainName",d, "domainName=\""+DomainTextField.getText()+ "\"" ,screen.getClient());
+					if(temp==null)
+					{
 			 		boolean result=FormatController.AddDomain(d,screen.getClient()); // return true or false from the controller DB 
 			 		if (result==false){
-			 			JOptionPane.showMessageDialog(screen,"Add book process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);
-			 			resultDomains = bookController.GetAllDomain(d,screen.getClient());//
+			 			JOptionPane.showMessageDialog(screen,"Add domain process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+			 			resultDomains = FormatController.GetAllDomain(d,screen.getClient());//
 			 		}
 			 		else
 			 		{
-			 			String str=DomainTextField.getText();
-			 			DomainBox.addItem(d);
-			 			resultDomains = bookController.GetAllDomain(d,screen.getClient());//
-			 			DomainBox.setSelectedItem(d);
-			 			JOptionPane.showMessageDialog(screen,"The book was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
-			 				
+			 			DomainBox.removeAllItems(); // first remove all the item becuz we add , and then update it again 
+			 			resultDomains = FormatController.GetAllDomain(d,screen.getClient());
+			 			for(int i=0;i<resultDomains.size();i++)
+			 				DomainBox.addItem(resultDomains.get(i)); 
+			 			DomainTextField.setText("");
+			 			DomainBox.setSelectedIndex(DomainBox.getItemCount()-1);  // some trick to put the selected becuz the selcted with object dont work
+			 			JOptionPane.showMessageDialog(screen,"The domain was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
+			 			
 			 		}
-					}
+			 		} else {JOptionPane.showMessageDialog(screen,"format is already EXSIT ! ", "Warning",JOptionPane.WARNING_MESSAGE);DomainTextField.setText("");}
+				}
 				else JOptionPane.showMessageDialog(screen,"format field is empty ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		});
@@ -187,6 +206,7 @@ public class FormatManagmentGUI extends JPanel {
 		
 		JButton btnAdd = new JButton("Add"); // adding new subject
 		btnAdd.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
 				
 				String s=SubjectTextField.getText();
@@ -196,24 +216,30 @@ public class FormatManagmentGUI extends JPanel {
 					int id=((Domain) DomainBox.getSelectedItem()).getDomainID();/// here is the problem
 					//////////////////////////////////////
 				Subject sub = new Subject(1,id,s); // create new Subject	
+				ArrayList<Subject> temp = FormatController.SearchSubject("bookID,domainID,nameSubject",sub, "nameSubject=\""+s+ "\"" ,screen.getClient());
+				System.out.println("///"+temp+"//");
+				
+				if(temp==null)
+				{
 		 		boolean result=FormatController.AddSubject(sub,screen.getClient()); // return true or false from the controller DB 
 		 		if (result==false)
-		 			JOptionPane.showMessageDialog(screen,"Add book process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+		 			JOptionPane.showMessageDialog(screen,"Add Subject process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 		 		else
 		 		{
 		 			String str=DomainTextField.getText();
 		 			SubjectBox.addItem(sub);
 		 			SubjectBox.setSelectedItem(sub);
-		 			
-		 			JOptionPane.showMessageDialog(screen,"The book was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
-		 			resultSubjects=bookController.SearchSubjectAtDomain("nameSubject", sub,"DomainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
+		 			SubjectTextField.setText("");
+		 			JOptionPane.showMessageDialog(screen,"The Subject was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
+		 			resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", sub,"DomainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
 		 		}
+				} else {JOptionPane.showMessageDialog(screen,"Subject  is already EXSIT ! ", "Warning",JOptionPane.WARNING_MESSAGE);SubjectTextField.setText("");}
 				}
-			else JOptionPane.showMessageDialog(screen,"format field is empty ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+				else JOptionPane.showMessageDialog(screen,"Subject field is empty ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			
 		}
 		
-			});
+	});
 			
 		btnAdd.setBounds(660, 237, 67, 21);
 		add(btnAdd);

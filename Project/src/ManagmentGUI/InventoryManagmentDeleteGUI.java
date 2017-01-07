@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import Book.Book;
 import Book.Domain;
 import Book.Subject;
+import Controller.FormatController;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
 import client.DBgenericObject;
@@ -61,7 +62,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		
 		
 		Domain d = new Domain("1");
-		 resultDomains = bookController.GetAllDomain(d,screen.getClient());//
+		 resultDomains = FormatController.GetAllDomain(d,screen.getClient());//
 		//System.out.println(result);
 		
 		JLabel lblChooseDomain = new JLabel("Choose Domain :");
@@ -80,7 +81,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				Subject s=new Subject(3,3,"1");  //create empty project
 				// select Subject of the specific domain ! 
 				
-				resultSubjects=bookController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) comboBoxDomain.getSelectedItem()).getDomainID(), screen.getClient());
+				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) comboBoxDomain.getSelectedItem()).getDomainID(), screen.getClient());
 				System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
 				//resultDomains.clear();// maybe not need .... 	
 				if(resultSubjects!=null)

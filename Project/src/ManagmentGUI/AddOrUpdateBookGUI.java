@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Book.Book;
+import Controller.UserController;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
 import command.DBtranslation;
@@ -139,13 +140,33 @@ public class AddOrUpdateBookGUI extends JPanel {
 
 				 if(ISUpdateOrAdd==1)//means its add flag page 
 				 {
-				 	Book b = new Book(title.getText(),lang.getText(),author.getText(),summary.getText(),true); // create new book	
-				 	boolean result=bookController.AddBook(b,screen.getClient()); // return true or false from the controller DB 
-				 	if (result==false)
-						JOptionPane.showMessageDialog(screen,"Add book process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);
-				 	else
-					JOptionPane.showMessageDialog(screen,"The book was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
-					
+					 if(title.getText().isEmpty()||lang.getText().isEmpty()||author.getText().isEmpty()||summary.getText().isEmpty())
+							JOptionPane.showMessageDialog(screen,"please fill all the book fields!! ", "Warning",JOptionPane.WARNING_MESSAGE);
+					 else
+					 {
+				 	Book b = new Book(title.getText(),lang.getText(),author.getText(),summary.getText(),true); // create new book
+				 	
+					ArrayList<Book> temp = bookController.SearchBook("title,language",b, "title=\""+title.getText()+ "\"" + " && "+"author=\""+author.getText()+"\"", screen.getClient());//call search book method from book controller
+				 	//System.out.println(temp);
+					if(temp==null||temp.isEmpty())
+					{
+						
+						boolean result=bookController.AddBook(b,screen.getClient()); // return true or false from the controller DB
+					 	if (result==false)
+							JOptionPane.showMessageDialog(screen,"Add user process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+					 	else
+					 	{
+					 		title.setText("");lang.setText("");author.setText("");summary.setText("");
+					 		JOptionPane.showMessageDialog(screen,"The book was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
+					 	}
+						}
+				
+					else
+					{
+						title.setText("");lang.setText("");author.setText("");summary.setText("");
+						JOptionPane.showMessageDialog(screen,"the book is already exist. Try to add another book\n", "Warning",JOptionPane.WARNING_MESSAGE);
+						}
+				 }
 				 }
 			 }
 		});
