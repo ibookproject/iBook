@@ -19,7 +19,7 @@ public class Book extends DBtranslation {
 	
 	
 	//empty constructor
-	private Book(){
+	public Book(){
 	super();	
 	}
 	

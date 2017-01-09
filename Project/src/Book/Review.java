@@ -11,16 +11,16 @@ public class Review extends DBtranslation {
 	private int reviewID;
 	private Date reviewDate;
 	private String reviewContent;
-	private boolean reviewStatus;
+	private int reviewStatus;
 	private int bookID;
 	
 	
 	//empty constactor
-	private Review(){
+	public Review(){
 		super();
 	}
 	
-	public Review(int reviewID, Date reviewDate, String reviewContent,boolean reviewStatus, int bookID) {
+	public Review(int reviewID, Date reviewDate, String reviewContent,int reviewStatus, int bookID) {
 		super();
 		this.reviewID = reviewID;
 		this.reviewDate = reviewDate;
@@ -46,10 +46,10 @@ public class Review extends DBtranslation {
 	public void setReviewContent(String reviewContent) {
 		this.reviewContent = reviewContent;
 	}
-	public boolean isReviewStatus() {
+	public int isReviewStatus() {
 		return reviewStatus;
 	}
-	public void setReviewStatus(boolean reviewStatus) {
+	public void setReviewStatus(int reviewStatus) {
 		this.reviewStatus = reviewStatus;
 	}
 	public int getBookID() {
@@ -104,7 +104,7 @@ public class Review extends DBtranslation {
 					recover.setReviewContent((String)ob.getValtoArray(i));
 					break;
 				case "reviewStatus":
-					recover.setReviewStatus(((int)ob.getValtoArray(i))==1);
+					recover.setReviewStatus((int)ob.getValtoArray(i));
 					break;
 				case "bookID":
 					recover.setBookID((int)ob.getValtoArray(i));

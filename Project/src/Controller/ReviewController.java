@@ -9,6 +9,7 @@ import Role.User;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 import command.DBtranslation;
+import command.deleteCommand;
 import command.insertCommand;
 import command.searchCommand;
 import command.updateCommand;
@@ -58,6 +59,21 @@ public class ReviewController {
 					return false;
 				}
 			}
-			return true;	// means the user add successful	
+			return true;	// means the review update successful
+	}
+	public static void DeleteReview(Review r , String searchCondition, DBSQLhandler client)
+	{
+		client.deleteFromDB(new deleteCommand<DBtranslation>(r, searchCondition));
+		while(!client.GetGotMessag()){//add user to DB
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+				
+			}
+			System.out.println("The review was deleted");
+		}
 	}
 }

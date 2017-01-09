@@ -82,7 +82,7 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 			public void actionPerformed(ActionEvent e)  {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
 	
-				RemovePartReviewGUI Rpr=new RemovePartReviewGUI(screen);
+				RemovePartReviewGUI Rpr=new RemovePartReviewGUI(screen,0);
 				Rpr.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);

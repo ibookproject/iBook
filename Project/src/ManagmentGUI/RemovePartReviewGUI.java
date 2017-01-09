@@ -31,12 +31,13 @@ public class RemovePartReviewGUI extends JPanel {
 	private LoginGUI screen;
 	private JPanel pann;
 	private Review r;
+	private int ReviewID;
 	private String oldReview = new String();
-	public RemovePartReviewGUI(LoginGUI screen) {
+	public RemovePartReviewGUI(LoginGUI screen,int reviewID) {
 		super();
 		this.screen=screen;
 		pann=this;
-
+		ReviewID=reviewID;
 		initialize();
 	}
 
@@ -66,7 +67,7 @@ public class RemovePartReviewGUI extends JPanel {
 		 btnSubmit.setBounds(369, 517, 97, 25);
 		 add(btnSubmit);
 		// String oldReview =(textReview.getText());//string keep the old review for equal if change review
-		 r = new Review(1, null, null,false, 1);// create review
+		 r = new Review(1, null, null,0, 1);// create review
 			/*ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, "bookID", screen.getClient());
 			
 			r = null;// reset the user that need to update*/
