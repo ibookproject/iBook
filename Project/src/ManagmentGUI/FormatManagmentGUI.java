@@ -53,11 +53,10 @@ public class FormatManagmentGUI extends JPanel {
 	
 	private void initialize() {
 		
-		this.setSize(850, 600);
 		this.setLayout(null);	
-		
+		this.setSize(850, 299);
+
 		JLabel lblFormatManagment = new JLabel("Format managment");
-		lblFormatManagment.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblFormatManagment.setBounds(322, 33, 154, 39);
 		add(lblFormatManagment);
 		
