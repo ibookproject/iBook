@@ -1,14 +1,26 @@
 package ManagmentGUI;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
+import Book.Review;
+import Controller.ReviewController;
+import Controller.UserController;
+import MenuGUI.LoginGUI;
+import Role.User;
+import Role.UserStatus;
 
 
 
@@ -16,10 +28,11 @@ public class RemovePartReviewGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack;
-	private JFrame screen;
+	private LoginGUI screen;
 	private JPanel pann;
-
-	public RemovePartReviewGUI(JFrame screen) {
+	private Review r;
+	private String oldReview = new String();
+	public RemovePartReviewGUI(LoginGUI screen) {
 		super();
 		this.screen=screen;
 		pann=this;
@@ -44,17 +57,39 @@ public class RemovePartReviewGUI extends JPanel {
 		 lblRemovePartOf.setBounds(322, 79, 234, 16);
 		 add(lblRemovePartOf);
 		 
-		 JTextArea textArea = new JTextArea();
-		 textArea.setFont(new Font("Courier New", Font.PLAIN, 13));
-		 textArea.setText("\u05DB\u05D0\u05DF \u05EA\u05D5\u05E4\u05D9\u05E2 \u05D1\u05D9\u05E7\u05D5\u05E8\u05EA \u05DE\u05DE\u05E0\u05D4 \u05D9\u05D4\u05D9\u05D4 \u05D0\u05E4\u05E9\u05E8 \u05DC\u05DE\u05D7\u05D5\u05E7 \u05D7\u05DC\u05E7\u05D9\u05DD");
-		 textArea.setBounds(136, 172, 556, 301);
-		 add(textArea);
-		 
-		 JButton btnNewButton = new JButton("Submit");
-		 btnNewButton.setBounds(369, 517, 97, 25);
-		 add(btnNewButton);
-		
+		 JTextArea textReview = new JTextArea();
+		 textReview.setFont(new Font("Courier New", Font.PLAIN, 13));
+		 textReview.setText("OLD REVIEW"); //need to get text review
+		 textReview.setBounds(136, 172, 556, 301);
+		 add(textReview);
+		 JButton btnSubmit = new JButton("Submit");
+		 btnSubmit.setBounds(369, 517, 97, 25);
+		 add(btnSubmit);
+		// String oldReview =(textReview.getText());//string keep the old review for equal if change review
+		 r = new Review(1, null, null,false, 1);// create review
+			/*ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, "bookID", screen.getClient());
+			
+			r = null;// reset the user that need to update*/
+		 btnSubmit.addActionListener(new ActionListener() {
+			 
+				public void actionPerformed(ActionEvent e) {
+					
+					if(!(oldReview.equals(textReview.getText())))
+						{
+						boolean result = ReviewController.UpdateReviewContent(r, "reviewContent=\""+textReview.getText()+"\"", "reviewID=\""+2+"\"",screen.getClient());
+						oldReview=textReview.getText();
+						if(result)
+							JOptionPane.showMessageDialog(screen,"The new Review update sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+						else JOptionPane.showMessageDialog(screen,"Update Review process FAILED", "Warning",JOptionPane.WARNING_MESSAGE);
+						}
+					else
+						JOptionPane.showMessageDialog(screen,"The Review not changed", "Warning",JOptionPane.WARNING_MESSAGE);
+					 
+				}
+			});
+
 	
 	
 	}
+	
 }
