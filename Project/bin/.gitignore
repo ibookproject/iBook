@@ -4,6 +4,7 @@
 /client/
 /command/
 /ocsf/
-/ManagmentGUI/
 /Book/
 /Controller/
+/DB/
+/ManagmentGUI/

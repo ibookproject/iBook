@@ -48,6 +48,54 @@ public class bookController {
 			return null;
 		}
 	}
+/*#####################################################################*/
+/* Return all table of domain for the search in the method BookRate! */
+/*#####################################################################*/
+	public static ArrayList<Domain> getAllDomainTable(Domain d,DBSQLhandler client)
+	{
+		client.getAllTable(new showAllCommand<Domain>(d));
+		while(!client.GetGotMessag()){//show table -domain
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+			}
+		}
+		try {
+			
+			return  Domain.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), "DomainID,DomainName");
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+/*#####################################################################*/
+
+	
+/*#####################################################################*/
+/* Search specific subject for the method BookRate! */
+/*#####################################################################*/
+	public static ArrayList<Subject> SearchSubject(String fromSentence,Subject s,String condition,DBSQLhandler client)
+	{
+		client.searchInDB(new searchCommand<Subject>(fromSentence,s,condition));//call command and client ask to search a book
+		while(!client.GetGotMessag()){//search subject in db
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+			}
+		}
+		try {
+			
+			return  Subject.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), fromSentence);
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+/*#####################################################################*/
 	
 
 	

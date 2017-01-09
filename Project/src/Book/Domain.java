@@ -12,7 +12,7 @@ public class Domain extends DBtranslation {
 	private String DomainName;
 	
 	
-	//empty constactor
+	
 	private Domain() {
 		super();
 	}
@@ -55,9 +55,10 @@ public class Domain extends DBtranslation {
 		return String.format("(\"%s\",\"%s\")",DomainID,DomainName);
 	}
 	
+	
 	//convert array Which was obtained from DB to an actual Domain
 	//need to implement in all tables.!!!
-		public static ArrayList<Domain> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
+	public static ArrayList<Domain> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
 			 ArrayList<Domain> convertedArr=new ArrayList<Domain>();
 			 
 			for(DBgenericObject ob:arr)
@@ -68,7 +69,7 @@ public class Domain extends DBtranslation {
 		}
 		
 		//this convert specific  DBgenericObject to Domain according the fromSentence
-		private static Domain convertDBObject(DBgenericObject ob,String fromSentenceArray)
+	private static Domain convertDBObject(DBgenericObject ob,String fromSentenceArray)
 		{
 			Domain recover=new Domain();
 			 String[] fromSentence=fromSentenceArray.split(",");

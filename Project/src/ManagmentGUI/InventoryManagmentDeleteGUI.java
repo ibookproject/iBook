@@ -60,10 +60,8 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		lblDeleteBook.setBounds(365, 33, 159, 39);
 		add(lblDeleteBook);
 		
-		
 		Domain d = new Domain("1");
-		 resultDomains = FormatController.GetAllDomain(d,screen.getClient());//
-		//System.out.println(result);
+		resultDomains = FormatController.GetAllDomain(d,screen.getClient());
 		
 		JLabel lblChooseDomain = new JLabel("Choose Domain :");
 		lblChooseDomain.setBounds(335, 120, 116, 23);
@@ -91,9 +89,6 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 						comboBoxSubject.addItem(ss);
 				}
 				else comboBoxSubject.removeAllItems();
-			
-				
-				
 			}
 		});
 		

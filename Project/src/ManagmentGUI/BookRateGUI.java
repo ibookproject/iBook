@@ -3,9 +3,11 @@ package ManagmentGUI;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
@@ -13,7 +15,12 @@ import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
+import Book.Domain;
+import Book.Subject;
+import Controller.UserController;
+import Controller.bookController;
 import MenuGUI.LoginGUI;
+import Role.User;
 
 public class BookRateGUI extends JPanel {
 	
@@ -32,6 +39,8 @@ public class BookRateGUI extends JPanel {
 	private JButton btnShowButton;
 	private JLabel bookRateLbl;
 	private JComboBox<String> comboBoxBook;
+	private ArrayList<Domain> Domains;
+	private ArrayList<Subject> Subjects;
 	
 	public BookRateGUI(LoginGUI screen) 
 	{
@@ -66,14 +75,37 @@ public class BookRateGUI extends JPanel {
 		
 		comboBoxChooseDomain = new JComboBox();
 		comboBoxChooseDomain.setBounds(335, 142, 101, 20);
+		Domain d=new Domain("nature");
+		Domains=bookController.getAllDomainTable(d, screen.getClient());
+		for(int i=0;i<Domains.size();i++)
+			comboBoxChooseDomain.addItem(Domains.get(i));
 		add(comboBoxChooseDomain);
+		
+		comboBoxChooseDomain.getSelectedItem();
+		
 		
 		lblChooseSubject = new JLabel("Choose Subject : ");
 		lblChooseSubject.setBounds(335, 173, 107, 14);
 		add(lblChooseSubject);
 		
+		Domain d1=new Domain(1,"nature");
+		Subject s=new Subject(1,"temp");
 		comboBoxChooseSubject = new JComboBox();
 		comboBoxChooseSubject.setBounds(335, 190, 103, 20);
+		ArrayList<Subject> Subjects= (ArrayList<Subject>)bookController.SearchSubject("nameSubject",s,"domainID=\""+d1.getDomainID()+"\"" ,screen.getClient());
+		if(Subjects==null||Subjects.isEmpty())
+		{
+			screen.setContentPane(pann);
+			JOptionPane.showMessageDialog(screen,"No Subject Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
+		}
+	
+		else
+		{
+			JOptionPane.showMessageDialog(screen,"Subject Found per Domain\n", "Warning",JOptionPane.WARNING_MESSAGE);
+		}
+		for(int i=0;i<Subjects.size();i++)
+			comboBoxChooseSubject.addItem(Subjects.get(i));
+		comboBoxChooseSubject.addActionListener(comboBoxBook);
 		add(comboBoxChooseSubject);
 		
 		lblChooseBook = new JLabel("Choose Book :");
