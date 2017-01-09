@@ -22,11 +22,15 @@ import java.io.IOException;
 
 
 
+
+
 import Controller.UserController;
 import client.DBSQLhandler;
 import client.DBgenericObject;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JPasswordField;
 
 public class LoginGUI extends JFrame {
@@ -39,12 +43,14 @@ public class LoginGUI extends JFrame {
 	final public static int DEFAULT_PORT = 5555;
 
 	private JPanel FirstPanel = null;
-	private JTextField txtUserID;
-	private JPasswordField pwdPassword;
+	private JTextField txtUserID=null;
+	private JPasswordField pwdPassword=null;
 	private LoginGUI screen;
 	private DBSQLhandler client;// client attribute
 	private int counteEnrty=0;
-
+	private int flagTry=0;
+	private String userInput;
+	private String newStatus;
 
 	/**
 	 * This is the default constructor
@@ -89,28 +95,51 @@ public class LoginGUI extends JFrame {
 			btnLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					User u=null;
+					if(flagTry==0)
+					{
+						userInput=txtUserID.getText();
+						flagTry++;
+					}
 					try{
-					u=new User(txtUserID.getText()/*ID*/, pwdPassword.getText()/*Password*/);
+							u=new User(txtUserID.getText()/*ID*/, pwdPassword.getText()/*Password*/);
+							
 					}
-					catch(InputMismatchException ex){
-					System.out.println(ex);
+					catch(InputMismatchException ex)
+					{
+						JOptionPane.showMessageDialog(screen,"USER ID or Password empty", "Warning",JOptionPane.WARNING_MESSAGE);
+					System.out.println("Mismatch password/username");
+					flagTry--;;
 					}
+					
 					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID,privilege",u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"",client);
-					if(temp==null||temp.isEmpty()){
-						JOptionPane.showMessageDialog(screen,"wrong password/username", "Warning",
-								JOptionPane.WARNING_MESSAGE);
-						if(counteEnrty++>=3){
-							JOptionPane.showMessageDialog(screen,"this user name is locked!", "Warning",
-									JOptionPane.WARNING_MESSAGE);
-							client.quit();
-							System.exit(1);
+					if(temp==null||temp.isEmpty())
+					{
+						JOptionPane.showMessageDialog(screen,"wrong password/username", "Warning",JOptionPane.WARNING_MESSAGE);
+						if(u.getUserStatus()!=3)//not looked yet 
+						{	
+							if(((txtUserID.getText()!=null)&&(pwdPassword!=null))&&(userInput.equals(txtUserID.getText())))
+								counteEnrty++;
+							if(counteEnrty>=3)
+							{
+								JOptionPane.showMessageDialog(screen,"this user name is locked!", "Warning",JOptionPane.WARNING_MESSAGE);
+								UserController.UpdateUserStatus(u, "userStatus=\""+"3"+"\"", "userID=\""+txtUserID.getText()+"\"", screen.client);
+								counteEnrty=0;
+								flagTry--;
+							}	
 						}
-						//here need to write sql to update
 						
 					}
 					else{
 						if(temp.size()>1)
 							throw new InputMismatchException("there is more then one User with userID"+temp.get(0).getUserID());
+						counteEnrty=0;
+						flagTry--;
+						if(temp.get(0).getUserStatus()==3)
+						{
+							JOptionPane.showMessageDialog(screen,"this user is already locked!", "Warning",JOptionPane.WARNING_MESSAGE);
+						}
+						else
+						{
 					switch (temp.get(0).getPriviliege()) {
 					case UserStatus.USER: {
 
@@ -210,6 +239,7 @@ public class LoginGUI extends JFrame {
 					// JFram/////////////////////////////////////////////
 				}
 				}
+				}
 			});
 			btnLogin.setBounds(386, 321, 89, 23);
 			FirstPanel.add(btnLogin);
@@ -227,7 +257,7 @@ public class LoginGUI extends JFrame {
 			pwdPassword = new JPasswordField();
 		//	pwdPassword = new JTextField();
 			//////////////////////enter listener///////////////////////
-			pwdPassword.addKeyListener(new KeyAdapter() {
+		/*	pwdPassword.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if(e.getKeyCode()==KeyEvent.VK_ENTER)
@@ -362,7 +392,7 @@ public class LoginGUI extends JFrame {
 						
 				}
 			});
-				//////////////////////enter listener///////////////////////
+				//////////////////////enter listener///////////////////////*/
 
 			pwdPassword.setText("");
 			pwdPassword.setBounds(374, 263, 112, 20);

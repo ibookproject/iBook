@@ -76,5 +76,20 @@ public class UserController {
 			}
 			return true;	// means the user add successful	
 	}
-
+	//UpdateUserStatus
+	public static boolean UpdateUserStatus(User u , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
+	{
+			client.UpdateInDB(new updateCommand<DBtranslation>(u, searchCondition, updateCondition));
+			while(!client.GetGotMessag()){//add user to DB
+				try{
+				Thread.sleep(500);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+					return false;
+				}
+			}
+			return true;	// means the user add successful	
+	}
 }
