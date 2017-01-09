@@ -1,39 +1,45 @@
 package command;
 
-public class joinObject {
+public class joinObject<E extends DBtranslation, T extends DBtranslation> {
 	
-	private String table1;
-	private String table2;
-	private String joinattribute;
+	private E table1;
+	private T table2; //the second 
+	private String joinAttribute;
 
-	public joinObject(String table1, String table2, String joinattribute) {
+	
+	///need to insert to insert first elemnet,second element and the the attribute to join
+	public joinObject(E table1, T table2, String joinAttribute) {
 		super();
 		this.table1 = table1;
 		this.table2 = table2;
-		this.joinattribute = joinattribute;
+		this.joinAttribute = joinAttribute;
 	}
 	public String getTable1() {
-		return table1;
+		return table1.getClassName();
 	}
-	public void setTable1(String table1) {
+	public void setTable1(E table1) {
 		this.table1 = table1;
 	}
 	public String getTable2() {
-		return table2;
+		return table2.getClassName();
 	}
-	public void setTable2(String table2) {
+	public void setTable2(T table2) {
 		this.table2 = table2;
 	}
 	public String getJoinattribute() {
-		return joinattribute;
+		return joinAttribute;
 	}
-	public void setJoinattribute(String joinattribute) {
-		this.joinattribute = joinattribute;
+	public void setJoinattribute(String joinAttribute) {
+		this.joinAttribute = joinAttribute;
+	}
+	public String getJoinQuery()
+	{
+	 return	String.format("%s.%s=%s.%s",getTable1(),joinAttribute,getTable2(),joinAttribute);
 	}
 	
 	@Override
 	public String toString() {
-		return table1+"."+joinattribute+"="+ table2 + "."+ joinattribute;
+		return table1+"."+joinAttribute+"="+ table2 + "."+ joinAttribute;
 	}
 	
 }

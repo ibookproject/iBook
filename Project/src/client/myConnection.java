@@ -9,15 +9,27 @@ public class myConnection {
 	private String url;
 	private String password;
 	private String username;
-	private Connection conn;
+	private static Connection conn;
+	//create an object of myConnection as singleTon
+	private static  myConnection instance=new myConnection();
 	
-	public myConnection(String u,String p,String user)
+	//make the constructor private that this class cannot instantiantes any other way
+	private myConnection(){};
+	public static myConnection startConnection(String u,String p,String user)
 	{
-		url=u;
-		password=p;
-		username=user;
+		instance.url=u;
+		instance.password=p;
+		instance.username=user;
+		return instance;
 	}
-
+	public static Connection getMyConnection() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		conn = DriverManager.getConnection(instance.url, instance.username, instance.password);
+		return conn;
+	}
+	public static void closeMyConnection() throws SQLException  {
+		conn.close();
+	}
 	public String getUrl() {
 		return url;
 	}
@@ -30,11 +42,6 @@ public class myConnection {
 		return username;
 	}
 
-	public Connection getConnection() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		conn = DriverManager.getConnection(url, username, password);
-		return conn;
-	}
 
 	public void setPassword(String password) {
 		this.password = password;

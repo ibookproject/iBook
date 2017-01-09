@@ -134,7 +134,7 @@ public class LoginGUI extends JFrame {
 							throw new InputMismatchException("there is more then one User with userID"+temp.get(0).getUserID());
 						counteEnrty=0;
 						flagTry--;
-						if(temp.get(0).getUserStatus()==3)
+						if(temp.get(0).getUserStatus()==UserStatus.LOCK)
 						{
 							JOptionPane.showMessageDialog(screen,"this user is already locked!", "Warning",JOptionPane.WARNING_MESSAGE);
 						}

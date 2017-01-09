@@ -1,5 +1,4 @@
-/Book/
-/Controller/
-/DB/
-/ManagmentGUI/
+/client/
+/command/
 /MenuGUI/
+/Role/

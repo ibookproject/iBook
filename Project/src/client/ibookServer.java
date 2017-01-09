@@ -10,10 +10,12 @@ import java.sql.Statement;
 // license found at www.lloseng.com 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import com.mysql.jdbc.*;
 
+import Role.User;
 import command.DBquery;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
@@ -30,15 +32,14 @@ import ocsf.server.ConnectionToClient;
  */
 public class ibookServer extends AbstractServer {
 	/*
-	 * HandleMessageFromClient
-	 * ServerStarted
-	 * ServerStopped
-	 * */
+	 * HandleMessageFromClient ServerStarted ServerStopped
+	 */
 	// Class variables *************************************************
 
 	public String sendMessage;
 	public ArrayList<DBgenericObject> resultList;
-	private myConnection myconnt;
+	private  myConnection myconnt;
+	private static ArrayList<User> userlist;
 	/**
 	 * The default port to listen on.
 	 */
@@ -52,10 +53,11 @@ public class ibookServer extends AbstractServer {
 	 * @param port
 	 *            The port number to connect on.
 	 */
-	public ibookServer(int port,String userName,String password) {
+	public ibookServer(int port, String userName, String password) {
 		super(port);
-	   resultList = null;
-	   myconnt=new myConnection("jdbc:mysql://localhost/ibook", password, userName);
+		resultList = null;
+		userlist=new ArrayList<User>();
+		myconnt = myConnection.startConnection("jdbc:mysql://localhost/ibook", password, userName);
 	}
 
 	// Instance methods ************************************************
@@ -76,10 +78,10 @@ public class ibookServer extends AbstractServer {
 	public void handleMessageFromClient(Object msg, ConnectionToClient client)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 
-		Connection conn = myconnt.getConnection();
+		Connection conn = myConnection.getMyConnection();
 		Statement stmt = conn.createStatement();
 		ResultSet resultquery;
-		 int NumOfCol;
+		int NumOfCol;
 		System.out.println("Message received: " + msg + " from " + client);
 		try {
 			if (msg instanceof DBquery) {
@@ -87,55 +89,56 @@ public class ibookServer extends AbstractServer {
 				switch (((DBquery) msg).getType()) {
 				case "insert":
 					if ((stmt.executeUpdate(((DBquery) msg).getQuery())) == 0)
-						throw new SQLException("you have a error in your command, the translation is \n" + ((DBquery) msg).getQuery());
-					else 
+						throw new SQLException(
+								"you have a error in your command, the translation is \n" + ((DBquery) msg).getQuery());
+					else
 						client.sendToClient("object has inserted");
 					break;
 				case "GetAllTable":
-					resultList=new ArrayList<DBgenericObject>();
+					resultList = new ArrayList<DBgenericObject>();
 					resultquery = (ResultSet) stmt.executeQuery(((DBquery) msg).getQuery());
-			         NumOfCol =resultquery.getMetaData().getColumnCount();
-					while (resultquery.next())
-					{
-						DBgenericObject temp=new DBgenericObject(NumOfCol);
-						for(int i=0;i<NumOfCol;i++)
-							temp.insertValtoArray(i, resultquery.getObject(i+1));
+					NumOfCol = resultquery.getMetaData().getColumnCount();
+					while (resultquery.next()) {
+						DBgenericObject temp = new DBgenericObject(NumOfCol);
+						for (int i = 0; i < NumOfCol; i++)
+							temp.insertValtoArray(i, resultquery.getObject(i + 1));
 						resultList.add(temp);
 					}
 					if (resultList.isEmpty())
-					throw new RuntimeException("The table is empty");
+						throw new RuntimeException("The table is empty");
 					else
 						client.sendToClient(resultList);
-				resultquery.close();
+					resultquery.close();
 					break;
 				case "search":
-					resultList=new ArrayList<DBgenericObject>();
+					resultList = new ArrayList<DBgenericObject>();
 					resultquery = (ResultSet) stmt.executeQuery(((DBquery) msg).getQuery());
-			         NumOfCol =resultquery.getMetaData().getColumnCount();
-					while (resultquery.next())
-					{
-						DBgenericObject temp=new DBgenericObject(NumOfCol);
-						for(int i=0;i<NumOfCol;i++)
-							temp.insertValtoArray(i, resultquery.getObject(i+1));
+					NumOfCol = resultquery.getMetaData().getColumnCount();
+					while (resultquery.next()) {
+						DBgenericObject temp = new DBgenericObject(NumOfCol);
+						for (int i = 0; i < NumOfCol; i++)
+							temp.insertValtoArray(i, resultquery.getObject(i + 1));
 						resultList.add(temp);
 					}
 					if (resultList.isEmpty())
-					throw new RuntimeException("not found any result\n");
+						throw new RuntimeException("not found any result\n");
 					else
 						client.sendToClient(resultList);
-				resultquery.close();
+					resultquery.close();
 					break;
-					
+
 				case "delete":
 					if ((stmt.executeUpdate(((DBquery) msg).getQuery())) == 0)
-						throw new SQLException("you have a error in your command, the translation is \n" + ((DBquery) msg).getQuery());
-					else 
+						throw new SQLException(
+								"you have a error in your command, the translation is \n" + ((DBquery) msg).getQuery());
+					else
 						client.sendToClient("object has removed");
 					break;
 				case "update":
 					if ((stmt.executeUpdate(((DBquery) msg).getQuery())) == 0)
-						throw new SQLException("you have a error in your command, the translation is \n" + ((DBquery) msg).getQuery());
-					else 
+						throw new SQLException(
+								"you have a error in your command, the translation is \n" + ((DBquery) msg).getQuery());
+					else
 						client.sendToClient("object has updated");
 					break;
 				default:
@@ -162,9 +165,10 @@ public class ibookServer extends AbstractServer {
 	protected void serverStarted() {
 		System.out.println("Server listening for connections on port " + getPort());
 		try {
-			Connection conn=myconnt.getConnection();
+			Connection conn = myConnection.getMyConnection();
 			System.out.println("SQL connection succeed");
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException |SQLException ex) {/* handle any errors */
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
+				| SQLException ex) {/* handle any errors */
 			System.out.println("Exception: " + ex.getMessage());
 		}
 	}
@@ -174,11 +178,23 @@ public class ibookServer extends AbstractServer {
 	 * stops listening for connections.
 	 */
 	protected void serverStopped() {
+		try {
+			myConnection.closeMyConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		System.out.println("Server has stopped listening for connections.");
 
 	}
 
 	// Class methods ***************************************************
+	public static void setUser(User thisUser) {
+		if(userlist.contains(thisUser))
+			throw new RuntimeException("this user is already loged in!");
+		else 
+			userlist.add(thisUser);
+		
+	}
 
 	/**
 	 * This method is responsible for the creation of the server instance (there
@@ -191,19 +207,19 @@ public class ibookServer extends AbstractServer {
 	public static void main(String[] args) {
 		int port; // Port to listen on
 		Scanner scan = new Scanner(System.in);
-		String userName,password;
+		String userName, password;
 		try {
 			port = Integer.parseInt(args[0]); // Get port from command line
 		} catch (Throwable t) {
 			port = DEFAULT_PORT; // Set port to 5555
 		}
 		System.out.println("please insert user name for mysql\n");
-		userName=scan.nextLine();
-		
+		userName = scan.nextLine();
+
 		System.out.println("please insert password for mysql\n");
-		password=scan.nextLine();
-		
-		ibookServer sv = new ibookServer(port,userName,password);
+		password = scan.nextLine();
+
+		ibookServer sv = new ibookServer(port, userName, password);
 		scan.close();
 		try {
 			sv.listen(); // Start listening for connections

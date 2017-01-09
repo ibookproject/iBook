@@ -142,11 +142,11 @@ public class User extends DBtranslation implements UserStatus {
 	//convert array Which was obtained from DB to an actual User
 	//need to implement in all tables.!!!
 		
-		public static ArrayList<User> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
+	public static ArrayList<User> convertBack(ArrayList<DBgenericObject> arr,String selectSentence){
 			 ArrayList<User> convertedArr=new ArrayList<User>();
 			 
 			for(DBgenericObject ob:arr)
-					convertedArr.add(convertDBObject(ob, fromSentence));//for each val in arr this convert back to book
+					convertedArr.add(convertDBObject(ob, selectSentence));//for each val in arr this convert back to book
 			
 			return convertedArr;
 			
