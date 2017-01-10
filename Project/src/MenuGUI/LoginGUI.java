@@ -2,6 +2,7 @@ package MenuGUI;
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
@@ -29,9 +30,12 @@ import Controller.UserController;
 import DB.Test;
 import client.DBSQLhandler;
 import client.DBgenericObject;
+import javafx.scene.image.Image;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JPasswordField;
 
@@ -49,8 +53,8 @@ public class LoginGUI extends JFrame {
 	private JPanel FirstPanel = null;
 	private JTextField txtUserID=null;
 	private JPasswordField pwdPassword=null;
-	private LoginGUI screen;
-	DBSQLhandler client;// client attribute
+	public static LoginGUI screen;
+	private DBSQLhandler client;// client attribute
 	private int counteEnrty=0;
 	private int flagTry=0;
 	private String userInput;
@@ -61,6 +65,7 @@ public class LoginGUI extends JFrame {
 	 */
 	public LoginGUI(String host) {
 		super();
+
 		initialize();
 		tempID=null;
 		this.screen = this;
@@ -71,7 +76,27 @@ public class LoginGUI extends JFrame {
 			System.out.println("Error: Can't setup connection!" + " Terminating client.");
 			System.exit(1);
 		}
-		
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+		  	@Override
+			public void windowClosing(WindowEvent e) {
+		  		ImageIcon point=new ImageIcon("bookIcon.png");
+				Object[] options = { "Yes, please", "No way!" };
+				int result = JOptionPane.showOptionDialog(null, "Would you like green eggs and ham?", "A Silly Question",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, point,options,options[0]);
+				if(result==JOptionPane.YES_OPTION){
+					if(tempID!=null){
+				User u = new User(tempID);
+				UserController.UpdateUserStatus(u, "userStatus=\"" + "0" + "\"", "userID=\"" + tempID + "\"",
+						getClient());
+					}
+				client.quit();
+				System.exit(0);
+				}
+				else
+					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		  	}
+		  });
 	}
 
 	public String getTempID() {

@@ -23,6 +23,7 @@ public class Test {
 			host = "localhost";
 		}// take the IP of server the host
 		  LoginGUI loginFrame = new LoginGUI(host); // create StudentFrame
+		  /*
 		  loginFrame.addWindowListener(new WindowAdapter() {
 		  	@Override
 		  
@@ -32,6 +33,7 @@ public class Test {
 		  		System.out.println(exitID);
 		  	}
 		  });
+		  */
 		  
 		  loginFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		  loginFrame.setSize( 850,625 ); // set frame size

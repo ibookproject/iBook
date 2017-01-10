@@ -1,8 +1,5 @@
 /DB/
-/ManagmentGUI/
-/MemberGUI/
-/MenuGUI/
-/Panels/
-/Role/
-/Book/
 /Controller/
+/client/
+/Book/
+/MenuGUI/

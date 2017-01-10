@@ -140,7 +140,7 @@ CREATE TABLE `review` (
   `reviewID` int(11) NOT NULL AUTO_INCREMENT,
   `reviewDate` date NOT NULL,
   `reviewContent` varchar(20000) NOT NULL,
-  `reviewStatus` tinyint(1) NOT NULL DEFAULT '0',
+  `reviewStatus` int(11) NOT NULL DEFAULT '0',
   `bookID` int(11) NOT NULL,
   PRIMARY KEY (`reviewID`,`bookID`),
   KEY `_bookID_idx` (`bookID`),
@@ -213,6 +213,7 @@ CREATE TABLE `subjecttobook` (
 
 LOCK TABLES `subjecttobook` WRITE;
 /*!40000 ALTER TABLE `subjecttobook` DISABLE KEYS */;
+INSERT INTO `subjecttobook` (`nameSubject`, `domainID`, `bookID`) VALUES ('kjhgfd',1,1),('tre',2,2);
 /*!40000 ALTER TABLE `subjecttobook` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,7 +232,7 @@ CREATE TABLE `user` (
   `userStatus` int(10) NOT NULL DEFAULT '0',
   `subscriptionMethod` int(10) DEFAULT NULL,
   `privilege` int(11) NOT NULL DEFAULT '1',
-  `suscriptionRequset` int(11) DEFAULT '0',
+  `subscriptionRequset` int(11) DEFAULT '0',
   `finishDateOfSubscription` date DEFAULT NULL,
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -244,7 +245,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`userID`, `password`, `firstName`, `lastName`, `userStatus`, `subscriptionMethod`, `privilege`, `suscriptionRequset`, `finishDateOfSubscription`) VALUES ('1','1','sagi','entenberg',0,0,1,0,NULL),('2','2','coral','carmeli',0,0,2,0,NULL),('3','3','hen','saada',0,0,3,0,NULL),('4','4','almog','yamin',0,0,4,0,NULL),('5','5','kfir','girshtain',0,0,5,0,NULL),('6','6','avi','sofer',0,0,6,0,NULL),('8','8','8','8',0,NULL,1,0,NULL),('9','86','6','6',0,NULL,1,0,NULL);
+INSERT INTO `user` (`userID`, `password`, `firstName`, `lastName`, `userStatus`, `subscriptionMethod`, `privilege`, `subscriptionRequset`, `finishDateOfSubscription`) VALUES ('1','1','sagi','entenberg',0,0,1,0,NULL),('2','2','coral','carmeli',1,0,2,0,NULL),('3','3','hen','saada',1,0,3,0,NULL),('4','4','almog','yamin',0,0,4,0,NULL),('5','5','kfir','girshtain',0,0,5,0,NULL),('6','6','avi','sofer',0,0,6,0,NULL),('8','8','8','8',0,NULL,1,0,NULL),('9','86','6','6',0,NULL,1,0,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -257,4 +258,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-10  2:38:38
+-- Dump completed on 2017-01-11  1:13:03

@@ -39,11 +39,10 @@ public class ibookServer extends AbstractServer {
 	public String sendMessage;
 	public ArrayList<DBgenericObject> resultList;
 	private  myConnection myconnt;
-	private static ArrayList<User> userlist;
 	/**
 	 * The default port to listen on.
 	 */
-	final public static int DEFAULT_PORT = 5555;
+	final public static int DEFAULT_PORT = 5520;
 
 	// Constructors ****************************************************
 
@@ -56,7 +55,6 @@ public class ibookServer extends AbstractServer {
 	public ibookServer(int port, String userName, String password) {
 		super(port);
 		resultList = null;
-		userlist=new ArrayList<User>();
 		myconnt = myConnection.startConnection("jdbc:mysql://localhost/ibook", password, userName);
 	}
 
@@ -188,14 +186,6 @@ public class ibookServer extends AbstractServer {
 	}
 
 	// Class methods ***************************************************
-	public static void setUser(User thisUser) {
-		if(userlist.contains(thisUser))
-			throw new RuntimeException("this user is already loged in!");
-		else 
-			userlist.add(thisUser);
-		
-	}
-
 	/**
 	 * This method is responsible for the creation of the server instance (there
 	 * is no UI in this phase).
@@ -224,7 +214,7 @@ public class ibookServer extends AbstractServer {
 		try {
 			sv.listen(); // Start listening for connections
 		} catch (Exception ex) {
-			System.out.println("ERROR - Could not listen for clients!");
+			System.out.println("ERROR - Could not listen for clients!"+ex.getMessage());
 		}
 	}
 }

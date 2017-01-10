@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Book.Book;
+import DB.WaitGif;
+import MenuGUI.LoginGUI;
 import Role.User;
 import client.DBSQLhandler;
 import client.DBgenericObject;
@@ -67,6 +69,7 @@ public class UserController {
 			while(!client.GetGotMessag()){//add user to DB
 				try{
 				Thread.sleep(500);
+
 				}
 				catch(InterruptedException ex)
 				{
@@ -80,9 +83,11 @@ public class UserController {
 	public static boolean UpdateUserStatus(User u , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
 	{
 			client.UpdateInDB(new updateCommand<DBtranslation>(u, searchCondition, updateCondition));
+			WaitGif wg=new WaitGif();
 			while(!client.GetGotMessag()){//add user to DB
 				try{
 				Thread.sleep(500);
+				wg.setVisible(true);
 				}
 				catch(InterruptedException ex)
 				{
@@ -90,6 +95,7 @@ public class UserController {
 					return false;
 				}
 			}
+			wg.setVisible(false);
 			return true;	// means the user add successful	
 	}
 }
