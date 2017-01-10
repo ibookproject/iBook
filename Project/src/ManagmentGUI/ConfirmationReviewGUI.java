@@ -160,6 +160,7 @@ public class ConfirmationReviewGUI extends JPanel {
 		
 		if(this.Permission==5){
 		add(btnRemovePartReview);}
+		
 		btnRemovePartReview.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -177,9 +178,13 @@ public class ConfirmationReviewGUI extends JPanel {
 ////////////////////////button to back to confirmation review from remove part of review/////////////////////////////////////////////
 				});
 		
-			
-		screen.setContentPane(Rpr);//
+				if(chckbxBookName.isSelected())
+				{
+					screen.setContentPane(Rpr);
+				}
+	
 			}
+		
 		});
 		
 		
