@@ -27,7 +27,8 @@ public class SearchBook extends JPanel {
 	private JButton btnPostReview;
 	private JLabel lblSearchBook;
 	private ArrayList<Book> searchRes;
-	public static JPanel Test;
+	public static JPanel panel;
+	private JScrollPane scrollPaneMain;
 
 	public SearchBook(LoginGUI screen) {
 		super();
@@ -69,32 +70,24 @@ public class SearchBook extends JPanel {
 		lblSearchBook.setBounds(355, 49, 175, 22);
 		add(lblSearchBook);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setAutoscrolls(true);
-		scrollPane.setBounds(49, 106, 758, 332);
-		add(scrollPane);
+		scrollPaneMain = new JScrollPane();
+		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneMain.setAutoscrolls(true);
+		scrollPaneMain.setBounds(51, 106, 756, 492);
+		add(scrollPaneMain);
 		
-		Test = new JPanel();
-		Test.setIgnoreRepaint(true);
-		Test.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		Test.setAutoscrolls(true);
-		Test.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		scrollPane.setViewportView(Test);
-		Test.setLayout(new GridLayout(0, 1, 0, 0));
+		panel = new JPanel();
+		panel.setIgnoreRepaint(true);
+		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		panel.setAutoscrolls(true);
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		scrollPaneMain.setViewportView(panel);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		//panel.add(new BookPanel());
-		
-	Test.add(new BookPanel());
-	Test.add(new BookPanel());
-	Test.add(new BookPanel());
-	Test.add(new BookPanel());
-	Test.add(new BookPanel());
-	Test.add(new BookPanel());
-	Test.add(new BookPanel());
-	Test.add(new BookPanel());
-	Test.add(new BookPanel());
-	Test.add(new BookPanel());
-		
+		//for(int i=0;i<20;i++)
+		//	panel.add(new BookPanel(this.screen));
+	
+
 		ArrayList<JButton> test=new ArrayList<JButton>();
 
 		

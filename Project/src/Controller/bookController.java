@@ -72,6 +72,31 @@ public class bookController {
 	}
 /*#####################################################################*/
 
+
+	
+/*#####################################################################*/
+/* Return all table of BOOK for the search in the method SearchBook! */
+/*#####################################################################*/
+		public static ArrayList<Book> getAllBookTable(Book b,DBSQLhandler client)
+		{
+			client.getAllTable(new showAllCommand<Book>(b));
+			while(!client.GetGotMessag()){//show table -domain
+				try{
+				Thread.sleep(500);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+				}
+			}
+			try {
+				
+				return  Book.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), "bookID,title");
+			} catch (SQLException e) {
+				return null;
+			}
+		}
+/*#####################################################################*/
 	
 /*#####################################################################*/
 /* Search specific subject for the method BookRate! */
