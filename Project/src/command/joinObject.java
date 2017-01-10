@@ -1,29 +1,29 @@
 package command;
 
-public class joinObject<E extends DBtranslation, T extends DBtranslation> {
+public class joinObject  {
 	
-	private E table1;
-	private T table2; //the second 
+	private String table1;
+	private String table2; //the second 
 	private String joinAttribute;
 
 	
 	///need to insert to insert first elemnet,second element and the the attribute to join
-	public joinObject(E table1, T table2, String joinAttribute) {
+	public joinObject(String table1, String table2, String joinAttribute) {
 		super();
 		this.table1 = table1;
 		this.table2 = table2;
 		this.joinAttribute = joinAttribute;
 	}
 	public String getTable1() {
-		return table1.getClassName();
+		return table1;
 	}
-	public void setTable1(E table1) {
+	public void setTable1(String table1) {
 		this.table1 = table1;
 	}
 	public String getTable2() {
-		return table2.getClassName();
+		return table2;
 	}
-	public void setTable2(T table2) {
+	public void setTable2(String table2) {
 		this.table2 = table2;
 	}
 	public String getJoinattribute() {

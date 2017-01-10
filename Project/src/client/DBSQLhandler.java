@@ -138,7 +138,7 @@ public class DBSQLhandler extends AbstractClient {
 			quit();
 		}
 	}
-	public void joinSearchInDB(joinCommand<?,?> message)
+	public void joinSearchInDB(joinCommand<?> message)
 	{
 		try {
 			setGotMessage(false);

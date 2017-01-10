@@ -1,8 +1,13 @@
 package client;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import Book.*;
 import command.*;
@@ -11,8 +16,28 @@ import command.joinObject;
 import command.searchCommand;
 import command.showAllCommand;
 import command.updateCommand;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.GridLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.BoxLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ScrollPaneConstants;
 
-public class checkDB {
+public class checkDB extends JPanel {
+
+	public checkDB() {
+		
+	}
 	final public static int DEFAULT_PORT = 5555;
 public static void main(String[] args) throws InterruptedException, SQLException
 {
@@ -57,9 +82,19 @@ public static void main(String[] args) throws InterruptedException, SQLException
 	*/
 	SubjectToBook stb=new SubjectToBook(1, "1");
 	Book b=new Book();
-	ArrayList<joinObject<SubjectToBook, Book>> temp =new ArrayList<joinObject<SubjectToBook, Book>>();
-	temp.add(new joinObject<SubjectToBook, Book>(stb, b, "bookID"));
-	client.joinSearchInDB(new joinCommand<SubjectToBook, Book>("book.bookID,book.title",stb,temp,""));
+	Domain d=new Domain(1,"1");
+	ArrayList<joinObject> temp =new ArrayList<joinObject>();
+	
+	
+	//the first object is the assiation class and the second is to join with
+	
+	
+	temp.add(new joinObject(stb.getClassName(), b.getClassName(), "bookID"));
+	temp.add(new joinObject(stb.getClassName(), d.getClassName(), "domainID"));
+	
+	
+	//temp.add(new joinObject(stb.getClassName(), "domain", "bookID"));
+	client.joinSearchInDB(new joinCommand<Book>("book.bookID,book.title,SubjectToBook.nameSubject,domain.domainName",b,temp,""));
 	while(!client.GetGotMessag()){//search book in db
 		try{
 		Thread.sleep(500);
