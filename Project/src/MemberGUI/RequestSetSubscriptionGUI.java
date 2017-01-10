@@ -1,6 +1,7 @@
 package MemberGUI;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
@@ -87,12 +88,12 @@ public class RequestSetSubscriptionGUI extends JPanel {
 		group.add(rdbtnSingl);
 		group.add(rdbtnMonthly);
 		group.add(rdbtnYearly);
-		
+		User u = new User(screen.getTempID());
 		JButton btnSendRequest = new JButton("Send Request");
 		btnSendRequest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
-				
+				UserController.UpdateUserStatus(u, "suscriptionRequset=\""+radioButtonChoose+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
+				JOptionPane.showMessageDialog(screen,"Swnd request Subscription sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		btnSendRequest.setBounds(385, 348, 127, 25);

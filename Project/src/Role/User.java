@@ -6,7 +6,10 @@ import java.util.InputMismatchException;
 
 import client.DBgenericObject;
 import command.DBtranslation;
-
+/**
+ *@author Sagi Entenberg 
+ * 
+ */
 public class User extends DBtranslation implements UserStatus {
 	private String userID;
 	private String password;
@@ -16,7 +19,10 @@ public class User extends DBtranslation implements UserStatus {
 	private int privilege;
 	private int suscriptionRequset;
 	private Date finishDateOfSubscription;
-	
+	/**
+	 * 
+	 * 
+	 */
 	//empty constructor
 	private User(){
 		super();

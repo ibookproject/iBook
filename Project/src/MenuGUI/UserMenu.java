@@ -1,14 +1,20 @@
 package MenuGUI;
 
 import javax.swing.JPanel;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
+import client.DBSQLhandler;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import Controller.UserController;
 import MemberGUI.*;
+import Role.User;
+
 import java.awt.Font;
+import java.util.ArrayList;
 
 
 public class UserMenu extends JPanel {
@@ -18,13 +24,14 @@ public class UserMenu extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	/// hen- i change all to protected because we extends this ... ( it was private)
-	protected LoginGUI screen;
+	public LoginGUI screen;
 	//protected int UserIdAtDataBase; // this is the user id from the loging , for the cart , i need what is the current Userid at database
 	protected JPanel pann;
 	protected JButton btnSearchBook;
 	protected JButton btnSearchReview;
 	protected JButton btnSetSubscription;
 	protected JLabel lblUserMenu;
+	private User u;
 	public JButton btnDisconnect;
 	
 	/**
@@ -35,9 +42,10 @@ public class UserMenu extends JPanel {
 	
 	public UserMenu(LoginGUI screen ) {
 		super();
-		initialize();
+		
 		this.screen=screen;
 		pann=this;
+		initialize();
 		lblUserMenu = new JLabel("iBOOK Menu");
 		lblUserMenu.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblUserMenu.setBounds(387, 11, 116, 14);
@@ -107,6 +115,15 @@ public class UserMenu extends JPanel {
 		add(btnSetSubscription);
 		
 		btnDisconnect = new JButton("Disconnect");
+		
+		
+	//	ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID",u,"userStatus=\""+"1"+"\"",screen.getClient());
+		u=new User(screen.getTempID());
+		btnDisconnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				UserController.UpdateUserStatus(u, "userStatus=\""+"0"+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
+				}
+			});
 		btnDisconnect.setBounds(712, 22, 116, 23);
 		add(btnDisconnect);
 	}

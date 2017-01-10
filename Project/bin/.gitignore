@@ -1,5 +1,11 @@
-/client/
+/Book/
+/Controller/
+/DB/
+/ManagmentGUI/
+/MemberGUI/
 /MenuGUI/
-/book_PNG2111.png
-/bookIIcon.png
-/bookIcon.png
+/Role/
+/backIcon.png
+/client/
+/command/
+/ocsf/
