@@ -1,4 +1,4 @@
-package MemberGUI;
+package Panels;
 
 import javax.swing.JPanel;
 

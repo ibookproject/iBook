@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import Book.Book;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
+import Panels.BookPanel;
 import client.DBgenericObject;
 import command.showAllCommand;
 
@@ -82,7 +83,7 @@ public class SearchBook extends JPanel {
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
-		scrollPaneMain.setBounds(51, 106, 756, 492);
+		scrollPaneMain.setBounds(50, 106, 757, 469);
 		add(scrollPaneMain);
 		
 		panel = new JPanel();
