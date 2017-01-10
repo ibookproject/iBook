@@ -1,8 +1,7 @@
 package MemberGUI;
 
-import java.awt.Font;
-
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,8 +27,8 @@ public class SearchBook extends JPanel {
 	private JButton btnPostReview;
 	private JLabel lblSearchBook;
 	private ArrayList<Book> searchRes;
-	private JTextArea textArea;
-	
+	public static JPanel Test;
+
 	public SearchBook(LoginGUI screen) {
 		super();
 		setForeground(Color.LIGHT_GRAY);
@@ -59,7 +58,7 @@ public class SearchBook extends JPanel {
 			}
 		});
 	
-		btnPostReview.setBounds(516, 231, 123, 25);
+		btnPostReview.setBounds(684, 11, 123, 25);
 		add(btnPostReview);
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
@@ -70,20 +69,50 @@ public class SearchBook extends JPanel {
 		lblSearchBook.setBounds(355, 49, 175, 22);
 		add(lblSearchBook);
 		
-	    textArea = new JTextArea();
-		textArea.setBackground(Color.LIGHT_GRAY);
-		textArea.setBounds(179, 121, 488, 456);
-		add(textArea);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setAutoscrolls(true);
+		scrollPane.setBounds(49, 106, 758, 332);
+		add(scrollPane);
 		
+		Test = new JPanel();
+		Test.setIgnoreRepaint(true);
+		Test.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		Test.setAutoscrolls(true);
+		Test.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		scrollPane.setViewportView(Test);
+		Test.setLayout(new GridLayout(0, 1, 0, 0));
+		//panel.add(new BookPanel());
+		
+	Test.add(new BookPanel());
+	Test.add(new BookPanel());
+	Test.add(new BookPanel());
+	Test.add(new BookPanel());
+	Test.add(new BookPanel());
+	Test.add(new BookPanel());
+	Test.add(new BookPanel());
+	Test.add(new BookPanel());
+	Test.add(new BookPanel());
+	Test.add(new BookPanel());
+		
+		ArrayList<JButton> test=new ArrayList<JButton>();
+
 		
 	}
+	/**
+	 * 
+	 *@author hensaada
+	 *@return nothing
+	 *@param list 
+	 *give you shit.
+	 **/
 	public void setList(ArrayList<Book> list)
-	{
+	{	
 		this.searchRes=list;
 		String temp = "";
 		for(Book b:list)		
 			temp+=String.format("%s \n",b.toString());
-		textArea.setText(temp);
+	
 		
 	}
 }

@@ -156,11 +156,10 @@ public class ConfirmationReviewGUI extends JPanel {
 		
 		reviewID=Reviews.get(0).getReviewID();
 		
-
-		if(this.Permission==5)
 		btnRemovePartReview = new JButton("Remove Part Of Review");
 		
-		
+		if(this.Permission==5){
+		add(btnRemovePartReview);}
 		btnRemovePartReview.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -185,7 +184,7 @@ public class ConfirmationReviewGUI extends JPanel {
 		
 		
 		btnRemovePartReview.setBounds(536, 509, 187, 25);
-		add(btnRemovePartReview);
+	
 		
 		/*JRadioButton rdbtnConfirm = new JRadioButton("Remove Part Of Review");
 		rdbtnConfirm.addActionListener(new ActionListener() 

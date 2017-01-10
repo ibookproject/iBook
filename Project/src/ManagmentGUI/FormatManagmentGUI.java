@@ -193,12 +193,12 @@ public class FormatManagmentGUI extends JPanel {
 		JButton btnAddNewDomain = new JButton("Add"); // adding new domain
 		btnAddNewDomain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String s=DomainTextField.getText();
+				String s=DomainTextField.getText().trim();
 				
 				if(!s.isEmpty())
 					{
-					Domain d = new Domain(DomainTextField.getText()); //   	
-					ArrayList<Domain> temp = FormatController.SearchDomain("DomainName",d, "domainName=\""+DomainTextField.getText()+ "\"" ,screen.getClient());
+					Domain d = new Domain(DomainTextField.getText().trim()); //   	
+					ArrayList<Domain> temp = FormatController.SearchDomain("DomainName",d, "domainName=\""+DomainTextField.getText().trim()+ "\"" ,screen.getClient());
 					if(temp==null)
 					{
 			 		boolean result=FormatController.AddDomain(d,screen.getClient()); // return true or false from the controller DB 
@@ -243,7 +243,7 @@ public class FormatManagmentGUI extends JPanel {
 			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
 				
-				String s=SubjectTextField.getText();
+				String s=SubjectTextField.getText().trim();
 				if(!s.isEmpty())
 				{
 					////////////////////////////////////
@@ -260,7 +260,7 @@ public class FormatManagmentGUI extends JPanel {
 		 			JOptionPane.showMessageDialog(screen,"Add Subject process FAILD ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 		 		else
 		 		{
-		 			String str=DomainTextField.getText();
+		 			String str=DomainTextField.getText().trim();
 		 			SubjectBox.addItem(sub);
 		 			SubjectBox.setSelectedItem(sub);
 		 			SubjectTextField.setText("");
