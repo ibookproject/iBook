@@ -18,6 +18,7 @@ import javax.swing.UIManager;
 import Book.Book;
 import Book.Domain;
 import Book.Subject;
+import Book.SubjectToBook;
 import Controller.FormatController;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
@@ -26,6 +27,7 @@ import command.joinObject;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -162,27 +164,8 @@ public class FormatManagmentGUI extends JPanel {
 		JLabel lblChooseSubject = new JLabel("Choose Subject : ");
 		lblChooseSubject.setBounds(71, 168, 95, 14);
 		add(lblChooseSubject);
-		/*
-		 SubjectAttachcomboBox.addActionListener(new ActionListener() {
-			 	public void actionPerformed(ActionEvent e) {
-			 		Subject s=new Subject(3,"1");  //create empty project
-					if(DomainAttachcomboBox.getItemAt(0)!=null)
-					{	
-					//resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainAttachcomboBox.getSelectedItem()).getDomainID(), screen.getClient());
-						joinObject<Domain, Subject>[] temp= new joinObject<Domain, DBtranslation>[1];
-						resultBook=screen.getClient().joinSearchInDB(new joinCommand<Domain,Subject>(selectSentence, tablesToJoin, whereSentence) );
-						System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
-					if(resultSubjects!=null) // if there is no result 
-					{
-						SubjectAttachcomboBox.removeAllItems(); // first clear all the subject result from the checkbox 
-					for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
-						SubjectAttachcomboBox.addItem(ddd);
-					}
-					else SubjectAttachcomboBox.removeAllItems();
-				}
-			 	}
-			 });
-			 */
+		
+			 
 		SubjectAttachcomboBox.setBounds(71, 185, 103, 20);
 		add(SubjectAttachcomboBox);
 		

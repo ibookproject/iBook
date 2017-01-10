@@ -22,8 +22,8 @@ public class deleteCommand<E extends DBtranslation> extends command<E> {
 		for(int i=0;i<conditions.length-1;i++)
 			st+=conditions[i]+" AND ";
 		st+=conditions[conditions.length-1];
-		if(st.equals(""))
-			throw new RuntimeException("you insert wrong condition!");
+		//if(st.equals(""))
+			//throw new RuntimeException("you insert wrong condition!");
 		return st;
 		
 	}

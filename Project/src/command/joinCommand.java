@@ -7,12 +7,16 @@ public class joinCommand<E extends DBtranslation,T extends DBtranslation> extend
 	private static final long serialVersionUID = 1L;
 	private ArrayList<joinObject<E,T>> tablesToJoin;
 
-	/*
-	public joinCommand(String selectSentence, E table1, String whereSentence) {
+	
+
+	public joinCommand(String selectSentence, E table1, ArrayList<joinObject<E,T>>  tablesToJoin,String whereSentence) throws SQLException {
 		super(selectSentence, table1, whereSentence);
-		// TODO Auto-generated constructor stub
+		if(tablesToJoin==null)
+			throw new SQLException("you inesrt wrong tables to Join");
+		this.tablesToJoin=tablesToJoin;
+			
 	}
-	*/
+	
 	
 	//in the select selectSentence have to add the name of the table first the '.' and the the name 
 	// example b.getTable().bookID
@@ -42,6 +46,8 @@ public class joinCommand<E extends DBtranslation,T extends DBtranslation> extend
 			temp+=tablesToJoin.get(i).getJoinQuery()+","; /// will be table1.joinAttribute=table2.joinAttribute AND table3.joinAttribute=table4.joinAttribute
 		temp+=tablesToJoin.get(tablesToJoin.size()).getJoinQuery();
 		}
+		if(this.getCondition().length()>0)
+			temp+=" AND ";
 		return temp;
 	}
 	/**

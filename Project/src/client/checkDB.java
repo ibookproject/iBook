@@ -1,13 +1,13 @@
 package client;
 
-import java.awt.print.Book;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Book.*;
-import command.deleteCommand;
+import command.*;
 import command.insertCommand;
+import command.joinObject;
 import command.searchCommand;
 import command.showAllCommand;
 import command.updateCommand;
@@ -55,5 +55,22 @@ public static void main(String[] args) throws InterruptedException, SQLException
 		Thread.sleep(500);
 	System.out.println(client.getResultObject());
 	*/
+	SubjectToBook stb=new SubjectToBook(1, "1");
+	Book b=new Book();
+	ArrayList<joinObject<SubjectToBook, Book>> temp =new ArrayList<joinObject<SubjectToBook, Book>>();
+	temp.add(new joinObject<SubjectToBook, Book>(stb, b, "bookID"));
+	client.joinSearchInDB(new joinCommand<SubjectToBook, Book>("book.bookID,book.title",stb,temp,""));
+	while(!client.GetGotMessag()){//search book in db
+		try{
+		Thread.sleep(500);
+		}
+		catch(InterruptedException ex)
+		{
+			System.out.println("InterruptedException "+ex);
+		}
+	}
+	System.out.println(client.getResultObject());
+	
+	
 }
 }
