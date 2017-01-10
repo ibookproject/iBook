@@ -39,7 +39,7 @@ public class ibookServer extends AbstractServer {
 	public String sendMessage;
 	public ArrayList<DBgenericObject> resultList;
 	private  myConnection myconnt;
-	private static ArrayList<User> userlist;
+	private  ArrayList<User> userlist;
 	/**
 	 * The default port to listen on.
 	 */
@@ -146,10 +146,22 @@ public class ibookServer extends AbstractServer {
 				}
 				stmt.close();
 				conn.close();
-			} else
-				client.sendToClient("You Send wrong message");
+			} 
+			else {
+				if (msg instanceof User) {
+					try {
+						setUser((User) msg);
+					}//end try 
+					catch (Exception e) {
+						System.out.println("there is an exaption " + e.getClass() + ": " + e);
+						client.sendToClient(e);
+					}//end catch
+				} //end if
+				else
+					client.sendToClient("You Send wrong message");
+			} // end else
 		} catch (Exception e) {
-			System.out.println("there is an TT " + e.getClass() + ": " + e);
+			System.out.println("there is an exaption " + e.getClass() + ": " + e);
 			try {
 				client.sendToClient(e);
 			} catch (IOException ex) {
@@ -188,12 +200,18 @@ public class ibookServer extends AbstractServer {
 	}
 
 	// Class methods ***************************************************
-	public static void setUser(User thisUser) {
-		if(userlist.contains(thisUser))
-			throw new RuntimeException("this user is already loged in!");
-		else 
+	public void setUser(User thisUser) throws RuntimeException {
+		if (userlist == null || userlist.isEmpty()) {
+			userlist=new  ArrayList<User>();
 			userlist.add(thisUser);
-		
+		} else {
+			if (userlist.contains(thisUser))
+				throw new RuntimeException("this user is already loged in!");
+			else
+				userlist.add(thisUser);
+		}
+		System.out.println(userlist);
+
 	}
 
 	/**

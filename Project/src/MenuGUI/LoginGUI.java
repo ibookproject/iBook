@@ -146,7 +146,12 @@ public class LoginGUI extends JFrame {
 						{
 							temp.get(0).setUserStatus(UserStatus.CONNECTED);
 							UserController.UpdateUserStatus(u, "userStatus=\""+"1"+"\"", "userID=\""+txtUserID.getText()+"\"", screen.client);
-							//client.setNowRunUser(temp.get(0));
+							try {
+								client.setNowRunUser(temp.get(0));
+								Thread.sleep(500);
+							} catch (Exception e1) {
+								JOptionPane.showMessageDialog(screen,e1.getMessage(), "Warning",JOptionPane.WARNING_MESSAGE);
+							}
 					switch (temp.get(0).getPriviliege()) {
 							
 					case UserStatus.USER: {

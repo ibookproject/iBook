@@ -180,10 +180,10 @@ public class DBSQLhandler extends AbstractClient {
 		return nowRunUser;
 	}
 
-	public void setNowRunUser(User nowRunUser) throws RuntimeException{
+	public void setNowRunUser(User nowRunUser) throws RuntimeException, IOException{
 		if(nowRunUser==null)
 			throw new NullPointerException("no user is sent.. this null pointer");
-		ibookServer.setUser(nowRunUser);
+			sendToServer(nowRunUser);
 		this.nowRunUser = nowRunUser;
 	}
 
