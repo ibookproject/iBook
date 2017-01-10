@@ -26,6 +26,7 @@ public class bookController {
 	 * AddBook - Done
 	 * UpdateBook
 	 * GetAllDomain- Done
+	 * getAllBookTable - Done
 	 * */
 
 	public static ArrayList<Book> SearchBook(String fromSentence,Book b,String condition,DBSQLhandler client)
@@ -75,7 +76,7 @@ public class bookController {
 
 	
 /*#####################################################################*/
-/* Return all table of BOOK for the search in the method SearchBook! */
+	/* Return all table of BOOK for the search in the method SearchBook! */
 /*#####################################################################*/
 		public static ArrayList<Book> getAllBookTable(Book b,DBSQLhandler client)
 		{
@@ -99,7 +100,7 @@ public class bookController {
 /*#####################################################################*/
 	
 /*#####################################################################*/
-/* Search specific subject for the method BookRate! */
+		/* Search specific subject for the method BookRate! */
 /*#####################################################################*/
 	public static ArrayList<SubjectToBook> SearchSubject(String fromSentence,SubjectToBook s,String condition,DBSQLhandler client)
 	{
@@ -123,6 +124,9 @@ public class bookController {
 /*#####################################################################*/
 	
 
+/*#####################################################################*/
+							/* AddBook method */
+/*#####################################################################*/
 	
 	public static boolean AddBook(Book b,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{
@@ -140,7 +144,7 @@ public class bookController {
 			return true;	// means the book add successful	
 	}
 	
-
+/*#####################################################################*/
 	
 	
 }

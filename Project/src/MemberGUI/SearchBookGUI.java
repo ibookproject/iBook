@@ -57,6 +57,7 @@ public class SearchBookGUI extends JPanel {
 	private JTextField textFieldSummary;
 	private JTextField textFieldContents;
 	private JButton btnSearch;
+	private ArrayList<Book> bookss;
 
 	public SearchBookGUI(LoginGUI screen) {
 		super();
@@ -176,12 +177,13 @@ public class SearchBookGUI extends JPanel {
 		add(textFieldLanguage);
 		textFieldLanguage.setColumns(10);
 
+		bookss=new ArrayList<Book>();
 		btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// //////////////////////button back to Search book GUI
 				// /////////////////////////////////////////////
-				SearchBook sb = new SearchBook(screen);
+				SearchBook sb = new SearchBook(screen,bookss);
 				sb.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
@@ -213,6 +215,7 @@ public class SearchBookGUI extends JPanel {
 					ArrayList<Book> temp = bookController.SearchBook("title,language,author,summary",b,condition, screen.getClient());//call search book method from book controller
 					if (temp != null) {
 						sb.setList(temp);
+						
 						screen.setContentPane(sb);
 					} else //
 						JOptionPane.showMessageDialog(screen,"not found any book result\n", "Warning",

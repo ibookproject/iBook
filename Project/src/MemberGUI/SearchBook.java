@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import Book.Book;
+import Controller.bookController;
 import MenuGUI.LoginGUI;
 import client.DBgenericObject;
 import command.showAllCommand;
@@ -27,17 +28,25 @@ public class SearchBook extends JPanel {
 	private JButton btnPostReview;
 	private JLabel lblSearchBook;
 	private ArrayList<Book> searchRes;
+	private ArrayList<Book> books;
 	public static JPanel panel;
 	private JScrollPane scrollPaneMain;
 
-	public SearchBook(LoginGUI screen) {
+	public SearchBook(LoginGUI screen,ArrayList<Book> books) {
 		super();
 		setForeground(Color.LIGHT_GRAY);
 		this.screen=screen;
 		pann=this;
+		this.books=books;
 		initialize();
 	}
-
+	/**
+	 * 
+	 *@author CoralCarmeli
+	 *@return nothing
+	 *@param nothing 
+	 *initialize the SearchBook
+	 **/
 	private void initialize()
 	{
 		this.setSize(850, 625);
@@ -83,29 +92,15 @@ public class SearchBook extends JPanel {
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		scrollPaneMain.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		panel.add(new BookPanel(screen));
-		//for(int i=0;i<20;i++)
-		//	panel.add(new BookPanel(this.screen));
-	
-
-		ArrayList<JButton> test=new ArrayList<JButton>();
-
 		
 	}
-	/**
-	 * 
-	 *@author hensaada
-	 *@return nothing
-	 *@param list 
-	 *give you shit.
-	 **/
+
 	public void setList(ArrayList<Book> list)
 	{	
 		this.searchRes=list;
-		String temp = "";
-		for(Book b:list)		
-			temp+=String.format("%s \n",b.toString());
-	
-		
+		if(searchRes!=null)
+			
+		for(Book b:searchRes)
+			panel.add(new BookPanel(this.screen,b));
 	}
 }
