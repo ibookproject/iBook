@@ -164,6 +164,10 @@ public class ibookServer extends AbstractServer {
 		System.out.println("Server listening for connections on port " + getPort());
 		try {
 			Connection conn = myConnection.getMyConnection();
+			Statement stmt = conn.createStatement();
+			String query="UPDATE user SET userStatus=0";
+			stmt.executeUpdate(query);
+			stmt.close();
 			System.out.println("SQL connection succeed");
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
 				| SQLException ex) {/* handle any errors */
