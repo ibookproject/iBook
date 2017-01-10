@@ -100,7 +100,13 @@ public class SetAccountSubscriptionGUI extends JPanel {
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		scrollPaneMain.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		panel.add(new UserSubscriptionPanel(screen , u));
+		
+	//	panel.add(new UserSubscriptionPanel(screen , u));		/*########## Coral #########3*/
+		
+		
+		
+		
+		
 	//	panel.add(new UserSubscriptionPanel(screen));
 		//panel.add(new UserSubscriptionPanel(screen));
 	//	panel.add(new UserSubscriptionPanel(screen));

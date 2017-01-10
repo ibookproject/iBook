@@ -1,7 +1,10 @@
 package ManagmentGUI;
 
 
+import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -9,14 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
+import javax.swing.ScrollPaneConstants;
 
 import Book.Book;
 import Book.Review;
 import Controller.ReviewController;
 import Controller.UserController;
 import Controller.bookController;
+import Panels.BookPanel;
+import Panels.ReviewPanel;
 import MenuGUI.LoginGUI;
 import Role.User;
 import Role.UserStatus;
@@ -26,6 +33,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
+import javax.swing.border.MatteBorder;
 
 
 
@@ -47,7 +55,10 @@ public class ConfirmationReviewGUI extends JPanel {
 	private JLabel lblDateStr;
 	private JTextArea textAreaReviewContent;
 	private int reviewID;
-	private int flag=0;
+	private int flagReviewChoose=0;
+	private JScrollPane scrollPaneMain;
+	private JPanel panel;
+	private ArrayList<ReviewPanel> reviewPanels;
 	
 	public ConfirmationReviewGUI(LoginGUI screen,int permission) {
 		super();
@@ -65,13 +76,15 @@ public class ConfirmationReviewGUI extends JPanel {
 		
 		backIcon =new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(40, 35, 89, 23);
 		add(btnBack);
 		
 		confirmLbl = new JLabel("Confirmation Review");
 		confirmLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		confirmLbl.setBounds(355, 49, 175, 22);
+		confirmLbl.setBounds(355, 35, 175, 22);
 		add(confirmLbl);
+		
+		
 	
 		btnNotConfirm = new JButton("Not Confirm");
 		btnNotConfirm.addActionListener(new ActionListener() {
@@ -81,7 +94,7 @@ public class ConfirmationReviewGUI extends JPanel {
 				ReviewController.DeleteReview(r,"reviewID=\""+reviewID+"\"",screen.getClient());
 			}
 		});
-		btnNotConfirm.setBounds(388, 509, 109, 25);
+		btnNotConfirm.setBounds(375, 544, 109, 25);
 		add(btnNotConfirm);
 		
 		btnConfirm = new JButton("Confirm");
@@ -100,8 +113,22 @@ public class ConfirmationReviewGUI extends JPanel {
 				
 			}
 		});
-		btnConfirm.setBounds(230, 509, 109, 25);
+		btnConfirm.setBounds(238, 544, 109, 25);
 		add(btnConfirm);
+			
+		scrollPaneMain = new JScrollPane();
+		scrollPaneMain.setBounds(58, 86, 731, 411);
+		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneMain.setAutoscrolls(true);
+		add(scrollPaneMain);
+				
+		panel = new JPanel();
+		scrollPaneMain.setColumnHeaderView(panel);
+		panel.setIgnoreRepaint(true);
+		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		panel.setAutoscrolls(true);
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		Review r=new Review();
 		ArrayList<Review> Reviews= (ArrayList<Review>)ReviewController.SearchReviews("reviewID,reviewDate,reviewContent,reviewStatus,bookID",r,"reviewStatus=\""+0+"\"" ,screen.getClient());
@@ -112,19 +139,20 @@ public class ConfirmationReviewGUI extends JPanel {
 		}
 	
 		else
-			JOptionPane.showMessageDialog(screen,"Review Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
-		
-		
-		chckbxBookName = new JCheckBox("Book Name");
-		chckbxBookName.setBounds(194, 159, 111, 25);
-		
-		chckbxBookName.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				flag=1;
+			{
+			//int i=0;
+			reviewPanels=new ArrayList<ReviewPanel>();
+			for(int i=0;i<Reviews.size();i++/*Review r1:Reviews*/)
+			{
+				reviewPanels.add(new ReviewPanel(this.screen,Reviews.get(i)));
+				panel.add(reviewPanels.get(i));
 			}
-		});
+				
+			JOptionPane.showMessageDialog(screen,"Review Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
+			}
+		
 
-		Book b=new Book();
+	/*	Book b=new Book();
 		ArrayList<Book> book= (ArrayList<Book>)bookController.SearchBook("title",b,"bookID=\""+Reviews.get(0).getBookID()+"\"" ,screen.getClient());
 		if(book==null||book.isEmpty())
 		{
@@ -135,11 +163,11 @@ public class ConfirmationReviewGUI extends JPanel {
 	
 		else
 			JOptionPane.showMessageDialog(screen,"User Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
-	
-		chckbxBookName.setText(book.get(0).getTitle());
-		add(chckbxBookName);
+	*/
+	//	chckbxBookName.setText(book.get(0).getTitle());
+	//	add(chckbxBookName);
 		
-		lblDate = new JLabel("Date:");
+	/*	lblDate = new JLabel("Date:");
 		lblDate.setBounds(214, 193, 74, 16);
 		add(lblDate);
 		
@@ -152,9 +180,19 @@ public class ConfirmationReviewGUI extends JPanel {
 		textAreaReviewContent.setText(Reviews.get(0).getReviewContent());
 		textAreaReviewContent.setBounds(320, 160, 275, 49);
 		add(textAreaReviewContent);
+		*/
 		
-		
-		reviewID=Reviews.get(0).getReviewID();
+		if(reviewPanels!=null)
+			for(ReviewPanel r2:reviewPanels)
+			{
+				if(r2.getchbxChoose()==1)
+				{
+					reviewID=r2.getReview().getReviewID();
+					flagReviewChoose=1;
+					//screen.setContentPane(Rpr);
+				}
+			}
+		//reviewID=Reviews.get(0).getReviewID();
 		
 		btnRemovePartReview = new JButton("Remove Part Of Review");
 		
@@ -167,6 +205,8 @@ public class ConfirmationReviewGUI extends JPanel {
 			{
 ////////////////////////button to back to confirmation review from remove part of review /////////////////////////////////////////////
 			
+				
+				
 				RemovePartReviewGUI Rpr=new RemovePartReviewGUI(screen,reviewID);
 				Rpr.btnBack.addActionListener(new ActionListener()
 				{
@@ -177,10 +217,19 @@ public class ConfirmationReviewGUI extends JPanel {
 					}
 ////////////////////////button to back to confirmation review from remove part of review/////////////////////////////////////////////
 				});
-		
-				if(chckbxBookName.isSelected())
+		/*if(reviewPanels!=null)
+				for(ReviewPanel r:reviewPanels)
+				{
+					if(r.getchbxChoose()==1)
+					{
+						reviewID=r.getReview().getReviewID();
+						screen.setContentPane(Rpr);
+					}
+				}*/
+				if(flagReviewChoose==1)
 				{
 					screen.setContentPane(Rpr);
+					flagReviewChoose=0;
 				}
 	
 			}
@@ -188,7 +237,7 @@ public class ConfirmationReviewGUI extends JPanel {
 		});
 		
 		
-		btnRemovePartReview.setBounds(536, 509, 187, 25);
+		btnRemovePartReview.setBounds(536, 544, 187, 25);
 	
 		
 	

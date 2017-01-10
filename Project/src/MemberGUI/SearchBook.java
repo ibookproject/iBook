@@ -81,9 +81,9 @@ public class SearchBook extends JPanel {
 		add(lblSearchBook);
 		
 		scrollPaneMain = new JScrollPane();
+		scrollPaneMain.setBounds(51, 106, 756, 492);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
-		scrollPaneMain.setBounds(50, 106, 757, 469);
 		add(scrollPaneMain);
 		
 		panel = new JPanel();
