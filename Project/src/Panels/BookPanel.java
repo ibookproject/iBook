@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class BookPanel extends JPanel{
 	private ArrayList<Book> Books;
 	private LoginGUI screen;
-	private Book book;
+	private Book book;//************************i think you don't use it.
 	private JLabel lblNewTitle;
 	private JLabel lblNewLanguage;
 	private JCheckBox chckbxBookTitle;
