@@ -191,17 +191,6 @@ public class ConfirmationReviewGUI extends JPanel {
 		btnRemovePartReview.setBounds(536, 509, 187, 25);
 	
 		
-		/*JRadioButton rdbtnConfirm = new JRadioButton("Remove Part Of Review");
-		rdbtnConfirm.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				
-			}
-		});
-		rdbtnConfirm.setBounds(67, 545, 123, 25);
-		add(rdbtnConfirm);*/
-		
 	
 	}
 }

@@ -83,7 +83,7 @@ public class SearchBook extends JPanel {
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		scrollPaneMain.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		//panel.add(new BookPanel());
+		panel.add(new BookPanel(screen));
 		//for(int i=0;i<20;i++)
 		//	panel.add(new BookPanel(this.screen));
 	

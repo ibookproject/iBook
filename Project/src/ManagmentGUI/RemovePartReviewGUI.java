@@ -63,7 +63,8 @@ public class RemovePartReviewGUI extends JPanel {
 		 JTextArea textReview = new JTextArea();
 		 textReview.setFont(new Font("Courier New", Font.PLAIN, 13));
 		 r = new Review(1, null, null,0, 1);// create review
-			ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, "bookID", screen.getClient());
+			ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, ""
+					+ "reviewID=\""+ReviewID+"\"", screen.getClient());
 			
 		 textReview.setText(temp.get(0).getReviewContent()); //need to get text review
 		 oldReview=temp.get(0).getReviewContent();
