@@ -111,7 +111,7 @@ public class LoginGUI extends JFrame {
 					flagTry--;;
 					}
 					
-					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID,privilege",u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"",client);
+					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID,privilege,userStatus",u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"",client);
 					if(temp==null||temp.isEmpty())
 					{
 						JOptionPane.showMessageDialog(screen,"wrong password/username", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -130,17 +130,25 @@ public class LoginGUI extends JFrame {
 						
 					}
 					else{
-						if(temp.size()>1)
-							throw new InputMismatchException("there is more then one User with userID"+temp.get(0).getUserID());
+						//if(temp.size()>1)
+							//throw new InputMismatchException("there is more then one User with userID"+temp.get(0).getUserID());
 						counteEnrty=0;
 						flagTry--;
 						if(temp.get(0).getUserStatus()==UserStatus.LOCK)
 						{
 							JOptionPane.showMessageDialog(screen,"this user is already locked!", "Warning",JOptionPane.WARNING_MESSAGE);
 						}
+						if(temp.get(0).getUserStatus()==UserStatus.CONNECTED)
+						{
+							JOptionPane.showMessageDialog(screen,"this user is already connected!", "Warning",JOptionPane.WARNING_MESSAGE);
+						}
 						else
 						{
+							temp.get(0).setUserStatus(UserStatus.CONNECTED);
+							UserController.UpdateUserStatus(u, "userStatus=\""+"1"+"\"", "userID=\""+txtUserID.getText()+"\"", screen.client);
+							//client.setNowRunUser(temp.get(0));
 					switch (temp.get(0).getPriviliege()) {
+							
 					case UserStatus.USER: {
 
 // //////////////////////button to back panel from panel// /////////////////////////////////////////////

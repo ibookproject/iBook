@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import client.DBSQLhandler;
 import Book.Review;
 import Controller.ReviewController;
 import Controller.UserController;
@@ -31,6 +32,7 @@ public class RemovePartReviewGUI extends JPanel {
 	private LoginGUI screen;
 	private JPanel pann;
 	private Review r;
+	private ReviewController r1;
 	private int ReviewID;
 	private String oldReview = new String();
 	public RemovePartReviewGUI(LoginGUI screen,int reviewID) {
@@ -60,25 +62,29 @@ public class RemovePartReviewGUI extends JPanel {
 		 
 		 JTextArea textReview = new JTextArea();
 		 textReview.setFont(new Font("Courier New", Font.PLAIN, 13));
-		 textReview.setText("OLD REVIEW"); //need to get text review
+		 r = new Review(1, null, null,0, 1);// create review
+			ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, "bookID", screen.getClient());
+			
+		 textReview.setText(temp.get(0).getReviewContent()); //need to get text review
+		 oldReview=temp.get(0).getReviewContent();
 		 textReview.setBounds(136, 172, 556, 301);
 		 add(textReview);
 		 JButton btnSubmit = new JButton("Submit");
 		 btnSubmit.setBounds(369, 517, 97, 25);
 		 add(btnSubmit);
-		// String oldReview =(textReview.getText());//string keep the old review for equal if change review
-		 r = new Review(1, null, null,0, 1);// create review
-			/*ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, "bookID", screen.getClient());
+		
+		
 			
-			r = null;// reset the user that need to update*/
+			
 		 btnSubmit.addActionListener(new ActionListener() {
 			 
 				public void actionPerformed(ActionEvent e) {
 					
 					if(!(oldReview.equals(textReview.getText())))
 						{
-						boolean result = ReviewController.UpdateReviewContent(r, "reviewContent=\""+textReview.getText()+"\"", "reviewID=\""+2+"\"",screen.getClient());
-						oldReview=textReview.getText();
+						
+						boolean result = ReviewController.UpdateReviewContent(r, "reviewContent=\""+textReview.getText()+"\"", "reviewID=\""+ReviewID+"\"",screen.getClient());
+						 oldReview=textReview.getText();
 						if(result)
 							JOptionPane.showMessageDialog(screen,"The new Review update sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
 						else JOptionPane.showMessageDialog(screen,"Update Review process FAILED", "Warning",JOptionPane.WARNING_MESSAGE);
