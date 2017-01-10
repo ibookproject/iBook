@@ -16,7 +16,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 import Book.Domain;
-import Book.Subject;
+import Book.SubjectToBook;
 import Controller.UserController;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
@@ -40,7 +40,7 @@ public class BookRateGUI extends JPanel {
 	private JLabel bookRateLbl;
 	private JComboBox<String> comboBoxBook;
 	private ArrayList<Domain> Domains;
-	private ArrayList<Subject> Subjects;
+	private ArrayList<SubjectToBook> Subjects;
 	
 	public BookRateGUI(LoginGUI screen) 
 	{
@@ -89,10 +89,10 @@ public class BookRateGUI extends JPanel {
 		add(lblChooseSubject);
 		
 		Domain d1=new Domain(1,"nature");
-		Subject s=new Subject(1,"temp");
+		SubjectToBook s=new SubjectToBook(1,"temp");
 		comboBoxChooseSubject = new JComboBox();
 		comboBoxChooseSubject.setBounds(335, 190, 103, 20);
-		ArrayList<Subject> Subjects= (ArrayList<Subject>)bookController.SearchSubject("nameSubject",s,"domainID=\""+d1.getDomainID()+"\"" ,screen.getClient());
+		ArrayList<SubjectToBook> Subjects= (ArrayList<SubjectToBook>)bookController.SearchSubject("nameSubject",s,"domainID=\""+d1.getDomainID()+"\"" ,screen.getClient());
 		if(Subjects==null||Subjects.isEmpty())
 		{
 			screen.setContentPane(pann);

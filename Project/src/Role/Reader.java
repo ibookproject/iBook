@@ -15,6 +15,9 @@ public class Reader extends User{
 	public void setSubscriptionMethod(int subscriptionMethod) {
 		switch(subscriptionMethod)
 		{
+		case NONE:
+			this.subscriptionMethod=NONE;
+			break;
 		case YEARLY:
 			this.subscriptionMethod=YEARLY;
 			break;

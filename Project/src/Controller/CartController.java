@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Book.Cart;
-import Book.Subject;
+import Book.SubjectToBook;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 import command.searchCommand;

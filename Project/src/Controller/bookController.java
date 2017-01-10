@@ -10,7 +10,7 @@ import command.showAllCommand;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 import Book.Domain;
-import Book.Subject;
+import Book.SubjectToBook;
 import Book.Book;
 
 
@@ -76,9 +76,9 @@ public class bookController {
 /*#####################################################################*/
 /* Search specific subject for the method BookRate! */
 /*#####################################################################*/
-	public static ArrayList<Subject> SearchSubject(String fromSentence,Subject s,String condition,DBSQLhandler client)
+	public static ArrayList<SubjectToBook> SearchSubject(String fromSentence,SubjectToBook s,String condition,DBSQLhandler client)
 	{
-		client.searchInDB(new searchCommand<Subject>(fromSentence,s,condition));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,s,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search subject in db
 			try{
 			Thread.sleep(500);
@@ -90,7 +90,7 @@ public class bookController {
 		}
 		try {
 			
-			return  Subject.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), fromSentence);
+			return  SubjectToBook.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), fromSentence);
 		} catch (SQLException e) {
 			return null;
 		}

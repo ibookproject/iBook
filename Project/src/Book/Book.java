@@ -154,6 +154,12 @@ public class Book extends DBtranslation {
 	public static ArrayList<Book> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
 		 ArrayList<Book> convertedArr=new ArrayList<Book>();
 		 
+		 if(fromSentence.indexOf('*')>=0)
+			 for(DBgenericObject ob:arr)
+			 {
+				 convertedArr.add(new Book((int)ob.getValtoArray(0),(String)ob.getValtoArray(1),(String)ob.getValtoArray(2),(String)ob.getValtoArray(3),(String)ob.getValtoArray(4),((int)ob.getValtoArray(5))==1));
+			 }
+		else
 		for(DBgenericObject ob:arr)
 				convertedArr.add(convertDBObject(ob, fromSentence));//for each val in arr this convert back to book
 		

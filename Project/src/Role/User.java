@@ -1,9 +1,9 @@
 package Role;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 
-import Book.Subject;
 import client.DBgenericObject;
 import command.DBtranslation;
 
@@ -14,7 +14,8 @@ public class User extends DBtranslation implements UserStatus {
 	private String lastName;
 	private int userStatus;
 	private int privilege;
-	
+	private int suscriptionRequset;
+	private Date finishDateOfSubscription;
 	
 	//empty constructor
 	private User(){
@@ -121,6 +122,38 @@ public class User extends DBtranslation implements UserStatus {
 				throw new InputMismatchException("wrong privilege inserted");
 			}
 		}
+	public int getSuscriptionRequset() {
+		return suscriptionRequset;
+	}
+
+	public void setSuscriptionRequset(int suscriptionRequset) {
+		switch(suscriptionRequset)
+		{
+		case NONE:
+			this.suscriptionRequset=NONE;
+			break;
+		case YEARLY:
+			this.suscriptionRequset=YEARLY;
+			break;
+		case MONTHLY:
+			this.suscriptionRequset=MONTHLY;
+			break;
+		case SINGLE:
+			this.suscriptionRequset=SINGLE;
+		break;
+		default:
+			throw new InputMismatchException("wrong subscription inserted");
+		}
+	}
+	
+	public Date getFinishDateOfSubscription() {
+		return finishDateOfSubscription;
+	}
+
+	public void setFinishDateOfSubscription(Date finishDateOfSubscription) {
+		this.finishDateOfSubscription = finishDateOfSubscription;
+	}
+
 	public int getPriviliege(){
 		return privilege;
 	}
@@ -193,5 +226,6 @@ public class User extends DBtranslation implements UserStatus {
 		return "User [userID=" + userID + ", password=" + password + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", userStatus=" + userStatus + ", privilege=" + privilege + "]";
 	}
-	
+
+
 }//end class User

@@ -76,7 +76,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 
 		comboBoxDomain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Subject s=new Subject(3,3,"1");  //create empty project
+				Subject s=new Subject(3,"1");  //create empty project
 				// select Subject of the specific domain ! 
 				
 				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) comboBoxDomain.getSelectedItem()).getDomainID(), screen.getClient());

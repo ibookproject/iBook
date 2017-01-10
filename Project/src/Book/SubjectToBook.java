@@ -6,53 +6,65 @@ import java.util.InputMismatchException;
 import client.DBgenericObject;
 import command.DBtranslation;
 
-public class Subject extends DBtranslation {
+public class SubjectToBook extends DBtranslation {
+	private int bookID;
 	private int domainID;
 	private String nameSubject;
-	
-	
-	public Subject(int domainID, String nameSubject) {
+
+	//empty constactor
+	private SubjectToBook(){
+		super();
+	}
+	public SubjectToBook(int bookID, int domainID, String nameSubject) {
+		super();
+		this.bookID = bookID;
+		this.domainID = domainID;
+		this.nameSubject = nameSubject;
+	}
+	public SubjectToBook(int domainID, String nameSubject) {
 		super();
 		this.domainID = domainID;
 		this.nameSubject = nameSubject;
 	}
-	//empty constactor
-	private Subject() {
-		super();
-	}
 
-	public int getDomainID() {
-		return domainID;
+	public int getBookID() {
+		return bookID;
+	}
+	public void setBookID(int bookID) {
+		this.bookID = bookID;
 	}
 	public String getNameSubject() {
 		return nameSubject;
 	}
-	public void setDomainID(int domainID) {
-		this.domainID = domainID;
-	}
 	public void setNameSubject(String nameSubject) {
 		this.nameSubject = nameSubject;
 	}
+	public int getDomainID() {
+		return domainID;
+	}
+	public void setDomainID(int domainID) {
+		this.domainID = domainID;
+	}
 	@Override
 	public String getClassName() {
-		return "subject";
+		return "subjecttobook";
 	}
 	@Override
 	public String getAttributeToInsert() {
 		
-		return "(domainID,nameSubject)";
+		return "(bookID,domainID,nameSubject)";
 	}
 	@Override
 	public String getValToInsert() {
-		return String.format("(\"%d\",\"%s\")",domainID,nameSubject);
+		return String.format("(\"%s\",\"%s\",\"%s\")",bookID,domainID,nameSubject);
 		
 	}
 	
 	//convert array Which was obtained from DB to an actual Subject
 	//need to implement in all tables.!!!
 		
-		public static ArrayList<Subject> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
-			 ArrayList<Subject> convertedArr=new ArrayList<Subject>();
+		public static ArrayList<SubjectToBook> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
+			 ArrayList<SubjectToBook> convertedArr=new ArrayList<SubjectToBook>();
 			 
 			for(DBgenericObject ob:arr)
 					convertedArr.add(convertDBObject(ob, fromSentence));//for each val in arr this convert back to book
@@ -62,13 +74,16 @@ public class Subject extends DBtranslation {
 		}
 	
 	//this convert specific  DBgenericObject to Subject according the fromSentence
-	private static Subject convertDBObject(DBgenericObject ob,String fromSentenceArray)
+	private static SubjectToBook convertDBObject(DBgenericObject ob,String fromSentenceArray)
 	{
-		Subject recover=new Subject();
+		SubjectToBook recover=new SubjectToBook();
 		 String[] fromSentence=fromSentenceArray.split(",");
 		 for(int i=0;i<fromSentence.length;i++)
 		 {
 			 switch (fromSentence[i]) {
+			case "bookID":
+				recover.setBookID((int)ob.getValtoArray(i));
+				break;
 			case "domainID":
 				recover.setDomainID((int)ob.getValtoArray(i));
 				break;
@@ -83,11 +98,9 @@ public class Subject extends DBtranslation {
 		 return recover;
 		
 	}
-	
-	
-    @Override
+	@Override
 	public String toString() {
-		//return "Subject [domainID=" + domainID + ", nameSubject=" + nameSubject + "]";
-    	return String.format("%s", nameSubject);
-    }
+		return "Subject [bookID=" + bookID + ", domainID=" + domainID + ", nameSubject=" + nameSubject + "]";
+	}
+	
 }

@@ -21,6 +21,8 @@ import Book.Subject;
 import Controller.FormatController;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
+import command.joinCommand;
+import command.joinObject;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -42,7 +44,11 @@ public class FormatManagmentGUI extends JPanel {
 	public LoginGUI screen;
 	private ArrayList<Domain> resultDomains;
 	private ArrayList<Subject> resultSubjects;
+	private ArrayList<Book> resultBook;
 	private JComboBox SubjectBox;
+	private JComboBox DomainAttachcomboBox;
+    private JComboBox SubjectAttachcomboBox;
+    private JComboBox bookComboBox;
 
 	public FormatManagmentGUI(LoginGUI screen) {
 		super();		
@@ -56,6 +62,11 @@ public class FormatManagmentGUI extends JPanel {
 		this.setLayout(null);	
 		this.setSize(850, 600);
 
+		
+		 DomainAttachcomboBox = new JComboBox(); // for attaching
+		 SubjectAttachcomboBox = new JComboBox();// for attaching
+		 bookComboBox = new JComboBox();//for attaching
+		 
 		JLabel lblFormatManagment = new JLabel("Format managment");
 		lblFormatManagment.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblFormatManagment.setBounds(322, 33, 154, 39);
@@ -80,16 +91,19 @@ public class FormatManagmentGUI extends JPanel {
 		Domain d = new Domain("1");
 		
 		 resultDomains = FormatController.GetAllDomain(d,screen.getClient());//
-			for(Domain dd:resultDomains) // adding all the Domain names to the checkbox
+			for(Domain dd:resultDomains){ // adding all the Domain names to the checkbox
 				DomainBox.addItem(dd);
+				DomainAttachcomboBox.addItem(dd);
+			}
 			
 			// this is for the first time that we get in the format managar , if the domain list is not null..->
 			//..-> we will do " selected item " for to show all the subject list for the first time ! 
 			if(resultDomains!=null)
 			{
 				DomainBox.setSelectedIndex(0);
-				Subject s=new Subject(3,3,"1");  //create empty project
-				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
+				Subject s=new Subject(3,"1");  //create empty project
+				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
+				if(resultSubjects!=null&&!resultSubjects.isEmpty())
 				for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
 					SubjectBox.addItem(ddd);
 			}
@@ -98,10 +112,10 @@ public class FormatManagmentGUI extends JPanel {
 		
 		DomainBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Subject s=new Subject(3,3,"1");  //create empty project
+				Subject s=new Subject(3,"1");  //create empty project
 				if(DomainBox.getItemAt(0)!=null)
 				{	
-				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
+				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
 				System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
 				if(resultSubjects!=null) // if there is no result 
 				{
@@ -124,25 +138,62 @@ public class FormatManagmentGUI extends JPanel {
 		lblChooseSubjectAt.setBounds(239, 218, 150, 14);
 		
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(71, 137, 101, 20);
-		add(comboBox);
+	
+		 DomainAttachcomboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Subject s=new Subject(3,"1");  //create empty project
+				if(DomainAttachcomboBox.getItemAt(0)!=null)
+				{	
+				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainAttachcomboBox.getSelectedItem()).getDomainID(), screen.getClient());
+				System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
+				if(resultSubjects!=null) // if there is no result 
+				{
+					SubjectAttachcomboBox.removeAllItems(); // first clear all the subject result from the checkbox 
+				for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
+					SubjectAttachcomboBox.addItem(ddd);
+				}
+				else SubjectAttachcomboBox.removeAllItems();
+			}
+			}
+		});
+		 DomainAttachcomboBox.setBounds(71, 137, 101, 20);
+		add(DomainAttachcomboBox);
 		
 		JLabel lblChooseSubject = new JLabel("Choose Subject : ");
 		lblChooseSubject.setBounds(71, 168, 95, 14);
 		add(lblChooseSubject);
+		/*
+		 SubjectAttachcomboBox.addActionListener(new ActionListener() {
+			 	public void actionPerformed(ActionEvent e) {
+			 		Subject s=new Subject(3,"1");  //create empty project
+					if(DomainAttachcomboBox.getItemAt(0)!=null)
+					{	
+					//resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainAttachcomboBox.getSelectedItem()).getDomainID(), screen.getClient());
+						joinObject<Domain, Subject>[] temp= new joinObject<Domain, DBtranslation>[1];
+						resultBook=screen.getClient().joinSearchInDB(new joinCommand<Domain,Subject>(selectSentence, tablesToJoin, whereSentence) );
+						System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
+					if(resultSubjects!=null) // if there is no result 
+					{
+						SubjectAttachcomboBox.removeAllItems(); // first clear all the subject result from the checkbox 
+					for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
+						SubjectAttachcomboBox.addItem(ddd);
+					}
+					else SubjectAttachcomboBox.removeAllItems();
+				}
+			 	}
+			 });
+			 */
+		SubjectAttachcomboBox.setBounds(71, 185, 103, 20);
+		add(SubjectAttachcomboBox);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(71, 185, 103, 20);
-		add(comboBox_2);
 		
 		JLabel lblChooseBook1 = new JLabel("Choose Book :");
 		lblChooseBook1.setBounds(71, 225, 91, 23);
 		add(lblChooseBook1);
 		
-		JComboBox comboBox_11 = new JComboBox();
-		comboBox_11.setBounds(71, 243, 105, 23);
-		add(comboBox_11);
+		
+		bookComboBox.setBounds(71, 243, 105, 23);
+		add(bookComboBox);
 		
 		add(lblChooseSubjectAt);
 		
@@ -215,7 +266,7 @@ public class FormatManagmentGUI extends JPanel {
 					////////////////////////////////////
 					int id=((Domain) DomainBox.getSelectedItem()).getDomainID();/// here is the problem
 					//////////////////////////////////////
-				Subject sub = new Subject(1,id,s); // create new Subject	
+				Subject sub = new Subject(id,s); // create new Subject	
 				ArrayList<Subject> temp = FormatController.SearchSubject("bookID,domainID,nameSubject",sub, "nameSubject=\""+s+ "\"" ,screen.getClient());
 				System.out.println("///"+temp+"//");
 				
