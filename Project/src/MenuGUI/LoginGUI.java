@@ -24,7 +24,9 @@ import java.io.IOException;
 
 
 
+
 import Controller.UserController;
+import DB.Test;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 
@@ -157,7 +159,8 @@ public class LoginGUI extends JFrame {
 							temp.get(0).setUserStatus(UserStatus.CONNECTED);
 							setTempID(temp.get(0).getUserID());
 							UserController.UpdateUserStatus(u, "userStatus=\""+"1"+"\"", "userID=\""+txtUserID.getText()+"\"", screen.client);
-							//client.setNowRunUser(temp.get(0));
+							Test.setExitID(temp.get(0).getUserID());
+							Test.setExitCLIENT(screen);
 					switch (temp.get(0).getPriviliege()) {
 							
 					case UserStatus.USER: {
