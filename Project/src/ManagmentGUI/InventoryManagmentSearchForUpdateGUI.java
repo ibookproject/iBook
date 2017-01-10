@@ -2,9 +2,12 @@ package ManagmentGUI;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Book.Book;
+import Book.Subject;
+import Controller.bookController;
 import MenuGUI.LoginGUI;
 
 import javax.swing.JFrame;
@@ -27,6 +30,8 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 	private LoginGUI screen;
 	private JPanel pann;
 	ArrayList<Book> books;	// return the books that choosen
+	private JTextField textFieldAutohr;
+	private JTextField textFieldBook;
 
 
 	public InventoryManagmentSearchForUpdateGUI(LoginGUI screen) {
@@ -35,8 +40,6 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		this.screen=screen;
 		pann=this;
 		initialize();
-		
-
 	}
 
 	
@@ -59,51 +62,54 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		lblSearchBookFor.setBounds(361, 33, 195, 46);
 		add(lblSearchBookFor);
 		
+		JLabel lblNameOfAuthor = new JLabel("name of author:");
+		lblNameOfAuthor.setBounds(400, 90, 89, 19);
+		add(lblNameOfAuthor);
 		
-		JLabel lblChooseDomain = new JLabel("Choose Domain :");
-		lblChooseDomain.setBounds(335, 120, 116, 23);
-		add(lblChooseDomain);
+		textFieldAutohr = new JTextField();
+		textFieldAutohr.setBounds(499, 89, 86, 20);
+		add(textFieldAutohr);
+		textFieldAutohr.setColumns(10);
+		
+		JLabel lblNameOfBook = new JLabel("name of book:");
+		lblNameOfBook.setBounds(213, 94, 111, 19);
+		add(lblNameOfBook);
+		
+		textFieldBook = new JTextField();
+		textFieldBook.setBounds(300, 90, 86, 20);
+		add(textFieldBook);
+		textFieldBook.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(335, 142, 101, 20);
+		comboBox.setBounds(337, 139, 219, 20);
 		add(comboBox);
 		
-		JLabel lblChooseSubject = new JLabel("Choose Subject : ");
-		lblChooseSubject.setBounds(335, 173, 95, 14);
-		add(lblChooseSubject);
-		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(335, 190, 103, 20);
-		add(comboBox_2);
-		
-		JLabel lblChooseBook = new JLabel("Choose Book :");
-		lblChooseBook.setBounds(335, 230, 91, 23);
-		add(lblChooseBook);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(335, 248, 105, 23);
-		add(comboBox_1);
-		
-	
-		
-		JButton btnSend = new JButton("Select");
-		btnSend.addActionListener(new ActionListener() {
+		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				////////////////////////button to back panel from panel /////////////////////////////////////////////
-				AddOrUpdateBookGUI goback=new AddOrUpdateBookGUI(screen,0, books); 
-				goback.btnBack.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						screen.setContentPane(pann);
-					}
-				////////////////////////button to back panel from panel/////////////////////////////////////////////
-				});
-				screen.setContentPane(goback);//send to search book window
-			}
-		
-		});
 				
-		btnSend.setBounds(335, 318, 89, 23);
-		add(btnSend);
+				boolean flag=textFieldAutohr.getText().isEmpty();
+				 if(textFieldBook.getText().isEmpty())
+						JOptionPane.showMessageDialog(screen,"please fill all the book fields!! ", "Warning",JOptionPane.WARNING_MESSAGE);
+				 else
+				 {
+			 	Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
+			 	ArrayList<Book> temp;
+			 	if(textFieldAutohr.getText().isEmpty()==false)
+			 		 temp = bookController.SearchBook("title,author",b, "title=\""+textFieldBook.getText()+ "\"" + " && "+"author=\""+textFieldAutohr.getText()+"\"", screen.getClient());
+			 	else
+			 		 temp = bookController.SearchBook("title,author",b, "title=\""+textFieldBook.getText() +"\"", screen.getClient());
+ 			
+				comboBox.removeAllItems();
+				for(int i=0;i<temp.size();i++)
+					comboBox.addItem(temp.get(i).getTitle() + " , " + temp.get(i).getAuthor());
+
+			}}
+			});
+		btnSearch.setBounds(612, 86, 89, 23);
+		add(btnSearch);
+		
+		
 	
 	}
 }

@@ -42,6 +42,17 @@ public class Book extends DBtranslation {
 		this.summary = summary;
 		this.bookEnable = bookEnable;
 	}
+	
+	
+	public Book(String title, String author) {
+		super();
+		this.title = title;
+		this.author = author;
+
+	}
+	
+	
+	
 	//Contractor to insert form DB with keyword and content
 	public Book(int bookID, String title, String language, String author, String summary, boolean bookEnable,String keyword,String content)
 	{
