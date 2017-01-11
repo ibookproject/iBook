@@ -176,7 +176,7 @@ public class Book extends DBtranslation {
 	public String getValToInsert() {
 		int temp=0;
 		if(bookEnable)temp=1;
-		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",%d,\"%s\",\"%s\",\"%s\")",title,language,author,summary,temp,getKeywordString(),getContentToString());
+		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",%d,\"%s\",\"%s\")",title,language,author,summary,temp,getKeywordToString(),getContentToString());
 	}
 	@Override
 	public String getAttributeToInsert() {

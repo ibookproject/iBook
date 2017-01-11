@@ -154,16 +154,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 			 lang.setText(tempBooks.get(0).getLanguage());
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		JButton btnAdd = new JButton();
 		btnAdd.addActionListener(new ActionListener() {
@@ -222,7 +213,6 @@ public class AddOrUpdateBookGUI extends JPanel {
 								}
 							});
 							screen.setContentPane(goback);//send to search book window
-						
 					 	}
 			 
 					 // String title, String language, String author, String summary, boolean bookEnable,String keyword,String content

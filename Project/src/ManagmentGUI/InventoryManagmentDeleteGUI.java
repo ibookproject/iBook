@@ -163,6 +163,11 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				if(answer==0)
 				{
 					//means delete ..... 
+					
+					
+					
+					
+					
 				}// if it 0 mean no so do nothing . 
 			}
 		});
