@@ -129,6 +129,15 @@ public class Book extends DBtranslation {
 		return keyword.toString();
 	}
 	
+	//to insert into DB
+	private String getKeywordToString()
+	{
+		String toString="";
+		for(int i=0;i<keyword.length-1;i++)
+			toString+=keyword[i]+" ";
+		return toString+keyword[keyword.length-1];
+	}
+	
 	public void setKeyword(String[] keyword) {//copy the array
 		this.keyword = keyword;
 	}
@@ -139,6 +148,15 @@ public class Book extends DBtranslation {
 
 	public String[] getContent() {
 		return content;
+	}
+	
+	//to insert into DB
+	private String getContentToString()
+	{
+		String toString="";
+		for(int i=0;i<content.length-1;i++)
+			toString+=content[i]+" ";
+		return toString+content[content.length-1];
 	}
 
 	public void setContent(String[] content) {//copy array
@@ -158,11 +176,11 @@ public class Book extends DBtranslation {
 	public String getValToInsert() {
 		int temp=0;
 		if(bookEnable)temp=1;
-		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",%d)",title,language,author,summary,temp);
+		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",%d,\"%s\",\"%s\",\"%s\")",title,language,author,summary,temp,getKeywordString(),getContentToString());
 	}
 	@Override
 	public String getAttributeToInsert() {
-		return "(title,language,author,summary,bookEnable)";
+		return "(title,language,author,summary,bookEnable,keyword,content)";
 	}
 
 //convert array Which was obtained from DB to an actual book
