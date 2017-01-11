@@ -33,8 +33,11 @@ public class AddOrUpdateBookGUI extends JPanel {
 	private JTextField keyword;
 	private JTextField author;
 	public JButton btnBack ;
-	public ArrayList<Book> books;
+	private ArrayList<Book> tempBooks;
+	private int Bookid;
+	private JPanel pann;
 	public LoginGUI screen;
+	private JPanel Mainpann;
 
 	private int ISUpdateOrAdd;
 
@@ -45,20 +48,18 @@ public class AddOrUpdateBookGUI extends JPanel {
 		super();
 		this.ISUpdateOrAdd=ISUpdateOrAdd;
 		this.screen=screen;
+		
+
+		pann=this;
 		initialize();
-		JLabel lblEmptyLabelFor = new JLabel("Empty label for answer tkinut");
-		lblEmptyLabelFor.setBounds(188, 290, 179, 14);
-		add(lblEmptyLabelFor);
 	}
-	public AddOrUpdateBookGUI(LoginGUI screen ,int ISUpdateOrAdd,ArrayList<Book> books) {
+	public AddOrUpdateBookGUI(LoginGUI screen ,int ISUpdateOrAdd,int Bookid,JPanel Mainpann) {
 		super();
-		this.books=books; // get back the book from the search and now upddate 
+		this.Bookid=Bookid; // get back the book from the search and now upddate 
 		this.screen=screen;
+		this.Mainpann=Mainpann;
 		this.ISUpdateOrAdd=ISUpdateOrAdd;
 		initialize();
-		JLabel lblEmptyLabelFor = new JLabel("Empty label for answer tkinut");
-		lblEmptyLabelFor.setBounds(188, 290, 179, 14);
-		add(lblEmptyLabelFor);
 	}
 	
 	
@@ -81,27 +82,27 @@ public class AddOrUpdateBookGUI extends JPanel {
 		add(lblPleaseFillThe);
 		
 		JLabel lblTitle = new JLabel("Title :");
-		lblTitle.setBounds(66, 99, 46, 14);
+		lblTitle.setBounds(50, 99, 62, 14);
 		add(lblTitle);
 		
 		JLabel lblLanguage = new JLabel("Language : ");
-		lblLanguage.setBounds(40, 124, 72, 14);
+		lblLanguage.setBounds(26, 124, 86, 14);
 		add(lblLanguage);
 		
 		JLabel lblSummary = new JLabel("Summary :");
-		lblSummary.setBounds(40, 149, 60, 14);
+		lblSummary.setBounds(26, 149, 74, 14);
 		add(lblSummary);
 		
 		JLabel lblContents = new JLabel("Contents : ");
-		lblContents.setBounds(40, 174, 60, 14);
+		lblContents.setBounds(26, 174, 74, 14);
 		add(lblContents);
 		
 		JLabel lblKeywords = new JLabel("Keywords : ");
-		lblKeywords.setBounds(40, 199, 60, 14);
+		lblKeywords.setBounds(26, 199, 74, 14);
 		add(lblKeywords);
 		
 		JLabel lblAuthor = new JLabel("Author :");
-		lblAuthor.setBounds(50, 227, 46, 14);
+		lblAuthor.setBounds(36, 227, 60, 14);
 		add(lblAuthor);
 		
 		title = new JTextField();
@@ -134,17 +135,49 @@ public class AddOrUpdateBookGUI extends JPanel {
 		add(author);
 		author.setColumns(10);
 		
+		
+		if(ISUpdateOrAdd==0)
+		{
+			
+			
+			Book tempObject = new Book(); // create new book
+			 tempBooks = bookController.SearchBook("bookID,title,author,language,summary,keyword,content",tempObject, "bookID=\""+Bookid+ "\"" , screen.getClient());
+			 //System.out.println(Bookid);
+			 
+			 title.setText(tempBooks.get(0).getTitle());
+			 author.setText(tempBooks.get(0).getAuthor());
+			 summary.setText(tempBooks.get(0).getSummary());
+			 String arrKeyword[]=tempBooks.get(0).getKeyword();
+			 keyword.setText(arrKeyword[0]);
+			 String arrContent[]=tempBooks.get(0).getKeyword();
+			 contents.setText(arrContent[0]);
+			 lang.setText(tempBooks.get(0).getLanguage());
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		JButton btnAdd = new JButton();
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				 if(ISUpdateOrAdd==1)//means its add flag page 
 				 {
-					 if(title.getText().isEmpty()||lang.getText().isEmpty()||author.getText().isEmpty()||summary.getText().isEmpty())
+					 if(title.getText().isEmpty()||lang.getText().isEmpty()||author.getText().isEmpty()||summary.getText().isEmpty()||contents.getText().isEmpty()||keyword.getText().isEmpty())
 							JOptionPane.showMessageDialog(screen,"please fill all the book fields!! ", "Warning",JOptionPane.WARNING_MESSAGE);
 					 else
 					 {
-				 	Book b = new Book(title.getText(),lang.getText(),author.getText(),summary.getText(),true); // create new book
+						 //	public Book( String title, String language, String author, String summary, boolean bookEnable,String keyword,String content)
+
+				 	Book b = new Book(title.getText().trim(),lang.getText().trim(),author.getText().trim(),summary.getText().trim(),true,keyword.getText().trim(),contents.getText().trim()); // create new book
 				 	
 					ArrayList<Book> temp = bookController.SearchBook("title,language",b, "title=\""+title.getText()+ "\"" + " && "+"author=\""+author.getText()+"\"", screen.getClient());//call search book method from book controller
 				 	//System.out.println(temp);
@@ -153,20 +186,49 @@ public class AddOrUpdateBookGUI extends JPanel {
 						
 						boolean result=bookController.AddBook(b,screen.getClient()); // return true or false from the controller DB
 					 	if (result==false)
-							JOptionPane.showMessageDialog(screen,"Add user process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(screen,"Add book process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 					 	else
 					 	{
-					 		title.setText("");lang.setText("");author.setText("");summary.setText("");
+					 		title.setText("");lang.setText("");author.setText("");summary.setText(""); contents.setText(""); keyword.setText("");
 					 		JOptionPane.showMessageDialog(screen,"The book was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
 					 	}
-						}
+					}
 				
 					else
-					{
-						title.setText("");lang.setText("");author.setText("");summary.setText("");
-						JOptionPane.showMessageDialog(screen,"the book is already exist. Try to add another book\n", "Warning",JOptionPane.WARNING_MESSAGE);
+						{
+							title.setText("");lang.setText("");author.setText("");summary.setText("");
+							JOptionPane.showMessageDialog(screen,"the book is already exist. Try to add another book\n", "Warning",JOptionPane.WARNING_MESSAGE);
 						}
+					 }
 				 }
+				 else // its update
+				 {
+					 	Book b = new Book(title.getText(),lang.getText(),author.getText(),summary.getText(),true,keyword.getText(),contents.getText()); // create new book
+						//boolean result=bookController.AddBook(b,screen.getClient()); // return true or false from the controller DB
+						boolean result=bookController.UpdateBook(b, "title=\""+title.getText()+ "\"" + " && "+"author=\""+author.getText()+"\""+" && "+"language=\""+lang.getText()+"\""+" && "+"summary=\""+summary.getText()+"\""+" && "+"content=\""+contents.getText()+"\""+" && "+"summary=\""+summary.getText()+"\""+" && "+"keyword=\""+keyword.getText()+"\"", "bookID=\""+Bookid+ "\"", screen.getClient()); // return true or false from the controller DB
+
+					 	if (result==false)
+							JOptionPane.showMessageDialog(screen,"Update book process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+					 	else
+					 	{
+					 		title.setText("");lang.setText("");author.setText("");summary.setText(""); contents.setText(""); keyword.setText("");
+					 		JOptionPane.showMessageDialog(screen,"The book was Updated successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
+							
+							
+					 		InventoryManagmentGUI goback=new InventoryManagmentGUI(screen); 
+							goback.btnBack.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									screen.setContentPane(Mainpann);
+								}
+							});
+							screen.setContentPane(goback);//send to search book window
+						
+					 	}
+			 
+					 // String title, String language, String author, String summary, boolean bookEnable,String keyword,String content
+					// Book b = new Book(tempBooks.get(0).getTitle(),tempBooks.get(0).getAuthor(),tempBooks.get(0).getSummary(),tempBooks.get(0),true,tempBooks.get(0).getKeyword()); // create new book
+					 
+					 
 				 }
 			 }
 		});

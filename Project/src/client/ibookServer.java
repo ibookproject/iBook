@@ -42,7 +42,7 @@ public class ibookServer extends AbstractServer {
 	/**
 	 * The default port to listen on.
 	 */
-	final public static int DEFAULT_PORT = 5520;
+	final public static int DEFAULT_PORT = 5555;
 
 	// Constructors ****************************************************
 

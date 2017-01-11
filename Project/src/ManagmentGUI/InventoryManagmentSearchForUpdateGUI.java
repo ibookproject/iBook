@@ -29,14 +29,17 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 	public JButton btnBack ;
 	private LoginGUI screen;
 	private JPanel pann;
-	ArrayList<Book> books;	// return the books that choosen
 	private JTextField textFieldAutohr;
 	private JTextField textFieldBook;
+	private int bookId;
+	private ArrayList<Book> tempBooks;
+	private JPanel Mainpann;
 
 
-	public InventoryManagmentSearchForUpdateGUI(LoginGUI screen) {
+
+	public InventoryManagmentSearchForUpdateGUI(LoginGUI screen,JPanel Mainpann) {
 		super();
-
+		this.Mainpann=Mainpann;
 		this.screen=screen;
 		pann=this;
 		initialize();
@@ -81,33 +84,98 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		textFieldBook.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(337, 139, 219, 20);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index=comboBox.getSelectedIndex();
+				if (index!=-1)
+					bookId=tempBooks.get(index).getBookID();
+			
+				System.out.println(bookId);
+				
+				 
+			}
+		});
+		comboBox.setBounds(225, 141, 412, 20);
 		add(comboBox);
 		
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				boolean flag=textFieldAutohr.getText().isEmpty();
+
+				
 				 if(textFieldBook.getText().isEmpty())
-						JOptionPane.showMessageDialog(screen,"please fill all the book fields!! ", "Warning",JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(screen,"you must fill the name of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
 				 else
 				 {
-			 	Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
-			 	ArrayList<Book> temp;
-			 	if(textFieldAutohr.getText().isEmpty()==false)
-			 		 temp = bookController.SearchBook("title,author",b, "title=\""+textFieldBook.getText()+ "\"" + " && "+"author=\""+textFieldAutohr.getText()+"\"", screen.getClient());
+				 	Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
+				 	
+				 	if(textFieldAutohr.getText().isEmpty()==false)
+				 	{
+				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\"", screen.getClient());
+				 		 if(tempBooks==null)
+				 		 {
+								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
+								textFieldBook.setText("");textFieldAutohr.setText("");
+				 		 }
+				 		 else
+				 		 {
+				 		//	if(flagFirstTime==1)
+				 				comboBox.removeAllItems();
+							for(int i=0;i<tempBooks.size();i++)
+								comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+							
+				 		 }
+
+				 		 
+				 	}
 			 	else
-			 		 temp = bookController.SearchBook("title,author",b, "title=\""+textFieldBook.getText() +"\"", screen.getClient());
- 			
+			 	{
+			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\"", screen.getClient());
+					 if(tempBooks==null)
+			 		 {
+							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
+							textFieldBook.setText("");textFieldAutohr.setText("");
+			 		 }
+			 		 else
+			 		 {
+			 		if(comboBox.getSize() != null)	comboBox.removeAllItems();
+						for(int i=0;i<tempBooks.size();i++)
+							comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+			 		 }
+			 	}
+ 			/*
 				comboBox.removeAllItems();
 				for(int i=0;i<temp.size();i++)
 					comboBox.addItem(temp.get(i).getTitle() + " , " + temp.get(i).getAuthor());
+					*/
 
 			}}
-			});
+			}); 
 		btnSearch.setBounds(612, 86, 89, 23);
 		add(btnSearch);
+		
+		JButton btnSelect = new JButton("Select");
+		btnSelect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				////////////////////////button to back panel from panel /////////////////////////////////////////////
+				AddOrUpdateBookGUI goback=new AddOrUpdateBookGUI(screen,0, bookId,Mainpann); 
+				goback.btnBack.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						screen.setContentPane(pann);
+					}
+				////////////////////////button to back panel from panel/////////////////////////////////////////////
+				});
+				screen.setContentPane(goback);//send to search book window
+			}
+				
+				
+			
+		});
+		btnSelect.setBounds(377, 250, 89, 23);
+		add(btnSelect);
 		
 		
 	

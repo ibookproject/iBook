@@ -7,6 +7,7 @@ import command.DBtranslation;
 import command.insertCommand;
 import command.searchCommand;
 import command.showAllCommand;
+import command.updateCommand;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 import Book.Domain;
@@ -145,6 +146,25 @@ public class bookController {
 	}
 	
 /*#####################################################################*/
+	
+	
+	//new hen 10.1//
+	public static boolean UpdateBook(Book b , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
+	{
+			client.UpdateInDB(new updateCommand<DBtranslation>(b, searchCondition, updateCondition));
+			while(!client.GetGotMessag()){//add user to DB
+				try{
+				Thread.sleep(500);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+					return false;
+				}
+			}
+			return true;	// means the user add successful	
+	}
+
 	
 	
 }

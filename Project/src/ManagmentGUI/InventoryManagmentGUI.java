@@ -88,7 +88,7 @@ public class InventoryManagmentGUI extends JPanel {
 		btnUpdateBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
-				InventoryManagmentSearchForUpdateGUI search=new InventoryManagmentSearchForUpdateGUI(screen); // 0 means update
+				InventoryManagmentSearchForUpdateGUI search=new InventoryManagmentSearchForUpdateGUI(screen,pann); // 0 means update
 				search.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
