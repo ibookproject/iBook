@@ -9,6 +9,7 @@ import Book.Book;
 import Book.Domain;
 import Book.Subject;
 import Controller.FormatController;
+import Controller.ReviewController;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
 import client.DBgenericObject;
@@ -144,7 +145,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 							comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
 			 	}
- 			/*
+				 	/*
 				comboBox.removeAllItems();
 				for(int i=0;i<temp.size();i++)
 					comboBox.addItem(temp.get(i).getTitle() + " , " + temp.get(i).getAuthor());
@@ -163,12 +164,10 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				if(answer==0)
 				{
 					//means delete ..... 
-					
-					
-					
-					
-					
-				}// if it 0 mean no so do nothing . 
+					Book b=new Book();
+					bookController.DeleteBook(b,"bookID=\""+bookId+"\"",screen.getClient());
+	
+				}
 			}
 		});
 		btnDelet.setBounds(377, 250, 89, 23);

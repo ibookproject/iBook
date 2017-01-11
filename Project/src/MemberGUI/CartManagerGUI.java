@@ -80,6 +80,5 @@ public class CartManagerGUI extends JPanel {
 		//for(int i=0;i<7;i++)
 		//panel.add(new JCheckBox("New check box" + i))
 			
-	
 	}
 }
