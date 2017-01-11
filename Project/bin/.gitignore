@@ -1,7 +1,5 @@
-/client/
-/command/
-/ocsf/
 /Controller/
-/ManagmentGUI/
-/Book/
 /MemberGUI/
+/Book/
+/ManagmentGUI/
+/MenuGUI/

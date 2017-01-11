@@ -65,8 +65,8 @@ public class LoginGUI extends JFrame {
 		  	@Override
 			public void windowClosing(WindowEvent e) {
 		  		ImageIcon point=new ImageIcon("bookIcon.png");
-				Object[] options = { "Yes, please", "No way!" };
-				int result = JOptionPane.showOptionDialog(null, "Would you like green eggs and ham?", "A Silly Question",
+				Object[] options = { "Yes, please", "No!" };
+				int result = JOptionPane.showOptionDialog(null, "Would you like exit now?", "A Silly Question",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, point,options,options[0]);
 				if(result==JOptionPane.YES_OPTION){
 					if(tempID!=null){

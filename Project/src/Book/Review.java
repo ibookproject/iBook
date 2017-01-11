@@ -11,6 +11,7 @@ public class Review extends DBtranslation {
 	private int reviewID;
 	private Date reviewDate;
 	private String reviewContent;
+	private String StrreviewDate;
 	private int reviewStatus;
 	private int bookID;
 	
@@ -24,6 +25,13 @@ public class Review extends DBtranslation {
 		super();
 		this.reviewID = reviewID;
 		this.reviewDate = reviewDate;
+		this.reviewContent = reviewContent;
+		this.reviewStatus = reviewStatus;
+		this.bookID = bookID;
+	}
+	public Review( String StrreviewDate, String reviewContent,int reviewStatus, int bookID) {
+		super();
+		this.StrreviewDate = StrreviewDate;
 		this.reviewContent = reviewContent;
 		this.reviewStatus = reviewStatus;
 		this.bookID = bookID;
