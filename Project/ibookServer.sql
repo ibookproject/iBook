@@ -140,7 +140,7 @@ CREATE TABLE `review` (
   `reviewID` int(11) NOT NULL AUTO_INCREMENT,
   `reviewDate` date NOT NULL,
   `reviewContent` varchar(20000) NOT NULL,
-  `reviewStatus` tinyint(1) NOT NULL DEFAULT '0',
+  `reviewStatus` int(11) NOT NULL DEFAULT '0',
   `bookID` int(11) NOT NULL,
   PRIMARY KEY (`reviewID`,`bookID`),
   KEY `_bookID_idx` (`bookID`),
