@@ -170,7 +170,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 
 				 	Book b = new Book(title.getText().trim(),lang.getText().trim(),author.getText().trim(),summary.getText().trim(),true,keyword.getText().trim(),contents.getText().trim()); // create new book
 				 	
-					ArrayList<Book> temp = bookController.SearchBook("title,language",b, "title=\""+title.getText()+ "\"" + " && "+"author=\""+author.getText()+"\"", screen.getClient());//call search book method from book controller
+					ArrayList<Book> temp = bookController.SearchBook("title,language",b, "title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\"", screen.getClient());//call search book method from book controller
 				 	//System.out.println(temp);
 					if(temp==null||temp.isEmpty())
 					{
@@ -187,7 +187,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 				
 					else
 						{
-							title.setText("");lang.setText("");author.setText("");summary.setText("");
+				 		title.setText("");lang.setText("");author.setText("");summary.setText(""); contents.setText(""); keyword.setText("");
 							JOptionPane.showMessageDialog(screen,"the book is already exist. Try to add another book\n", "Warning",JOptionPane.WARNING_MESSAGE);
 						}
 					 }
@@ -196,7 +196,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 				 {
 					 	Book b = new Book(title.getText(),lang.getText(),author.getText(),summary.getText(),true,keyword.getText(),contents.getText()); // create new book
 						//boolean result=bookController.AddBook(b,screen.getClient()); // return true or false from the controller DB
-						boolean result=bookController.UpdateBook(b, "title=\""+title.getText()+ "\"" + " && "+"author=\""+author.getText()+"\""+" && "+"language=\""+lang.getText()+"\""+" && "+"summary=\""+summary.getText()+"\""+" && "+"content=\""+contents.getText()+"\""+" && "+"summary=\""+summary.getText()+"\""+" && "+"keyword=\""+keyword.getText()+"\"", "bookID=\""+Bookid+ "\"", screen.getClient()); // return true or false from the controller DB
+						boolean result=bookController.UpdateBook(b, "title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\""+" && "+"language=\""+lang.getText().trim()+"\""+" && "+"summary=\""+summary.getText().trim()+"\""+" && "+"content=\""+contents.getText().trim()+"\""+" && "+"summary=\""+summary.getText().trim()+"\""+" && "+"keyword=\""+keyword.getText().trim()+"\"", "bookID=\""+Bookid+ "\"", screen.getClient()); // return true or false from the controller DB
 
 					 	if (result==false)
 							JOptionPane.showMessageDialog(screen,"Update book process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
