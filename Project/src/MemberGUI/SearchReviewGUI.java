@@ -106,6 +106,7 @@ public class SearchReviewGUI extends JPanel {
 		
 		
 		scrollPaneMain = new JScrollPane();
+		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
 		scrollPaneMain.setBounds(125, 160, 682, 392);
