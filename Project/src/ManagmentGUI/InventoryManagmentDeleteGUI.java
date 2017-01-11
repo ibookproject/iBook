@@ -1,9 +1,12 @@
 package ManagmentGUI;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.MatteBorder;
 
 import Book.Book;
 import Book.Domain;
@@ -11,7 +14,9 @@ import Book.Subject;
 import Controller.FormatController;
 import Controller.ReviewController;
 import Controller.bookController;
+import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;
+import Panels.BookPanel;
 import client.DBgenericObject;
 
 import javax.swing.JFrame;
@@ -20,7 +25,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.JComboBox;
 
 
@@ -39,10 +48,16 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	private int bookId;
 	private ArrayList<Book> tempBooks;
 	private LoginGUI screen;
+	public static JPanel panel;
+	private JScrollPane scrollPaneMain;
+	//private ArrayList<Book> books;
+	private JPanel pann;
 	
 
 	public InventoryManagmentDeleteGUI(LoginGUI screen ) {
 		super();
+		//this.tempBooks=books;
+		pann=this;
 		this.screen=screen;
 		initialize();
 	}
@@ -54,7 +69,8 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png"); 
 		 btnBack = new JButton(backIcon);
-		btnBack.addActionListener(new ActionListener() {
+			SearchBook sb = new SearchBook(screen,tempBooks);
+		sb.btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -125,7 +141,8 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				 				comboBox.removeAllItems();
 							for(int i=0;i<tempBooks.size();i++)
 								comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
-							
+							sb.setList(tempBooks);
+							screen.setContentPane(sb);
 				 		 }
 
 				 		 
@@ -141,8 +158,13 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 			 		 else
 			 		 {
 			 		if(comboBox.getSize() != null)	comboBox.removeAllItems();
+			 		////////**////
+
+			 		///////**//////
 						for(int i=0;i<tempBooks.size();i++)
 							comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+						sb.setList(tempBooks);
+						screen.setContentPane(sb);
 			 		 }
 			 	}
 				 	/*
