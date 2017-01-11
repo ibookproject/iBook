@@ -48,16 +48,16 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	private int bookId;
 	private ArrayList<Book> tempBooks;
 	private LoginGUI screen;
-	public static JPanel panel;
-	private JScrollPane scrollPaneMain;
+	//public static JPanel panel;
+	//private JScrollPane scrollPaneMain;
 	//private ArrayList<Book> books;
-	private JPanel pann;
+	//private JPanel pann;
 	
 
 	public InventoryManagmentDeleteGUI(LoginGUI screen ) {
 		super();
 		//this.tempBooks=books;
-		pann=this;
+	//	pann=this;
 		this.screen=screen;
 		initialize();
 	}
@@ -158,13 +158,10 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 			 		 else
 			 		 {
 			 		if(comboBox.getSize() != null)	comboBox.removeAllItems();
-			 		////////**////
-
-			 		///////**//////
 						for(int i=0;i<tempBooks.size();i++)
 							comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
-						sb.setList(tempBooks);
-						screen.setContentPane(sb);
+					//	sb.setList(tempBooks);
+					//	screen.setContentPane(sb);
 			 		 }
 			 	}
 				 	/*
