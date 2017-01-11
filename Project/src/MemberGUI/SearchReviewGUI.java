@@ -101,7 +101,7 @@ public class SearchReviewGUI extends JPanel {
 				 
 			}
 		});
-		comboBox.setBounds(225, 141, 412, 20);
+		comboBox.setBounds(223, 120, 412, 20);
 		add(comboBox);
 		
 		
@@ -110,7 +110,9 @@ public class SearchReviewGUI extends JPanel {
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
 		scrollPaneMain.setBounds(125, 160, 682, 392);
+		scrollPaneMain.setVisible(false);
 		add(scrollPaneMain);
+		
 		
 		panel = new JPanel();
 		panel.setIgnoreRepaint(true);
@@ -120,9 +122,7 @@ public class SearchReviewGUI extends JPanel {
 		scrollPaneMain.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		
-		
-		
+	
 		
 		
 		JButton btnSearch = new JButton("Search");
@@ -195,11 +195,14 @@ public class SearchReviewGUI extends JPanel {
 					
 					//panel.add(new UserSubscriptionPanel(screen , u));
 					if (temp != null) {
+						scrollPaneMain.setVisible(true);
 						for(Review r:temp)
 							panel.add(new SearchReviewPanel(screen,r,titleBook));
 					} 
 					else 
 					{
+						JOptionPane.showMessageDialog(screen,"no review results !  ", "Warning",JOptionPane.WARNING_MESSAGE);
+
 						panel.setVisible(false);
 						scrollPaneMain.setVisible(false);
 					}
@@ -225,7 +228,7 @@ public class SearchReviewGUI extends JPanel {
 	
 			}
 		});
-		btnDelet.setBounds(93, 92, 89, 23);
+		btnDelet.setBounds(645, 119, 89, 23);
 		add(btnDelet);
 	
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
