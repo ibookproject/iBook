@@ -21,8 +21,8 @@ public class UserController {
 	 * UpdateUserInfo
 	 * CreateNewAccount
 	 * RequestStatisticUserReport
-	 * RequestSubscription
-	 * SetStatusSubscription
+	 * RequestSubscription - Done
+	 * SetStatusSubscription - Done
 	 * GetUserList
 	 * CheckUserDetails
 	 * UpdateUserStatus

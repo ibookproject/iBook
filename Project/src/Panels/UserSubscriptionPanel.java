@@ -113,6 +113,7 @@ public class UserSubscriptionPanel extends JPanel{
 		};
 
 		JLabel lblRequestsubscriptiondb = new JLabel(choose);
+		lblRequestsubscriptiondb.setForeground(Color.BLUE);
 		lblRequestsubscriptiondb.setBounds(179, 83, 141, 14);
 		add(lblRequestsubscriptiondb);
 		
