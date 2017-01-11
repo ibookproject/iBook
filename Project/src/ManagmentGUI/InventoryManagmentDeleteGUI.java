@@ -33,7 +33,10 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	private ArrayList<Subject>resultSubjects; // array of subjects of some domain
 	private ArrayList<Domain> resultDomains; // array of domains
 	private JComboBox comboBoxSubject;
-	private JComboBox comboBoxBook;
+	private JTextField textFieldAutohr;
+	private JTextField textFieldBook;
+	private int bookId;
+	private ArrayList<Book> tempBooks;
 	private LoginGUI screen;
 	
 
@@ -44,8 +47,10 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	}
 
 	private void initialize() {
+		
 		this.setSize(850, 625);
-		this.setLayout(null);	
+		this.setLayout(null);
+
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png"); 
 		 btnBack = new JButton(backIcon);
 		btnBack.addActionListener(new ActionListener() {
@@ -55,66 +60,103 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		btnBack.setBounds(11, 33, 89, 23);
 		add(btnBack);
 		
-		JLabel lblDeleteBook = new JLabel("Delete Book");
-		lblDeleteBook.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDeleteBook.setBounds(365, 33, 159, 39);
-		add(lblDeleteBook);
+		JLabel lblSearchBookFor = new JLabel("Delete Book");
+		lblSearchBookFor.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSearchBookFor.setBounds(361, 33, 195, 46);
+		add(lblSearchBookFor);
 		
-		Domain d = new Domain("1");
-		resultDomains = FormatController.GetAllDomain(d,screen.getClient());
+		JLabel lblNameOfAuthor = new JLabel("name of author:");
+		lblNameOfAuthor.setBounds(400, 90, 89, 19);
+		add(lblNameOfAuthor);
 		
-		JLabel lblChooseDomain = new JLabel("Choose Domain :");
-		lblChooseDomain.setBounds(335, 120, 116, 23);
-		add(lblChooseDomain);
+		textFieldAutohr = new JTextField();
+		textFieldAutohr.setBounds(499, 89, 86, 20);
+		add(textFieldAutohr);
+		textFieldAutohr.setColumns(10);
 		
-		JComboBox comboBoxDomain = new JComboBox();
-		JComboBox comboBoxSubject=new JComboBox();
-		comboBoxDomain.setBounds(335, 142, 101, 20);
-		//comboBoxDomain.addItem("1111");
-		for(Domain dd:resultDomains) // adding all the Domain names to the checkbox
-			comboBoxDomain.addItem(dd);
-
-		comboBoxDomain.addActionListener(new ActionListener() {
+		JLabel lblNameOfBook = new JLabel("name of book:");
+		lblNameOfBook.setBounds(213, 94, 111, 19);
+		add(lblNameOfBook);
+		
+		textFieldBook = new JTextField();
+		textFieldBook.setBounds(300, 90, 86, 20);
+		add(textFieldBook);
+		textFieldBook.setColumns(10);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Subject s=new Subject(3,"1");  //create empty project
-				// select Subject of the specific domain ! 
+				int index=comboBox.getSelectedIndex();
+				if (index!=-1)
+					bookId=tempBooks.get(index).getBookID();
+			
+				System.out.println(bookId);
 				
-				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"DomainID="+((Domain) comboBoxDomain.getSelectedItem()).getDomainID(), screen.getClient());
-				System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
-				//resultDomains.clear();// maybe not need .... 	
-				if(resultSubjects!=null)
-				{
-					comboBoxSubject.removeAllItems();
-					for(Subject ss:resultSubjects) // adding all the Domain names to the checkbox
-						comboBoxSubject.addItem(ss);
-				}
-				else comboBoxSubject.removeAllItems();
+				 
 			}
 		});
+		comboBox.setBounds(225, 141, 412, 20);
+		add(comboBox);
 		
-		add(comboBoxDomain);
-		
-		JLabel lblChooseSubject = new JLabel("Choose Subject : ");
-		lblChooseSubject.setBounds(335, 173, 95, 14);
-		add(lblChooseSubject);
-		
-	
-		
-		
-		comboBoxSubject.setBounds(335, 190, 103, 20);
-		add(comboBoxSubject);
-		
-		JLabel lblChooseBook = new JLabel("Choose Book :");
-		lblChooseBook.setBounds(335, 230, 91, 23);
-		add(lblChooseBook);
-		
-		comboBoxBook = new JComboBox();
-		comboBoxBook.setBounds(335, 248, 105, 23);
-		add(comboBoxBook);
-		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
 
-		JButton btnDelete = new JButton("Delete");
-		btnDelete.addActionListener(new ActionListener() {
+				
+				 if(textFieldBook.getText().isEmpty())
+						JOptionPane.showMessageDialog(screen,"you must fill the name of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
+				 else
+				 {
+				 	Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
+				 	
+				 	if(textFieldAutohr.getText().isEmpty()==false)
+				 	{
+				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\"", screen.getClient());
+				 		 if(tempBooks==null)
+				 		 {
+								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
+								textFieldBook.setText("");textFieldAutohr.setText("");
+				 		 }
+				 		 else
+				 		 {
+				 		//	if(flagFirstTime==1)
+				 				comboBox.removeAllItems();
+							for(int i=0;i<tempBooks.size();i++)
+								comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+							
+				 		 }
+
+				 		 
+				 	}
+			 	else
+			 	{
+			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\"", screen.getClient());
+					 if(tempBooks==null)
+			 		 {
+							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
+							textFieldBook.setText("");textFieldAutohr.setText("");
+			 		 }
+			 		 else
+			 		 {
+			 		if(comboBox.getSize() != null)	comboBox.removeAllItems();
+						for(int i=0;i<tempBooks.size();i++)
+							comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+			 		 }
+			 	}
+ 			/*
+				comboBox.removeAllItems();
+				for(int i=0;i<temp.size();i++)
+					comboBox.addItem(temp.get(i).getTitle() + " , " + temp.get(i).getAuthor());
+					*/
+
+			}}
+			}); 
+		btnSearch.setBounds(612, 86, 89, 23);
+		add(btnSearch);
+		
+		JButton btnDelet = new JButton("Delete");
+		btnDelet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					int answer=JOptionPane.showConfirmDialog(null, "are you sure you want to delte this book ?","Warning !!", JOptionPane.YES_NO_OPTION);
 				System.out.println(answer);
@@ -124,10 +166,10 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				}// if it 0 mean no so do nothing . 
 			}
 		});
-		btnDelete.setBounds(335, 303, 101, 30);
-		add(btnDelete);
+		btnDelet.setBounds(377, 250, 89, 23);
+		add(btnDelet);
 		
-	
+		
 	
 	}
 }

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import command.DBtranslation;
+import command.deleteCommand;
 import command.insertCommand;
 import command.searchCommand;
 import command.showAllCommand;
@@ -11,24 +12,13 @@ import command.updateCommand;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 import Book.Domain;
+import Book.Review;
 import Book.SubjectToBook;
 import Book.Book;
 
 
 public class bookController {
-	/*
-	 * SearchBook - Done
-	 * TemporaryRemove
-	 * DeleteBook
-	 * GetBookList
-	 * RequestStatisticBookReport
-	 * RequestBookRate
-	 * CheckDetailsInventoryManagment
-	 * AddBook - Done
-	 * UpdateBook
-	 * GetAllDomain- Done
-	 * getAllBookTable - Done
-	 * */
+
 
 	public static ArrayList<Book> SearchBook(String fromSentence,Book b,String condition,DBSQLhandler client)
 	{
@@ -165,6 +155,21 @@ public class bookController {
 			return true;	// means the user add successful	
 	}
 
+	public static boolean DeleteBook(Book b , String searchCondition, DBSQLhandler client)
+	{
+		client.deleteFromDB(new deleteCommand<DBtranslation>(b, searchCondition));
+		while(!client.GetGotMessag()){//add user to DB
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	
 }
