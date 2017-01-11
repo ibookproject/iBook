@@ -9,10 +9,14 @@ import javax.swing.border.MatteBorder;
 import Book.Book;
 import Book.Review;
 import Controller.ReviewController;
+import Controller.UserController;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
 import Panels.BookPanel;
 import Panels.ReviewPanel;
+import Panels.SearchReviewPanel;
+import Panels.UserSubscriptionPanel;
+import Role.User;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -39,8 +43,10 @@ public class SearchReviewGUI extends JPanel {
 	private ArrayList<ReviewPanel> reviewPanels;
 	private JPanel pann;
 	public static JPanel panel;
-
+	private JScrollPane scrollPaneMain;
 	private ArrayList<Review> temp;
+	private String titleBook;
+	private int index;
 	
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
@@ -85,7 +91,7 @@ public class SearchReviewGUI extends JPanel {
 		JComboBox comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int index=comboBox.getSelectedIndex();
+				 index=comboBox.getSelectedIndex();
 				if (index!=-1)
 					bookId=tempBooks.get(index).getBookID();
 				else 
@@ -97,6 +103,26 @@ public class SearchReviewGUI extends JPanel {
 		});
 		comboBox.setBounds(225, 141, 412, 20);
 		add(comboBox);
+		
+		
+		scrollPaneMain = new JScrollPane();
+		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneMain.setAutoscrolls(true);
+		scrollPaneMain.setBounds(125, 160, 682, 392);
+		add(scrollPaneMain);
+		
+		panel = new JPanel();
+		panel.setIgnoreRepaint(true);
+		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		panel.setAutoscrolls(true);
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		scrollPaneMain.setViewportView(panel);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		
+		
+		
+		
 		
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
@@ -159,11 +185,29 @@ public class SearchReviewGUI extends JPanel {
 				if(bookId!=-1)
 				{
 					 r = new Review(1, null, null,0, 1);// create review
-
-					temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewID,reviewDate,reviewContent,reviewStatus,bookID", r, ""+ "bookID=\""+bookId+"\"", screen.getClient());
+					 titleBook=tempBooks.get(index).getTitle();
+					temp = ReviewController.SearchReviews("reviewID,reviewDate,reviewContent,reviewStatus,bookID", r, ""+ "bookID=\""+bookId+"\"", screen.getClient());
 					System.out.println(temp);
-					reviewPanels=new ArrayList<ReviewPanel>();
+					//reviewPanels=new ArrayList<ReviewPanel>();
 				
+					
+					
+					//panel.add(new UserSubscriptionPanel(screen , u));
+					if (temp != null) {
+						for(Review r:temp)
+							panel.add(new SearchReviewPanel(screen,r,titleBook));
+					} 
+					else 
+					{
+						panel.setVisible(false);
+						scrollPaneMain.setVisible(false);
+					}
+					
+					
+					
+					
+					
+					
 					/*
 					for(int i=0;i<temp.size();i++)
 					{
@@ -180,7 +224,7 @@ public class SearchReviewGUI extends JPanel {
 	
 			}
 		});
-		btnDelet.setBounds(377, 250, 89, 23);
+		btnDelet.setBounds(93, 92, 89, 23);
 		add(btnDelet);
 	
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
