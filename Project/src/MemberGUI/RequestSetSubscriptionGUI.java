@@ -92,8 +92,8 @@ public class RequestSetSubscriptionGUI extends JPanel {
 		JButton btnSendRequest = new JButton("Send Request");
 		btnSendRequest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				UserController.UpdateUserStatus(u, "suscriptionRequset=\""+radioButtonChoose+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
-				JOptionPane.showMessageDialog(screen,"Swnd request Subscription sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+				UserController.UpdateUserStatus(u, "subscriptionRequest=\""+radioButtonChoose+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
+				JOptionPane.showMessageDialog(screen,"Send request Subscription sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		btnSendRequest.setBounds(385, 348, 127, 25);

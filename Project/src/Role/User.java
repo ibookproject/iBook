@@ -17,14 +17,14 @@ public class User extends DBtranslation implements UserStatus {
 	private String lastName;
 	private int userStatus;
 	private int privilege;
-	private int suscriptionRequset;
+	private int subscriptionRequest;
 	private Date finishDateOfSubscription;
 	/**
 	 * 
 	 * 
 	 */
 	//empty constructor
-	private User(){
+	public User(){
 		super();
 	}
 	
@@ -128,24 +128,24 @@ public class User extends DBtranslation implements UserStatus {
 				throw new InputMismatchException("wrong privilege inserted");
 			}
 		}
-	public int getSuscriptionRequset() {
-		return suscriptionRequset;
+	public int getSubscriptionRequest() {
+		return subscriptionRequest;
 	}
 
-	public void setSuscriptionRequset(int suscriptionRequset) {
-		switch(suscriptionRequset)
+	public void setSubscriptionRequest(int subscriptionRequest) {
+		switch(subscriptionRequest)
 		{
 		case NONE:
-			this.suscriptionRequset=NONE;
+			this.subscriptionRequest=NONE;
 			break;
 		case YEARLY:
-			this.suscriptionRequset=YEARLY;
+			this.subscriptionRequest=YEARLY;
 			break;
 		case MONTHLY:
-			this.suscriptionRequset=MONTHLY;
+			this.subscriptionRequest=MONTHLY;
 			break;
 		case SINGLE:
-			this.suscriptionRequset=SINGLE;
+			this.subscriptionRequest=SINGLE;
 		break;
 		default:
 			throw new InputMismatchException("wrong subscription inserted");
@@ -217,7 +217,12 @@ public class User extends DBtranslation implements UserStatus {
 			case "privilege":
 				recover.setPrivilege((int)ob.getValtoArray(i));
 				break;
-				
+			case "subscriptionRequest":
+				recover.setSubscriptionRequest((int)ob.getValtoArray(i));
+				break;
+			case "finishDateOfSubscription":
+				recover.setFinishDateOfSubscription((Date)ob.getValtoArray(i));
+				break;				
 
 			default:
 				throw new InputMismatchException("you have inserred wrong to search statment");

@@ -10,8 +10,8 @@ public interface UserStatus {
 	public static final int MANAGER=6;
 	
 	///sagi
-	public static final int CONNECTED=1;
 	public static final int DISCONNECTED=0;
+	public static final int CONNECTED=1;
 	public static final int LOCK=2;
 	//
 	

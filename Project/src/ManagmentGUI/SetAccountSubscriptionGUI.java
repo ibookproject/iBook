@@ -1,6 +1,5 @@
 
 
-
 package ManagmentGUI;
 
 import javax.swing.JPanel;
@@ -14,13 +13,16 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
 
+import Book.Book;
 import Controller.UserController;
+import Controller.bookController;
 import MenuGUI.LoginGUI;
 import Panels.*;
 import Role.User;
@@ -37,16 +39,12 @@ import java.awt.event.ActionEvent;
 public class SetAccountSubscriptionGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel lblUserCheck;
 	public JButton btnBack;
 	private LoginGUI screen;
 	private JPanel pann;
 	public static JPanel panel;
 	private JScrollPane scrollPaneMain;
-	private int privilegeTemp=0;// save the privilege of the user that was found
-	private int radioButtonChoose = 0;// integer to sent what the radio button
-										// that
-										// choose
+	private ArrayList<User> searcRes;
 	private User u;
 
 	public SetAccountSubscriptionGUI(LoginGUI screen) {
@@ -62,35 +60,28 @@ public class SetAccountSubscriptionGUI extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Set Account Subscription");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(355, 49, 207, 22);
-		add(lblNewLabel);
+		JLabel lblHeaderSetAccountSubscription = new JLabel("Set Account Subscription");
+		lblHeaderSetAccountSubscription.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblHeaderSetAccountSubscription.setBounds(355, 49, 207, 22);
+		add(lblHeaderSetAccountSubscription);
 
 		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 
-		JLabel lblUserCheck = new JLabel("");
-		lblUserCheck.setBounds(34, 185, 217, 14);
-		add(lblUserCheck);
-
 		// Group the radio buttons.
 		ButtonGroup group = new ButtonGroup();
-
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(422, 185, 46, 14);
-		add(lblNewLabel_1);
 		
 		JLabel lblListOfUsers = new JLabel("LIST OF USERS WITH REQUESTED SUBSCRIPTION");
-		lblListOfUsers.setBounds(312, 135, 369, 14);
+		lblListOfUsers.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblListOfUsers.setBounds(287, 111, 369, 33);
 		add(lblListOfUsers);
 
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
-		scrollPaneMain.setBounds(127, 160, 680, 438);
+		scrollPaneMain.setBounds(125, 160, 682, 392);
 		add(scrollPaneMain);
 		
 		panel = new JPanel();
@@ -100,13 +91,22 @@ public class SetAccountSubscriptionGUI extends JPanel {
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		scrollPaneMain.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-	//	panel.add(new UserSubscriptionPanel(screen , u));		/*########## Coral #########3*/
-		
-		
-		
-		
-		
+		u = new User();
+		searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionRequest,privilege",u,"subscriptionRequest <> \"" + 0 + "\"", screen.getClient());//call search book method from book controller
+		//panel.add(new UserSubscriptionPanel(screen , u));
+		if (searcRes != null) {
+			for(User ut:searcRes)
+				panel.add(new UserSubscriptionPanel(this.screen,ut));
+		} else 
+		{
+			panel.setVisible(false);
+			scrollPaneMain.setVisible(false);
+			lblListOfUsers.setText("You don't have any new requests!");
+			lblListOfUsers.setForeground(Color.GREEN);
+		}
+		//JOptionPane.showMessageDialog(screen,"not found any user to be updated by his subscription method\n", "Warning",
+		//		JOptionPane.WARNING_MESSAGE);
+	//	panel.add(new UserSubscriptionPanel(screen , u));
 	//	panel.add(new UserSubscriptionPanel(screen));
 		//panel.add(new UserSubscriptionPanel(screen));
 	//	panel.add(new UserSubscriptionPanel(screen));
@@ -144,3 +144,8 @@ public class SetAccountSubscriptionGUI extends JPanel {
 
 	}
 }
+
+
+
+
+
