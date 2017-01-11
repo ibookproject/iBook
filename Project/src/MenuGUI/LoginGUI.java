@@ -45,7 +45,8 @@ public class LoginGUI extends JFrame {
 	private String newStatus;
 	private String tempID;
 	/**
-	 * This is the default constructor
+	 * 
+	 * @param host
 	 */
 	public LoginGUI(String host) {
 		super();
@@ -82,11 +83,17 @@ public class LoginGUI extends JFrame {
 		  	}
 		  });
 	}
-
+/**
+ * 
+ * @return tempID
+ */
 	public String getTempID() {
 		return tempID;
 	}
-
+/**
+ * 
+ * @param tempID
+ */
 	public void setTempID(String tempID) {
 		this.tempID = tempID;
 	}
