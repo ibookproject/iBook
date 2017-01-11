@@ -3,10 +3,7 @@ package DB;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import com.sun.prism.Image;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;

@@ -5,38 +5,22 @@ import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
 import Role.User;
 import Role.UserStatus;
-import Role.UserStatus.*;
-
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-
-
-
-
-
-
 import Controller.UserController;
 import DB.Test;
 import client.DBSQLhandler;
-import client.DBgenericObject;
-import javafx.scene.image.Image;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.JPasswordField;
 
 public class LoginGUI extends JFrame {
