@@ -40,9 +40,6 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	public JButton btnBack ;
-	private ArrayList<Subject>resultSubjects; // array of subjects of some domain
-	private ArrayList<Domain> resultDomains; // array of domains
-	private JComboBox comboBoxSubject;
 	private JTextField textFieldAutohr;
 	private JTextField textFieldBook;
 	private int bookId;
@@ -52,10 +49,12 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	//private JScrollPane scrollPaneMain;
 	//private ArrayList<Book> books;
 	//private JPanel pann;
+	private int index;
 	
 
 	public InventoryManagmentDeleteGUI(LoginGUI screen ) {
 		super();
+		bookId=-1;
 		//this.tempBooks=books;
 	//	pann=this;
 		this.screen=screen;
@@ -103,10 +102,12 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		JComboBox comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int index=comboBox.getSelectedIndex();
+				index=comboBox.getSelectedIndex();
 				if (index!=-1)
 					bookId=tempBooks.get(index).getBookID();
-			
+				else
+					bookId=-1;
+				System.out.println(index);
 				System.out.println(bookId);
 				
 				 
@@ -141,8 +142,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				 				comboBox.removeAllItems();
 							for(int i=0;i<tempBooks.size();i++)
 								comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
-							sb.setList(tempBooks);
-							screen.setContentPane(sb);
+
 				 		 }
 
 				 		 
@@ -178,20 +178,27 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		JButton btnDelet = new JButton("Delete");
 		btnDelet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(bookId!=-1)
+				{
 					int answer=JOptionPane.showConfirmDialog(null, "are you sure you want to delte this book ?","Warning !!", JOptionPane.YES_NO_OPTION);
 				System.out.println(answer);
-				if(answer==0)
-				{
-					//means delete ..... 
-					Book b=new Book();
-					bookController.DeleteBook(b,"bookID=\""+bookId+"\"",screen.getClient());
-	
+					if(answer==0)
+					{
+						//means delete ..... 
+						Book b=new Book();
+						bookController.DeleteBook(b,"bookID=\""+bookId+"\"",screen.getClient());
+					//	comboBox.removeAllItems();
+						tempBooks.remove(index);
+						comboBox.removeItemAt(index);
+					}
 				}
+				else JOptionPane.showMessageDialog(screen,"there is no book to select ", "Warning",JOptionPane.WARNING_MESSAGE);
+
 			}
 		});
 		btnDelet.setBounds(377, 250, 89, 23);
 		add(btnDelet);
-		
+		comboBox.removeAllItems();
 		
 	
 	}

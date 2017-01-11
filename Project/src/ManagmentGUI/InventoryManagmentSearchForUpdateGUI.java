@@ -41,6 +41,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		super();
 		this.Mainpann=Mainpann;
 		this.screen=screen;
+		bookId=-1;
 		pann=this;
 		initialize();
 	}
@@ -89,6 +90,8 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 				int index=comboBox.getSelectedIndex();
 				if (index!=-1)
 					bookId=tempBooks.get(index).getBookID();
+				else
+					bookId=-1;
 			
 				System.out.println(bookId);
 				
@@ -101,9 +104,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 
-				
 				 if(textFieldBook.getText().isEmpty())
 						JOptionPane.showMessageDialog(screen,"you must fill the name of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
 				 else
@@ -159,7 +160,8 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		btnSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
+				if(bookId!=-1)
+				{
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
 				AddOrUpdateBookGUI goback=new AddOrUpdateBookGUI(screen,0, bookId,Mainpann); 
 				goback.btnBack.addActionListener(new ActionListener() {
@@ -169,6 +171,10 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 				////////////////////////button to back panel from panel/////////////////////////////////////////////
 				});
 				screen.setContentPane(goback);//send to search book window
+				}
+				else 
+					JOptionPane.showMessageDialog(screen,"there is no book to select ", "Warning",JOptionPane.WARNING_MESSAGE);
+
 			}
 				
 				
