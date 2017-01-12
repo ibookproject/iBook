@@ -40,7 +40,6 @@ public class SearchReviewGUI extends JPanel {
 	private ArrayList<Book> tempBooks;
 	private LoginGUI screen;
 	private Review r;
-	private ArrayList<ReviewPanel> reviewPanels;
 	private JPanel pann;
 	public static JPanel panel;
 	private JScrollPane scrollPaneMain;
@@ -88,21 +87,51 @@ public class SearchReviewGUI extends JPanel {
 		add(textFieldBook);
 		textFieldBook.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.addActionListener(new ActionListener() {
+		JComboBox comboBoxOfBooks = new JComboBox();
+		comboBoxOfBooks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 index=comboBox.getSelectedIndex();
+				 index=comboBoxOfBooks.getSelectedIndex();
 				if (index!=-1)
 					bookId=tempBooks.get(index).getBookID();
 				else 
 					bookId=-1;
 				System.out.println(bookId);
 				
+				
+				if(bookId!=-1)
+				{
+					 r = new Review(1, null, null,0, 1);// create review
+					 titleBook=tempBooks.get(index).getTitle();
+					temp = ReviewController.SearchReviews("reviewID,reviewDate,reviewContent,reviewStatus,bookID", r, ""+ "bookID=\""+bookId+"\""+ " && "+"reviewStatus=\""+"1"+"\"", screen.getClient());
+					System.out.println(temp);
+
+					if (temp != null) {
+						panel.removeAll();
+						panel.setVisible(true);
+						scrollPaneMain.setVisible(true);
+						for(Review r:temp)
+							panel.add(new SearchReviewPanel(screen,r,titleBook));
+					} 
+					else 
+					{
+						panel.setVisible(false);
+						scrollPaneMain.setVisible(false);
+						JOptionPane.showMessageDialog(screen,"no review results !  ", "no results",JOptionPane.QUESTION_MESSAGE);
+					}
+		
+				}
+				else {
+					//JOptionPane.showMessageDialog(screen,"there is no book to select ", "Warning",JOptionPane.WARNING_MESSAGE);
+ 				comboBoxOfBooks.removeAllItems();
+				}
+				
+				
+				
 				 
 			}
 		});
-		comboBox.setBounds(223, 120, 412, 20);
-		add(comboBox);
+		comboBoxOfBooks.setBounds(223, 120, 412, 20);
+		add(comboBoxOfBooks);
 		
 		
 		scrollPaneMain = new JScrollPane();
@@ -132,7 +161,13 @@ public class SearchReviewGUI extends JPanel {
 
 				
 				 if(textFieldBook.getText().isEmpty())
+				 {
+		 				comboBoxOfBooks.removeAllItems();
+		 				panel.removeAll();
+		 				panel.setVisible(false);
+						scrollPaneMain.setVisible(false);
 						JOptionPane.showMessageDialog(screen,"you must fill the name of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
+				 }
 				 else
 				 {
 				 	Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
@@ -147,9 +182,9 @@ public class SearchReviewGUI extends JPanel {
 				 		 }
 				 		 else
 				 		 {
-				 				comboBox.removeAllItems();
+				 				comboBoxOfBooks.removeAllItems();
 							for(int i=0;i<tempBooks.size();i++)
-								comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+								comboBoxOfBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 							//sb.setList(tempBooks);
 							//screen.setContentPane(sb);
 				 		 }
@@ -166,11 +201,9 @@ public class SearchReviewGUI extends JPanel {
 			 		 }
 			 		 else
 			 		 {
-			 		if(comboBox.getSize() != null)	comboBox.removeAllItems();
+			 		if(comboBoxOfBooks.getSize() != null)	comboBoxOfBooks.removeAllItems();
 						for(int i=0;i<tempBooks.size();i++)
-							comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
-					//	sb.setList(tempBooks);
-					//	screen.setContentPane(sb);
+							comboBoxOfBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
 			 	}
 			
@@ -180,20 +213,16 @@ public class SearchReviewGUI extends JPanel {
 		btnSearch.setBounds(612, 86, 89, 23);
 		add(btnSearch);
 		
-		JButton btnDelet = new JButton("Select");
+	/*	JButton btnDelet = new JButton("Select");
 		btnDelet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(bookId!=-1)
 				{
 					 r = new Review(1, null, null,0, 1);// create review
 					 titleBook=tempBooks.get(index).getTitle();
-					temp = ReviewController.SearchReviews("reviewID,reviewDate,reviewContent,reviewStatus,bookID", r, ""+ "bookID=\""+bookId+"\"", screen.getClient());
+					temp = ReviewController.SearchReviews("reviewID,reviewDate,reviewContent,reviewStatus,bookID", r, ""+ "bookID=\""+bookId+"\""+ " && "+"reviewStatus=\""+"1"+"\"", screen.getClient());
 					System.out.println(temp);
-					//reviewPanels=new ArrayList<ReviewPanel>();
-				
-					
-					
-					//panel.add(new UserSubscriptionPanel(screen , u));
+
 					if (temp != null) {
 						scrollPaneMain.setVisible(true);
 						for(Review r:temp)
@@ -201,36 +230,18 @@ public class SearchReviewGUI extends JPanel {
 					} 
 					else 
 					{
-						JOptionPane.showMessageDialog(screen,"no review results !  ", "Warning",JOptionPane.WARNING_MESSAGE);
-
 						panel.setVisible(false);
 						scrollPaneMain.setVisible(false);
+						JOptionPane.showMessageDialog(screen,"no review results !  ", "Warning",JOptionPane.WARNING_MESSAGE);
 					}
-					
-					
-					
-					
-					
-					
-					/*
-					for(int i=0;i<temp.size();i++)
-					{
-						reviewPanels.add(new ReviewPanel(screen,temp.get(i)));
-						panel.add(reviewPanels.get(0));
-
-					}
-					*/
-					
+		
 				}
 				else JOptionPane.showMessageDialog(screen,"there is no book to select ", "Warning",JOptionPane.WARNING_MESSAGE);
-
-				
-	
 			}
 		});
 		btnDelet.setBounds(645, 119, 89, 23);
 		add(btnDelet);
-	
+	*/
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);
 	//	btnBack.setIcon(backIcon);

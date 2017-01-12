@@ -250,7 +250,7 @@ public class FormatManagmentGUI extends JPanel {
 					int id=((Domain) DomainBox.getSelectedItem()).getDomainID();/// here is the problem
 					//////////////////////////////////////
 				Subject sub = new Subject(id,s); // create new Subject	
-				ArrayList<Subject> temp = FormatController.SearchSubject("bookID,domainID,nameSubject",sub, "nameSubject=\""+s+ "\"" ,screen.getClient());
+				ArrayList<Subject> temp = FormatController.SearchSubject("domainID,nameSubject",sub, "nameSubject=\""+s+ "\"" ,screen.getClient());
 				System.out.println("///"+temp+"//");
 				
 				if(temp==null)

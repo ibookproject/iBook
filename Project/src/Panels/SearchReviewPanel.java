@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import javax.swing.DropMode;
 
 public class SearchReviewPanel extends JPanel{
 	private ArrayList<Book> Books;
@@ -38,7 +39,7 @@ public class SearchReviewPanel extends JPanel{
 	public SearchReviewPanel(LoginGUI screen,Review r,String titleBook) {
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 139, 87)));
-		setPreferredSize(new Dimension(577, 112));
+		setPreferredSize(new Dimension(577, 136));
 		setLayout(null);
 		
 		JLabel lblUserid = new JLabel("book name:");
@@ -46,15 +47,16 @@ public class SearchReviewPanel extends JPanel{
 		add(lblUserid);
 		
 		JLabel lblUderiddb = new JLabel(titleBook);
-		lblUderiddb.setBounds(179, 11, 141, 14);
+		lblUderiddb.setBounds(130, 11, 141, 14);
 		add(lblUderiddb);
 		
 		JLabel lblFirstName = new JLabel("Date post review:");
 		lblFirstName.setBounds(22, 36, 147, 14);
 		add(lblFirstName);
 		
+
 		JLabel lblFirstnamedb = new JLabel(r.getReviewDate().toString());
-		lblFirstnamedb.setBounds(179, 36, 141, 14);
+		lblFirstnamedb.setBounds(130, 36, 141, 14);
 		add(lblFirstnamedb);
 	
 		lblAnswerfromserver = new JLabel("");
@@ -62,12 +64,31 @@ public class SearchReviewPanel extends JPanel{
 		add(lblAnswerfromserver);
 		
 		JLabel lblContentOfThe = new JLabel("Content of the review:");
-		lblContentOfThe.setBounds(330, 11, 199, 14);
+		lblContentOfThe.setForeground(Color.RED);
+		lblContentOfThe.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblContentOfThe.setBounds(281, 0, 225, 25);
 		add(lblContentOfThe);
 		
+		
+		String s=r.getReviewContent();
+		/*
+		String temp="";
+		for(int i=0;i<s.length();i++)
+		{
+			if(i%120==0)
+			{
+				temp+= "\n";
+				
+			}
+			temp+=s.charAt(i);
+		}
+		*/
+		
 		JTextArea textArea = new JTextArea();
-		textArea.setText(r.getReviewContent());
-		textArea.setBounds(298, 31, 251, 66);
+		textArea.setLineWrap(true);
+		textArea.setText(s);
+		
+		textArea.setBounds(216, 22, 351, 103);
 		add(textArea);
 
 			
