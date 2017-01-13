@@ -320,7 +320,7 @@ public class BookRateGUI extends JPanel {
 				if(bookId!=-1)
 				{	
 					JOptionPane.showMessageDialog(screen,"Cool!!! ", "Warning",JOptionPane.WARNING_MESSAGE);
-					
+				//	SubjectToBook stb=new 
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
 				//AddOrUpdateBookGUI goback=new AddOrUpdateBookGUI(screen,0, bookId,Mainpann); 
 				//goback.btnBack.addActionListener(new ActionListener() {

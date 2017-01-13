@@ -33,6 +33,8 @@ import Controller.UserController;
 import Controller.bookController;
 import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;
+import Panels.BookPerCart;
+import Panels.ReviewPanel;
 import Role.User;
 import client.DBSQLhandler;
 import client.DBgenericObject;
@@ -54,6 +56,7 @@ public class StatisticsUserReportGUI extends JPanel
 	private JTextField textFieldDate;
 	private JScrollPane scrollPaneMain;
 	private JPanel panel;
+	//private ArrayList<BookPerCart> booksPerCarts;
 	
 	public StatisticsUserReportGUI(LoginGUI screen) 
 	{
@@ -147,14 +150,30 @@ public class StatisticsUserReportGUI extends JPanel
 					panel.setLayout(new GridLayout(0, 1, 0, 0));
 					
 					Cart t=new Cart();
-					ArrayList<Cart> carts= (ArrayList<Cart>)CartController.SearchCart("userID,bookID,firstName,price,status,date",t,"userID=\""+user.get(0).getUserID()+"\""/*&&status=\""+true+"\""*/,screen.getClient());
+					ArrayList<Cart> carts= (ArrayList<Cart>)CartController.SearchCart("userID,bookID,price",t,"userID=\""+user.get(0).getUserID()+"\""/*&&status=\""+true+"\""*/,screen.getClient());
 					if(carts==null||carts.isEmpty())
-					{
-						JOptionPane.showMessageDialog(screen,"Theres no books to this user\n", "Warning",JOptionPane.WARNING_MESSAGE);
-					}
+						JOptionPane.showMessageDialog(screen,"There's no books to this user\n", "Warning",JOptionPane.WARNING_MESSAGE);
 					else
 					{
+						Book[] books;
+						for(int i=0;i<carts.size();i++)
+						{
+							Book b=new Book();
+							ArrayList<Book> booksSearch= (ArrayList<Book>)bookController.SearchBook("bookID",b,"bookID=\""+carts.get(i).getBookID()+"\"" ,screen.getClient());
+							if(booksSearch==null||booksSearch.isEmpty())
+							{
+								JOptionPane.showMessageDialog(screen,"Book was not Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
+							} 
+							else
+							{
+								//books[i]=booksSearch.get(0);
 
+								 ArrayList<BookPerCart> booksPerCarts=new ArrayList<BookPerCart> ();
+							//	booksPerCarts.add(new BookPerCart(this.screen,books[i]);
+							
+							}
+							
+						}
 						JOptionPane.showMessageDialog(screen,"Theres books!!!!!!!!!!!!\n", "Warning",JOptionPane.WARNING_MESSAGE);
 					}
 					
@@ -167,13 +186,5 @@ public class StatisticsUserReportGUI extends JPanel
 		add(btnGetReports);
 	}
 	
-	/*public void setTextArea(ArrayList<User> user)
-	{
-		txtReport.setText(user.get(0).toString());
-	}*/
-/*	public void setList(ArrayList<User> list)
-	{
-		this.searchRes=list;
-		
-	}*/
+	
 }

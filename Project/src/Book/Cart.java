@@ -9,31 +9,31 @@ import command.DBtranslation;
 
 public class Cart extends DBtranslation {
 
-	private int userID;
+	private String userID;
 	private int bookID;
 	private float price;
 	protected boolean status;
-	private Date date;
+	private Date buyDate;
 	public Cart()
 	{
 		super();
 	}
-	public Cart(int userID,int bookID,float price,boolean status,Date date)
+	public Cart(String userID,int bookID,float price,boolean status,Date date)
 	{
 		this.userID=userID;
 		this.bookID=bookID;
 		this.price=price;
 		this.status=false;
-		this.date=date;
+		this.buyDate=date;
 	}
-	public Cart(int userID,int bookID,float price)
+	public Cart(String userID,int bookID,float price)
 	{
 		this.userID=userID;
 		this.bookID=bookID;
 		this.price=price;
 	}
 
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 	public int getBookID() {
@@ -42,7 +42,7 @@ public class Cart extends DBtranslation {
 	public float getPrice() {
 		return price;
 	}
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 	public void setBookID(int bookID) {
@@ -59,10 +59,10 @@ public class Cart extends DBtranslation {
 		this.status = status;
 	}
 	public Date getDate() {
-		return date;
+		return buyDate;
 	}
 	public void setDate(Date d) {
-		this.date = d;
+		this.buyDate = d;
 	}
 	@Override
 	public String getClassName() {
@@ -75,7 +75,7 @@ public class Cart extends DBtranslation {
 		int temp=0;
 		if(status)
 		temp=1;
-		return String.format("(%d,%d,%d,%f)",userID,bookID,temp,price);
+		return String.format("(%s,%d,%d,%f)",userID,bookID,temp,price);
 	}
 	@Override
 	public String getAttributeToInsert() {
@@ -92,7 +92,7 @@ public class Cart extends DBtranslation {
 		 if(fromSentence.indexOf('*')>=0)
 			 for(DBgenericObject ob:arr)
 			 {
-				 convertedArr.add(new Cart((int)ob.getValtoArray(0),(int)ob.getValtoArray(1),(float)ob.getValtoArray(2),(boolean)ob.getValtoArray(3),(Date)ob.getValtoArray(4)));
+				 convertedArr.add(new Cart((String)ob.getValtoArray(0),(int)ob.getValtoArray(1),(float)ob.getValtoArray(2),(boolean)ob.getValtoArray(3),(Date)ob.getValtoArray(4)));
 			 }
 		else
 		for(DBgenericObject ob:arr)
@@ -109,7 +109,7 @@ public class Cart extends DBtranslation {
 		 {
 			 switch (fromSentence[i]) {
 			case "userID":
-				recover.setUserID((int)ob.getValtoArray(i));
+				recover.setUserID((String)ob.getValtoArray(i));
 				break;
 			case "bookID":
 				recover.setBookID((int)ob.getValtoArray(i));
