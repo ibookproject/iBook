@@ -133,7 +133,7 @@ public class StatisticsUserReportGUI extends JPanel
 					
 					
 					scrollPaneMain = new JScrollPane();
-					scrollPaneMain.setBounds(55, 86, 731, 230);
+					scrollPaneMain.setBounds(55, 250, 731, 230);
 					scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 					scrollPaneMain.setAutoscrolls(true);
 					add(scrollPaneMain);
@@ -147,10 +147,10 @@ public class StatisticsUserReportGUI extends JPanel
 					panel.setLayout(new GridLayout(0, 1, 0, 0));
 					
 					Cart t=new Cart();
-					ArrayList<Cart> carts= (ArrayList<Cart>)CartController.SearchCart("userID,bookID,firstName,price,status,date",t,"userID=\""+textFieldID.getText()+"\""/*&&status=\""+true+"\""*/,screen.getClient());
+					ArrayList<Cart> carts= (ArrayList<Cart>)CartController.SearchCart("userID,bookID,firstName,price,status,date",t,"userID=\""+user.get(0).getUserID()+"\""/*&&status=\""+true+"\""*/,screen.getClient());
 					if(carts==null||carts.isEmpty())
 					{
-						JOptionPane.showMessageDialog(screen,"Theres no books to ths user\n", "Warning",JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(screen,"Theres no books to this user\n", "Warning",JOptionPane.WARNING_MESSAGE);
 					}
 					else
 					{
