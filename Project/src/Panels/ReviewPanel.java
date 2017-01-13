@@ -81,16 +81,17 @@ public class ReviewPanel extends JPanel{
 		
 		chckbxChooseReview = new JCheckBox("");
 		chckbxChooseReview.setBackground(Color.WHITE);
-		chckbxChooseReview.setBounds(8, 47, 111, 25);
+		chckbxChooseReview.setBounds(8, 47, 29, 25);
 		add(chckbxChooseReview);
 		
+	
+	}
+	public int getchbxChoose()
+	{
 		if(chckbxChooseReview.isSelected())
 			chbxChoose=1;
 		else
 			chbxChoose=0;
-	}
-	public int getchbxChoose()
-	{
 		return chbxChoose;
 	}
 	public Review getReview()
