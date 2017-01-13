@@ -11,7 +11,7 @@ public class Order extends Cart {
 		this.buyDate = buyDate;
 	}
 
-	public Order(int userID,int bookID,int price,Date buyDate)
+	public Order(int userID,int bookID,float price,Date buyDate)
 	{
 		super(userID,bookID,price);
 		this.status=false;

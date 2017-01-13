@@ -236,7 +236,6 @@ public class Book extends DBtranslation {
 			 }//end switch
 		 }//end for
 		 return recover;
-		
 	}
 	
 	@Override

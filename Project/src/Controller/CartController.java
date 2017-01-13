@@ -3,6 +3,7 @@ package Controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Book.Book;
 import Book.Cart;
 import Book.SubjectToBook;
 import client.DBSQLhandler;
@@ -40,7 +41,26 @@ public class CartController {
 	}
 	*/
 	
-	
+	public static ArrayList<Cart> SearchCart(String fromSentence,Cart t,String condition,DBSQLhandler client)
+	{
+		// filed is need to look like "bookID,author,..."
+		client.searchInDB(new searchCommand<Cart>(fromSentence,t,condition));//call command and client ask to search a book
+		while(!client.GetGotMessag()){//search book in db
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+			}
+		}
+		try {
+			
+			return  Cart.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), fromSentence);
+		} catch (SQLException e) {
+			return null;
+		}
+	}
 	
 	
 	
