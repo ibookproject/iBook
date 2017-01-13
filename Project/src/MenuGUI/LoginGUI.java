@@ -72,6 +72,8 @@ public class LoginGUI extends JFrame {
 				if(result==JOptionPane.YES_OPTION){
 					if(tempID!=null){
 				User u = new User(tempID);
+				ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userStatus",u,"userID=\""+tempID+"\"",client);
+				if(temp.get(0).getUserStatus()!=2)
 				UserController.UpdateUserStatus(u, "userStatus=\"" + "0" + "\"", "userID=\"" + tempID + "\"",
 						getClient());
 					}
@@ -150,7 +152,7 @@ public class LoginGUI extends JFrame {
 							if(counteEnrty>=3)
 							{
 								JOptionPane.showMessageDialog(screen,"this user name is locked!", "Warning",JOptionPane.WARNING_MESSAGE);
-								UserController.UpdateUserStatus(u, "userStatus=\""+"3"+"\"", "userID=\""+txtUserID.getText()+"\"", screen.client);
+								UserController.UpdateUserStatus(u, "userStatus=\""+"2"+"\"", "userID=\""+txtUserID.getText()+"\"", screen.client);
 								counteEnrty=0;
 								flagTry--;
 							}	
@@ -158,19 +160,15 @@ public class LoginGUI extends JFrame {
 						
 					}
 					else{
-						//if(temp.size()>1)
-							//throw new InputMismatchException("there is more then one User with userID"+temp.get(0).getUserID());
+						
 						counteEnrty=0;
 						flagTry--;
 						if(temp.get(0).getUserStatus()==UserStatus.LOCK)
-						{
 							JOptionPane.showMessageDialog(screen,"this user is already locked!", "Warning",JOptionPane.WARNING_MESSAGE);
-						}
-						if(temp.get(0).getUserStatus()==UserStatus.CONNECTED)
-						{
-							JOptionPane.showMessageDialog(screen,"this user is already connected!", "Warning",JOptionPane.WARNING_MESSAGE);
-						}
 						else
+							if(temp.get(0).getUserStatus()==UserStatus.CONNECTED)
+								JOptionPane.showMessageDialog(screen,"this user is already connected!", "Warning",JOptionPane.WARNING_MESSAGE);
+							else
 						{
 							temp.get(0).setUserStatus(UserStatus.CONNECTED);
 							setTempID(temp.get(0).getUserID());
@@ -275,8 +273,8 @@ public class LoginGUI extends JFrame {
 
 					// //////////////////////button go to panel from
 					// JFram/////////////////////////////////////////////
-				}
-				}
+						}
+					}
 				}
 			});
 			btnLogin.setBounds(386, 321, 89, 23);
@@ -293,145 +291,7 @@ public class LoginGUI extends JFrame {
 			txtUserID.setColumns(10);
 			
 			pwdPassword = new JPasswordField();
-		//	pwdPassword = new JTextField();
-			//////////////////////enter listener///////////////////////
-		/*	pwdPassword.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyPressed(KeyEvent e) {
-					if(e.getKeyCode()==KeyEvent.VK_ENTER)
-					{
-						User u=null;
-						try{
-						u=new User(txtUserID.getText(), pwdPassword.getText());
-						}
-						catch(InputMismatchException ex){
-						System.out.println(ex);
-						}
-						ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID,privilege",u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"",client);
-						if(temp==null||temp.isEmpty()){
-							JOptionPane.showMessageDialog(screen,"wrong password/username", "Warning",
-									JOptionPane.WARNING_MESSAGE);
-							if(counteEnrty++>=3){
-								JOptionPane.showMessageDialog(screen,"this user name is locked!", "Warning",
-										JOptionPane.WARNING_MESSAGE);
-								client.quit();
-								System.exit(1);
-							}
-							//here need to write sql to update
-							
-						}
-						else{
-							if(temp.size()>1)
-								throw new InputMismatchException("there is more then one User with userID"+temp.get(0).getUserID());
-						switch (temp.get(0).getPriviliege()) {
-						case UserStatus.USER: {
-
-							// //////////////////////button to back panel from panel
-							// /////////////////////////////////////////////
-							UserMenu usm = new UserMenu(screen);
-							usm.btnDisconnect
-									.addActionListener(new ActionListener() {
-										public void actionPerformed(ActionEvent e) {
-											setContentPane(FirstPanel);
-										}
-										// //////////////////////button to back
-										// panel from
-										// panel/////////////////////////////////////////////
-									});
-							setContentPane(usm);// send to search book window
-
-						}
-						
-							break;
-						case UserStatus.READER: {
-							ReaderMenu usm = new ReaderMenu(screen,Integer.parseInt(txtUserID.getText()));
-							usm.btnDisconnect
-									.addActionListener(new ActionListener() {
-										public void actionPerformed(ActionEvent e) {
-											setContentPane(FirstPanel);
-										}
-										// //////////////////////button to back
-										// panel from
-										// panel/////////////////////////////////////////////
-									});
-							setContentPane(usm);
-						}
-							break;
-						case UserStatus.LIBARYWORKER: {
-							LibraryWorkerMenu usm = new LibraryWorkerMenu(screen,Integer.parseInt(txtUserID.getText()));
-							usm.btnDisconnect
-									.addActionListener(new ActionListener() {
-										public void actionPerformed(ActionEvent e) {
-											setContentPane(FirstPanel);
-										}
-										// //////////////////////button to back
-										// panel from
-										// panel/////////////////////////////////////////////
-									});
-							setContentPane(usm);
-						}
-							break;
-						case UserStatus.QUALIFIEDEDITOR: {
-							QualifiedEditorMenu usm = new QualifiedEditorMenu(
-									screen, 4,Integer.parseInt(txtUserID.getText()));
-							usm.btnDisconnect
-									.addActionListener(new ActionListener() {
-										public void actionPerformed(ActionEvent e) {
-											setContentPane(FirstPanel);
-										}
-										// //////////////////////button to back
-										// panel from
-										// panel/////////////////////////////////////////////
-									});
-							setContentPane(usm);
-						}
-							break;
-						case UserStatus.LIBRRIAN: {
-							LibrarianMenu usm = new LibrarianMenu(screen, 5,Integer.parseInt(txtUserID.getText()));
-							usm.btnDisconnect
-									.addActionListener(new ActionListener() {
-										public void actionPerformed(ActionEvent e) {
-											setContentPane(FirstPanel);
-										}
-										// //////////////////////button to back
-										// panel from
-										// panel/////////////////////////////////////////////
-									});
-							setContentPane(usm);
-						}
-							break;
-						case UserStatus.MANAGER: {
-							LibraryManagerMenu usm = new LibraryManagerMenu(screen,
-									6,Integer.parseInt(txtUserID.getText()));
-							usm.btnDisconnect
-									.addActionListener(new ActionListener() {
-										public void actionPerformed(ActionEvent e) {
-											setContentPane(FirstPanel);
-										}
-										// //////////////////////button to back
-										// panel from
-										// panel/////////////////////////////////////////////
-									});
-							setContentPane(usm);
-						}
-							break;
-
-						// //////////////////////button go to panel from
-						// JFram/////////////////////////////////////////////
-						// LibrarianMenu usm=new LibrarianMenu(screen);
-						// setContentPane(usm);
-						}
-
-						// //////////////////////button go to panel from
-						// JFram/////////////////////////////////////////////
-						}
-					}
-					
-						
-				}
-			});
-				//////////////////////enter listener///////////////////////*/
-
+	
 			pwdPassword.setText("");
 			pwdPassword.setBounds(374, 263, 112, 20);
 			FirstPanel.add(pwdPassword);

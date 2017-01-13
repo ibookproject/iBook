@@ -18,6 +18,7 @@ public class User extends DBtranslation implements UserStatus {
 	private int userStatus;
 	private int privilege;
 	private int subscriptionRequest;
+	private int subscriptionMethod;
 	private Date finishDateOfSubscription;
 	/**
 	 * 
@@ -103,6 +104,16 @@ public class User extends DBtranslation implements UserStatus {
 			
 		}
 	}
+	
+	
+	public int getSubscriptionMethod() {
+		return subscriptionMethod;
+	}
+
+	public void setSubscriptionMethod(int subscriptionMethod) {
+		this.subscriptionMethod = subscriptionMethod;
+	}
+
 	public void setPrivilege(int privilege) {
 		switch(privilege)
 		{

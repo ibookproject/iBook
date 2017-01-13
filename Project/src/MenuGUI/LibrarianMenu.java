@@ -77,23 +77,5 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 		btnFormatManagment.setBounds(325, 339, 223, 23);
 		add(btnFormatManagment);
 
-		JButton btnRemovePartOf = new JButton("Remove part of review");
-		btnRemovePartOf.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)  {
-				////////////////////////button to back panel from panel /////////////////////////////////////////////
-	
-				RemovePartReviewGUI Rpr=new RemovePartReviewGUI(screen,0);
-				Rpr.btnBack.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						screen.setContentPane(pann);
-					}
-				////////////////////////button to back panel from panel/////////////////////////////////////////////
-				});
-				screen.setContentPane(Rpr);//
-			}
-		});
-		btnRemovePartOf.setBounds(325, 373, 223, 23);
-		add(btnRemovePartOf);
-
 	}
 }

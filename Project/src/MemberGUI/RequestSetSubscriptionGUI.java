@@ -92,8 +92,48 @@ public class RequestSetSubscriptionGUI extends JPanel {
 		JButton btnSendRequest = new JButton("Send Request");
 		btnSendRequest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				UserController.UpdateUserStatus(u, "subscriptionRequest=\""+radioButtonChoose+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
-				JOptionPane.showMessageDialog(screen,"Send request Subscription sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+				if(radioButtonChoose==0)
+					JOptionPane.showMessageDialog(screen,"                          Sorry!\nNo selected one of options", "Warning",JOptionPane.WARNING_MESSAGE);
+				else
+				{
+					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("subscriptionRequest",u,"userID=\""+screen.getTempID()+"\"",screen.getClient());
+				
+					if(radioButtonChoose==UserStatus.SINGLE)
+					{
+						if(temp.get(0).getSubscriptionRequest()==UserStatus.SINGLE)
+							JOptionPane.showMessageDialog(screen,"This request alredy sent! ", "Warning",JOptionPane.WARNING_MESSAGE);
+						else
+						{
+							UserController.UpdateUserStatus(u, "subscriptionRequest=\""+UserStatus.SINGLE+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
+							JOptionPane.showMessageDialog(screen,"Send request Subscription sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+						}
+					}
+					else
+					{
+						if(radioButtonChoose==UserStatus.MONTHLY)
+						{
+							if(temp.get(0).getSubscriptionRequest()==UserStatus.MONTHLY)
+								JOptionPane.showMessageDialog(screen,"This request alredy sent! ", "Warning",JOptionPane.WARNING_MESSAGE);
+							else
+							{
+								UserController.UpdateUserStatus(u, "subscriptionRequest=\""+UserStatus.MONTHLY+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
+								JOptionPane.showMessageDialog(screen,"Send request Subscription sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+							}
+						}
+						else
+							if(radioButtonChoose==UserStatus.YEARLY)
+							{
+								if(temp.get(0).getSubscriptionRequest()==UserStatus.YEARLY)
+									JOptionPane.showMessageDialog(screen,"This request alredy sent! ", "Warning",JOptionPane.WARNING_MESSAGE);
+								else
+								{
+									UserController.UpdateUserStatus(u, "subscriptionRequest=\""+UserStatus.YEARLY+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
+									JOptionPane.showMessageDialog(screen,"Send request Subscription sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+								}
+							}
+					
+					}
+				}
 			}
 		});
 		btnSendRequest.setBounds(385, 348, 127, 25);
