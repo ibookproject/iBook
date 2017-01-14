@@ -1,6 +1,7 @@
 package Book;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.InputMismatchException;
 
@@ -9,9 +10,9 @@ import command.DBtranslation;
 public class Review extends DBtranslation {
 
 	private int reviewID;
-	private Date reviewDate;
+	private String reviewDate;
 	private String reviewContent;
-	private String StrreviewDate;
+//	private String StrreviewDate;
 	private int reviewStatus;
 	private int bookID;
 	
@@ -21,7 +22,7 @@ public class Review extends DBtranslation {
 		super();
 	}
 	
-	public Review(int reviewID, Date reviewDate, String reviewContent,int reviewStatus, int bookID) {
+	public Review(int reviewID, String reviewDate, String reviewContent,int reviewStatus, int bookID) {
 		super();
 		this.reviewID = reviewID;
 		this.reviewDate = reviewDate;
@@ -29,9 +30,9 @@ public class Review extends DBtranslation {
 		this.reviewStatus = reviewStatus;
 		this.bookID = bookID;
 	}
-	public Review( String StrreviewDate, String reviewContent,int reviewStatus, int bookID) {
+	public Review( String reviewDate, String reviewContent,int reviewStatus, int bookID) {
 		super();
-		this.StrreviewDate = StrreviewDate;
+		this.reviewDate = reviewDate;
 		this.reviewContent = reviewContent;
 		this.reviewStatus = reviewStatus;
 		this.bookID = bookID;
@@ -42,10 +43,10 @@ public class Review extends DBtranslation {
 	public void setReviewID(int reviewID) {
 		this.reviewID = reviewID;
 	}
-	public Date getReviewDate() {
+	public String getReviewDate() {
 		return reviewDate;
 	}
-	public void setReviewDate(Date reviewDate) {
+	public void setReviewDate(String reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 	public String getReviewContent() {
@@ -77,8 +78,7 @@ public class Review extends DBtranslation {
 	}
 	@Override
 	public String getValToInsert() {
-
-		return String.format("(\"%s\",\"%s\",0,\"%s\")",reviewDate,reviewContent,reviewStatus,bookID);
+		return String.format("(\"%s\",\"%s\",%d,%d)",reviewDate,reviewContent,reviewStatus,bookID);
 	}
 
 	//convert array Which was obtained from DB to an actual Review
@@ -106,7 +106,7 @@ public class Review extends DBtranslation {
 					recover.setReviewID((int)ob.getValtoArray(i));
 					break;
 				case "reviewDate":
-					recover.setReviewDate((Date)ob.getValtoArray(i));
+					recover.setReviewDate((String)ob.getValtoArray(i));
 					break;
 				case "reviewContent":
 					recover.setReviewContent((String)ob.getValtoArray(i));
@@ -132,3 +132,4 @@ public class Review extends DBtranslation {
 		}
 		
 }
+

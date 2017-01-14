@@ -19,8 +19,11 @@ import MenuGUI.LoginGUI;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -34,7 +37,7 @@ public class RequestPostFillReviewGUI extends JPanel
 	private String bookID;
 	private JTextField textField;
 	public LoginGUI screen;
-	
+	private Date date;
 	public RequestPostFillReviewGUI(LoginGUI screen,String bookId) {
 		super();
 		//this.bookID=bookId;
@@ -70,12 +73,22 @@ public class RequestPostFillReviewGUI extends JPanel
 		add(lblReviewContent);
 		
 		textFieldReviewDate = new JTextField();
+		textFieldReviewDate.setEnabled(false);
 		textFieldReviewDate.setBounds(384, 138, 116, 22);
-		Date currentDate = new Date();
-		String txtDate = new SimpleDateFormat("dd/MM/yyyy").format(currentDate);
+
+		date = new Date();
+		String txtDate = new SimpleDateFormat("yyyy/MM/dd").format(date);
 		textFieldReviewDate.setText(txtDate);
 		add(textFieldReviewDate);
-		textFieldReviewDate.setColumns(10);
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd"); 
+		date = new Date(txtDate);
+	/*	try {
+			date = dt.parse(txtDate);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} */
+	//	textFieldReviewDate.setColumns(10);
 		
 		JTextPane textPaneReviewContent = new JTextPane();
 		textPaneReviewContent.setBounds(384, 199, 323, 233);
@@ -94,9 +107,15 @@ public class RequestPostFillReviewGUI extends JPanel
 		JButton btnPost = new JButton("Post");
 		btnPost.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Date currentDate = new Date();
-				String txtDate = new SimpleDateFormat("yyyy/dd/MM").format(currentDate);
-				Review r = new Review(txtDate,textPaneReviewContent.getText(),0,Integer.parseInt(textFieldBookID.getText()) );
+			//convert the current time to String
+				Calendar time = Calendar.getInstance();
+				//we can use also with Date object and insert it to Calander ********* we need to choose
+				/*Date f  = new Date();
+				time.setTime(f);*/
+		        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
+
+				//String txtDate = new SimpleDateFormat("yyyy/dd/MM").format(date);
+				Review r = new Review(timeRightNow,textPaneReviewContent.getText(),0,Integer.parseInt(textFieldBookID.getText()) );
 				boolean result = ReviewController.AddReview(r,screen.getClient());
 				if (result==false)
 					JOptionPane.showMessageDialog(screen,"Add Reviwe process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
