@@ -43,7 +43,7 @@ public class bookController {
 /*#####################################################################*/
 /* Return all table of domain for the search in the method BookRate! */
 /*#####################################################################*/
-	public static ArrayList<Domain> getAllDomainTable(Domain d,DBSQLhandler client)
+/*	public static ArrayList<Domain> getAllDomainTable(Domain d,DBSQLhandler client)
 	{
 		client.getAllTable(new showAllCommand<Domain>(d));
 		while(!client.GetGotMessag()){//show table -domain
@@ -61,15 +61,13 @@ public class bookController {
 		} catch (SQLException e) {
 			return null;
 		}
-	}
+	}*/
 /*#####################################################################*/
 
-
-	
 /*#####################################################################*/
 	/* Return all table of BOOK for the search in the method SearchBook! */
 /*#####################################################################*/
-		public static ArrayList<Book> getAllBookTable(Book b,DBSQLhandler client)
+	/*	public static ArrayList<Book> getAllBookTable(Book b,DBSQLhandler client)
 		{
 			client.getAllTable(new showAllCommand<Book>(b));
 			while(!client.GetGotMessag()){//show table -domain
@@ -87,13 +85,13 @@ public class bookController {
 			} catch (SQLException e) {
 				return null;
 			}
-		}
+		}*/
 /*#####################################################################*/
 	
 /*#####################################################################*/
 		/* Search specific subject for the method BookRate! */
 /*#####################################################################*/
-	public static ArrayList<SubjectToBook> SearchSubject(String fromSentence,SubjectToBook s,String condition,DBSQLhandler client)
+	/*public static ArrayList<SubjectToBook> SearchSubject(String fromSentence,SubjectToBook s,String condition,DBSQLhandler client)
 	{
 		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,s,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search subject in db
@@ -111,10 +109,9 @@ public class bookController {
 		} catch (SQLException e) {
 			return null;
 		}
-	}
+	}*/
 /*#####################################################################*/
 	
-
 /*#####################################################################*/
 							/* AddBook method */
 /*#####################################################################*/

@@ -14,6 +14,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.JCheckBox;
 
 import Book.Book;
+import Book.Cart;
 import Book.Domain;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
@@ -34,9 +35,9 @@ public class BookPerCart extends JPanel{
 	private JLabel lblNewDate ;
 	private JLabel lblTitle;
 	
-	public BookPerCart(LoginGUI screen,Book b) {
+	public BookPerCart(LoginGUI screen,Book b,Cart c) {
 		setBackground(Color.WHITE);
-		setBorder(new MatteBorder(3, 3, 3, 3, (Color) Color.CYAN));
+		setBorder(new MatteBorder(3, 3, 3, 3, (Color) Color.ORANGE));
 		setPreferredSize(new Dimension(731, 59));
 		setLayout(null);
 		book=b;
@@ -50,7 +51,7 @@ public class BookPerCart extends JPanel{
 		lblNewTitle.setBounds(295, 18, 56, 16);
 		add(lblNewTitle);
 		
-		lblNewBookID = new JLabel(b.getLanguage());
+		lblNewBookID = new JLabel(Integer.toString(b.getBookID()));
 		lblNewBookID.setBounds(123, 18, 56, 16);
 		add(lblNewBookID);
 		
@@ -68,7 +69,7 @@ public class BookPerCart extends JPanel{
 		lblDate.setBounds(578, 14, 56, 20);
 		add(lblDate);
 		
-		lblNewDate = new JLabel(b.getSummary());
+		lblNewDate = new JLabel(c.getDate());
 		lblNewDate.setBounds(646, 18, 56, 16);
 		add(lblNewDate);
 		

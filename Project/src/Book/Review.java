@@ -1,5 +1,6 @@
 package Book;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -94,7 +95,7 @@ public class Review extends DBtranslation {
 			
 		}
 		
-		//this convert specific  DBgenericObject to book according the fromSentence
+	//this convert specific  DBgenericObject to book according the fromSentence
 		private static Review convertDBObject(DBgenericObject ob,String fromSentenceArray)
 		{
 			Review recover=new Review();
@@ -106,7 +107,9 @@ public class Review extends DBtranslation {
 					recover.setReviewID((int)ob.getValtoArray(i));
 					break;
 				case "reviewDate":
-					recover.setReviewDate((String)ob.getValtoArray(i));
+					Date d = (Date)ob.getValtoArray(i);
+					String txtDate = new SimpleDateFormat("dd/MM/yyyy").format(d);
+					recover.setReviewDate(txtDate);
 					break;
 				case "reviewContent":
 					recover.setReviewContent((String)ob.getValtoArray(i));

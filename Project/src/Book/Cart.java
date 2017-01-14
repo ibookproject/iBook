@@ -1,6 +1,7 @@
 package Book;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
@@ -13,12 +14,12 @@ public class Cart extends DBtranslation {
 	private int bookID;
 	private float price;
 	protected boolean status;
-	private Date buyDate;
+	private String buyDate;
 	public Cart()
 	{
 		super();
 	}
-	public Cart(String userID,int bookID,float price,boolean status,Date date)
+	public Cart(String userID,int bookID,float price,boolean status,String date)
 	{
 		this.userID=userID;
 		this.bookID=bookID;
@@ -58,10 +59,10 @@ public class Cart extends DBtranslation {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return buyDate;
 	}
-	public void setDate(Date d) {
+	public void setDate(String d) {
 		this.buyDate = d;
 	}
 	@Override
@@ -86,21 +87,37 @@ public class Cart extends DBtranslation {
 		
 		return String.format("%s", bookID);
 	}
-	public static ArrayList<Cart> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
+	/*public static ArrayList<Cart> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
 		 ArrayList<Cart> convertedArr=new ArrayList<Cart>();
 		 
-		 if(fromSentence.indexOf('*')>=0)
-			 for(DBgenericObject ob:arr)
+		/* if(fromSentence.indexOf('*')>=0)
+			/* for(DBgenericObject ob:arr)
 			 {
-				 convertedArr.add(new Cart((String)ob.getValtoArray(0),(int)ob.getValtoArray(1),(float)ob.getValtoArray(2),(boolean)ob.getValtoArray(3),(Date)ob.getValtoArray(4)));
+				 convertedArr.add(new Cart((String)ob.getValtoArray(0),(int)ob.getValtoArray(1),(float)ob.getValtoArray(2),(boolean)ob.getValtoArray(3),(String)ob.getValtoArray(4)));
 			 }
+				{
+			 for(DBgenericObject ob:arr)
+				 convertedArr.add(convertDBObject(ob, fromSentence));//for each val in arr this convert back to book
+				}
+					
 		else
 		for(DBgenericObject ob:arr)
 				convertedArr.add(convertDBObject(ob, fromSentence));//for each val in arr this convert back to book
 		
 		return convertedArr;
 		
+	}*/
+	
+	public static ArrayList<Cart> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
+		 ArrayList<Cart> convertedArr=new ArrayList<Cart>();
+		 
+		for(DBgenericObject ob:arr)
+				convertedArr.add(convertDBObject(ob, fromSentence));//for each val in arr this convert back to book
+		
+		return convertedArr;
+		
 	}
+	
 	private static Cart convertDBObject(DBgenericObject ob,String fromSentenceArray)
 	{
 		 Cart recover=new Cart();
@@ -120,8 +137,11 @@ public class Cart extends DBtranslation {
 			case "status":
 				recover.setStatus((boolean)ob.getValtoArray(i));
 				break;
-			case "date":
-				recover.setDate((Date)ob.getValtoArray(i));
+			case "buyDate":
+				Date d = (Date)ob.getValtoArray(i);
+				String txtDate = new SimpleDateFormat("dd/MM/yyyy").format(d);
+				recover.setDate(txtDate);
+			/*	recover.setDate((Date)ob.getValtoArray(i));*/
 				break;
 			
 			default:

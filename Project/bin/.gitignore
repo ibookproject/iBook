@@ -1,4 +1,10 @@
-/Panels/
-/MemberGUI/
-/Book/
 /ManagmentGUI/
+/MemberGUI/
+/MenuGUI/
+/Panels/
+/Role/
+/client/
+/command/
+/Book/
+/Controller/
+/DB/

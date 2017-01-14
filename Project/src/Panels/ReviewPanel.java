@@ -60,7 +60,7 @@ public class ReviewPanel extends JPanel{
 		lblNewTitle.setBounds(168, 34, 93, 16);
 		add(lblNewTitle);
 		
-		lblNewDate = new JLabel(r.getReviewDate().toString());
+		lblNewDate = new JLabel(r.getReviewDate());
 		lblNewDate.setBounds(167, 68, 161, 16);
 		add(lblNewDate);
 		
