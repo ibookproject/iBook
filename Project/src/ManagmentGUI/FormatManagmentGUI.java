@@ -2,8 +2,11 @@ package ManagmentGUI;
 
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
@@ -11,49 +14,55 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JTable;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
+import javax.swing.border.MatteBorder;
 
 import Book.Book;
 import Book.Domain;
+import Book.Review;
 import Book.Subject;
 import Book.SubjectToBook;
 import Controller.FormatController;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
+import Panels.FormatCheckBoxBooklistPanel;
+import Panels.SearchReviewPanel;
 import command.joinCommand;
 import command.joinObject;
 
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 
-
-
 public class FormatManagmentGUI extends JPanel {
-
 
 	private static final long serialVersionUID = 1L;
 	private JTextField DomainTextField;
 	private JTextField SubjectTextField;
 	public JButton btnBack;
 	private JTable table;
-	private JTable table_1;
 	public LoginGUI screen;
 	private ArrayList<Domain> resultDomains;
 	private ArrayList<Subject> resultSubjects;
-	private ArrayList<Book> resultBook;
 	private JComboBox SubjectBox;
-	private JComboBox DomainAttachcomboBox;
-    private JComboBox SubjectAttachcomboBox;
-    private JComboBox bookComboBox;
+    private int coubtflag; // not use for now
+	private JScrollPane scrollPaneMain;
+	public static JPanel panel;
+    
+    private ArrayList<SubjectToBook> specificBooksWtihSelectedSubject;
+    private ArrayList<Book> AllBookList;
 
 	public FormatManagmentGUI(LoginGUI screen) {
 		super();		
+		coubtflag=0;
 		this.screen=screen;
 		initialize();
 	}
@@ -63,11 +72,25 @@ public class FormatManagmentGUI extends JPanel {
 		
 		this.setLayout(null);	
 		this.setSize(850, 600);
-
 		
-		 DomainAttachcomboBox = new JComboBox(); // for attaching
-		 SubjectAttachcomboBox = new JComboBox();// for attaching
-		 bookComboBox = new JComboBox();//for attaching
+		/////////////////////
+		scrollPaneMain = new JScrollPane();
+		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
+		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneMain.setAutoscrolls(true);
+		scrollPaneMain.setBounds(10, 90, 296, 309);
+		scrollPaneMain.setVisible(false);
+		add(scrollPaneMain);
+
+		panel = new JPanel();
+		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		panel.setAutoscrolls(true);
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		scrollPaneMain.setViewportView(panel);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+
+		////////////////////
+		
 		 
 		JLabel lblFormatManagment = new JLabel("Format managment");
 		lblFormatManagment.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -75,7 +98,7 @@ public class FormatManagmentGUI extends JPanel {
 		add(lblFormatManagment);
 		
 		JLabel lblChooseBook = new JLabel("Choose book for ataching subject :");
-		lblChooseBook.setBounds(32, 90, 197, 14);
+		lblChooseBook.setBounds(46, 75, 197, 14);
 		add(lblChooseBook);
 		
 		JList<?> list = new JList<Object>();
@@ -85,18 +108,20 @@ public class FormatManagmentGUI extends JPanel {
 		
 		JLabel lblChooseDomain = new JLabel("Choose Domain : ");
 		lblChooseDomain.setForeground(Color.RED);
-		lblChooseDomain.setBounds(251, 90, 114, 14);
+		lblChooseDomain.setBounds(325, 90, 114, 14);
 		add(lblChooseDomain);
 		
 		JComboBox DomainBox = new JComboBox();
 		SubjectBox = new JComboBox();
+
 		Domain d = new Domain("1");
 		
 		 resultDomains = FormatController.GetAllDomain(d,screen.getClient());//
-			for(Domain dd:resultDomains){ // adding all the Domain names to the checkbox
+		 	if(resultDomains!=null)
+			for(Domain dd:resultDomains) // adding all the Domain names to the checkbox
 				DomainBox.addItem(dd);
-				DomainAttachcomboBox.addItem(dd);
-			}
+				
+			
 			
 			// this is for the first time that we get in the format managar , if the domain list is not null..->
 			//..-> we will do " selected item " for to show all the subject list for the first time ! 
@@ -106,86 +131,104 @@ public class FormatManagmentGUI extends JPanel {
 				Subject s=new Subject(3,"1");  //create empty project
 				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
 				if(resultSubjects!=null&&!resultSubjects.isEmpty())
+				{
 				for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
 					SubjectBox.addItem(ddd);
+				SubjectBox.setSelectedIndex(0);
+				
+				//getting all the book at the DB
+				Book tempObject = new Book(); // create new book
+				AllBookList=bookController.getAllBookTable(tempObject, screen.getClient());
+				
+				//getting all the books that the selected subject is attach to them.
+				SubjectToBook btemp=new SubjectToBook();														//"domainName=\""+DomainTextField.getText().trim()+ "\""
+				specificBooksWtihSelectedSubject=FormatController.SearchSubjectAtSubjectToBook("nameSubject,domainID,bookID", btemp, "nameSubject=\"" +resultSubjects.get(0).getNameSubject()+"\"", screen.getClient());
+				//System.out.println(specificBooksWtihSelectedSubject);
+				
+				/*
+				for(int i=0;i<AllBookList.size();i++)
+					System.out.println(AllBookList.get(i).getAuthor()+" ,  " +AllBookList.get(i).getTitle());
+				System.out.println();System.out.println();
+				*/
+				
+				//make haluka !
+				if(specificBooksWtihSelectedSubject!=null)
+				for(int i=0;i<AllBookList.size();i++)
+				{
+					for(int j=0;j<specificBooksWtihSelectedSubject.size();j++)
+					{
+						if(specificBooksWtihSelectedSubject.get(j).getBookID()==AllBookList.get(i).getBookID())
+						{
+							AllBookList.remove(i);
+						//	if(i==0)
+							i--;
+							break;
+						}	 
+					}
+				}
+				//print for now.... 
+				
+				for(int i=0;i<AllBookList.size();i++)
+				System.out.println(AllBookList.get(i).getBookID());
+				System.out.println();
+				if(specificBooksWtihSelectedSubject!=null)
+				for(int i=0;i<specificBooksWtihSelectedSubject.size();i++)
+				System.out.println(specificBooksWtihSelectedSubject.get(i).getBookID());
+			
+				panel.removeAll();
+				panel.setVisible(true);
+				scrollPaneMain.setVisible(true);
+				for(Book b:AllBookList)
+					panel.add(new FormatCheckBoxBooklistPanel(screen,b,((Domain) DomainBox.getSelectedItem()).getDomainID()));
+				}
 			}
 			// this is for the first time that we get in the format managar , if the domain list is not null..
 			//we will do " selected item " for to show all the subject list for the first time ! 
 		
-		DomainBox.addActionListener(new ActionListener() {
+		DomainBox.addActionListener(new ActionListener() {// domain combobox lisener
 			public void actionPerformed(ActionEvent e) {
 				Subject s=new Subject(3,"1");  //create empty project
 				if(DomainBox.getItemAt(0)!=null)
 				{	
 				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
-				System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
+				//System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
 				if(resultSubjects!=null) // if there is no result 
 				{
 					SubjectBox.removeAllItems(); // first clear all the subject result from the checkbox 
 				for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
 					SubjectBox.addItem(ddd);
+					SubjectBox.setSelectedIndex(0);
+				}
+				else
+				{
+					SubjectBox.removeAllItems();
+					panel.removeAll();
+	 				panel.setVisible(false);
+					scrollPaneMain.setVisible(false);
+				}
+			
 				}
 				else SubjectBox.removeAllItems();
 			}
-			}
 		});
-		DomainBox.setBounds(265, 115, 75, 20);
+		DomainBox.setBounds(339, 115, 75, 20);
 		add(DomainBox);
 		
 	
-		SubjectBox.setBounds(267, 237, 75, 20);
+		SubjectBox.setBounds(341, 237, 75, 20);
 		add(SubjectBox);
 		
 		JLabel lblChooseSubjectAt = new JLabel("Choose subject at Domain");
-		lblChooseSubjectAt.setBounds(239, 218, 150, 14);
-		
-
-	
-		 DomainAttachcomboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Subject s=new Subject(3,"1");  //create empty project
-				if(DomainAttachcomboBox.getItemAt(0)!=null)
-				{	
-				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainAttachcomboBox.getSelectedItem()).getDomainID(), screen.getClient());
-				System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
-				if(resultSubjects!=null) // if there is no result 
-				{
-					SubjectAttachcomboBox.removeAllItems(); // first clear all the subject result from the checkbox 
-				for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
-					SubjectAttachcomboBox.addItem(ddd);
-				}
-				else SubjectAttachcomboBox.removeAllItems();
-			}
-			}
-		});
-		 DomainAttachcomboBox.setBounds(71, 137, 101, 20);
-		add(DomainAttachcomboBox);
-		
-		JLabel lblChooseSubject = new JLabel("Choose Subject : ");
-		lblChooseSubject.setBounds(71, 168, 95, 14);
-		add(lblChooseSubject);
-		
-			 
-		SubjectAttachcomboBox.setBounds(71, 185, 103, 20);
-		add(SubjectAttachcomboBox);
-		
-		
-		JLabel lblChooseBook1 = new JLabel("Choose Book :");
-		lblChooseBook1.setBounds(71, 225, 91, 23);
-		add(lblChooseBook1);
-		
-		
-		bookComboBox.setBounds(71, 243, 105, 23);
-		add(bookComboBox);
+		lblChooseSubjectAt.setBounds(313, 218, 150, 14);
 		
 		add(lblChooseSubjectAt);
 		
 		JLabel lblNewDomain = new JLabel("new domain : ");
-		lblNewDomain.setBounds(482, 114, 83, 14);
+		lblNewDomain.setBounds(556, 114, 83, 14);
 		add(lblNewDomain);
 		
 		DomainTextField = new JTextField();
-		DomainTextField.setBounds(564, 108, 86, 20);
+		DomainTextField.setBounds(638, 108, 86, 20);
 		add(DomainTextField);
 		DomainTextField.setColumns(10);
 		
@@ -223,18 +266,17 @@ public class FormatManagmentGUI extends JPanel {
 			}
 		});
 		
-		btnAddNewDomain.setBounds(660, 108, 67, 20);
+		btnAddNewDomain.setBounds(734, 108, 67, 20);
 		add(btnAddNewDomain);
 		
 
-		
 		JLabel lblNewSubjectAt = new JLabel("new subject at CHOSSEN domain : ");
 		lblNewSubjectAt.setForeground(Color.RED);
-		lblNewSubjectAt.setBounds(357, 240, 197, 14);
+		lblNewSubjectAt.setBounds(431, 240, 197, 14);
 		add(lblNewSubjectAt);
 		
 		SubjectTextField = new JTextField();
-		SubjectTextField.setBounds(564, 237, 86, 20);
+		SubjectTextField.setBounds(638, 237, 86, 20);
 		add(SubjectTextField);
 		SubjectTextField.setColumns(10);
 		
@@ -274,11 +316,111 @@ public class FormatManagmentGUI extends JPanel {
 		}
 		
 	});
+		
+		
+		SubjectBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				///////////////////////////////////////////////
+				//if(coubtflag%2==0)
+				//{
+				
+			//getting all the book at the DB
+			Book tempObject = new Book(); // create new book
+			AllBookList=bookController.getAllBookTable(tempObject, screen.getClient());
 			
-		btnAdd.setBounds(660, 237, 67, 21);
+			//getting all the books that the selected subject is attach to them.
+				//SubjectBox.setSelectedIndex(0);
+				if(SubjectBox.getItemCount()!=0)
+				{
+					SubjectToBook btemp=new SubjectToBook();													
+					specificBooksWtihSelectedSubject=FormatController.SearchSubjectAtSubjectToBook("nameSubject,domainID,bookID", btemp, "nameSubject=\"" +((Subject)SubjectBox.getSelectedItem()).getNameSubject()+"\"", screen.getClient());
+					//System.out.println(specificBooksWtihSelectedSubject);
+			
+					//make haluka !
+					if(specificBooksWtihSelectedSubject!=null)
+					for(int i=0;i<AllBookList.size();i++)
+					{
+						for(int j=0;j<specificBooksWtihSelectedSubject.size();j++)
+						{
+							if(specificBooksWtihSelectedSubject.get(j).getBookID()==AllBookList.get(i).getBookID())
+							{
+								AllBookList.remove(i);
+								//if(i==0)
+								i--;
+								break;
+							}	 
+						}
+					}
+			
+					//print for now....
+					System.out.print(++coubtflag);
+					System.out.println("books after deleting: ");
+					for(int i=0;i<AllBookList.size();i++)
+					System.out.println(AllBookList.get(i).getBookID());
+					System.out.println();
+					System.out.println("subject from  tavla mekasheret");
+					if(specificBooksWtihSelectedSubject!=null)
+					for(int i=0;i<specificBooksWtihSelectedSubject.size();i++)
+					System.out.println(specificBooksWtihSelectedSubject.get(i).getBookID());
+						if(AllBookList!=null)
+						{
+							panel.removeAll();
+							panel.updateUI();
+							panel.setVisible(true);
+							scrollPaneMain.setVisible(true);
+							for(Book b:AllBookList)
+								panel.add(new FormatCheckBoxBooklistPanel(screen,b,((Domain) DomainBox.getSelectedItem()).getDomainID()));
+						}
+						else JOptionPane.showMessageDialog(screen,"All books at the System is already Attached to the chossen subject", "Warning",JOptionPane.WARNING_MESSAGE);
+ 
+				}
+				else
+				{
+	 				panel.removeAll();
+	 				panel.setVisible(false);
+					scrollPaneMain.setVisible(false);
+				}
+			
+				//} else coubtflag++;
+			}
+		});
+			
+		btnAdd.setBounds(734, 237, 67, 21);
 		add(btnAdd);
 		
 		JButton btnAtachBook = new JButton("atach book to subject");
+		btnAtachBook.addActionListener(new ActionListener() { //attach Button Lisner  !!!!!!!!!!!!!!
+			public void actionPerformed(ActionEvent arg0) {
+						int flag=0;
+				ArrayList<Integer> tempBooksId = new 	ArrayList<Integer> ();
+					if(panel.getComponentCount()!=0)
+					{
+						for(int i=0;i<panel.getComponentCount();i++)
+						{
+							if((((FormatCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.isSelected())==true)
+							{
+								tempBooksId.add(((FormatCheckBoxBooklistPanel)panel.getComponent(i)).book.getBookID());
+								flag=1;
+								panel.remove(i);
+								//if(i==0)
+									i--;
+							}
+							panel.updateUI();
+						}
+						if(flag==1)
+						{
+					SubjectToBook s=new SubjectToBook();
+					for(int i=0;i<tempBooksId.size();i++)
+						FormatController.AddBookIdDomainIdSubjectNameTOSubjectToBookTable(new SubjectToBook(tempBooksId.get(i),((Domain) DomainBox.getSelectedItem()).getDomainID(),((Subject)SubjectBox.getSelectedItem()).getNameSubject()), screen.getClient());
+		 			JOptionPane.showMessageDialog(screen,"The book's attached successfully to the Choosen Subject !", "done",JOptionPane.INFORMATION_MESSAGE);
+						}				
+						else JOptionPane.showMessageDialog(screen,"you must to choose at list 1 book to attach !", "Warning",JOptionPane.WARNING_MESSAGE);
+
+					}
+					else JOptionPane.showMessageDialog(screen,"no Chossen Subject & any book's", "Warning",JOptionPane.WARNING_MESSAGE);
+	
+			}
+		});
 		btnAtachBook.setBounds(311, 440, 165, 32);
 		add(btnAtachBook);
 		
@@ -288,35 +430,10 @@ public class FormatManagmentGUI extends JPanel {
 		btnBack.setBounds(84, 44, 67, 20);
 		add(btnBack);
 		
-		JLabel lblDbAnswer = new JLabel("DB answer");
-		lblDbAnswer.setBounds(670, 129, 75, 14);
-		add(lblDbAnswer);
-		
-		JLabel lblDbAnswer_1 = new JLabel("DB answer");
-		lblDbAnswer_1.setBounds(670, 257, 67, 14);
-		add(lblDbAnswer_1);
-		
 		table = new JTable();
 		table.setBackground(SystemColor.inactiveCaptionBorder);
-		table.setBounds(239, 83, 527, 262);
+		table.setBounds(313, 83, 527, 314);
 		add(table);
-		
-		table_1 = new JTable();
-		table_1.setBackground(SystemColor.inactiveCaptionBorder);
-		table_1.setBounds(10, 83, 221, 262);
-		add(table_1);
-		
-		JLabel label = new JLabel("Choose Subject : ");
-		label.setBounds(71, 115, 95, 14);
-		add(label);
-		
-		JLabel label_1 = new JLabel("New label");
-		label_1.setBounds(69, 114, 46, 14);
-		add(label_1);
-		
-		JLabel lblChooseDomain_1 = new JLabel("Choose Domain :");
-		lblChooseDomain_1.setBounds(69, 115, 46, 14);
-		add(lblChooseDomain_1);
 	
 	}
 }

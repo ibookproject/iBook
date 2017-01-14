@@ -111,6 +111,10 @@ public class SearchReviewGUI extends JPanel {
 						scrollPaneMain.setVisible(true);
 						for(Review r:temp)
 							panel.add(new SearchReviewPanel(screen,r,titleBook));
+					;	
+					//System.out.println(panel.countComponents());
+					//for doin this to go to each selected check box i need to make a panel that variable is public and then to make casting 
+				//	((SearchReviewPanel)panel.getComponent(0)).textArea.getText();
 					} 
 					else 
 					{
@@ -177,6 +181,10 @@ public class SearchReviewGUI extends JPanel {
 				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\"", screen.getClient());
 				 		 if(tempBooks==null)
 				 		 {
+				 			comboBoxOfBooks.removeAllItems();
+			 				panel.removeAll();
+			 				panel.setVisible(false);
+							scrollPaneMain.setVisible(false);
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 								textFieldBook.setText("");textFieldAutohr.setText("");
 				 		 }
@@ -196,6 +204,10 @@ public class SearchReviewGUI extends JPanel {
 			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
+							comboBoxOfBooks.removeAllItems();
+			 				panel.removeAll();
+			 				panel.setVisible(false);
+							scrollPaneMain.setVisible(false);
 							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 							textFieldBook.setText("");textFieldAutohr.setText("");
 			 		 }

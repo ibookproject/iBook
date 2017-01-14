@@ -12,7 +12,7 @@ public class SubjectToBook extends DBtranslation {
 	private String nameSubject;
 
 	//empty constactor
-	private SubjectToBook(){
+	public SubjectToBook(){
 		super();
 	}
 	public SubjectToBook(int bookID, int domainID, String nameSubject) {

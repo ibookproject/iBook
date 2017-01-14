@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Book.Book;
 import Book.Domain;
 import Book.Subject;
+import Book.SubjectToBook;
 import Book.Subject;
 import Role.User;
 import client.DBSQLhandler;
@@ -17,14 +18,7 @@ import command.showAllCommand;
 
 public class FormatController {
 	
-	/*
-	 * AddNewSubject-coral
-	 * AddNewDomain-coral
-	 * GetAllSubjectList-coral
-	 * GetAllBookList-coral
-	 * AttachFormatBook-coral
-	 * */
-	
+
 	
 	public static ArrayList<Domain> SearchDomain(String fromSentence,Domain d,String whereSentence,DBSQLhandler client)
 	{
@@ -137,7 +131,43 @@ public class FormatController {
 		}
 	}
 	////////////////////new/////////////////////
+	
+	
+	public static ArrayList<SubjectToBook> SearchSubjectAtSubjectToBook(String fromSentence,SubjectToBook s,String whereSentence,DBSQLhandler client)
+	{
+		// filed is need to look like "userID,password,..."
+		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,s,whereSentence));//call command and client ask to search a book
+		while(!client.GetGotMessag()){//search user in db
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+			}
+		}
+		try {
+			return SubjectToBook.convertBack((ArrayList<DBgenericObject>) client.getResultObject(),fromSentence);
+		} catch (SQLException e) {
+			return null;
+		}
+	}
 
+	public static boolean AddBookIdDomainIdSubjectNameTOSubjectToBookTable(SubjectToBook s,DBSQLhandler client) // boolean function that return true if the add book done else false.
+	{
+			client.insertToDB(new insertCommand<DBtranslation>(s)); 	
+			while(!client.GetGotMessag()){//add book to DB
+				try{
+				Thread.sleep(500);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+					return false;
+				}
+			}
+			return true;	// means the book add successful	
+	}
 	
 	
 
