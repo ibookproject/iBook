@@ -14,14 +14,14 @@ public class Order extends Cart {
 	public Order(String userID,int bookID,float price,Date buyDate)
 	{
 		super(userID,bookID,price);
-		this.status=false;
+	//	this.status=0;
 		this.buyDate=buyDate;
 	}
 	@Override
 	public String getValToInsert() {
 		int temp=0;
-		if(status)
-		temp=1;
+		//if(status==1)
+		//temp=1;
 		return (String.format("(%s,%d,%d,%f",getUserID(),getBookID(),temp,getPrice())+buyDate);
 	}
 	@Override

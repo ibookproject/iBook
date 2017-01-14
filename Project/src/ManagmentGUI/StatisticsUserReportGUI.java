@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -39,18 +40,22 @@ import Role.User;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 
+
+/**
+ * 
+ * @author coral
+ * Give to the manager the user statistics per ID and date
+ */
 public class StatisticsUserReportGUI extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
 	private LoginGUI screen;
-	private JPanel pann;
 	private ImageIcon backIcon;
 	private JLabel lblDate;
 	private JLabel userReportLbl;
 	private JButton btnGetReports;
 	private JLabel lblUserID;
-	//private JTextArea txtReport;
 	private JTextField textFieldID;
 	private JTextField textFieldDate;
 	private JScrollPane scrollPaneMain;
@@ -62,7 +67,6 @@ public class StatisticsUserReportGUI extends JPanel
 		super();
 		
 		this.screen=screen;
-		pann=this;
 		
 		initialize();
 	}
@@ -83,7 +87,7 @@ public class StatisticsUserReportGUI extends JPanel
 		add(btnBack);
 		
 
-		textFieldID = new JTextField();
+		textFieldID = new JTextField("");
 		textFieldID.setBounds(320, 129, 116, 22);
 		add(textFieldID);
 		textFieldID.setColumns(10);
@@ -97,7 +101,7 @@ public class StatisticsUserReportGUI extends JPanel
 		lblDate.setBounds(238, 180, 48, 22);
 		add(lblDate);
 		
-		textFieldDate = new JTextField();
+		textFieldDate = new JTextField("");
 		textFieldDate.setBounds(320, 180, 116, 21);
 		add(textFieldDate);
 		textFieldDate.setColumns(10);
@@ -120,24 +124,32 @@ public class StatisticsUserReportGUI extends JPanel
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				try
+				{
 				Cart t=new Cart();
+			/*	if(textFieldDate.getText()!="")
+				{*/
+				
 				ArrayList<Cart> carts= (ArrayList<Cart>)CartController.SearchCart("userID,bookID,price,buyDate",t,"userID=\""+textFieldID.getText()+"\""/*&&status=\""+true+"\""*/,screen.getClient());
 				if(carts==null||carts.isEmpty())
 				{
-
+				
 					scrollPaneMain.setViewportView(panel);
 					panel.removeAll();
 					JOptionPane.showMessageDialog(screen,"There's nothing to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
+					
 				}
 				else		//success to get the rows of carts
 				{
 					ArrayList<Cart> cartsToShow=new ArrayList<Cart>();
-				//	cartsToShow=null;
-					for(Cart c:carts)
-					{
-						if(ifBiggerThanDate(c.getDate())==true)
-							cartsToShow.add(c);
-					}
+					
+						for(Cart c:carts)
+						{
+							if(ifBiggerThanDate(c.getDate())==true)
+								cartsToShow.add(c);
+						}
+					
+					
 					if(cartsToShow.isEmpty())
 						JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
 					else
@@ -147,7 +159,16 @@ public class StatisticsUserReportGUI extends JPanel
 					}
 						
 				}				
-			}		
+				
+				}
+				catch(Exception ex)
+				{
+					JOptionPane.showMessageDialog(screen,"Please fill the date field!", "Warning",JOptionPane.WARNING_MESSAGE);
+					System.out.println("Not fill the date field");
+				
+				}
+			
+			}	
 		});
 		btnGetReports.setBounds(598, 129, 107, 23);
 		add(btnGetReports);
@@ -180,10 +201,11 @@ public class StatisticsUserReportGUI extends JPanel
 	 */
 	public boolean ifBiggerThanDate(String date)	
 	{
-		String temp=textFieldDate.getText();		//date from user
-	
+		
+		String temp=textFieldDate.getText();													//date from user
+
 		String[] userDateInput=temp.split("/");
-		String[] dateCart=date.split("/");	//   dd/mm/yyyy
+		String[] dateCart=date.split("/");														//   dd/mm/yyyy
 		if((Integer.parseInt(userDateInput[2])<Integer.parseInt(dateCart[2])))					//compare the year
 			return true;	
 		else
@@ -200,5 +222,8 @@ public class StatisticsUserReportGUI extends JPanel
 		}
 
 		 return false;
+		 
+		 
+	
 	}
 }

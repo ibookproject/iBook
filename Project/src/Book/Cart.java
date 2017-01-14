@@ -13,18 +13,18 @@ public class Cart extends DBtranslation {
 	private String userID;
 	private int bookID;
 	private float price;
-	protected boolean status;
+	private int status;
 	private String buyDate;
 	public Cart()
 	{
 		super();
 	}
-	public Cart(String userID,int bookID,float price,boolean status,String date)
+	public Cart(String userID,int bookID,float price,int status,String date)
 	{
 		this.userID=userID;
 		this.bookID=bookID;
 		this.price=price;
-		this.status=false;
+		this.status=0;
 		this.buyDate=date;
 	}
 	public Cart(String userID,int bookID,float price)
@@ -53,10 +53,10 @@ public class Cart extends DBtranslation {
 		this.price = price;
 	}
 	
-	public boolean isStatus() {
+	public int isStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public String getDate() {
@@ -74,8 +74,8 @@ public class Cart extends DBtranslation {
 	@Override
 	public String getValToInsert() {
 		int temp=0;
-		if(status)
-		temp=1;
+		if(status==1)
+			temp=1;
 		return String.format("(%s,%d,%d,%f)",userID,bookID,temp,price);
 	}
 	@Override
@@ -135,7 +135,7 @@ public class Cart extends DBtranslation {
 				recover.setPrice((float)ob.getValtoArray(i));
 				break;
 			case "status":
-				recover.setStatus((boolean)ob.getValtoArray(i));
+				recover.setStatus((int)ob.getValtoArray(i));
 				break;
 			case "buyDate":
 				Date d = (Date)ob.getValtoArray(i);
