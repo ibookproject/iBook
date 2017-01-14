@@ -96,7 +96,7 @@ public class RequestSetSubscriptionGUI extends JPanel {
 					JOptionPane.showMessageDialog(screen,"                          Sorry!\nNo selected one of options", "Warning",JOptionPane.WARNING_MESSAGE);
 				else
 				{
-					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("subscriptionRequest",u,"userID=\""+screen.getTempID()+"\"",screen.getClient());
+					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("subscriptionMethod,subscriptionRequest",u,"userID=\""+screen.getTempID()+"\"",screen.getClient());
 				
 					if(radioButtonChoose==UserStatus.SINGLE)
 					{
@@ -104,8 +104,14 @@ public class RequestSetSubscriptionGUI extends JPanel {
 							JOptionPane.showMessageDialog(screen,"This request alredy sent! ", "Warning",JOptionPane.WARNING_MESSAGE);
 						else
 						{
+							int x =temp.get(0).getSubscriptionMethod();
+							if(temp.get(0).getSubscriptionMethod()>UserStatus.NONE)
+								JOptionPane.showMessageDialog(screen,"There is already another subscription", "Warning",JOptionPane.WARNING_MESSAGE);
+							else
+							{
 							UserController.UpdateUserStatus(u, "subscriptionRequest=\""+UserStatus.SINGLE+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
 							JOptionPane.showMessageDialog(screen,"Send request Subscription sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+							}
 						}
 					}
 					else
@@ -116,8 +122,13 @@ public class RequestSetSubscriptionGUI extends JPanel {
 								JOptionPane.showMessageDialog(screen,"This request alredy sent! ", "Warning",JOptionPane.WARNING_MESSAGE);
 							else
 							{
+								if(temp.get(0).getSubscriptionMethod()>UserStatus.SINGLE)
+									JOptionPane.showMessageDialog(screen,"There is already another subscription", "Warning",JOptionPane.WARNING_MESSAGE);
+								else
+								{
 								UserController.UpdateUserStatus(u, "subscriptionRequest=\""+UserStatus.MONTHLY+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
 								JOptionPane.showMessageDialog(screen,"Send request Subscription sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+								}
 							}
 						}
 						else
@@ -127,8 +138,12 @@ public class RequestSetSubscriptionGUI extends JPanel {
 									JOptionPane.showMessageDialog(screen,"This request alredy sent! ", "Warning",JOptionPane.WARNING_MESSAGE);
 								else
 								{
+									if(temp.get(0).getSubscriptionMethod()>UserStatus.MONTHLY)
+										JOptionPane.showMessageDialog(screen,"There is already another subscription", "Warning",JOptionPane.WARNING_MESSAGE);
+									else{
 									UserController.UpdateUserStatus(u, "subscriptionRequest=\""+UserStatus.YEARLY+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
 									JOptionPane.showMessageDialog(screen,"Send request Subscription sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+									}
 								}
 							}
 					

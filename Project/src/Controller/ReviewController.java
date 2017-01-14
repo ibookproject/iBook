@@ -13,17 +13,19 @@ import command.deleteCommand;
 import command.insertCommand;
 import command.searchCommand;
 import command.updateCommand;
-
+/**
+ * 
+ * @author Sagi Entenberg
+ */
 public class ReviewController {
-	/*
-	 * AddReview-sagi Done
-	 * SearchReviews-sagi 
-	 * CheckReview- 
-	 * EditReviewDetails-sagi
-	 * UpdateReviewContent-sagi SetConfirmationReviewStatus-coral
-	 * RequsetPostReview GetCategorysList GetBookLisAtCategoryt
-	 */
-
+/**
+ * 
+ * @param fromSentence
+ * @param r
+ * @param whereSentence
+ * @param client
+ * @return null if SQLException or result Review
+ */
 	public static ArrayList<Review> SearchReviews(String fromSentence,Review r, String whereSentence, DBSQLhandler client) {
 		// filed is need to look like "bookID"
 		client.searchInDB(new searchCommand<Review>(fromSentence, r,
@@ -44,7 +46,14 @@ public class ReviewController {
 			return null;
 		}
 	}
-
+/**
+ * 
+ * @param r
+ * @param updateCondition
+ * @param searchCondition
+ * @param client
+ * @return boolean (true if successfully/false if not successfully)
+ */
 	public static boolean UpdateReviewContent(Review r, String updateCondition,
 			String searchCondition, DBSQLhandler client) // boolean function
 															// that return true
@@ -63,7 +72,12 @@ public class ReviewController {
 		}
 		return true; // means the review update successful
 	}
-
+/**
+ * 
+ * @param r
+ * @param searchCondition
+ * @param client
+ */
 	public static void DeleteReview(Review r, String searchCondition,DBSQLhandler client) {
 		client.deleteFromDB(new deleteCommand<DBtranslation>(r, searchCondition));
 		while (!client.GetGotMessag()) {// add user to DB
@@ -81,7 +95,7 @@ public class ReviewController {
  * @author Sagi Entenberg
  * @param r
  * @param client
- * @return boolean (true/false)
+ * @return boolean (true if successfully/false if not successfully)
  */
 
 	public static boolean AddReview(Review r, DBSQLhandler client) // boolean

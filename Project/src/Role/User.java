@@ -233,7 +233,10 @@ public class User extends DBtranslation implements UserStatus {
 				break;
 			case "finishDateOfSubscription":
 				recover.setFinishDateOfSubscription((Date)ob.getValtoArray(i));
-				break;				
+				break;	
+			case "subscriptionMethod":
+				recover.setSubscriptionMethod((int)ob.getValtoArray(i));
+				break;
 
 			default:
 				throw new InputMismatchException("you have inserred wrong to search statment");

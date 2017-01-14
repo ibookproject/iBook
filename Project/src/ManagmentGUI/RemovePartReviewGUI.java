@@ -24,7 +24,11 @@ import Role.User;
 import Role.UserStatus;
 
 
-
+/**
+ * 
+ * @author Sagi Entenberg
+ * build the window of Remove Part Review
+ */
 public class RemovePartReviewGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;

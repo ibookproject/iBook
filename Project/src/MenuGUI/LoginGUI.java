@@ -45,8 +45,8 @@ public class LoginGUI extends JFrame {
 	private String newStatus;
 	private String tempID;
 	/**
-	 * 
 	 * @param host
+	 * Build the first window of the App - Login.
 	 */
 	public LoginGUI(String host) {
 		super();
@@ -87,14 +87,14 @@ public class LoginGUI extends JFrame {
 	}
 /**
  * 
- * @return tempID
+ * @return tempID - ID of the user that connected now
  */
 	public String getTempID() {
 		return tempID;
 	}
 /**
  * 
- * @param tempID
+ * @param tempID -ID of the user that connected now
  */
 	public void setTempID(String tempID) {
 		this.tempID = tempID;
@@ -132,15 +132,7 @@ public class LoginGUI extends JFrame {
 					}
 					try{
 							u=new User(txtUserID.getText()/*ID*/, pwdPassword.getText()/*Password*/);
-							
-					}
-					catch(InputMismatchException ex)
-					{
-						JOptionPane.showMessageDialog(screen,"USER ID or Password empty", "Warning",JOptionPane.WARNING_MESSAGE);
-					System.out.println("Mismatch password/username");
-					flagTry--;;
-					}
-					
+				
 					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID,privilege,userStatus",u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"",client);
 					if(temp==null||temp.isEmpty())
 					{
@@ -265,15 +257,19 @@ public class LoginGUI extends JFrame {
 					}
 						break;
 
-					// //////////////////////button go to panel from
-					// JFram/////////////////////////////////////////////
-					// LibrarianMenu usm=new LibrarianMenu(screen);
-					// setContentPane(usm);
+					// //////////////////////button go to panel from JFram/////////////////////////////////////////////
+					
 					}
 
-					// //////////////////////button go to panel from
-					// JFram/////////////////////////////////////////////
 						}
+					}
+				}//try
+					catch(InputMismatchException ex)
+					{
+						
+						JOptionPane.showMessageDialog(screen,"USER ID or Password empty", "Warning",JOptionPane.WARNING_MESSAGE);
+					System.out.println("Mismatch password/username");
+					flagTry--;;
 					}
 				}
 			});
@@ -320,12 +316,19 @@ public class LoginGUI extends JFrame {
 		}
 		return FirstPanel;
 	}
-
+/**
+ * 
+ * @param pnl
+ * 
+ */
 	public void setpann(JPanel pnl) {
 		setContentPane(pnl);
 	}
 
-
+/**
+ * 
+ * @return client
+ */
 	public DBSQLhandler getClient()// return client
 	{
 		return client;

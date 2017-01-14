@@ -82,19 +82,13 @@ public class RequestPostFillReviewGUI extends JPanel
 		add(textFieldReviewDate);
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd"); 
 		date = new Date(txtDate);
-	/*	try {
-			date = dt.parse(txtDate);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} */
-	//	textFieldReviewDate.setColumns(10);
-		
+			
 		JTextPane textPaneReviewContent = new JTextPane();
 		textPaneReviewContent.setBounds(384, 199, 323, 233);
 		add(textPaneReviewContent);
 		
 		JTextField textFieldBookID = new JTextField();
+		textFieldBookID.setText("");
 		textFieldBookID.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -115,15 +109,27 @@ public class RequestPostFillReviewGUI extends JPanel
 		        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
 
 				//String txtDate = new SimpleDateFormat("yyyy/dd/MM").format(date);
-				Review r = new Review(timeRightNow,textPaneReviewContent.getText(),0,Integer.parseInt(textFieldBookID.getText()) );
-				boolean result = ReviewController.AddReview(r,screen.getClient());
+		        if(textFieldBookID.getText().equals(""))
+					JOptionPane.showMessageDialog(screen,"Please insert BookID ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+		        else if(!(textPaneReviewContent.getText().equals("")))
+				{
+		        Review r = new Review(timeRightNow,textPaneReviewContent.getText(),0,Integer.parseInt(textFieldBookID.getText()));
+		        Book b=new Book();
+				ArrayList<Book> temp = bookController.SearchBook("title,language,author,summary",b,"bookID=\""+Integer.parseInt(textFieldBookID.getText())+"", screen.getClient());//call search book method from book controller
+				if(temp==null)
+					JOptionPane.showMessageDialog(screen,"not found any book result\n", "Warning",JOptionPane.WARNING_MESSAGE);
+				else{
+		        boolean result = ReviewController.AddReview(r,screen.getClient());
 				if (result==false)
 					JOptionPane.showMessageDialog(screen,"Add Reviwe process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			 	else
 			 	{
 			 		JOptionPane.showMessageDialog(screen,"Add Reviwe process Done ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			 	}
-				
+				}//temp!=null
+				}//else if
+		        else
+		        	JOptionPane.showMessageDialog(screen,"Please insert Review content ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		btnPost.setBounds(357, 509, 97, 25);
