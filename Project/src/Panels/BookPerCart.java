@@ -38,7 +38,7 @@ public class BookPerCart extends JPanel{
 	public BookPerCart(LoginGUI screen,Book b,Cart c) {
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) Color.ORANGE));
-		setPreferredSize(new Dimension(731, 59));
+		setPreferredSize(new Dimension(702, 59));
 		setLayout(null);
 		book=b;
 		
@@ -66,11 +66,11 @@ public class BookPerCart extends JPanel{
 		
 		lblDate = new JLabel("Date:");
 		lblDate.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
-		lblDate.setBounds(578, 14, 56, 20);
+		lblDate.setBounds(563, 14, 56, 20);
 		add(lblDate);
 		
 		lblNewDate = new JLabel(c.getDate());
-		lblNewDate.setBounds(646, 18, 56, 16);
+		lblNewDate.setBounds(619, 18, 56, 16);
 		add(lblNewDate);
 		
 		lblTitle = new JLabel("Title:");

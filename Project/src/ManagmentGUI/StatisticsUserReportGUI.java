@@ -129,22 +129,23 @@ public class StatisticsUserReportGUI extends JPanel
 					panel.removeAll();
 					JOptionPane.showMessageDialog(screen,"There's nothing to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
 				}
-				else
+				else		//success to get the rows of carts
 				{
-			/*	User u=new User();
-				ArrayList<User> user= (ArrayList<User>)UserController.SearchUser("userID,password,firstName,lastName",u,"userID=\""+textFieldID.getText()+"\"" ,screen.getClient());
-				if(user==null||user.isEmpty())
-				{
-					screen.setContentPane(pann);
-					JOptionPane.showMessageDialog(screen,"User was not Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
-				}
-			
-				else
-				{*/
-					//JOptionPane.showMessageDialog(screen,"User Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
-					
-						showBooks(carts);
+					ArrayList<Cart> cartsToShow=new ArrayList<Cart>();
+				//	cartsToShow=null;
+					for(Cart c:carts)
+					{
+						if(ifBiggerThanDate(c.getDate())==true)
+							cartsToShow.add(c);
+					}
+					if(cartsToShow.isEmpty())
+						JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
+					else
+					{
+						showBooks(cartsToShow);
 						JOptionPane.showMessageDialog(screen,"Theres books to this user\n", "Warning",JOptionPane.WARNING_MESSAGE);
+					}
+						
 				}				
 			}		
 		});
@@ -170,5 +171,34 @@ public class StatisticsUserReportGUI extends JPanel
 				panel.add(new BookPerCart(screen, booksSearch.get(0),carts.get(i)));
 			}
 		}
+	}
+	/**
+	 * @author coral
+	 * @param date(from DB)
+	 * @return true if false if
+	 * 			
+	 */
+	public boolean ifBiggerThanDate(String date)	
+	{
+		String temp=textFieldDate.getText();		//date from user
+	
+		String[] userDateInput=temp.split("/");
+		String[] dateCart=date.split("/");	//   dd/mm/yyyy
+		if((Integer.parseInt(userDateInput[2])<Integer.parseInt(dateCart[2])))					//compare the year
+			return true;	
+		else
+		{
+			if((Integer.parseInt(userDateInput[2])==Integer.parseInt(dateCart[2])))				//compare the year
+				{
+				if((Integer.parseInt(userDateInput[1])<Integer.parseInt(dateCart[1])))			//compare the month
+					return true;
+				else
+					if((Integer.parseInt(userDateInput[1])==Integer.parseInt(dateCart[1])))		//compare the month
+						if((Integer.parseInt(userDateInput[0])<=Integer.parseInt(dateCart[0])))	//compare the day
+							return true;
+				}
+		}
+
+		 return false;
 	}
 }
