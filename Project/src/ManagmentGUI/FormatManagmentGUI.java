@@ -56,6 +56,7 @@ public class FormatManagmentGUI extends JPanel {
     private int coubtflag; // not use for now
 	private JScrollPane scrollPaneMain;
 	public static JPanel panel;
+
     
     private ArrayList<SubjectToBook> specificBooksWtihSelectedSubject;
     private ArrayList<Book> AllBookList;
@@ -135,10 +136,12 @@ public class FormatManagmentGUI extends JPanel {
 				for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
 					SubjectBox.addItem(ddd);
 				SubjectBox.setSelectedIndex(0);
-				
+				//+ " && "+"bookEnable=\""+1+"\""
+
 				//getting all the book at the DB
 				Book tempObject = new Book(); // create new book
-				AllBookList=bookController.getAllBookTable(tempObject, screen.getClient());
+				AllBookList=bookController.SearchBook("bookID,title,language,author",tempObject,"bookEnable=\""+1+"\"", screen.getClient());
+
 				
 				//getting all the books that the selected subject is attach to them.
 				SubjectToBook btemp=new SubjectToBook();														//"domainName=\""+DomainTextField.getText().trim()+ "\""
@@ -326,7 +329,7 @@ public class FormatManagmentGUI extends JPanel {
 				
 			//getting all the book at the DB
 			Book tempObject = new Book(); // create new book
-			AllBookList=bookController.getAllBookTable(tempObject, screen.getClient());
+			AllBookList=bookController.SearchBook("bookID,title,language,author",tempObject,"bookEnable=\""+1+"\"", screen.getClient());
 			
 			//getting all the books that the selected subject is attach to them.
 				//SubjectBox.setSelectedIndex(0);

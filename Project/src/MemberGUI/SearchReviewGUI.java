@@ -178,7 +178,7 @@ public class SearchReviewGUI extends JPanel {
 				 	
 				 	if(textFieldAutohr.getText().isEmpty()==false)
 				 	{
-				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\"", screen.getClient());
+				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\"" + " && "+"bookEnable=\""+1+"\"", screen.getClient());
 				 		 if(tempBooks==null)
 				 		 {
 				 			comboBoxOfBooks.removeAllItems();
@@ -201,7 +201,7 @@ public class SearchReviewGUI extends JPanel {
 				 	}
 			 	else
 			 	{
-			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\"", screen.getClient());
+			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\""+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
 							comboBoxOfBooks.removeAllItems();
@@ -260,6 +260,6 @@ public class SearchReviewGUI extends JPanel {
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 		
-	
+	//+ " && "+"bookEnable=\""+1+"\""
 	}
 }

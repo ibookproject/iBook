@@ -130,7 +130,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				 	
 				 	if(textFieldAutohr.getText().isEmpty()==false)
 				 	{
-				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\"", screen.getClient());
+				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\""+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 				 		 if(tempBooks==null)
 				 		 {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -149,7 +149,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				 	}
 			 	else
 			 	{
-			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\"", screen.getClient());
+			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\""+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
 							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -186,7 +186,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 					{
 						//means delete ..... 
 						Book b=new Book();
-						bookController.DeleteBook(b,"bookID=\""+bookId+"\"",screen.getClient());
+						bookController.DeleteBook(b,"bookID=\""+bookId+"\""+ " && "+"bookEnable=\""+1+"\"",screen.getClient());
 					//	comboBox.removeAllItems();
 						tempBooks.remove(index);
 						comboBox.removeItemAt(index);
