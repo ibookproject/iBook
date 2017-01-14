@@ -96,11 +96,22 @@ public class StatisticsBookReportGUI extends JPanel {
 		panel.setAutoscrolls(true);
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		scrollPaneMain.setViewportView(panel);
+		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		Book b=new Book();
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				////////////////////////button to back panel from panel /////////////////////////////////////////////
+			StatisticsBookReport sbr=new StatisticsBookReport(screen);
+			sbr.btnBack.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						screen.setContentPane(pann);
+					}
+				////////////////////////button to back panel from panel/////////////////////////////////////////////
+				});
+			panel.removeAll();
+				
 				if ((textFieldBookTitle.getText().isEmpty())&&(textFieldAuthor.getText().isEmpty()))
 					JOptionPane.showMessageDialog(screen, "you must fill one field at least ", "Warning",
 							JOptionPane.WARNING_MESSAGE);
@@ -120,7 +131,7 @@ public class StatisticsBookReportGUI extends JPanel {
 					if(tempBooks != null)
 					{
 						for (Book bt : tempBooks)
-							panel.add(new BookStatisticsPanel(screen, bt));
+							panel.add(new BookStatisticsPanel(screen, bt,pann));
 						panel.updateUI();
 					}
 					else
@@ -137,3 +148,4 @@ public class StatisticsBookReportGUI extends JPanel {
 
 	}
 }
+
