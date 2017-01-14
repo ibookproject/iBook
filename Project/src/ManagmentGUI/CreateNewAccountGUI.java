@@ -110,9 +110,15 @@ public class CreateNewAccountGUI extends JPanel {
 				 	if (result==false)
 						JOptionPane.showMessageDialog(screen,"Add user process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 				 	else
+				 	{
 				 		JOptionPane.showMessageDialog(screen,"The user was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
-					}
-			
+				 		txtLastName.setText("");
+				 		txtFirstName.setText("");
+				 		txtUserID.setText("");	
+				 		txtPassword.setText("");
+				 	}
+				}
+
 				else
 					JOptionPane.showMessageDialog(screen,"User name already exist. Try another user name\n", "Warning",JOptionPane.WARNING_MESSAGE);
 
