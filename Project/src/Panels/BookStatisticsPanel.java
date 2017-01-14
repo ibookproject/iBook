@@ -84,6 +84,7 @@ public class BookStatisticsPanel extends JPanel {
 		add(lblFromDate);
 
 		txtFromDate = new JTextField();
+		txtFromDate.setText("yyyy/mm/dd");
 		txtFromDate.setBounds(481, 18, 86, 20);
 		add(txtFromDate);
 		txtFromDate.setColumns(10);
@@ -93,6 +94,7 @@ public class BookStatisticsPanel extends JPanel {
 		add(lblToDate);
 
 		txtToDate = new JTextField();
+		txtToDate.setText("yyyy/mm/dd");
 		txtToDate.setBounds(481, 48, 86, 20);
 		add(txtToDate);
 		txtToDate.setColumns(10);
@@ -109,7 +111,7 @@ public class BookStatisticsPanel extends JPanel {
 					//SELECT * FROM Orders
 				//WHERE OrderDate BETWEEN #07/04/1996# AND #07/09/1996#;		
 				Cart c = new Cart();
-				searcRes = CartController.SearchCart("userID", c, "buyDate between '2001/01/01' AND '2017/05/05' ",screen.getClient());//call search book method from book controller
+				searcRes = CartController.SearchCart("userID", c, "buyDate between '"+ txtFromDate.getText() +"' AND '"+txtToDate.getText()+"' && bookID=\""+ b.getBookID()+ "\"",screen.getClient());//call search book method from book controller
 				int count=0;
 				for(Cart ct:searcRes)
 					count++;
