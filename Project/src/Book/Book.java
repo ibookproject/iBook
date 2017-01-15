@@ -16,15 +16,17 @@ public class Book extends DBtranslation {
 	private boolean bookEnable;
 	private String[] keyword;
 	private String[] content;
-	
+	private String cont;
 	
 	//empty constructor
-	public Book(){
-	super();	
+	public Book()
+	{
+		super();	
 	}
-	public Book(int bookID){
-	super();	
-	this.bookID=bookID;
+	public Book(int bookID)
+	{
+		super();	
+		this.bookID=bookID;
 	}
 	
 	//Contractor to insert form DB without keyword and content
@@ -47,14 +49,11 @@ public class Book extends DBtranslation {
 		this.bookEnable = bookEnable;
 	}
 	
-	
 	public Book(String title, String author) {
 		super();
 		this.title = title;
 		this.author = author;
 	}
-	
-	
 	
 	//Contractor to insert form DB with keyword and content
 	public Book( String title, String language, String author, String summary, boolean bookEnable,String keyword,String content)
@@ -62,7 +61,9 @@ public class Book extends DBtranslation {
 		this(title,language,author,summary,bookEnable);
 		this.keyword=keyword.split(" ");
 		this.content=content.split(" ");
+		this.cont=content;
 	}
+	
 	public Book(Book b)
 	{
 		this.bookID = b.getBookID();
@@ -74,6 +75,7 @@ public class Book extends DBtranslation {
 		this.keyword=b.getKeyword();
 		this.content=b.getContent();
 	}
+	
 	public int getBookID() {
 		return bookID;
 	}
@@ -130,7 +132,7 @@ public class Book extends DBtranslation {
 	}
 	
 	//to insert into DB
-	private String getKeywordToString()
+	public String getKeywordToString()
 	{
 		String toString="";
 		for(int i=0;i<keyword.length-1;i++)
@@ -145,13 +147,15 @@ public class Book extends DBtranslation {
 	public void setKeyword(String keyword) {/// splite form DB
 		this.keyword=keyword.split(" ");
 	}
-
+	public String getCont() {
+		return cont;
+	}
 	public String[] getContent() {
 		return content;
 	}
 	
 	//to insert into DB
-	private String getContentToString()
+	public String getContentToString()
 	{
 		String toString="";
 		for(int i=0;i<content.length-1;i++)

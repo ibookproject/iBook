@@ -102,6 +102,9 @@ public class SearchBook extends JPanel {
 		if(searchRes!=null)
 			
 		for(Book b:searchRes)
+		{
 			panel.add(new BookPanel(this.screen,b));
+			panel.updateUI();
+		}
 	}
 }

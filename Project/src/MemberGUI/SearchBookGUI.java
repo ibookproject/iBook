@@ -58,6 +58,7 @@ public class SearchBookGUI extends JPanel {
 	private JTextField textFieldContents;
 	private JButton btnSearch;
 	private ArrayList<Book> bookss;
+	private int flag=0;
 
 	public SearchBookGUI(LoginGUI screen) {
 		super();
@@ -181,18 +182,16 @@ public class SearchBookGUI extends JPanel {
 		btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// //////////////////////button back to Search book GUI
-				// /////////////////////////////////////////////
+// //////////////////////button back to Search book GUI// /////////////////////////////////////////////
 				SearchBook sb = new SearchBook(screen,bookss);
 				sb.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
 					}
-					// //////////////////////button back to Search book
-					// GUI/////////////////////////////////////////////
+// //////////////////////button back to Search book GUI/////////////////////////////////////////////
 				});
 				Book b = new Book(textTitle.getText(), textFieldLanguage.getText(),
-						textAuthor.getText(), textFieldSummary.getText(), true);//create book from text fields
+						textAuthor.getText(), textFieldSummary.getText(), true,textFieldKeywords.getText(),textFieldContents.getText());//create book from text fields
 				String condition = "";//initialize the condition
 				if (chckbxTitle.isSelected())
 					condition += "title=\"" + b.getTitle() + "\"";//add "title" to condition
@@ -211,23 +210,114 @@ public class SearchBookGUI extends JPanel {
 						condition += " && ";
 					condition += "summary=\"" + b.getSummary() + "\"";//add "summary" to condition
 				}
-				if (!condition.equals("")) {//if have some condition
-					ArrayList<Book> temp = bookController.SearchBook("title,language,author,summary",b,condition, screen.getClient());//call search book method from book controller
-					if (temp != null) {
-						sb.setList(temp);
+			
+				ArrayList<Book> bookContentsChoose=new ArrayList<Book>();
+				ArrayList<Book> bookKeywordsChoose=new ArrayList<Book>();
+				ArrayList<Book> bookKeywordsContents=new ArrayList<Book>();
+				
+				if (chckbxContents.isSelected())
+				{
+					flag=1;
+					Book b2=new Book();
+					ArrayList<Book> bookContents=bookController.SearchBook("bookID,title,language,author,summary,content,keyword", b2, "bookEnable=\""+1+"\"", screen.getClient());
+					
+					for(Book b1:bookContents)
+					{
+						for(int i=0;i<b1.getContent().length;i++)
+							if(textFieldContents.getText().equals(b1.getContent()[i]))
+								bookContentsChoose.add(b1);	
+					}
+				}
+				
+				if (chckbxKeywords.isSelected())
+				{
+					flag=2;
+					Book b2=new Book();
+					ArrayList<Book> bookKeywords=bookController.SearchBook("bookID,title,language,author,summary,content,keyword", b2, "bookEnable=\""+1+"\"", screen.getClient());
+					
+					for(Book b1:bookKeywords)
+					{
+						for(int i=0;i<b1.getKeyword().length;i++)
+							if(textFieldKeywords.getText().equals(b1.getKeyword()[i]))
+								bookKeywordsChoose.add(b1);	
+					}
+				}
+		
+				if(chckbxKeywords.isSelected()&&chckbxContents.isSelected())		//AND between both ArrayList!
+				{
+					flag=3;
+					if((bookContentsChoose!=null)&&(bookKeywordsChoose!=null))
+					{
+						for(Book b1:bookContentsChoose)
+						{
+							for(int i=0;i<bookKeywordsChoose.size();i++)
+								if(bookKeywordsChoose.get(i).getBookID()==b1.getBookID())
+									bookKeywordsContents.add(b1);
+						}
+					}
+				
+				}
+				
+				
+				if (!condition.equals("")||flag!=0) 
+				{//if have some condition
+					ArrayList<Book> temp1 =new ArrayList<Book>();
+					if(condition.equals("")&&flag==1)
+						temp1=bookContentsChoose;
+					else
+						if(condition.equals("")&&flag==2)
+							temp1=bookKeywordsChoose;
+						else
+							if(condition.equals("")&&flag==3)
+								temp1=bookKeywordsContents;
+							else{
+					
+					ArrayList<Book> temp = bookController.SearchBook("bookID,title,language,author,summary,content,keyword",b,condition, screen.getClient());//call search book method from book controller
+					if (temp != null) 
+					{
 						
-						screen.setContentPane(sb);
-					} else //
+						if(flag==1)//contents
+						{
+							for(Book b1:bookContentsChoose)
+							{
+								for(int i=0;i<temp.size();i++)
+									if(temp.get(i).getBookID()==b1.getBookID())
+										temp1.add(b1);
+							}
+						}
+						else
+							if(flag==2)//keywords
+							{
+								for(Book b1:bookKeywordsChoose)
+								{
+									for(int i=0;i<temp.size();i++)
+										if(temp.get(i).getBookID()==b1.getBookID())
+											temp1.add(b1);
+								}
+							}
+							else
+								if(flag==3)//both
+								{
+									for(Book b1:bookKeywordsContents)
+									{
+										for(int i=0;i<temp.size();i++)
+											if(temp.get(i).getBookID()==b1.getBookID())
+												temp1.add(b1);
+									}
+								}
+					} 
+					else //
 						JOptionPane.showMessageDialog(screen,"not found any book result\n", "Warning",
 								JOptionPane.WARNING_MESSAGE);
+							}
+					sb.setList(temp1);
+					screen.setContentPane(sb);
 				} else //(condition)=="")empty
 					JOptionPane.showMessageDialog(screen,"Nothing has selected", "Warning",
 							JOptionPane.WARNING_MESSAGE);
 			}
-
 		});
 		btnSearch.setBounds(326, 537, 97, 25);
 		add(btnSearch);
-
 	}
 }
