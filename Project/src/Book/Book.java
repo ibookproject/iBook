@@ -1,12 +1,13 @@
 package Book;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 
 import client.DBgenericObject;
 import command.DBtranslation;
 
-public class Book extends DBtranslation {
+public class Book extends DBtranslation  {
 
 	private int bookID;
 	private String title;
@@ -260,5 +261,24 @@ public class Book extends DBtranslation {
 		temp+=", no";
 	return temp;
 	}//rnd toString
+
+
+	/*Comparator for sorting the list by roll no*/
+	public static Comparator<Book> IdBookNum = new Comparator<Book>() 
+	{
+
+		public int compare(Book b1, Book b2) 
+		{
+
+		   int idNum1 = b1.getBookID();
+		   int idNum2 = b2.getBookID();
+
+		   /*For ascending order*/
+		   return idNum1-idNum2;
+
+		   /*For descending order*/
+		   //rollno2-rollno1;
+	   }
+	};
 
 }//end Book class

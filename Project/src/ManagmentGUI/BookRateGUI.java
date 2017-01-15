@@ -154,13 +154,16 @@ public class BookRateGUI extends JPanel {
 
 package ManagmentGUI;
 
+import javax.naming.ldap.SortKey;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Book.Book;
+import Book.Cart;
 import Book.Subject;
+import Controller.CartController;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
 
@@ -171,8 +174,12 @@ import javax.swing.JComboBox;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+
+import javax.swing.JRadioButton;
 
 
 
@@ -192,12 +199,15 @@ public class BookRateGUI extends JPanel {
 	private JLabel lblNameOfAuthor;
 	private JLabel lblNameOfBook;
 	private JComboBox comboBoxChooseBook;
+	private JRadioButton rdbtnAbsoluteRate;
+	private JRadioButton rdbtnProportionRate ;
+	private int flag;
+	private ArrayList<Book> allBooks;
 
 
 
 	public BookRateGUI(LoginGUI screen) {
 		super();
-	//	this.Mainpann=Mainpann;
 		this.screen=screen;
 		bookId=-1;
 		pann=this;
@@ -221,11 +231,11 @@ public class BookRateGUI extends JPanel {
 		add(lblBookRate);
 		
 		lblNameOfAuthor = new JLabel("name of author:");
-		lblNameOfAuthor.setBounds(400, 90, 89, 19);
+		lblNameOfAuthor.setBounds(398, 92, 108, 19);
 		add(lblNameOfAuthor);
 		
 		textFieldAutohr = new JTextField();
-		textFieldAutohr.setBounds(499, 89, 86, 20);
+		textFieldAutohr.setBounds(504, 91, 86, 20);
 		add(textFieldAutohr);
 		textFieldAutohr.setColumns(10);
 		
@@ -237,6 +247,16 @@ public class BookRateGUI extends JPanel {
 		textFieldBook.setBounds(300, 90, 86, 20);
 		add(textFieldBook);
 		textFieldBook.setColumns(10);
+		
+		
+		rdbtnAbsoluteRate = new JRadioButton("Absolute Rate");
+		rdbtnAbsoluteRate.setBounds(278, 193, 123, 25);
+		add(rdbtnAbsoluteRate);
+		
+		rdbtnProportionRate = new JRadioButton("Proportion Rate");
+		rdbtnProportionRate.setBounds(468, 193, 123, 25);
+		add(rdbtnProportionRate);
+		
 		
 		comboBoxChooseBook = new JComboBox();
 		comboBoxChooseBook.addActionListener(new ActionListener() {
@@ -308,7 +328,7 @@ public class BookRateGUI extends JPanel {
 
 			}}
 			}); 
-		btnSearch.setBounds(612, 86, 89, 23);
+		btnSearch.setBounds(645, 88, 89, 23);
 		add(btnSearch);
 		
 		JButton btnSelect = new JButton("Select");
@@ -320,6 +340,22 @@ public class BookRateGUI extends JPanel {
 				if(bookId!=-1)
 				{	
 					JOptionPane.showMessageDialog(screen,"Cool!!! ", "Warning",JOptionPane.WARNING_MESSAGE);
+					
+					if(rdbtnAbsoluteRate.isSelected())
+						{
+						flag=1;
+						rdbtnAbsoluteRateSelected();
+						}
+					else
+						if(rdbtnProportionRate.isSelected())
+						{
+							flag=2;
+						}
+						else
+						JOptionPane.showMessageDialog(screen,"You need to choose kind of rate! ", "Warning",JOptionPane.WARNING_MESSAGE);
+					
+						
+							
 				//	SubjectToBook stb=new 
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
 				//AddOrUpdateBookGUI goback=new AddOrUpdateBookGUI(screen,0, bookId,Mainpann); 
@@ -339,8 +375,31 @@ public class BookRateGUI extends JPanel {
 		btnSelect.setBounds(377, 250, 89, 23);
 		add(btnSelect);
 		
-		
+
 	
+	}
+	public void rdbtnAbsoluteRateSelected()
+	{
+		ArrayList<Book> allBooks=new ArrayList<Book>();
+		Book b=new Book();
+	//	ArrayList<Cart> allcarts=new ArrayList<Cart>();
+		//Cart c=new Cart();
+	//	allcarts=CartController.SearchCart("userID,price", c,  "status=\""+0+"\"", screen.getClient());
+		allBooks=bookController.SearchBook("bookID,title,language,author,summary,content,keyword", b, "bookEnable=\""+1+"\"", screen.getClient());
+		for(Book b4:allBooks)
+			System.out.println(b4.toString()+"");
+	//	for(Cart b4:allcarts)
+			//System.out.println(b4.toString()+"");
+		Collections.sort(allBooks, Book.IdBookNum);
+		//Collections.sort(allcarts, Cart.IdBookNum);
+		System.out.println("");
+	//	for(Cart b4:allcarts)
+		//	System.out.println(b4.toString()+"");
+		JOptionPane.showMessageDialog(screen,"The list is sortted", "Warning",JOptionPane.WARNING_MESSAGE);
+	}
+	public void rdbtnProportionRateSelected()
+	{
+		
 	}
 }
 

@@ -3,6 +3,7 @@ package Book;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 
 import client.DBgenericObject;
@@ -150,6 +151,22 @@ public class Cart extends DBtranslation {
 		 }//end for
 		 return recover;
 	}
+	public static Comparator<Cart> IdBookNum = new Comparator<Cart>() 
+			{
+
+				public int compare(Cart b1, Cart b2) 
+				{
+
+				   float idNum1 = b1.getPrice();
+				   float idNum2 = b2.getPrice();
+
+				   /*For ascending order*/
+				   return (int)idNum1-(int)idNum2;
+
+				   /*For descending order*/
+				   //rollno2-rollno1;
+			   }
+			};
 	
 	
 }
