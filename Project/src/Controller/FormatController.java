@@ -107,8 +107,52 @@ public class FormatController {
 	catch (SQLException e) {
 		return null;
 	}
-	//	return null;
 	}
+	
+	
+	/*Coral made for search book*/
+	public static ArrayList<Subject> GetAllSubject(Subject s,DBSQLhandler client)// changes
+	{
+		// filed is need to look like "bookID,author,..."
+		client.getAllTable((new showAllCommand<Subject>(s)));
+		try{
+		Thread.sleep(500);
+		}
+		catch(InterruptedException ex)
+		{
+			System.out.println("InterruptedException "+ex);
+		}
+		try {
+		return  Subject.convertBack((ArrayList<DBgenericObject>) client.getResultObject(),"DomainID,nameSubject");
+	} 	
+		catch (SQLException e) 
+		{
+			return null;
+		}
+	}
+	
+	public static ArrayList<SubjectToBook> SearchBookInSubjectToBookAccordingDomain(String fromSentence,SubjectToBook s,String whereSentence,DBSQLhandler client)
+	{
+		// filed is need to look like "userID,password,..."
+		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,s,whereSentence));//call command and client ask to search a book
+		while(!client.GetGotMessag()){//search user in db
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+			}
+		}
+		try {
+			return SubjectToBook.convertBack((ArrayList<DBgenericObject>) client.getResultObject(),fromSentence);
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+	/*Coral made*/
+	
+	
 	////////////////////new/////////////////////
 	public static ArrayList<Subject> SearchSubjectAtDomain(String fromSentence,Subject s,String condition,DBSQLhandler client)
 	{

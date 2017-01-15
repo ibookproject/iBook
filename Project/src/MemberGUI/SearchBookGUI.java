@@ -18,6 +18,9 @@ import client.DBgenericObject;
 import command.searchCommand;
 import command.showAllCommand;
 import Book.Book;
+import Book.Domain;
+import Book.SubjectToBook;
+import Controller.FormatController;
 import Controller.bookController;
 import ManagmentGUI.RemovePartReviewGUI;
 import MenuGUI.LoginGUI;
@@ -50,7 +53,7 @@ public class SearchBookGUI extends JPanel {
 	private JCheckBox chckbxKeywords;
 	private JCheckBox chckbxDomain;
 	private JCheckBox chckbxFormat;
-	private JComboBox<String> comboBoxDomain;
+	private JComboBox<Domain> comboBoxDomain;
 	private JComboBox<String> comboBoxFormat ;
 	private JTextField textFieldLanguage;
 	private JTextField textFieldKeywords;
@@ -58,6 +61,8 @@ public class SearchBookGUI extends JPanel {
 	private JTextField textFieldContents;
 	private JButton btnSearch;
 	private ArrayList<Book> bookss;
+	private ArrayList<SubjectToBook> subjectDomainList;
+	private ArrayList<Book> bookDomainList;
 	private int flag=0;
 
 	public SearchBookGUI(LoginGUI screen) {
@@ -71,13 +76,9 @@ public class SearchBookGUI extends JPanel {
 
 		this.setSize(850, 625);
 		this.setLayout(null);
-		String books[] = new String[3];
-		String authors[] = new String[3];
 		String domains[] = new String[3];
 
 		for (int i = 0; i < 3; i++) {
-			books[i] = "Book " + i;
-			authors[i] = "Author " + i;
 			domains[i] = "Domain " + i;
 		}
 
@@ -131,14 +132,19 @@ public class SearchBookGUI extends JPanel {
 		chckbxFormat.setBounds(257, 500, 111, 25);
 		add(chckbxFormat);
 
-		comboBoxDomain = new JComboBox<String>();
-		comboBoxDomain.addItem(" ");
-		for (int i = 0; i < 3; i++) {
-			comboBoxDomain.addItem(domains[i]);
+		comboBoxDomain = new JComboBox<Domain>();
+		//comboBoxDomain.addItem(" ");
+		//comboBoxDomain.setSelectedIndex(0);
+		Domain d=new Domain();
+		ArrayList<Domain> domainList=FormatController.GetAllDomain(d, screen.getClient());
+		
+		for (Domain d1:domainList) {
+			comboBoxDomain.addItem(d1);
 		}
 		comboBoxDomain.setBounds(393, 452, 116, 22);
 		add(comboBoxDomain);
 
+		//comboBoxDomain.getSelectedItem();
 		comboBoxFormat = new JComboBox<String>();
 		comboBoxFormat.addItem(" ");
 		comboBoxFormat.addItem("PDF");
@@ -214,6 +220,8 @@ public class SearchBookGUI extends JPanel {
 				ArrayList<Book> bookContentsChoose=new ArrayList<Book>();
 				ArrayList<Book> bookKeywordsChoose=new ArrayList<Book>();
 				ArrayList<Book> bookKeywordsContents=new ArrayList<Book>();
+
+				ArrayList<Book> bookDomainList=new 	ArrayList<Book>();
 				
 				if (chckbxContents.isSelected())
 				{
@@ -257,7 +265,36 @@ public class SearchBookGUI extends JPanel {
 					}
 				
 				}
-				
+				if(chckbxDomain.isSelected())
+				{	
+					SubjectToBook s=new SubjectToBook();
+					Domain d=(Domain)comboBoxDomain.getSelectedItem();
+					ArrayList<SubjectToBook> subjectDomainList=FormatController.SearchBookInSubjectToBookAccordingDomain("bookID", s, "DomainID=\""+d.getDomainID()+"\"", screen.getClient());
+					if(subjectDomainList!=null)
+					{
+						Book b1=new Book();
+						
+						ArrayList<Book> allBooks=bookController.SearchBook("bookID,title,language,author,summary,content,keyword", b1, "bookEnable=\""+1+"\"", screen.getClient());
+						
+						
+						for(Book b2:allBooks)
+							
+						{
+							for(SubjectToBook s1:subjectDomainList)
+							{
+								if(b2.getBookID()==s1.getBookID())
+									{
+									bookDomainList.add(b2);
+									flag=4;
+									}
+							
+							}
+						}
+					}	
+					else
+						JOptionPane.showMessageDialog(screen,"Theres no books in the chosen domain", "Warning",JOptionPane.WARNING_MESSAGE);
+						
+				}
 				
 				if (!condition.equals("")||flag!=0) 
 				{//if have some condition
@@ -270,7 +307,11 @@ public class SearchBookGUI extends JPanel {
 						else
 							if(condition.equals("")&&flag==3)
 								temp1=bookKeywordsContents;
-							else{
+							else
+								if(condition.equals("")&&flag==4)
+									temp1=bookDomainList;
+									
+								else{
 					
 					ArrayList<Book> temp = bookController.SearchBook("bookID,title,language,author,summary,content,keyword",b,condition, screen.getClient());//call search book method from book controller
 					if (temp != null) 
@@ -305,6 +346,8 @@ public class SearchBookGUI extends JPanel {
 												temp1.add(b1);
 									}
 								}
+								else
+									temp1=temp;
 					} 
 					else //
 						JOptionPane.showMessageDialog(screen,"not found any book result\n", "Warning",

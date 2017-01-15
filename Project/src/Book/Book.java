@@ -16,7 +16,7 @@ public class Book extends DBtranslation {
 	private boolean bookEnable;
 	private String[] keyword;
 	private String[] content;
-	private String cont;
+	//private String cont;
 	
 	//empty constructor
 	public Book()
@@ -61,7 +61,7 @@ public class Book extends DBtranslation {
 		this(title,language,author,summary,bookEnable);
 		this.keyword=keyword.split(" ");
 		this.content=content.split(" ");
-		this.cont=content;
+		
 	}
 	
 	public Book(Book b)
@@ -147,9 +147,7 @@ public class Book extends DBtranslation {
 	public void setKeyword(String keyword) {/// splite form DB
 		this.keyword=keyword.split(" ");
 	}
-	public String getCont() {
-		return cont;
-	}
+	
 	public String[] getContent() {
 		return content;
 	}

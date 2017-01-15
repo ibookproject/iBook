@@ -13,7 +13,7 @@ public class Domain extends DBtranslation {
 	
 	
 	
-	private Domain() {
+	public Domain() {
 		super();
 	}
 	
