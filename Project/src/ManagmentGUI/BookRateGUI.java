@@ -381,25 +381,113 @@ public class BookRateGUI extends JPanel {
 	public void rdbtnAbsoluteRateSelected()
 	{
 		ArrayList<Book> allBooks=new ArrayList<Book>();
+	
+		ArrayList<Cart> allcarts=new ArrayList<Cart>();
+		Cart c=new Cart();
+		allcarts=CartController.SearchCart("userID,bookID,price,status", c,  "status=\""+1+"\""/*+"&&"+"bookID=\""+bookId+"\""*/, screen.getClient());
 		Book b=new Book();
-	//	ArrayList<Cart> allcarts=new ArrayList<Cart>();
-		//Cart c=new Cart();
-	//	allcarts=CartController.SearchCart("userID,price", c,  "status=\""+0+"\"", screen.getClient());
+		//"title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\""
 		allBooks=bookController.SearchBook("bookID,title,language,author,summary,content,keyword", b, "bookEnable=\""+1+"\"", screen.getClient());
+		
+		int maxBookID=0;
+		int bookIdNumPurchase;
+		for(Book b4:allBooks)
+			if(b4.getBookID()>maxBookID)
+				maxBookID=b4.getBookID();
+		
+		int[] arrayCounter=new int[maxBookID];
+		int[] arrayCounterSort=new int[maxBookID];
+		ArrayList<Integer> arrayListCounter=new ArrayList<Integer>();
+		
+		/*for(int i=0;i<maxBookID;i++)		//initialize the countArray
+			arrayCounter[i]=-1;*/
+		
+		for(int i=0;i<allcarts.size();i++)	//go over the purchases book in Cart-counter number of purchases
+			if(allcarts.get(i).isStatus()==1)
+				arrayCounter[allcarts.get(i).getBookID()-1]++;
+		
+		for(int i=0;i<maxBookID;i++)
+			arrayCounterSort[i]=arrayCounter[i];
+		for(int i=0;i<maxBookID;i++)
+		{
+			System.out.println(arrayCounter[i]);
+		}
+		
+		insertionSort(arrayCounterSort);
+		int counter=0;
+		bookIdNumPurchase=arrayCounter[bookId-1];		//number of purchase of bookID
+		
+		for(int i=maxBookID-1;i>0;i--)
+		{
+			counter++;
+			if(arrayCounterSort[i]==bookIdNumPurchase)
+				break;
+		}
+		
+		System.out.println("The counter is:"+counter);
+	/*	for(int i=0;i<maxBookID;i++)
+		{
+			System.out.println(arrayCounter[i]);
+		}
+		
+		
+		for(int i=0;i<maxBookID;i++)		//update the IntegerArrayList
+			arrayListCounter.add(arrayCounter[i]);
+		
+		for(int i=0;i<arrayListCounter.size();i++)
+		{
+			System.out.println(arrayListCounter.get(i).toString());
+		//	counter++;
+			//if(arrayListCounterSorted.get(i)==bookIdNumPurchase)
+				
+		}
+		ArrayList<Integer> arrayListCounterSorted=new ArrayList<Integer>();
+		for(Integer r:arrayListCounter)		//update the sortArray
+			arrayListCounterSorted.add(r);
+		
+		Collections.sort(arrayListCounterSorted);
+		
+		//int rateBook=0;
+		for(int i=arrayListCounterSorted.size()-1;i>0;i--)
+		{
+			System.out.println(arrayListCounterSorted.get(i).toString());
+			
+			counter++;
+			if(arrayListCounterSorted.get(i)==bookIdNumPurchase)
+				break;
+		}
+		
+
+				
+			
 		for(Book b4:allBooks)
 			System.out.println(b4.toString()+"");
-	//	for(Cart b4:allcarts)
-			//System.out.println(b4.toString()+"");
+		for(Cart b4:allcarts)
+			System.out.println(b4.toString()+"");
 		Collections.sort(allBooks, Book.IdBookNum);
-		//Collections.sort(allcarts, Cart.IdBookNum);
+		
+		Collections.sort(allcarts, Cart.IdBookNum);
 		System.out.println("");
-	//	for(Cart b4:allcarts)
-		//	System.out.println(b4.toString()+"");
-		JOptionPane.showMessageDialog(screen,"The list is sortted", "Warning",JOptionPane.WARNING_MESSAGE);
+		for(Cart b4:allcarts)
+			System.out.println(b4.toString()+"");
+		JOptionPane.showMessageDialog(screen,"The list is sortted", "Warning",JOptionPane.WARNING_MESSAGE);*/
 	}
 	public void rdbtnProportionRateSelected()
 	{
 		
+	}
+	public static void insertionSort(int array[]) {
+	    int n = array.length;
+	    for (int j = 1; j < n; j++) {
+	        int key = array[j];
+	        int i = j-1;
+	        while ( (i > -1) && ( array [i] > key ) ) {
+	            array [i+1] = array [i];
+	            i--;
+	        }
+	        array[i+1] = key;
+	       
+	    }
 	}
 }
 
