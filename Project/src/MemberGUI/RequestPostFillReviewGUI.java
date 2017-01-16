@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
@@ -25,6 +26,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.Color;
+
+import javax.swing.SwingConstants;
 
 
 
@@ -38,6 +44,7 @@ public class RequestPostFillReviewGUI extends JPanel
 	private JTextField textField;
 	public LoginGUI screen;
 	private Date date;
+	private int conterOfText;
 	public RequestPostFillReviewGUI(LoginGUI screen,String bookId) {
 		super();
 		//this.bookID=bookId;
@@ -50,6 +57,13 @@ public class RequestPostFillReviewGUI extends JPanel
 		this.setSize(850, 625);
 		this.setLayout(null);	
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
+		
+		JLabel Counterlabel = new JLabel("50");
+		Counterlabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		Counterlabel.setHorizontalAlignment(SwingConstants.CENTER);
+		Counterlabel.setForeground(Color.RED);
+		Counterlabel.setBounds(719, 409, 27, 23);
+		add(Counterlabel);
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
@@ -83,9 +97,41 @@ public class RequestPostFillReviewGUI extends JPanel
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd"); 
 		date = new Date(txtDate);
 			
-		JTextPane textPaneReviewContent = new JTextPane();
-		textPaneReviewContent.setBounds(384, 199, 323, 233);
-		add(textPaneReviewContent);
+		JTextArea textAreaReviewContent = new JTextArea();
+		textAreaReviewContent.setLineWrap(true);
+		textAreaReviewContent.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textAreaReviewContent.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent pressedChar) {
+				if((pressedChar.getKeyChar()==8)&&(conterOfText>0))
+				{
+					conterOfText--;
+					if(conterOfText<=50)
+						Counterlabel.setText(Integer.toString((50-conterOfText)));
+					//System.out.println(conterOfText);
+					
+				}
+				else 
+				{
+					if((pressedChar.getKeyChar()!=8)&&conterOfText<50)
+					{
+						conterOfText++;
+						Counterlabel.setText(Integer.toString((50-conterOfText)));
+						
+					}
+					else if(conterOfText>=50)
+						{
+						conterOfText++;
+							JOptionPane.showMessageDialog(screen,"There are enough characters !\n please remove "+(conterOfText-50)+" of characters", "Warning",JOptionPane.WARNING_MESSAGE);
+							
+						}
+					//System.out.println(conterOfText);
+				}
+			}
+		
+		});
+		textAreaReviewContent.setBounds(384, 199, 323, 233);
+		add(textAreaReviewContent);
 		
 		JTextField textFieldBookID = new JTextField();
 		textFieldBookID.setText("");
@@ -111,11 +157,11 @@ public class RequestPostFillReviewGUI extends JPanel
 				//String txtDate = new SimpleDateFormat("yyyy/dd/MM").format(date);
 		        if(textFieldBookID.getText().equals(""))
 					JOptionPane.showMessageDialog(screen,"Please insert BookID ! ", "Warning",JOptionPane.WARNING_MESSAGE);
-		        else if(!(textPaneReviewContent.getText().equals("")))
+		        else if(!(textAreaReviewContent.getText().equals(""))&&(conterOfText<=50))
 				{
-		        Review r = new Review(timeRightNow,textPaneReviewContent.getText(),0,Integer.parseInt(textFieldBookID.getText()));
+		        Review r = new Review(timeRightNow,textAreaReviewContent.getText(),0,Integer.parseInt(textFieldBookID.getText()));
 		        Book b=new Book();
-				ArrayList<Book> temp = bookController.SearchBook("title,language,author,summary",b,"bookID=\""+Integer.parseInt(textFieldBookID.getText())+"", screen.getClient());//call search book method from book controller
+				ArrayList<Book> temp = bookController.SearchBook("bookID",b,"bookID=\""+Integer.parseInt(textFieldBookID.getText())+"\"", screen.getClient());//call search book method from book controller
 				if(temp==null)
 					JOptionPane.showMessageDialog(screen,"not found any book result\n", "Warning",JOptionPane.WARNING_MESSAGE);
 				else{
@@ -128,6 +174,8 @@ public class RequestPostFillReviewGUI extends JPanel
 			 	}
 				}//temp!=null
 				}//else if
+		        else if(conterOfText>=50)
+		        	JOptionPane.showMessageDialog(screen,"There are too many characters ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 		        else
 		        	JOptionPane.showMessageDialog(screen,"Please insert Review content ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
