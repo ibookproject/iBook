@@ -25,7 +25,7 @@ public class bookController {
 		client.searchInDB(new searchCommand<Book>(fromSentence,b,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search book in db
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -46,7 +46,7 @@ public class bookController {
 			client.insertToDB(new insertCommand<DBtranslation>(b)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
-				Thread.sleep(500);
+				Thread.sleep(250);
 				}
 				catch(InterruptedException ex)
 				{
@@ -66,7 +66,7 @@ public class bookController {
 			client.UpdateInDB(new updateCommand<DBtranslation>(b, searchCondition, updateCondition));
 			while(!client.GetGotMessag()){//add user to DB
 				try{
-				Thread.sleep(500);
+				Thread.sleep(250);
 				}
 				catch(InterruptedException ex)
 				{
@@ -82,7 +82,7 @@ public class bookController {
 		client.deleteFromDB(new deleteCommand<DBtranslation>(b, searchCondition));
 		while(!client.GetGotMessag()){//add user to DB
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -98,7 +98,7 @@ public class bookController {
 		client.getAllTable(new showAllCommand<Book>(b));
 		while(!client.GetGotMessag()){//show table -domain
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -125,7 +125,7 @@ public class bookController {
 		client.getAllTable(new showAllCommand<Domain>(d));
 		while(!client.GetGotMessag()){//show table -domain
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -149,7 +149,7 @@ public class bookController {
 			client.getAllTable(new showAllCommand<Book>(b));
 			while(!client.GetGotMessag()){//show table -domain
 				try{
-				Thread.sleep(500);
+				Thread.sleep(250);
 				}
 				catch(InterruptedException ex)
 				{
@@ -173,7 +173,7 @@ public class bookController {
 		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,s,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search subject in db
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{

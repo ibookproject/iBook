@@ -91,11 +91,9 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 				if (index!=-1)
 					bookId=tempBooks.get(index).getBookID();
 				else
-					bookId=-1;
-			
+					bookId=-1;	
 				System.out.println(bookId);
-				
-				 
+	 
 			}
 		});
 		comboBox.setBounds(225, 141, 412, 20);
@@ -104,54 +102,64 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				 if(textFieldBook.getText().isEmpty())
-						JOptionPane.showMessageDialog(screen,"you must fill the name of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
-				 else
-				 {
-				 	Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
-				 	
-				 	if(textFieldAutohr.getText().isEmpty()==false)
+			 
+				Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
+			 	 if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty())
+			 	 {
+						JOptionPane.showMessageDialog(screen,"you must fill the name/author of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
+		 				comboBox.removeAllItems();
+			 	 }
+				 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)
 				 	{
-				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\""+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+ "&&"+"bookEnable=\""+1+"\"", screen.getClient());
 				 		 if(tempBooks==null)
 				 		 {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 								textFieldBook.setText("");textFieldAutohr.setText("");
+				 				comboBox.removeAllItems();
 				 		 }
 				 		 else
 				 		 {
-				 		//	if(flagFirstTime==1)
 				 				comboBox.removeAllItems();
 							for(int i=0;i<tempBooks.size();i++)
 								comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
-							
 				 		 }
-
-				 		 
+ 
 				 	}
-			 	else
+			 	else if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty()==false)
 			 	{
-			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\""+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
 							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 							textFieldBook.setText("");textFieldAutohr.setText("");
+			 				comboBox.removeAllItems();
 			 		 }
 			 		 else
 			 		 {
-			 		if(comboBox.getSize() != null)	comboBox.removeAllItems();
-						for(int i=0;i<tempBooks.size();i++)
-							comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+			 			 if(comboBox.getSize() != null)	comboBox.removeAllItems();
+			 			 	for(int i=0;i<tempBooks.size();i++)
+			 			 		comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
 			 	}
- 			/*
-				comboBox.removeAllItems();
-				for(int i=0;i<temp.size();i++)
-					comboBox.addItem(temp.get(i).getTitle() + " , " + temp.get(i).getAuthor());
-					*/
+			 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty())
+			 	{
+			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+					 if(tempBooks==null)
+			 		 {
+							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
+							textFieldBook.setText("");textFieldAutohr.setText("");
+			 				comboBox.removeAllItems();
 
-			}}
+			 		 }
+			 		 else
+			 		 {
+			 			 if(comboBox.getSize() != null)	comboBox.removeAllItems();
+			 			 	for(int i=0;i<tempBooks.size();i++)
+			 			 		comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+			 		 }
+			 	}
+			}
 			}); 
 		btnSearch.setBounds(612, 86, 89, 23);
 		add(btnSearch);
@@ -174,16 +182,11 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 				}
 				else 
 					JOptionPane.showMessageDialog(screen,"there is no book to select ", "Warning",JOptionPane.WARNING_MESSAGE);
-
 			}
-				
-				
-			
+	
 		});
 		btnSelect.setBounds(377, 250, 89, 23);
 		add(btnSelect);
-		
-		
-	
+
 	}
 }

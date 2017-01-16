@@ -26,7 +26,7 @@ public class FormatController {
 		client.searchInDB(new searchCommand<Domain>(fromSentence,d,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -46,7 +46,7 @@ public class FormatController {
 		client.searchInDB(new searchCommand<Subject>(fromSentence,s,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -65,7 +65,7 @@ public class FormatController {
 			client.insertToDB(new insertCommand<DBtranslation>(d)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
-				Thread.sleep(500);
+				Thread.sleep(250);
 				}
 				catch(InterruptedException ex)
 				{
@@ -80,7 +80,7 @@ public class FormatController {
 			client.insertToDB(new insertCommand<DBtranslation>(s)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
-				Thread.sleep(500);
+				Thread.sleep(250);
 				}
 				catch(InterruptedException ex)
 				{
@@ -95,7 +95,7 @@ public class FormatController {
 		// filed is need to look like "bookID,author,..."
 		client.getAllTable((new showAllCommand<Domain>(d)));
 		try{
-		Thread.sleep(500);
+		Thread.sleep(250);
 		}
 		catch(InterruptedException ex)
 		{
@@ -116,7 +116,7 @@ public class FormatController {
 		// filed is need to look like "bookID,author,..."
 		client.getAllTable((new showAllCommand<Subject>(s)));
 		try{
-		Thread.sleep(500);
+		Thread.sleep(250);
 		}
 		catch(InterruptedException ex)
 		{
@@ -137,7 +137,7 @@ public class FormatController {
 		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,s,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -160,7 +160,7 @@ public class FormatController {
 		client.searchInDB(new searchCommand<Subject>(fromSentence,s,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search Subject in db
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -183,7 +183,7 @@ public class FormatController {
 		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,s,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -202,7 +202,7 @@ public class FormatController {
 			client.insertToDB(new insertCommand<DBtranslation>(s)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
-				Thread.sleep(500);
+				Thread.sleep(250);
 				}
 				catch(InterruptedException ex)
 				{

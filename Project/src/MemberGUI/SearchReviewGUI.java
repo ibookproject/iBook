@@ -110,11 +110,7 @@ public class SearchReviewGUI extends JPanel {
 						panel.setVisible(true);
 						scrollPaneMain.setVisible(true);
 						for(Review r:temp)
-							panel.add(new SearchReviewPanel(screen,r,titleBook));
-					;	
-					//System.out.println(panel.countComponents());
-					//for doin this to go to each selected check box i need to make a panel that variable is public and then to make casting 
-				//	((SearchReviewPanel)panel.getComponent(0)).textArea.getText();
+							panel.add(new SearchReviewPanel(screen,r,titleBook));						
 					} 
 					else 
 					{
@@ -124,14 +120,9 @@ public class SearchReviewGUI extends JPanel {
 					}
 		
 				}
-				else {
-					//JOptionPane.showMessageDialog(screen,"there is no book to select ", "Warning",JOptionPane.WARNING_MESSAGE);
+				else 
  				comboBoxOfBooks.removeAllItems();
-				}
-				
-				
-				
-				 
+						 
 			}
 		});
 		comboBoxOfBooks.setBounds(223, 120, 412, 20);
@@ -164,21 +155,21 @@ public class SearchReviewGUI extends JPanel {
 				
 
 				
-				 if(textFieldBook.getText().isEmpty())
+			 	 if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty())
 				 {
 		 				comboBoxOfBooks.removeAllItems();
 		 				panel.removeAll();
 		 				panel.setVisible(false);
 						scrollPaneMain.setVisible(false);
-						JOptionPane.showMessageDialog(screen,"you must fill the name of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(screen,"you must fill the name/author of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
 				 }
 				 else
 				 {
 				 	Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
 				 	
-				 	if(textFieldAutohr.getText().isEmpty()==false)
+				 	 if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)
 				 	{
-				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\"" + " && "+"bookEnable=\""+1+"\"", screen.getClient());
+					 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+ "&&"+"bookEnable=\""+1+"\"", screen.getClient());
 				 		 if(tempBooks==null)
 				 		 {
 				 			comboBoxOfBooks.removeAllItems();
@@ -193,15 +184,11 @@ public class SearchReviewGUI extends JPanel {
 				 				comboBoxOfBooks.removeAllItems();
 							for(int i=0;i<tempBooks.size();i++)
 								comboBoxOfBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
-							//sb.setList(tempBooks);
-							//screen.setContentPane(sb);
-				 		 }
-
-				 		 
+				 		 }	 
 				 	}
-			 	else
+				else if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty()==false)
 			 	{
-			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\""+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
 							comboBoxOfBooks.removeAllItems();
@@ -218,42 +205,32 @@ public class SearchReviewGUI extends JPanel {
 							comboBoxOfBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
 			 	}
-			
+			 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty())
+			 	{
+			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+					 if(tempBooks==null)
+			 		 {
+						 	comboBoxOfBooks.removeAllItems();
+			 				panel.removeAll();
+			 				panel.setVisible(false);
+							scrollPaneMain.setVisible(false);
+							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
+							textFieldBook.setText("");textFieldAutohr.setText("");
+							comboBoxOfBooks.removeAllItems();
+			 		 }
+			 		 else
+			 		 {
+			 			 if(comboBoxOfBooks.getSize() != null)	comboBoxOfBooks.removeAllItems();
+			 			 	for(int i=0;i<tempBooks.size();i++)
+			 			 		comboBoxOfBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+			 		 }
+			 	}
 
 			}}
 			}); 
 		btnSearch.setBounds(612, 86, 89, 23);
 		add(btnSearch);
-		
-	/*	JButton btnDelet = new JButton("Select");
-		btnDelet.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(bookId!=-1)
-				{
-					 r = new Review(1, null, null,0, 1);// create review
-					 titleBook=tempBooks.get(index).getTitle();
-					temp = ReviewController.SearchReviews("reviewID,reviewDate,reviewContent,reviewStatus,bookID", r, ""+ "bookID=\""+bookId+"\""+ " && "+"reviewStatus=\""+"1"+"\"", screen.getClient());
-					System.out.println(temp);
 
-					if (temp != null) {
-						scrollPaneMain.setVisible(true);
-						for(Review r:temp)
-							panel.add(new SearchReviewPanel(screen,r,titleBook));
-					} 
-					else 
-					{
-						panel.setVisible(false);
-						scrollPaneMain.setVisible(false);
-						JOptionPane.showMessageDialog(screen,"no review results !  ", "Warning",JOptionPane.WARNING_MESSAGE);
-					}
-		
-				}
-				else JOptionPane.showMessageDialog(screen,"there is no book to select ", "Warning",JOptionPane.WARNING_MESSAGE);
-			}
-		});
-		btnDelet.setBounds(645, 119, 89, 23);
-		add(btnDelet);
-	*/
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);
 	//	btnBack.setIcon(backIcon);

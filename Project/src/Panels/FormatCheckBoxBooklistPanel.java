@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
+import java.awt.SystemColor;
 
 public class FormatCheckBoxBooklistPanel extends JPanel{
 	private LoginGUI screen;
@@ -43,7 +44,7 @@ public class FormatCheckBoxBooklistPanel extends JPanel{
 		this.book=book;
 		this.DomainID=DomainID;
 		setBackground(Color.WHITE);
-		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 139, 87)));
+		setBorder(new MatteBorder(3, 3, 3, 3, (Color) SystemColor.inactiveCaption));
 		setPreferredSize(new Dimension(249, 38));
 		setLayout(null);
 	
@@ -52,6 +53,7 @@ public class FormatCheckBoxBooklistPanel extends JPanel{
 		add(lblAnswerfromserver);
 		
 		 chckbxNewCheckBox = new JCheckBox();
+		 chckbxNewCheckBox.setBackground(SystemColor.inactiveCaptionBorder);
 		chckbxNewCheckBox.setText("Name: " + book.getTitle() + "  Author: " + book.getAuthor());
 		chckbxNewCheckBox.setBounds(6, 7, 237, 23);
 		add(chckbxNewCheckBox);

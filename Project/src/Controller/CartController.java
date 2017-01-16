@@ -25,7 +25,7 @@ public class CartController {
 		client.searchInDB(new searchCommand<Cart>(fromSentence,s,condition));
 		while(!client.GetGotMessag()){
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -47,7 +47,7 @@ public class CartController {
 		client.searchInDB(new searchCommand<Cart>(fromSentence,t,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search book in db
 			try{
-			Thread.sleep(500);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{

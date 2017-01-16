@@ -1,11 +1,4 @@
-/MenuGUI/
-/Panels/
-/Role/
-/client/
-/command/
-/ocsf/
+/Controller/
 /ManagmentGUI/
 /MemberGUI/
-/Book/
-/Controller/
-/DB/
+/Panels/
