@@ -69,13 +69,13 @@ public class Book extends DBtranslation  {
 	
 	
 	//Contractor to insert form DB with keyword and content and price and numberOfOrders
-	public Book( String title, String language, String author, String summary, boolean bookEnable,String keyword,String content,float price,long numberOfOrders)
+	public Book( String title, String language, String author, String summary, boolean bookEnable,String keyword,String content,float price)
 	{
 		this(title,language,author,summary,bookEnable);
 		this.keyword=keyword.split(" ");
 		this.content=content.split(" ");
 		this.price=price;
-		this.numberOfOrder=numberOfOrders;
+		this.numberOfOrder=0;
 		
 	}
 	
@@ -217,7 +217,7 @@ public class Book extends DBtranslation  {
 	}
 	@Override
 	public String getAttributeToInsert() {
-		return "(title,language,author,summary,bookEnable,keyword,content,price)";
+		return "(title,language,author,summary,bookEnable,keyword,content,numberOfOrder,price)";
 	}
 
 //convert array Which was obtained from DB to an actual book
