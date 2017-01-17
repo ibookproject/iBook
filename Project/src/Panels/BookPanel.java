@@ -59,7 +59,7 @@ public class BookPanel extends JPanel{
 		btnPostReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 ////////////////////////button to back panel from panel /////////////////////////////////////////////
-				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,b.getBookID());
+				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,b.getBookID(),pan);
 				Pfr.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);

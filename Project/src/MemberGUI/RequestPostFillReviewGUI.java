@@ -17,6 +17,7 @@ import Book.Review;
 import Controller.ReviewController;
 import Controller.bookController;
 import MenuGUI.LoginGUI;
+import Panels.Validation;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
@@ -47,10 +50,12 @@ public class RequestPostFillReviewGUI extends JPanel
 	private JTextField textField;
 	public LoginGUI screen;
 	private Date date;
+	private SearchBook pan;
 	private int conterOfText;
-	public RequestPostFillReviewGUI(LoginGUI screen,int bookId) {
+	public RequestPostFillReviewGUI(LoginGUI screen,int bookId,SearchBook sp) {
 		super();
 		bookID=bookId;
+		pan=sp;
 		setBorder(new LineBorder(UIManager.getColor("Button.background")));
 		//this.bookID=bookId;
 		this.screen=screen;
@@ -112,7 +117,14 @@ public class RequestPostFillReviewGUI extends JPanel
 			@Override
 			public void keyTyped(KeyEvent a)
 			{
-				
+				char c = a.getKeyChar();
+				String charToString = Character.toString(c);
+				if(!ContentValidation(charToString))
+					{
+					a.consume();
+					
+					
+					}
 				if(textAreaReviewContent.getText().length()>=50)
 					a.consume();
 			
@@ -125,19 +137,25 @@ public class RequestPostFillReviewGUI extends JPanel
 					conterOfText--;
 					if(conterOfText<=50)
 						Counterlabel.setText(Integer.toString((50-conterOfText)));
-					//System.out.println(conterOfText);
+				
 				}
 				else 
 				{
-					if((pressedChar.getKeyChar()!=8)&&conterOfText<50)
+					if((pressedChar.getKeyChar()!=8)&&conterOfText<50&&(pressedChar.getKeyCode()!=16))
 					{
-						/*if((pressedChar.getKeyCode()==(222)||(pressedChar.getKeyCode()==(61))))
-							pressedChar.consume();*/
-					
-						//else
+						char c = pressedChar.getKeyChar();
+						String charToString = Character.toString(c);
+						if(!ContentValidation(charToString))
+							{
+							JOptionPane.showMessageDialog(screen,"Incorrect input char\n", "Warning",JOptionPane.WARNING_MESSAGE);
+							pressedChar.consume();
+							
+							
+							}
+						else
 						{
-						conterOfText++;
-						Counterlabel.setText(Integer.toString((50-conterOfText)));
+							conterOfText++;
+							Counterlabel.setText(Integer.toString((50-conterOfText)));
 						}
 					}
 					//System.out.println(conterOfText);
@@ -175,7 +193,8 @@ public class RequestPostFillReviewGUI extends JPanel
 					JOptionPane.showMessageDialog(screen,"Add Reviwe process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			 	else
 			 	{
-			 		JOptionPane.showMessageDialog(screen,"Add Reviwe process Done ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+			 		JOptionPane.showMessageDialog(screen,"Add Reviwe process Done ! ", "",JOptionPane.INFORMATION_MESSAGE);
+			 		screen.setContentPane(pan);
 			 	}
 				}//temp!=null
 				}//else if
@@ -195,5 +214,17 @@ public class RequestPostFillReviewGUI extends JPanel
 		add(btnNewButton);
 		
 		
+	}
+	public static boolean ContentValidation(String name) {
+		boolean status = false;
+		String namePattern = "[|%\"'&=]";
+		Pattern pattern = Pattern.compile(namePattern);
+		Matcher matcher = pattern.matcher(name);
+
+		if (matcher.matches())
+			status = false;
+		else
+			status = true;
+		return status;
 	}
 }

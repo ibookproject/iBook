@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import ManagmentGUI.InventoryManagmentGUI;
 import MemberGUI.CartManagerGUI;
 import MemberGUI.RequestPostFillReviewGUI;
+import MemberGUI.SearchBook;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -55,7 +56,8 @@ public class ReaderMenu extends UserMenu {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
-				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,1);
+				SearchBook s=new SearchBook(null,null);
+				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,1,s);
 				Pfr.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);

@@ -7,6 +7,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -91,31 +93,42 @@ public class RemovePartReviewGUI extends JPanel {
 		 @Override
 			public void keyTyped(KeyEvent a)
 			{
-				
+			 char c = a.getKeyChar();
+				String charToString = Character.toString(c);
+				if(!ContentValidation(charToString))
+					{
+					a.consume();
+					
+					
+					}
 				if(textReview.getText().length()>=200)
 					a.consume();
 			
 			}
 		 
-		 
 		 @Override
 			public void keyPressed(KeyEvent pressedChar) {
-				if((pressedChar.getKeyChar()==8)&&(conterOfText>0))
+				if((pressedChar.getKeyChar()==8)&&(conterOfText>0)&&(pressedChar.getKeyCode()!=16))
 				{
 					
 					conterOfText--;
 					if(conterOfText<=50)
 						Counterlabel.setText(Integer.toString((200-conterOfText)));
-					//System.out.println(conterOfText);
+					
 				}
 				else 
 				{
-					if((pressedChar.getKeyChar()!=8)&&conterOfText<200)
+					if((pressedChar.getKeyChar()!=8)&&conterOfText<200&&(pressedChar.getKeyCode()!=16))
 					{
-						/*if((pressedChar.getKeyCode()==(222)||(pressedChar.getKeyCode()==(61))))
-							pressedChar.consume();*/
-					
-						//else
+						char c = pressedChar.getKeyChar();
+						String charToString = Character.toString(c);
+						if(!ContentValidation(charToString))
+							{
+							JOptionPane.showMessageDialog(screen,"Incorrect input char\n", "Warning",JOptionPane.WARNING_MESSAGE);
+							pressedChar.consume();
+													
+							}
+						else
 						{
 						conterOfText++;
 						Counterlabel.setText(Integer.toString((200-conterOfText)));
@@ -126,9 +139,7 @@ public class RemovePartReviewGUI extends JPanel {
 			}
 		
 		});
-		 //r = new Review(1, null, null,0, 1);// create review
-		//	ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, ""+ "reviewID=\""+ReviewID+"\"", screen.getClient());
-			
+		
 		 textReview.setText(temp.get(0).getReviewContent()); //need to get text review
 		 oldReview=temp.get(0).getReviewContent();
 		 textReview.setBounds(136, 172, 556, 301);
@@ -159,7 +170,10 @@ public class RemovePartReviewGUI extends JPanel {
 						boolean result1 = ReviewController.UpdateReviewContent(r, "reviewStatus=\""+1+"\"", "reviewID=\""+ReviewID+"\"",screen.getClient());
 						oldReview=textReview.getText();
 						if(result)
-							JOptionPane.showMessageDialog(screen,"The new Review update sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
+						{
+							JOptionPane.showMessageDialog(screen,"The new Review update sucsseccfully", "",JOptionPane.INFORMATION_MESSAGE);
+							
+						}
 						else JOptionPane.showMessageDialog(screen,"Update Review process FAILED", "Warning",JOptionPane.WARNING_MESSAGE);
 						}
 					else
@@ -170,6 +184,18 @@ public class RemovePartReviewGUI extends JPanel {
 
 	
 	
+	}
+	public static boolean ContentValidation(String name) {
+		boolean status = false;
+		String namePattern = "[|%\"'&=]";
+		Pattern pattern = Pattern.compile(namePattern);
+		Matcher matcher = pattern.matcher(name);
+
+		if (matcher.matches())
+			status = false;
+		else
+			status = true;
+		return status;
 	}
 	
 }
