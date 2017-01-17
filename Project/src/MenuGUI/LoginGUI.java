@@ -52,6 +52,7 @@ public class LoginGUI extends JFrame {
 	 */
 	public LoginGUI(String host) {
 		super();
+		setResizable(false);
 
 		initialize();
 		tempID=null;
@@ -281,11 +282,6 @@ public class LoginGUI extends JFrame {
 			btnLogin.setBounds(565, 342, 118, 35);
 			FirstPanel.add(btnLogin);
 
-			JLabel lblLogin = new JLabel("LOGIN");
-			lblLogin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 29));
-			lblLogin.setBounds(369, 75, 125, 65);
-			FirstPanel.add(lblLogin);
-
 			txtUserID = new JTextField();
 			txtUserID.setFont(new Font("Tahoma", Font.PLAIN, 17));
 			txtUserID.setBounds(337, 323, 157, 35);
@@ -314,6 +310,11 @@ public class LoginGUI extends JFrame {
 			bntBackground.setEnabled(false);
 			bntBackground.setBounds(131, 262, 586, 200);
 			FirstPanel.add(bntBackground);
+			ImageIcon logo=new ImageIcon("IbookIcon.png");
+			JLabel lblNewLabel = new JLabel("");
+			lblNewLabel.setBounds(156, 24, 488, 236);
+			lblNewLabel.setIcon(logo);
+			FirstPanel.add(lblNewLabel);
 			
 
 		}
