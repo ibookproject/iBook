@@ -1,0 +1,69 @@
+
+package Panels;
+
+import javax.swing.JPanel;
+
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.border.MatteBorder;
+
+import java.awt.Color;
+
+import javax.swing.border.LineBorder;
+import javax.swing.JCheckBox;
+
+import Book.Book;
+import Book.Domain;
+import Book.Review;
+import Controller.UserController;
+import Controller.BookController;
+import MenuGUI.LoginGUI;
+import Role.User;
+import Role.UserStatus;
+
+import java.awt.Font;
+import java.util.ArrayList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+import javax.swing.DropMode;
+import java.awt.SystemColor;
+
+public class CartCheckBoxBooklistPanel extends JPanel{
+	private LoginGUI screen;
+	private JLabel lblAnswerfromserver;
+	public JCheckBox chckbxNewCheckBox ;
+	public int BookID;
+//	public int price;
+	//public int UserId;
+
+	public Book book;
+	
+	
+	public CartCheckBoxBooklistPanel(LoginGUI screen,Book book,int BookID) {
+		this.book=book;
+		this.BookID=BookID;
+		//this.price=price;
+		setBackground(Color.WHITE);
+		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(191, 205, 219)));
+		setPreferredSize(new Dimension(302, 38));
+		setLayout(null);
+	
+		lblAnswerfromserver = new JLabel("");
+		lblAnswerfromserver.setBounds(415, 66, 152, 14);
+		add(lblAnswerfromserver);
+		
+		 chckbxNewCheckBox = new JCheckBox();
+		 chckbxNewCheckBox.setBackground(SystemColor.inactiveCaptionBorder);
+		chckbxNewCheckBox.setText("Name:  " + book.getTitle() + "   Author: " + book.getAuthor() +"    price: " +book.getPrice());
+		chckbxNewCheckBox.setBounds(6, 7, 288, 23);
+		add(chckbxNewCheckBox);
+		
+	}
+}
+
+
+

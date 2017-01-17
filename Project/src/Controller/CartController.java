@@ -8,7 +8,11 @@ import Book.Cart;
 import Book.SubjectToBook;
 import client.DBSQLhandler;
 import client.DBgenericObject;
+import command.DBtranslation;
+import command.joinCommand;
+import command.joinObject;
 import command.searchCommand;
+import command.updateCommand;
 
 public class CartController {
 	/*
@@ -60,6 +64,54 @@ public class CartController {
 		} catch (SQLException e) {
 			return null;
 		}
+	}
+	
+	
+	public static ArrayList<Book> GetCartListForUser(String fromSentence,Cart c,ArrayList<joinObject> temp,String condition,DBSQLhandler client)
+	{
+		try {
+			client.joinSearchInDB(new joinCommand<Cart>(fromSentence,c,temp,condition ));
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		while(!client.GetGotMessag()){//search book in db
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+			}
+		}
+		try
+		{
+			return Book.convertBack((ArrayList<DBgenericObject>) client.getResultObject(),"bookID,title,author,price");
+		}
+		catch (SQLException e) 
+		{
+			return null;
+		}
+	
+		}
+	
+
+
+	
+	public static boolean UpdateCart(Cart c, String updateCondition,
+			String searchCondition, DBSQLhandler client)
+	{
+		client.UpdateInDB(new updateCommand<DBtranslation>(c, searchCondition,
+				updateCondition));
+		while (!client.GetGotMessag()) {// add user to DB
+			try {
+				Thread.sleep(250);
+			} catch (InterruptedException ex) {
+				System.out.println("InterruptedException " + ex);
+				return false;
+			}
+		}
+		return true; // means the review update successful
 	}
 	
 	

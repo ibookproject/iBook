@@ -7,29 +7,67 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.MatteBorder;
+
+import Book.Book;
+import Book.Cart;
+import Book.Domain;
+import Book.Review;
+import Book.Subject;
+import Book.SubjectToBook;
+import Controller.CartController;
+import Controller.FormatController;
+import Controller.BookController;
+import MenuGUI.LoginGUI;
+import Panels.CartCheckBoxBooklistPanel;
+import Panels.FormatCheckBoxBooklistPanel;
+import Panels.SearchReviewPanel;
+import client.DBgenericObject;
+import command.joinCommand;
+import command.joinObject;
+
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.awt.event.ActionEvent;
 
 
 
 
 public class CartManagerGUI extends JPanel {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	public static JPanel panel;
+	public LoginGUI screen;
 	public JButton btnBack ;
 	private int UserIdAtDataBase;
-	public CartManagerGUI(JFrame screen,int UserIdAtDataBase) {
+	private JScrollPane scrollPaneMain;
+	private Date date;
+
+
+
+
+	
+	
+	public CartManagerGUI(LoginGUI screen,int UserIdAtDataBase) {
 		super();
+		this.screen=screen;
 		initialize();
 		this.UserIdAtDataBase=UserIdAtDataBase;
-		System.out.println(this.UserIdAtDataBase);
 	}
 
 	/**
@@ -44,6 +82,50 @@ public class CartManagerGUI extends JPanel {
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 		
+		
+		
+		/////////////////////
+		scrollPaneMain = new JScrollPane();
+		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
+		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneMain.setAutoscrolls(true);
+		scrollPaneMain.setBounds(272, 132, 337, 324);
+		scrollPaneMain.setVisible(false);
+		add(scrollPaneMain);
+
+		panel = new JPanel();
+		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		panel.setAutoscrolls(true);
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		scrollPaneMain.setViewportView(panel);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+
+		Book b=new Book();	
+		Cart c = new Cart();
+		ArrayList<joinObject> temp =new ArrayList<joinObject>();
+
+		temp.add(new joinObject(c.getClassName(), b.getClassName(), "bookID"));
+		
+		ArrayList<Book> bbb;
+		bbb=CartController.GetCartListForUser("book.bookID,book.title,book.author,book.price",c,temp,"userID=\""+screen.getTempID() +"\""+" && "+"status=0" , screen.getClient());
+		//System.out.print(bbb);
+		if (bbb != null) {
+			panel.removeAll();
+			panel.setVisible(true);
+			scrollPaneMain.setVisible(true);
+			for(Book tempb:bbb)
+				panel.add(new CartCheckBoxBooklistPanel(screen,tempb,tempb.getBookID()));
+
+		} 
+		else 
+		{
+			panel.setVisible(false);
+			scrollPaneMain.setVisible(false);
+			JOptionPane.showMessageDialog(screen,"Your cart is Empty", "no results",JOptionPane.QUESTION_MESSAGE);
+		}
+		
+		
+		
 		JLabel lblButFromCart = new JLabel("Buy From Cart");
 		lblButFromCart.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblButFromCart.setBounds(379, 52, 163, 23);
@@ -54,31 +136,46 @@ public class CartManagerGUI extends JPanel {
 		add(lblChooseBooksFrom);
 		
 		JButton btnBuy = new JButton("Buy");
-		btnBuy.setBounds(402, 284, 59, 23);
-		add(btnBuy);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(368, 132, 142, 20);
-		add(comboBox);
-		
-		
-		
-	/*	
-		JPanel panel = new JPanel();
-		panel.setBounds(55, 166, 163, 141);
-		for(int i=0;i<7;i++)
-		panel.add(new JCheckBox("New check box" + i));
-		//add(panel);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(292, 170, 151, 48);
-		scrollBar.add(new JCheckBox("New check box"));
-		
-		scrollBar.add(panel);
-		add(scrollBar);
-*/
-		//for(int i=0;i<7;i++)
-		//panel.add(new JCheckBox("New check box" + i))
-			
+		btnBuy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int flag=0;
+		ArrayList<Integer> tempBooksId = new 	ArrayList<Integer> ();
+			if(panel.getComponentCount()!=0)
+			{
+				for(int i=0;i<panel.getComponentCount();i++)
+				{
+					if((((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.isSelected())==true)
+					{
+						tempBooksId.add(((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getBookID());
+						flag=1;
+						((CartCheckBoxBooklistPanel)panel.getComponent(i)).setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(46, 139, 87)));
+
+						((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setEnabled(false);
+						System.out.println((((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID);
+					}
+					//panel.updateUI();
+				}
+				if(flag==1)
+				{
+					Cart c= new Cart();
+					date = new Date();
+					String txtDate = new SimpleDateFormat("yyyy/MM/dd").format(date);
+					SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd"); 
+					date = new Date(txtDate);
+		System.out.println((((CartCheckBoxBooklistPanel)panel.getComponent(0))).BookID);
+			for(int i=0;i<tempBooksId.size();i++)
+			{
+				CartController.UpdateCart(c, "status=\""+1+"\"" + " && "+"buyDate=\""+txtDate+"\"", "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\"", screen.getClient());
+
+			}
+ 			JOptionPane.showMessageDialog(screen,"The Purshace  successfully  !", "done",JOptionPane.INFORMATION_MESSAGE);
+				}				
+				else JOptionPane.showMessageDialog(screen,"you must to choose at list 1 book to buy !", "Warning",JOptionPane.WARNING_MESSAGE);
+			}
+			else JOptionPane.showMessageDialog(screen,"no Chossen book's to buy", "Warning",JOptionPane.WARNING_MESSAGE);
+	}
+});		
+		btnBuy.setBounds(390, 467, 59, 23);
+		add(btnBuy);		
 	}
 }
