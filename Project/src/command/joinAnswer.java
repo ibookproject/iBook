@@ -36,6 +36,10 @@ public class joinAnswer {
 	public String[] setAttribute(){
 	 return attribute;
 	}
+	public String[] getAttributes()
+	{
+		 return attribute;
+	}
 	
 	
 }

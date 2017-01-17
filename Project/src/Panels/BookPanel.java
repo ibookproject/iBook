@@ -59,7 +59,7 @@ public class BookPanel extends JPanel{
 		btnPostReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 ////////////////////////button to back panel from panel /////////////////////////////////////////////
-				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,b.getBookID(),pan);
+				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,b.getBookID(),pann);
 				Pfr.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
@@ -106,10 +106,6 @@ public class BookPanel extends JPanel{
 		lblSummary.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
 		lblSummary.setBounds(12, 80, 122, 37);
 		add(lblSummary);
-		
-	/*	lblNewSummary = new JLabel(b.getSummary());
-		lblNewSummary.setBounds(157, 81, 56, 16);
-		add(lblNewSummary);*/
 		
 		lblTitle = new JLabel("Title:");
 		lblTitle.setFont(new Font("VAGRounded BT", Font.BOLD, 21));

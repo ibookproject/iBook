@@ -80,6 +80,7 @@ public class ConfirmationReviewGUI extends JPanel {
 		
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.setBounds(55, 86, 763, 414);
+		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
 		add(scrollPaneMain);

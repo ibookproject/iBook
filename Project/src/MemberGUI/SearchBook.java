@@ -21,12 +21,9 @@ public class SearchBook extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
 	private LoginGUI screen;
-	private JPanel pann;
 	private ImageIcon backIcon;
-//	private JButton btnPostReview;
 	private JLabel lblSearchBook;
 	private ArrayList<Book> searchRes;
-	private ArrayList<Book> books;
 	public static JPanel panel;
 	private JScrollPane scrollPaneMain;
 
@@ -34,8 +31,6 @@ public class SearchBook extends JPanel {
 		super();
 		setForeground(Color.LIGHT_GRAY);
 		this.screen=screen;
-		pann=this;
-		this.books=books;
 		initialize();
 	}
 	/**
@@ -51,23 +46,6 @@ public class SearchBook extends JPanel {
 		this.setLayout(null);	
 		
 		backIcon =new ImageIcon("src/images/backIcon.png");
-	/*	btnPostReview = new JButton("Post Review");
-		btnPostReview.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-////////////////////////button to back panel from panel /////////////////////////////////////////////
-				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,1);
-				Pfr.btnBack.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						screen.setContentPane(pann);
-					}
-////////////////////////button to back panel from panel/////////////////////////////////////////////
-				});
-				screen.setContentPane(Pfr);//
-			}
-		});
-	
-		btnPostReview.setBounds(684, 11, 123, 25);
-		add(btnPostReview);*/
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
@@ -78,9 +56,10 @@ public class SearchBook extends JPanel {
 		add(lblSearchBook);
 		
 		scrollPaneMain = new JScrollPane();
-		scrollPaneMain.setBounds(51, 106, 756, 451);
+		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
+		scrollPaneMain.setBounds(51, 106, 756, 451);
 		add(scrollPaneMain);
 		
 		panel = new JPanel();

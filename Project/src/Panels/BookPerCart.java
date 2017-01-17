@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class BookPerCart extends JPanel{
 	
 	private LoginGUI screen;
-	private Book book;
+	//private Book book;
 	private JLabel lblNewTitle;
 	private JLabel lblNewBookID;
 	private JLabel lblBookID;
@@ -35,52 +35,56 @@ public class BookPerCart extends JPanel{
 	private JLabel lblNewDate ;
 	private JLabel lblTitle;
 	
-	public BookPerCart(LoginGUI screen,Book b,Cart c) {
+	public BookPerCart(LoginGUI screen,int bookId,String bookTitle, String bookAutor,String cartDate) {
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) Color.ORANGE));
 		setPreferredSize(new Dimension(702, 59));
 		setLayout(null);
-		book=b;
+		//book=b;
 		
 		lblBookID = new JLabel("Book ID:");
-		lblBookID.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
-		lblBookID.setBounds(28, 13, 83, 23);
+		lblBookID.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
+		lblBookID.setBounds(12, 13, 99, 23);
 		add(lblBookID);
 		
-		lblNewTitle = new JLabel(b.getTitle());
-		lblNewTitle.setBounds(295, 18, 56, 16);
+		lblNewTitle = new JLabel(bookTitle);
+		lblNewTitle.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewTitle.setBounds(212, 9, 120, 33);
 		add(lblNewTitle);
 		
-		lblNewBookID = new JLabel(Integer.toString(b.getBookID()));
-		lblNewBookID.setBounds(123, 18, 56, 16);
+		lblNewBookID = new JLabel(Integer.toString(bookId));
+		lblNewBookID.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewBookID.setBounds(109, 13, 57, 25);
 		add(lblNewBookID);
 		
-		lblAutor = new JLabel("Autor:");
-		lblAutor.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
-		lblAutor.setBounds(406, 16, 56, 16);
+		lblAutor = new JLabel("Author:");
+		lblAutor.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
+		lblAutor.setBounds(344, 11, 76, 26);
 		add(lblAutor);
 		
-		lblNewAutor = new JLabel(b.getAuthor());
-		lblNewAutor.setBounds(474, 18, 56, 16);
+		lblNewAutor = new JLabel(bookAutor);
+		lblNewAutor.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewAutor.setBounds(421, 11, 116, 29);
 		add(lblNewAutor);
 		
 		lblDate = new JLabel("Date:");
-		lblDate.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
-		lblDate.setBounds(563, 14, 56, 20);
+		lblDate.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
+		lblDate.setBounds(534, 13, 70, 22);
 		add(lblDate);
 		
-		lblNewDate = new JLabel(c.getDate());
-		lblNewDate.setBounds(619, 18, 56, 16);
+		lblNewDate = new JLabel(cartDate);
+		lblNewDate.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewDate.setBounds(602, 14, 100, 23);
 		add(lblNewDate);
 		
 		lblTitle = new JLabel("Title:");
-		lblTitle.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
-		lblTitle.setBounds(239, 16, 56, 16);
+		lblTitle.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
+		lblTitle.setBounds(150, 13, 57, 23);
 		add(lblTitle);
 	}
 	
-	public int getBookID()
+/*	public int getBookID()
 	{
 		return book.getBookID();
-	}
+	}*/
 }

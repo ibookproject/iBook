@@ -69,15 +69,17 @@ public class CartController {
 	
 	public static ArrayList<Book> GetCartListForUser(String fromSentence,Cart c,ArrayList<joinObject> temp,String condition,DBSQLhandler client)
 	{
-		try {
+		try 
+		{
 			client.joinSearchInDB(new joinCommand<Cart>(fromSentence,c,temp,condition ));
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		while(!client.GetGotMessag()){//search book in db
-			try{
-			Thread.sleep(500);
+			try
+			{
+				Thread.sleep(500);
 			}
 			catch(InterruptedException ex)
 			{
@@ -112,6 +114,34 @@ public class CartController {
 			}
 		}
 		return true; // means the review update successful
+	}
+	
+	public static ArrayList<DBgenericObject> searchJoinCartBook(String date,int status,String userId,DBSQLhandler client) throws SQLException
+	{
+
+		Book b=new Book();
+		Cart c=new Cart();
+		ArrayList<joinObject> temp =new ArrayList<joinObject>();
+		
+		
+		//the first object is the assiation class and the second is to join with
+		
+		
+		temp.add(new joinObject(c.getClassName(), b.getClassName(), "bookID"));
+		
+		client.joinSearchInDB(new joinCommand<Cart>("book.bookID,book.title,book.author,cart.buyDate",c,temp,"cart.userID=\""+userId +"\""+" && "+"cart.status=1"+" && "+"cart.buyDate>'"+date+"'"));
+		while(!	client.GetGotMessag()){//search book in db
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+			}
+		}
+		return (ArrayList<DBgenericObject>)client.getResultObject();
+	//	return joinAnswer.convertBack((ArrayList<DBgenericObject>)client.getResultObject(),"bookID,title,author,buyDate");
+		
 	}
 	
 	

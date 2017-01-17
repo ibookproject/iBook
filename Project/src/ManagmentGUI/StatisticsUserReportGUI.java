@@ -6,38 +6,28 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
 
-import Book.Book;
+
 import Book.Cart;
 
-import java.util.InputMismatchException;
-
 import Controller.CartController;
-import Controller.UserController;
-import Controller.BookController;
-import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;
-import Panels.BookPerCart;
-import Panels.ReviewPanel;
-import Role.User;
-import client.DBSQLhandler;
+import Panels.*;
 import client.DBgenericObject;
 
 
@@ -57,17 +47,14 @@ public class StatisticsUserReportGUI extends JPanel
 	private JButton btnGetReports;
 	private JLabel lblUserID;
 	private JTextField textFieldID;
-	private JTextField textFieldDate;
 	private JScrollPane scrollPaneMain;
 	private JPanel panel;
-	private ArrayList<BookPerCart> booksPerCarts;
+	private JTextField txtFromDate;
 	
 	public StatisticsUserReportGUI(LoginGUI screen) 
 	{
 		super();
-		
 		this.screen=screen;
-		
 		initialize();
 	}
 
@@ -101,13 +88,9 @@ public class StatisticsUserReportGUI extends JPanel
 		lblDate.setBounds(238, 180, 70, 22);
 		add(lblDate);
 		
-		textFieldDate = new JTextField("");
-		textFieldDate.setBounds(320, 180, 116, 21);
-		add(textFieldDate);
-		textFieldDate.setColumns(10);
-		
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.setBounds(55, 250, 731, 230);
+		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
 		add(scrollPaneMain);
@@ -119,111 +102,74 @@ public class StatisticsUserReportGUI extends JPanel
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
+		txtFromDate = new JTextField();
+		txtFromDate.setBackground(Color.WHITE);
+		txtFromDate.setEditable(false);
+		txtFromDate.setBounds(320, 181, 116, 20);
+		add(txtFromDate);
+		txtFromDate.setColumns(10);
+		
+		//create button and there object
+		JButton btnChooseFromDate = new JButton("Choose Date");
+		//perform action listener
+		btnChooseFromDate.addActionListener(new ActionListener() 
+		{	
+			//performed action
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				//create frame new object  f
+				JFrame f = new JFrame();
+				f.setLocation(400, 400);
+				f.setBounds(200, 200, 200, 200);
+				//set text which is collected by date picker i.e. set date 
+				txtFromDate.setText(new DatePicker(f).setPickedDate());
+
+			}
+		});
+		btnChooseFromDate.setBounds(448, 180, 116, 22);
+		add(btnChooseFromDate);
+		
+		/**
+		 * @author coral
+		 * @param date(from DB)
+		 * @return true if false if
+		 * 			
+		 */
+
 		btnGetReports = new JButton("Get report");
 		btnGetReports.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				try
-				{
+				
 				Cart t=new Cart();
-			/*	if(textFieldDate.getText()!="")
-				{*/
-				
-				ArrayList<Cart> carts= (ArrayList<Cart>)CartController.SearchCart("userID,bookID,price,buyDate",t,"userID=\""+textFieldID.getText()+"\""/*&&status=\""+true+"\""*/,screen.getClient());
-				if(carts==null||carts.isEmpty())
-				{
-				
-					scrollPaneMain.setViewportView(panel);
-					panel.removeAll();
-					JOptionPane.showMessageDialog(screen,"There's nothing to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
-					
-				}
-				else		//success to get the rows of carts
-				{
-					ArrayList<Cart> cartsToShow=new ArrayList<Cart>();
-					
-						for(Cart c:carts)
-						{
-							if(ifBiggerThanDate(c.getDate())==true)
-								cartsToShow.add(c);
-						}
-					
-					
-					if(cartsToShow.isEmpty())
-						JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
-					else
-					{
-						showBooks(cartsToShow);
-						JOptionPane.showMessageDialog(screen,"Theres books to this user\n", "Warning",JOptionPane.WARNING_MESSAGE);
-					}
-						
-				}				
-				
-				}
-				catch(Exception ex)
-				{
+				if( txtFromDate.getText().isEmpty())
 					JOptionPane.showMessageDialog(screen,"Please fill the date field!", "Warning",JOptionPane.WARNING_MESSAGE);
-					System.out.println("Not fill the date field");
+				else
+				{
+					try
+					{
+						scrollPaneMain.setViewportView(panel);
+						panel.removeAll();
+						ArrayList<DBgenericObject> joinAnswerCartBook=CartController.searchJoinCartBook(txtFromDate.getText(),1,textFieldID.getText(),screen.getClient());
+						if(joinAnswerCartBook.isEmpty())
+							JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
+						
+						else
+							for(DBgenericObject j:joinAnswerCartBook)
+								panel.add(new BookPerCart(screen, (int)j.getValtoArray(0),(String)j.getValtoArray(1),(String)j.getValtoArray(2),new SimpleDateFormat("yyyy/MM/dd").format((Date)j.getValtoArray(3))));
+							
+					} 
+					catch (SQLException e1) 
+					{
+						JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
+						System.out.println("There's no books to show!");
+					}
 				
 				}
-			
 			}	
 		});
 		btnGetReports.setBounds(598, 129, 107, 23);
 		add(btnGetReports);
-	}
-	public void showBooks(ArrayList<Cart> carts)
-	{
-		scrollPaneMain.setViewportView(panel);
-		panel.removeAll();
-		for(int i=0;i<carts.size();i++)
-		{
-			ArrayList<Book> books=new ArrayList<Book>();
-			Book b=new Book();
-			ArrayList<Book> booksSearch= (ArrayList<Book>)BookController.SearchBook("bookID,title,author",b,"bookID=\""+carts.get(i).getBookID()+"\"" ,screen.getClient());
-			if(booksSearch==null||booksSearch.isEmpty())
-			{
-				JOptionPane.showMessageDialog(screen,"Book was NOT Found\n", "Warning",JOptionPane.WARNING_MESSAGE);
-			} 
-			else
-			{
-				books.add(booksSearch.get(0));
-				panel.add(new BookPerCart(screen, booksSearch.get(0),carts.get(i)));
-			}
-		}
-	}
-	/**
-	 * @author coral
-	 * @param date(from DB)
-	 * @return true if false if
-	 * 			
-	 */
-	public boolean ifBiggerThanDate(String date)	
-	{
-		
-		String temp=textFieldDate.getText();													//date from user
-
-		String[] userDateInput=temp.split("/");
-		String[] dateCart=date.split("/");														//   dd/mm/yyyy
-		if((Integer.parseInt(userDateInput[2])<Integer.parseInt(dateCart[2])))					//compare the year
-			return true;	
-		else
-		{
-			if((Integer.parseInt(userDateInput[2])==Integer.parseInt(dateCart[2])))				//compare the year
-				{
-				if((Integer.parseInt(userDateInput[1])<Integer.parseInt(dateCart[1])))			//compare the month
-					return true;
-				else
-					if((Integer.parseInt(userDateInput[1])==Integer.parseInt(dateCart[1])))		//compare the month
-						if((Integer.parseInt(userDateInput[0])<=Integer.parseInt(dateCart[0])))	//compare the day
-							return true;
-				}
-		}
-
-		 return false;
-		 
-		 
-	
 	}
 }
