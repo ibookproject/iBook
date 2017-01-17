@@ -41,7 +41,12 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -170,6 +175,29 @@ public class CartManagerGUI extends JPanel {
 				{
 			
 					JOptionPane.showMessageDialog(screen,"The Purshace  successfully  !", "done",JOptionPane.INFORMATION_MESSAGE);
+					/*
+					 *this is for hen 
+					 *all this code you need to inesrt we the buynig selected!
+					final JFileChooser fc = new JFileChooser();
+					//fc.setCurrentDirectory(new java.io.File("C:/Users/kfir/Desktop"));
+					fc.setFileFilter(new FileTypeFilter(".txt","Text File"));
+					fc.setFileFilter(new FileTypeFilter(".PDF","PDF"));
+				if(fc.showSaveDialog(null)==JFileChooser.APPROVE_OPTION){
+					System.out.println(fc.getSelectedFile());
+					System.out.println((FileTypeFilter)fc.getFileFilter());
+					for(Integer b:tempBooksId){
+					try {
+						FileWriter fw = new FileWriter(fc.getSelectedFile().getAbsolutePath()+(FileTypeFilter)fc.getFileFilter());
+						PrintWriter pw = new PrintWriter(fw);
+						
+						pw.println(b);
+						pw.close();
+					} catch (IOException ex) {
+						System.out.println(ex);
+					}
+					}
+					}
+					*/
 				}				
 				else if (cnt==panel.getComponentCount()) 
 							JOptionPane.showMessageDialog(screen,"You Bought all your Cart Book's list !", "Warning",JOptionPane.WARNING_MESSAGE);
