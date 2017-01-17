@@ -20,9 +20,6 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
-
-
-
 public class AddOrUpdateBookGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -32,6 +29,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 	private JTextField contents;
 	private JTextField keyword;
 	private JTextField author;
+	private JTextField price;
 	public JButton btnBack ;
 	private ArrayList<Book> tempBooks;
 	private int Bookid;
@@ -40,7 +38,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 	private JPanel Mainpann;
 
 	private int ISUpdateOrAdd;
-	private JTextField price;
+
 
 	/**
 	 * @wbp.parser.constructor
@@ -62,9 +60,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 		this.ISUpdateOrAdd=ISUpdateOrAdd;
 		initialize();
 	}
-	
-	
-	
+
 	private void initialize() {
 		
 		this.setSize(850, 625);
@@ -78,6 +74,9 @@ public class AddOrUpdateBookGUI extends JPanel {
 		lblAddUpdate.setBounds(346, 26, 217, 30);
 		add(lblAddUpdate);
 		
+		JLabel lblPrice = new JLabel("Price:");
+		lblPrice.setBounds(50, 252, 46, 14);
+		add(lblPrice);
 		JLabel lblPleaseFillThe = new JLabel("please fill the fields : ");
 		lblPleaseFillThe.setBounds(111, 76, 140, 14);
 		add(lblPleaseFillThe);
@@ -136,17 +135,23 @@ public class AddOrUpdateBookGUI extends JPanel {
 		add(author);
 		author.setColumns(10);
 		
+		price = new JTextField();
+		price.setBounds(100, 252, 86, 20);
+		add(price);
+		price.setColumns(10);
+		
 		
 		if(ISUpdateOrAdd==0)
 		{
-			
 			
 			Book tempObject = new Book(); // create new book
 			 tempBooks = BookController.SearchBook("bookID,title,author,language,summary,keyword,content,price",tempObject, "bookID=\""+Bookid+ "\"" , screen.getClient());
 			 //System.out.println(Bookid);
 			 
 			 title.setText(tempBooks.get(0).getTitle());
-			// price.setText(tempBooks.get(0).getPrice());
+			//System.out.println(tempBooks.get(0).getPrice());
+			// price.setText(String.format("%f", tempBooks.get(0).getPrice()));
+			 price.setText(String.valueOf(tempBooks.get(0).getPrice()));
 			 author.setText(tempBooks.get(0).getAuthor());
 			 summary.setText(tempBooks.get(0).getSummary());
 			 String arrKeyword[]=tempBooks.get(0).getKeyword();
@@ -155,9 +160,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 			 contents.setText(arrContent[0]);
 			 lang.setText(tempBooks.get(0).getLanguage());
 		}
-		
 
-		
 		JButton btnAdd = new JButton();
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -182,11 +185,10 @@ public class AddOrUpdateBookGUI extends JPanel {
 							JOptionPane.showMessageDialog(screen,"Add book process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 					 	else
 					 	{
-					 		title.setText("");lang.setText("");author.setText("");summary.setText(""); contents.setText(""); keyword.setText("");
+					 		title.setText("");lang.setText("");author.setText("");summary.setText(""); contents.setText(""); keyword.setText(""); price.setText("");
 					 		JOptionPane.showMessageDialog(screen,"The book was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
 					 	}
-					}
-				
+					}		
 					else
 						{
 				 		title.setText("");lang.setText("");author.setText("");summary.setText(""); contents.setText(""); keyword.setText("");
@@ -198,13 +200,13 @@ public class AddOrUpdateBookGUI extends JPanel {
 				 {
 					 	Book b = new Book(title.getText(),lang.getText(),author.getText(),summary.getText(),true,keyword.getText(),contents.getText()); // create new book
 						//boolean result=bookController.AddBook(b,screen.getClient()); // return true or false from the controller DB
-						boolean result=BookController.UpdateBook(b, "title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\""+" && "+"language=\""+lang.getText().trim()+"\""+" && "+"summary=\""+summary.getText().trim()+"\""+" && "+"content=\""+contents.getText().trim()+"\""+" && "+"summary=\""+summary.getText().trim()+"\""+" && "+"keyword=\""+keyword.getText().trim()+"\""+" && "+"keyword=\""+keyword.getText().trim()+"\""+"price=\""+Float.parseFloat(price.getText().trim())+"\"", "bookID=\""+Bookid+ "\"", screen.getClient()); // return true or false from the controller DB
+						boolean result=BookController.UpdateBook(b, "title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\""+" && "+"language=\""+lang.getText().trim()+"\""+" && "+"summary=\""+summary.getText().trim()+"\""+" && "+"content=\""+contents.getText().trim()+"\""+" && "+"summary=\""+summary.getText().trim()+"\""+" && "+"keyword=\""+keyword.getText().trim()+"\""+" && "+"price=\""+Float.parseFloat(price.getText().trim())+"\"", "bookID=\""+Bookid+ "\"", screen.getClient()); // return true or false from the controller DB
 
 					 	if (result==false)
 							JOptionPane.showMessageDialog(screen,"Update book process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 					 	else
 					 	{
-					 		title.setText("");lang.setText("");author.setText("");summary.setText(""); contents.setText(""); keyword.setText("");
+					 		title.setText("");lang.setText("");author.setText("");summary.setText(""); contents.setText(""); keyword.setText(""); price.setText("");
 					 		JOptionPane.showMessageDialog(screen,"The book was Updated successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
 							
 							
@@ -246,14 +248,9 @@ public class AddOrUpdateBookGUI extends JPanel {
 		btnBack.setBounds(11, 33, 89, 23);
 		add(btnBack);
 		
-		JLabel lblPrice = new JLabel("Price:");
-		lblPrice.setBounds(50, 252, 46, 14);
-		add(lblPrice);
+	
 		
-		price = new JTextField();
-		price.setBounds(100, 252, 86, 20);
-		add(price);
-		price.setColumns(10);
+
 	
 	}
 }
