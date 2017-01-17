@@ -20,7 +20,7 @@ import Book.Book;
 import Book.Review;
 import Controller.ReviewController;
 import Controller.UserController;
-import Controller.bookController;
+import Controller.BookController;
 import Panels.BookPanel;
 import Panels.ReviewPanel;
 import Panels.UserSubscriptionPanel;

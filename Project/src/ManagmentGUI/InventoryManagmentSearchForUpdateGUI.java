@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 
 import Book.Book;
 import Book.Subject;
-import Controller.bookController;
+import Controller.BookController;
 import MenuGUI.LoginGUI;
 
 import javax.swing.JFrame;
@@ -111,7 +111,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 	 }
 				 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)
 				 	{
-				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+ "&&"+"bookEnable=\""+1+"\"", screen.getClient());
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+ "&&"+"bookEnable=\""+1+"\"", screen.getClient());
 				 		 if(tempBooks==null)
 				 		 {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -128,7 +128,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 				 	}
 			 	else if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty()==false)
 			 	{
-			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
 							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -144,7 +144,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 	}
 			 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty())
 			 	{
-			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
 							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);

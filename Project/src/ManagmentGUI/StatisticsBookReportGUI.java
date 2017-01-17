@@ -24,7 +24,7 @@ import javax.swing.border.MatteBorder;
 import Book.Book;
 import Book.Domain;
 import Controller.UserController;
-import Controller.bookController;
+import Controller.BookController;
 import MenuGUI.LoginGUI;
 import Panels.BookStatisticsPanel;
 import Panels.UserSubscriptionPanel;
@@ -119,12 +119,12 @@ public class StatisticsBookReportGUI extends JPanel {
 				{
 					Book b = new Book(textFieldBookTitle.getText().trim(), textFieldAuthor.getText().trim()); // create
 					if(textFieldBookTitle.getText().isEmpty())
-				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "author=\""+textFieldAuthor.getText().trim() +"\"", screen.getClient());
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "author=\""+textFieldAuthor.getText().trim() +"\"", screen.getClient());
 					else if(textFieldAuthor.getText().isEmpty())
-				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBookTitle.getText().trim() +"\"", screen.getClient());				
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBookTitle.getText().trim() +"\"", screen.getClient());				
 					else
 					{
-						tempBooks = bookController.SearchBook(
+						tempBooks = BookController.SearchBook(
 								"title,author,bookID", b, "title=\"" + textFieldBookTitle.getText().trim() + "\""
 										+ " && " + "author=\"" + textFieldAuthor.getText().trim() + "\"",screen.getClient());
 					}

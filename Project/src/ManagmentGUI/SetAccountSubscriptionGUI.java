@@ -22,7 +22,7 @@ import javax.swing.border.MatteBorder;
 
 import Book.Book;
 import Controller.UserController;
-import Controller.bookController;
+import Controller.BookController;
 import MenuGUI.LoginGUI;
 import Panels.*;
 import Role.User;

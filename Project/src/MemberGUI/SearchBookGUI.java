@@ -21,7 +21,7 @@ import Book.Book;
 import Book.Domain;
 import Book.SubjectToBook;
 import Controller.FormatController;
-import Controller.bookController;
+import Controller.BookController;
 import ManagmentGUI.RemovePartReviewGUI;
 import MenuGUI.LoginGUI;
 
@@ -245,7 +245,7 @@ public class SearchBookGUI extends JPanel {
 				{
 					flag=2;
 					Book b2=new Book();
-					ArrayList<Book> bookKeywords=bookController.SearchBook("bookID,title,language,author,summary,content,keyword", b2, "bookEnable=\""+1+"\"", screen.getClient());
+					ArrayList<Book> bookKeywords=BookController.SearchBook("bookID,title,language,author,summary,content,keyword", b2, "bookEnable=\""+1+"\"", screen.getClient());
 					
 					for(Book b1:bookKeywords)
 					{
@@ -265,7 +265,7 @@ public class SearchBookGUI extends JPanel {
 					{
 						Book b1=new Book();
 						
-						ArrayList<Book> allBooks=bookController.SearchBook("bookID,title,language,author,summary,content,keyword", b1, "bookEnable=\""+1+"\"", screen.getClient());
+						ArrayList<Book> allBooks=BookController.SearchBook("bookID,title,language,author,summary,content,keyword", b1, "bookEnable=\""+1+"\"", screen.getClient());
 						
 						
 						for(Book b2:allBooks)
@@ -316,7 +316,7 @@ public class SearchBookGUI extends JPanel {
 									
 								else{
 					
-					ArrayList<Book> temp = bookController.SearchBook("bookID,title,language,author,summary,content,keyword",b,condition, screen.getClient());//call search book method from book controller
+					ArrayList<Book> temp = BookController.SearchBook("bookID,title,language,author,summary,content,keyword",b,condition, screen.getClient());//call search book method from book controller
 					if (temp != null) 
 					{
 						

@@ -10,7 +10,7 @@ import Book.Book;
 import Book.Review;
 import Controller.ReviewController;
 import Controller.UserController;
-import Controller.bookController;
+import Controller.BookController;
 import MenuGUI.LoginGUI;
 import Panels.BookPanel;
 import Panels.ReviewPanel;
@@ -169,7 +169,7 @@ public class SearchReviewGUI extends JPanel {
 				 	
 				 	 if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)
 				 	{
-					 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+ "&&"+"bookEnable=\""+1+"\"", screen.getClient());
+					 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+ "&&"+"bookEnable=\""+1+"\"", screen.getClient());
 				 		 if(tempBooks==null)
 				 		 {
 				 			comboBoxOfBooks.removeAllItems();
@@ -188,7 +188,7 @@ public class SearchReviewGUI extends JPanel {
 				 	}
 				else if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty()==false)
 			 	{
-			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
 							comboBoxOfBooks.removeAllItems();
@@ -207,7 +207,7 @@ public class SearchReviewGUI extends JPanel {
 			 	}
 			 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty())
 			 	{
-			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
 						 	comboBoxOfBooks.removeAllItems();

@@ -31,7 +31,7 @@ import java.util.InputMismatchException;
 
 import Controller.CartController;
 import Controller.UserController;
-import Controller.bookController;
+import Controller.BookController;
 import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;
 import Panels.BookPerCart;
@@ -181,7 +181,7 @@ public class StatisticsUserReportGUI extends JPanel
 		{
 			ArrayList<Book> books=new ArrayList<Book>();
 			Book b=new Book();
-			ArrayList<Book> booksSearch= (ArrayList<Book>)bookController.SearchBook("bookID,title,author",b,"bookID=\""+carts.get(i).getBookID()+"\"" ,screen.getClient());
+			ArrayList<Book> booksSearch= (ArrayList<Book>)BookController.SearchBook("bookID,title,author",b,"bookID=\""+carts.get(i).getBookID()+"\"" ,screen.getClient());
 			if(booksSearch==null||booksSearch.isEmpty())
 			{
 				JOptionPane.showMessageDialog(screen,"Book was NOT Found\n", "Warning",JOptionPane.WARNING_MESSAGE);

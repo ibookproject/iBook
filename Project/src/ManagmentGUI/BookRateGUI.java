@@ -164,7 +164,7 @@ import Book.Book;
 import Book.Cart;
 import Book.Subject;
 import Controller.CartController;
-import Controller.bookController;
+import Controller.BookController;
 import MenuGUI.LoginGUI;
 
 import javax.swing.JFrame;
@@ -287,7 +287,7 @@ public class BookRateGUI extends JPanel {
 				 	
 				 	if(textFieldAutohr.getText().isEmpty()==false)
 				 	{
-				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\"", screen.getClient());
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\"", screen.getClient());
 				 		 if(tempBooks==null)
 				 		 {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -306,7 +306,7 @@ public class BookRateGUI extends JPanel {
 				 	}
 			 	else
 			 	{
-			 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\"", screen.getClient());
+			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
 							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -387,7 +387,7 @@ public class BookRateGUI extends JPanel {
 		allcarts=CartController.SearchCart("userID,bookID,price,status", c,  "status=\""+1+"\""/*+"&&"+"bookID=\""+bookId+"\""*/, screen.getClient());
 		Book b=new Book();
 		//"title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\""
-		allBooks=bookController.SearchBook("bookID,title,language,author,summary,content,keyword", b, "bookEnable=\""+1+"\"", screen.getClient());
+		allBooks=BookController.SearchBook("bookID,title,language,author,summary,content,keyword", b, "bookEnable=\""+1+"\"", screen.getClient());
 		
 		int maxBookID=0;
 		int bookIdNumPurchase;

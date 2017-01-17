@@ -1,8 +1,5 @@
 /Book/
-/Controller/
-/DB/
-/ManagmentGUI/
-/MemberGUI/
-/MenuGUI/
-/IbookIcon
 /Panels/
+/ManagmentGUI/
+/Controller/
+/MemberGUI/

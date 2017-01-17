@@ -15,7 +15,7 @@ import javax.swing.JTextPane;
 import Book.Book;
 import Book.Review;
 import Controller.ReviewController;
-import Controller.bookController;
+import Controller.BookController;
 import MenuGUI.LoginGUI;
 import Panels.Validation;
 
@@ -184,7 +184,7 @@ public class RequestPostFillReviewGUI extends JPanel
 				{
 		        Review r = new Review(timeRightNow,textAreaReviewContent.getText(),0,bookID);
 		        Book b=new Book();
-				ArrayList<Book> temp = bookController.SearchBook("bookID",b,"bookID=\""+bookID+"\"", screen.getClient());//call search book method from book controller
+				ArrayList<Book> temp = BookController.SearchBook("bookID",b,"bookID=\""+bookID+"\"", screen.getClient());//call search book method from book controller
 				if(temp==null)
 					JOptionPane.showMessageDialog(screen,"not found any book result\n", "Warning",JOptionPane.WARNING_MESSAGE);
 				else{

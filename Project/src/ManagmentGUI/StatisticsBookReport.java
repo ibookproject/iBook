@@ -24,10 +24,11 @@ import javax.swing.border.MatteBorder;
 import Book.Book;
 import Book.Domain;
 import Controller.UserController;
-import Controller.bookController;
+import Controller.BookController;
 import MenuGUI.LoginGUI;
 import Panels.BookPanel;
 import Panels.BookStatisticsPanel;
+import Panels.HistogramPanel;
 import Panels.UserSubscriptionPanel;
 import Role.User;
 import client.DBgenericObject;
@@ -45,8 +46,7 @@ public class StatisticsBookReport extends JPanel {
 	private JLabel lblOrdersdb;
 	private JLabel lblSearchersdb;
 	private JProgressBar progressBar;
-	private JProgressBar progressBarSearches;
-	private JProgressBar progressBarOrders;
+	private JPanel insidePanel;
 	
 	public StatisticsBookReport(LoginGUI screen) {
 		super();
@@ -75,41 +75,30 @@ public class StatisticsBookReport extends JPanel {
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 		
-		JLabel lblOrders = new JLabel("Orders:");
-		lblOrders.setBounds(130, 182, 75, 14);
-		add(lblOrders);
-		
 		lblOrdersdb = new JLabel("");
 		lblOrdersdb.setBounds(236, 182, 46, 14);
 		add(lblOrdersdb);
-		
-		JLabel lblSearches = new JLabel("Searches:");
-		lblSearches.setBounds(130, 224, 75, 14);
-		add(lblSearches);
 		
 		lblSearchersdb = new JLabel("");
 		lblSearchersdb.setBounds(236, 224, 46, 14);
 		add(lblSearchersdb);
 		
-		progressBarOrders = new JProgressBar();
-		progressBarOrders.setBounds(292, 182, 146, 14);
-		progressBarOrders.setMaximum(2000);
-		add(progressBarOrders);
+		insidePanel = new JPanel();
+		insidePanel.setBounds(219, 98, 430, 427);
+		add(insidePanel);
 		
-		progressBarSearches = new JProgressBar();
-		progressBarSearches.setBounds(292, 224, 146, 14);
-		add(progressBarSearches);
-		
-		Book b=new Book();
 
 	}
 	public void setResult(int purchase,int searches)
 	{	
-		lblOrdersdb.setText(Integer.toString(purchase));
-		lblSearchersdb.setText(Integer.toString(searches));
-		//textFieldOrders.setBounds(292, 179, 5*purchase, 20);
-		progressBarOrders.setValue(20*purchase);
-		progressBarSearches.setValue(20*searches);
+		//lblOrdersdb.setText(Integer.toString(purchase));
+		//lblSearchersdb.setText(Integer.toString(searches));
+        HistogramPanel histogramPan = new HistogramPanel();
+        histogramPan.addHistogramColumn("Purchase", purchase, Color.RED);
+        histogramPan.addHistogramColumn("Searches", searches, Color.YELLOW);
+        histogramPan.layoutHistogram();
+        insidePanel.add(histogramPan);
+        insidePanel.updateUI();
 		
 	}
 }

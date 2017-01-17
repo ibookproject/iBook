@@ -26,7 +26,7 @@ import Book.Review;
 import Book.Subject;
 import Book.SubjectToBook;
 import Controller.FormatController;
-import Controller.bookController;
+import Controller.BookController;
 import MenuGUI.LoginGUI;
 import Panels.FormatCheckBoxBooklistPanel;
 import Panels.SearchReviewPanel;
@@ -140,7 +140,7 @@ public class FormatManagmentGUI extends JPanel {
 
 				//getting all the book at the DB
 				Book tempObject = new Book(); // create new book
-				AllBookList=bookController.SearchBook("bookID,title,language,author",tempObject,"bookEnable=\""+1+"\"", screen.getClient());
+				AllBookList=BookController.SearchBook("bookID,title,language,author",tempObject,"bookEnable=\""+1+"\"", screen.getClient());
 
 				
 				//getting all the books that the selected subject is attach to them.
@@ -329,7 +329,7 @@ public class FormatManagmentGUI extends JPanel {
 				
 			//getting all the book at the DB
 			Book tempObject = new Book(); // create new book
-			AllBookList=bookController.SearchBook("bookID,title,language,author",tempObject,"bookEnable=\""+1+"\"", screen.getClient());
+			AllBookList=BookController.SearchBook("bookID,title,language,author",tempObject,"bookEnable=\""+1+"\"", screen.getClient());
 			
 			//getting all the books that the selected subject is attach to them.
 				//SubjectBox.setSelectedIndex(0);

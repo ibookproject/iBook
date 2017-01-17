@@ -13,11 +13,12 @@ import client.DBSQLhandler;
 import client.DBgenericObject;
 import Book.Domain;
 import Book.Review;
+import Book.SearchToBook;
 import Book.SubjectToBook;
 import Book.Book;
 
 
-public class bookController {
+public class BookController {
 
 	public static ArrayList<Book> SearchBook(String fromSentence,Book b,String condition,DBSQLhandler client)
 	{
@@ -39,7 +40,26 @@ public class bookController {
 			return null;
 		}
 	}
-	
+	public static ArrayList<SearchToBook> SearchSearchToBook(String fromSentence,SearchToBook btb,String condition,DBSQLhandler client)
+	{
+		// filed is need to look like "bookID,author,..."
+		client.searchInDB(new searchCommand<SearchToBook>(fromSentence,btb,condition));//call command and client ask to search a book
+		while(!client.GetGotMessag()){//search book in db
+			try{
+			Thread.sleep(250);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+			}
+		}
+		try {
+			
+			return  SearchToBook.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), fromSentence);
+		} catch (SQLException e) {
+			return null;
+		}
+	}
 	
 	public static boolean AddBook(Book b,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{

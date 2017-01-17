@@ -13,7 +13,7 @@ import Book.Domain;
 import Book.Subject;
 import Controller.FormatController;
 import Controller.ReviewController;
-import Controller.bookController;
+import Controller.BookController;
 import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;
 import Panels.BookPanel;
@@ -128,7 +128,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				 	 }
 					 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)
 					 	{
-					 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+ "&&"+"bookEnable=\""+1+"\"", screen.getClient());
+					 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+ "&&"+"bookEnable=\""+1+"\"", screen.getClient());
 					 		 if(tempBooks==null)
 					 		 {
 									JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -145,7 +145,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 					 	}
 				 	else if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty()==false)
 				 	{
-				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 						 if(tempBooks==null)
 				 		 {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -161,7 +161,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				 	}
 				 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty())
 				 	{
-				 		tempBooks = bookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 						 if(tempBooks==null)
 				 		 {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -192,7 +192,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 					{
 						//means delete ..... 
 						Book b=new Book();
-						bookController.DeleteBook(b,"bookID=\""+bookId+"\""+ " && "+"bookEnable=\""+1+"\"",screen.getClient());
+						BookController.DeleteBook(b,"bookID=\""+bookId+"\""+ " && "+"bookEnable=\""+1+"\"",screen.getClient());
 					//	comboBox.removeAllItems();
 						tempBooks.remove(index);
 						comboBox.removeItemAt(index);

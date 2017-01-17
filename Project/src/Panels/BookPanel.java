@@ -15,7 +15,7 @@ import javax.swing.JCheckBox;
 
 import Book.Book;
 import Book.Domain;
-import Controller.bookController;
+import Controller.BookController;
 import MemberGUI.RequestPostFillReviewGUI;
 import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;

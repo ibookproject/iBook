@@ -136,7 +136,7 @@ public class HistogramPanel extends JPanel
         }
     }
 
-    private static void createAndShowGUI()
+ /*   private static void createAndShowGUI()
     {
         HistogramPanel panel = new HistogramPanel();
         panel.addHistogramColumn("Kokoriko", 100, Color.RED);
@@ -158,5 +158,5 @@ public class HistogramPanel extends JPanel
     public static void main(String[] args)
     {
     	createAndShowGUI();
-    }
+    }*/
 }

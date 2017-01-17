@@ -17,7 +17,7 @@ import javax.swing.JCheckBox;
 import Book.Book;
 import Book.Domain;
 import Book.Review;
-import Controller.bookController;
+import Controller.BookController;
 import MenuGUI.LoginGUI;
 
 import java.awt.Font;
@@ -55,7 +55,7 @@ public class ReviewPanel extends JPanel{
 		add(lblDate);
 		
 		Book b=new Book();
-		ArrayList<Book> book=bookController.SearchBook("title", b, "bookID=\""+r.getBookID()+"\"", screen.getClient());
+		ArrayList<Book> book=BookController.SearchBook("title", b, "bookID=\""+r.getBookID()+"\"", screen.getClient());
 		lblNewTitle = new JLabel(book.get(0).getTitle());
 		lblNewTitle.setBounds(168, 34, 93, 16);
 		add(lblNewTitle);
