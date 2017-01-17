@@ -93,12 +93,12 @@ public class StatisticsUserReportGUI extends JPanel
 		textFieldID.setColumns(10);
 
 		
-		lblUserID = new JLabel("User ID");
+		lblUserID = new JLabel("User ID:");
 		lblUserID.setBounds(238, 133, 70, 14);
 		add(lblUserID);
 				
-		lblDate = new JLabel("Date");
-		lblDate.setBounds(238, 180, 48, 22);
+		lblDate = new JLabel("From Date:");
+		lblDate.setBounds(238, 180, 70, 22);
 		add(lblDate);
 		
 		textFieldDate = new JTextField("");

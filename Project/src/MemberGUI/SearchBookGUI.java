@@ -52,15 +52,14 @@ public class SearchBookGUI extends JPanel {
 	private JTextField textAuthor;
 	private JCheckBox chckbxKeywords;
 	private JCheckBox chckbxDomain;
-	private JCheckBox chckbxFormat;
+	//private JCheckBox chckbxFormat;
 	private JComboBox<Domain> comboBoxDomain;
-	private JComboBox<String> comboBoxFormat ;
+	//private JComboBox<String> comboBoxFormat ;
 	private JTextField textFieldLanguage;
 	private JTextField textFieldKeywords;
 	private JTextField textFieldSummary;
 	private JTextField textFieldContents;
 	private JButton btnSearch;
-	private ArrayList<Book> bookss;
 	private ArrayList<SubjectToBook> subjectDomainList;
 	private ArrayList<Book> bookDomainList;
 	private int flag=0;
@@ -127,10 +126,10 @@ public class SearchBookGUI extends JPanel {
 		chckbxDomain.setBounds(257, 450, 111, 25);
 		add(chckbxDomain);
 
-		chckbxFormat = new JCheckBox("Format");
+		/*chckbxFormat = new JCheckBox("Format");
 		chckbxFormat.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		chckbxFormat.setBounds(257, 500, 111, 25);
-		add(chckbxFormat);
+		add(chckbxFormat);*/
 
 		comboBoxDomain = new JComboBox<Domain>();
 		//comboBoxDomain.addItem(" ");
@@ -145,14 +144,14 @@ public class SearchBookGUI extends JPanel {
 		add(comboBoxDomain);
 
 		//comboBoxDomain.getSelectedItem();
-		comboBoxFormat = new JComboBox<String>();
+	/*	comboBoxFormat = new JComboBox<String>();
 		comboBoxFormat.addItem(" ");
 		comboBoxFormat.addItem("PDF");
 		comboBoxFormat.addItem("DOC");
 		comboBoxFormat.addItem("FB2");
 
 		comboBoxFormat.setBounds(393, 502, 116, 22);
-		add(comboBoxFormat);
+		add(comboBoxFormat);*/
 
 		textFieldSummary = new JTextField();
 		textFieldSummary.setBounds(393, 302, 116, 22);
@@ -184,7 +183,7 @@ public class SearchBookGUI extends JPanel {
 		add(textFieldLanguage);
 		textFieldLanguage.setColumns(10);
 
-		bookss=new ArrayList<Book>();
+		ArrayList<Book> bookss=new ArrayList<Book>();
 		btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -196,34 +195,39 @@ public class SearchBookGUI extends JPanel {
 					}
 // //////////////////////button back to Search book GUI/////////////////////////////////////////////
 				});
-				Book b = new Book(textTitle.getText(), textFieldLanguage.getText(),
-						textAuthor.getText(), textFieldSummary.getText(), true,textFieldKeywords.getText(),textFieldContents.getText());//create book from text fields
+				Book b=new Book();
+			/*	Book b = new Book(textTitle.getText(), textFieldLanguage.getText(),
+						textAuthor.getText(), textFieldSummary.getText(), true,textFieldKeywords.getText(),textFieldContents.getText());//create book from text fields*/
 				String condition = "";//initialize the condition
 				if (chckbxTitle.isSelected())
-					condition += "title=\"" + b.getTitle() + "\"";//add "title" to condition
+					condition += "title=\"" + textTitle.getText() + "\"";//add "title" to condition
 				if (chckbxLanguage.isSelected()) {
 					if (!condition.equals(""))
 						condition += " && ";
-					condition += "language=\"" + b.getLanguage() + "\"";//add "language" to condition
+					condition += "language=\"" + textFieldLanguage.getText() + "\"";//add "language" to condition
 				}
 				if (chckbxAuthor.isSelected()) {
 					if (!condition.equals(""))
 						condition += " && ";
-					condition += "author=\"" + b.getAuthor() + "\"";//add "author" to condition
+					condition += "author=\"" + textAuthor.getText() + "\"";//add "author" to condition
 				}
 				if (chckbxSummary.isSelected()) {
 					if (!condition.equals(""))
 						condition += " && ";
-					condition += "summary=\"" + b.getSummary() + "\"";//add "summary" to condition
+					condition += "summary=\"" + textFieldSummary.getText() + "\"";//add "summary" to condition
+				}
+				if (chckbxContents.isSelected()) {
+					if (!condition.equals(""))
+						condition += " && ";
+					condition += "content=\"" +textFieldContents.getText() + "\"";//add "content" to condition
 				}
 			
-				ArrayList<Book> bookContentsChoose=new ArrayList<Book>();
+			//	ArrayList<Book> bookContentsChoose=new ArrayList<Book>();
 				ArrayList<Book> bookKeywordsChoose=new ArrayList<Book>();
-				ArrayList<Book> bookKeywordsContents=new ArrayList<Book>();
-
+				ArrayList<Book> bookKeywordsDomains=new ArrayList<Book>();
 				ArrayList<Book> bookDomainList=new 	ArrayList<Book>();
 				
-				if (chckbxContents.isSelected())
+			/*	if (chckbxContents.isSelected())
 				{
 					flag=1;
 					Book b2=new Book();
@@ -235,7 +239,7 @@ public class SearchBookGUI extends JPanel {
 							if(textFieldContents.getText().equals(b1.getContent()[i]))
 								bookContentsChoose.add(b1);	
 					}
-				}
+				}*/
 				
 				if (chckbxKeywords.isSelected())
 				{
@@ -251,20 +255,7 @@ public class SearchBookGUI extends JPanel {
 					}
 				}
 		
-				if(chckbxKeywords.isSelected()&&chckbxContents.isSelected())		//AND between both ArrayList!
-				{
-					flag=3;
-					if((bookContentsChoose!=null)&&(bookKeywordsChoose!=null))
-					{
-						for(Book b1:bookContentsChoose)
-						{
-							for(int i=0;i<bookKeywordsChoose.size();i++)
-								if(bookKeywordsChoose.get(i).getBookID()==b1.getBookID())
-									bookKeywordsContents.add(b1);
-						}
-					}
-				
-				}
+			
 				if(chckbxDomain.isSelected())
 				{	
 					SubjectToBook s=new SubjectToBook();
@@ -278,16 +269,14 @@ public class SearchBookGUI extends JPanel {
 						
 						
 						for(Book b2:allBooks)
-							
 						{
 							for(SubjectToBook s1:subjectDomainList)
 							{
 								if(b2.getBookID()==s1.getBookID())
 									{
 									bookDomainList.add(b2);
-									flag=4;
+									flag=1;
 									}
-							
 							}
 						}
 					}	
@@ -295,18 +284,32 @@ public class SearchBookGUI extends JPanel {
 						JOptionPane.showMessageDialog(screen,"Theres no books in the chosen domain", "Warning",JOptionPane.WARNING_MESSAGE);
 						
 				}
+				if(chckbxKeywords.isSelected()&&chckbxDomain.isSelected())		//AND between both ArrayList!
+				{
+					flag=3;
+					if((bookDomainList!=null)&&(bookKeywordsChoose!=null))
+					{
+						for(Book b1:bookDomainList)
+						{
+							for(int i=0;i<bookKeywordsChoose.size();i++)
+								if(bookKeywordsChoose.get(i).getBookID()==b1.getBookID())
+									bookKeywordsDomains.add(b1);
+						}
+					}
+				
+				}
 				
 				if (!condition.equals("")||flag!=0) 
 				{//if have some condition
 					ArrayList<Book> temp1 =new ArrayList<Book>();
 					if(condition.equals("")&&flag==1)
-						temp1=bookContentsChoose;
+						temp1=bookDomainList;
 					else
 						if(condition.equals("")&&flag==2)
 							temp1=bookKeywordsChoose;
 						else
 							if(condition.equals("")&&flag==3)
-								temp1=bookKeywordsContents;
+								temp1=bookKeywordsDomains;
 							else
 								if(condition.equals("")&&flag==4)
 									temp1=bookDomainList;
@@ -317,9 +320,9 @@ public class SearchBookGUI extends JPanel {
 					if (temp != null) 
 					{
 						
-						if(flag==1)//contents
+						if(flag==1)//Domain
 						{
-							for(Book b1:bookContentsChoose)
+							for(Book b1:bookDomainList)
 							{
 								for(int i=0;i<temp.size();i++)
 									if(temp.get(i).getBookID()==b1.getBookID())
@@ -337,9 +340,9 @@ public class SearchBookGUI extends JPanel {
 								}
 							}
 							else
-								if(flag==3)//both
+								if(flag==3)//both domain and keywords
 								{
-									for(Book b1:bookKeywordsContents)
+									for(Book b1:bookKeywordsDomains)
 									{
 										for(int i=0;i<temp.size();i++)
 											if(temp.get(i).getBookID()==b1.getBookID())

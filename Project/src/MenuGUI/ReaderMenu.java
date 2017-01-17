@@ -55,7 +55,7 @@ public class ReaderMenu extends UserMenu {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
-				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,"ID1234");
+				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,1);
 				Pfr.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);

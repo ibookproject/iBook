@@ -40,12 +40,12 @@ public class RequestPostFillReviewGUI extends JPanel
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
 	private JTextField textFieldReviewDate;
-	private String bookID;
+	private int bookID;
 	private JTextField textField;
 	public LoginGUI screen;
 	private Date date;
 	private int conterOfText;
-	public RequestPostFillReviewGUI(LoginGUI screen,String bookId) {
+	public RequestPostFillReviewGUI(LoginGUI screen,int bookId) {
 		super();
 		//this.bookID=bookId;
 		this.screen=screen;

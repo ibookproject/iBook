@@ -15,9 +15,6 @@ import Panels.BookPanel;
 import client.DBgenericObject;
 import command.showAllCommand;
 
-
-
-
 public class SearchBook extends JPanel {
 
 
@@ -26,7 +23,7 @@ public class SearchBook extends JPanel {
 	private LoginGUI screen;
 	private JPanel pann;
 	private ImageIcon backIcon;
-	private JButton btnPostReview;
+//	private JButton btnPostReview;
 	private JLabel lblSearchBook;
 	private ArrayList<Book> searchRes;
 	private ArrayList<Book> books;
@@ -54,11 +51,11 @@ public class SearchBook extends JPanel {
 		this.setLayout(null);	
 		
 		backIcon =new ImageIcon("src/images/backIcon.png");
-		btnPostReview = new JButton("Post Review");
+	/*	btnPostReview = new JButton("Post Review");
 		btnPostReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 ////////////////////////button to back panel from panel /////////////////////////////////////////////
-				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,"ID1234");
+				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,1);
 				Pfr.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
@@ -70,7 +67,7 @@ public class SearchBook extends JPanel {
 		});
 	
 		btnPostReview.setBounds(684, 11, 123, 25);
-		add(btnPostReview);
+		add(btnPostReview);*/
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
@@ -81,7 +78,7 @@ public class SearchBook extends JPanel {
 		add(lblSearchBook);
 		
 		scrollPaneMain = new JScrollPane();
-		scrollPaneMain.setBounds(51, 106, 756, 492);
+		scrollPaneMain.setBounds(51, 106, 756, 451);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
 		add(scrollPaneMain);
@@ -103,7 +100,7 @@ public class SearchBook extends JPanel {
 			
 		for(Book b:searchRes)
 		{
-			panel.add(new BookPanel(this.screen,b));
+			panel.add(new BookPanel(this.screen,b,this));
 			panel.updateUI();
 		}
 	}
