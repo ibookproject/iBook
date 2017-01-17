@@ -17,6 +17,8 @@ public class Book extends DBtranslation  {
 	private boolean bookEnable;
 	private String[] keyword;
 	private String[] content;
+	private long numberOfOrder;
+	private float price;
 	//private String cont;
 	
 	//empty constructor
@@ -168,6 +170,25 @@ public class Book extends DBtranslation  {
 	public void setContent(String content){//splite from DB
 		this.content=content.split(" ");
 	}
+
+	public long getNumberOfOrder() {
+		return numberOfOrder;
+	}
+	public void setNumberOfOrder(long numberOfOrder) {
+		this.numberOfOrder = numberOfOrder;
+	}
+
+
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+
+	
+	
 	
 	@Override
 	public String getClassName() {
@@ -179,11 +200,11 @@ public class Book extends DBtranslation  {
 	public String getValToInsert() {
 		int temp=0;
 		if(bookEnable)temp=1;
-		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",%d,\"%s\",\"%s\")",title,language,author,summary,temp,getKeywordToString(),getContentToString());
+		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",%d,\"%s\",\"%s\",0,%f)",title,language,author,summary,temp,getKeywordToString(),getContentToString(),price);
 	}
 	@Override
 	public String getAttributeToInsert() {
-		return "(title,language,author,summary,bookEnable,keyword,content)";
+		return "(title,language,author,summary,bookEnable,keyword,content,price)";
 	}
 
 //convert array Which was obtained from DB to an actual book

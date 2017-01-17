@@ -29,12 +29,14 @@ CREATE TABLE `book` (
   `title` varchar(45) NOT NULL,
   `language` varchar(45) NOT NULL,
   `author` varchar(45) NOT NULL,
-  `summary` varchar(45) NOT NULL,
-  `bookEnable` tinyint(1) NOT NULL DEFAULT '1',
+  `summary` varchar(500) NOT NULL,
+  `bookEnable` tinyint(2) NOT NULL DEFAULT '1',
   `keyword` varchar(10000) DEFAULT '" "',
   `content` varchar(10000) DEFAULT '" "',
+  `numberOfOrder` bigint(45) NOT NULL DEFAULT '0',
+  `price` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`bookID`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +46,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` (`bookID`, `title`, `language`, `author`, `summary`, `bookEnable`, `keyword`, `content`) VALUES (1,'kofiko','HEB','j.k. roling','g',1,NULL,NULL),(2,'kofiko','HEB','j.k. roling','f',1,NULL,NULL),(3,'kofiko','HEB','j.k. roling','e',1,NULL,NULL),(4,'kofiko','HEB','j.k. roling','d',1,NULL,NULL),(5,'kofiko','HEB','j.k. roling','c',1,NULL,NULL),(6,'kofiko','HEB','j.k. roling','b',1,NULL,NULL),(7,'kofiko','HEB','j.k. roling','a',1,NULL,NULL),(8,'kofiko','HEB','j.k. roling','k',1,NULL,NULL),(9,'kofiko','HEB','j.k. roling','t',1,NULL,NULL),(17,'narnita','ENG','j.k. roling','best to know',1,NULL,NULL),(18,'narnita','ENG','j.k. roling','best to know',1,NULL,NULL),(19,'narnita','ENG','j.k. roling','best to know',1,NULL,NULL),(20,'narnita','ENG','j.k. roling','best to know',1,NULL,NULL),(21,'narnita','ENG','j.k. roling','best to know',1,NULL,NULL),(22,'kofiko','HEB','j.k. roling','best to know',1,NULL,NULL),(23,'kofiko','HEB','j.k. roling','best to know',1,NULL,NULL),(24,'2','2','2','2',1,'\" \"','\" \"'),(25,'go','heb','sagi','ds',1,'\" \"','\" \"'),(26,'','','','',1,'\" \"','\" \"');
+INSERT INTO `book` (`bookID`, `title`, `language`, `author`, `summary`, `bookEnable`, `keyword`, `content`, `numberOfOrder`, `price`) VALUES (1,'kof','HEB','j.k. roling','g',1,'heb a','1 2',0,0),(2,'twilight','HEB','coral','f',1,'coral','2',0,0),(3,'hasod','HEB','sagi','e',1,'sagi','3',0,0),(4,'hacoach','HEB','sagi','d',1,'sagi','4',0,0),(5,'kofiko','HEB','j.k. roling','c',1,'heb','5',0,0),(6,'co','HEB','co','b',1,'kofiko','6',0,0),(7,'kofiko','HEB','j.k. roling','a',1,'a','7',0,0),(8,'kofiko','HEB','j.k. roling','k',1,'k','8',0,0),(9,'kofiko','HEB','j.k. roling','t',1,'t','9',0,0),(17,'narnita','ENG','j.k. roling','best to know',1,'best to know','17',0,0),(18,'narnita','ENG','j.k. roling','best to know',1,'18','18',0,0),(19,'narnita','ENG','j.k. roling','best to know',1,'j.k. roling','19 18',0,0),(20,'narnita','ENG','j.k. roling','best to know',1,'eng 18','20 ',0,0),(21,'narnita','ENG','j.k. roling','best to know',1,'narnita','21',0,0),(22,'kofiko','HEB','j.k. roling','best to know',1,'kof','22',0,0),(23,'kofiko','HEB','j.k. roling','best to know',1,'heb','kofiko',0,0),(24,'2','2','2','2',1,'3','cool',0,0),(25,'go','heb','sagi','ds',1,'fr','book',0,0),(26,'cool','HEB','almog','cool',1,'fr','search',0,0),(110,'f','f','f','f',1,'fd','fd',0,0);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +60,7 @@ DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `userID` varchar(45) NOT NULL,
   `bookID` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` int(11) NOT NULL DEFAULT '0',
   `price` float NOT NULL,
   `buyDate` date DEFAULT NULL,
   PRIMARY KEY (`userID`,`bookID`),
@@ -75,6 +77,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` (`userID`, `bookID`, `status`, `price`, `buyDate`) VALUES ('1',1,1,17,'2015-11-11'),('1',2,1,13,'2015-11-11'),('1',3,1,54,'2016-02-02'),('1',4,1,15,'2016-12-12'),('2',1,1,45,'2016-08-09'),('2',2,1,78,'2016-08-09'),('2',5,1,32,'2015-11-11'),('2',6,1,17,'2016-07-04'),('2',7,1,4,'2016-08-09'),('3',1,1,34,'2016-08-09'),('3',2,1,78,'2016-08-09'),('3',3,1,12,'2016-08-09'),('4',1,1,10,'2015-11-11');
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +92,7 @@ CREATE TABLE `domain` (
   `domainID` int(10) NOT NULL AUTO_INCREMENT,
   `domainName` varchar(255) NOT NULL,
   PRIMARY KEY (`domainID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,34 +102,8 @@ CREATE TABLE `domain` (
 
 LOCK TABLES `domain` WRITE;
 /*!40000 ALTER TABLE `domain` DISABLE KEYS */;
-INSERT INTO `domain` (`domainID`, `domainName`) VALUES (1,'23'),(2,'543');
+INSERT INTO `domain` (`domainID`, `domainName`) VALUES (1,'nature'),(2,'science'),(3,'madab'),(4,'action'),(5,'guide'),(6,'children');
 /*!40000 ALTER TABLE `domain` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `libraryworker`
---
-
-DROP TABLE IF EXISTS `libraryworker`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `libraryworker` (
-  `workerID` bigint(19) NOT NULL AUTO_INCREMENT,
-  `role` varchar(255) NOT NULL DEFAULT '1',
-  `department` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  PRIMARY KEY (`workerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `libraryworker`
---
--- ORDER BY:  `workerID`
-
-LOCK TABLES `libraryworker` WRITE;
-/*!40000 ALTER TABLE `libraryworker` DISABLE KEYS */;
-/*!40000 ALTER TABLE `libraryworker` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -160,6 +137,32 @@ INSERT INTO `review` (`reviewID`, `reviewDate`, `reviewContent`, `reviewStatus`,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `searchtobook`
+--
+
+DROP TABLE IF EXISTS `searchtobook`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `searchtobook` (
+  `bookID` int(11) NOT NULL,
+  `SearchDate` date NOT NULL,
+  `numberOfSearches` bigint(45) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`bookID`,`SearchDate`),
+  CONSTRAINT `SbookID` FOREIGN KEY (`bookID`) REFERENCES `book` (`bookID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `searchtobook`
+--
+-- ORDER BY:  `bookID`,`SearchDate`
+
+LOCK TABLES `searchtobook` WRITE;
+/*!40000 ALTER TABLE `searchtobook` DISABLE KEYS */;
+/*!40000 ALTER TABLE `searchtobook` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `subject`
 --
 
@@ -182,7 +185,7 @@ CREATE TABLE `subject` (
 
 LOCK TABLES `subject` WRITE;
 /*!40000 ALTER TABLE `subject` DISABLE KEYS */;
-INSERT INTO `subject` (`domainID`, `nameSubject`) VALUES (1,'kjhgfd'),(2,'tre');
+INSERT INTO `subject` (`domainID`, `nameSubject`) VALUES (1,'animals'),(2,'brain'),(1,'dogs'),(1,'flowers'),(4,'murder'),(6,'songs'),(6,'tree'),(2,'umanBuddy');
 /*!40000 ALTER TABLE `subject` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,6 +216,7 @@ CREATE TABLE `subjecttobook` (
 
 LOCK TABLES `subjecttobook` WRITE;
 /*!40000 ALTER TABLE `subjecttobook` DISABLE KEYS */;
+INSERT INTO `subjecttobook` (`nameSubject`, `domainID`, `bookID`) VALUES ('animals',1,1),('animals',1,4),('songs',6,5),('songs',6,6),('umanBuddy',2,2),('umanBuddy',2,4);
 /*!40000 ALTER TABLE `subjecttobook` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,6 +230,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `userID` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `identityNumber` varchar(9) NOT NULL,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `userStatus` int(10) NOT NULL DEFAULT '0',
@@ -244,7 +249,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`userID`, `password`, `firstName`, `lastName`, `userStatus`, `subscriptionMethod`, `privilege`, `subscriptionRequest`, `finishDateOfSubscription`) VALUES ('1','1','sagi','entenberg',0,0,1,0,NULL),('2','2','coral','carmeli',0,0,2,0,NULL),('3','3','hen','saada',0,0,3,0,NULL),('4','4','almog','yamin',0,0,4,0,NULL),('5','5','kfir','girshtain',0,0,5,0,NULL),('6','6','avi','sofer',0,0,6,0,NULL),('8','8','8','8',0,NULL,1,0,NULL),('9','86','6','6',0,NULL,1,0,NULL);
+INSERT INTO `user` (`userID`, `password`, `identityNumber`, `firstName`, `lastName`, `userStatus`, `subscriptionMethod`, `privilege`, `subscriptionRequest`, `finishDateOfSubscription`) VALUES ('1','1','','sagi','entenberg',0,0,1,0,NULL),('2','2','','coral','carmeli',0,0,2,0,NULL),('3','3','','hen','saada',0,0,3,0,NULL),('4','4','','almog','yamin',0,0,4,0,NULL),('5','5','','kfir','girshtain',0,0,5,0,NULL),('6','6','','avi','sofer',0,0,6,0,NULL),('8','8','','8','8',0,NULL,1,0,NULL),('9','86','','6','6',0,NULL,1,0,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -257,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-10  2:38:38
+-- Dump completed on 2017-01-17 13:29:46

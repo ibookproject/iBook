@@ -13,6 +13,7 @@ import command.DBtranslation;
 public class User extends DBtranslation implements UserStatus {
 	private String userID;
 	private String password;
+	private String identityNumber;
 	private String firstName;
 	private String lastName;
 	private int userStatus;
@@ -68,6 +69,13 @@ public class User extends DBtranslation implements UserStatus {
 		this.password = password;
 	}
 
+	public String getIdentityNumber() {
+		return identityNumber;
+	}
+
+	public void setIdentityNumber(String identityNumber) {
+		this.identityNumber = identityNumber;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -181,12 +189,12 @@ public class User extends DBtranslation implements UserStatus {
 
 	@Override
 	public String getAttributeToInsert() {
-		return "(userID,password,firstName,lastName,privilege)";
+		return "(userID,password,identityNumber,firstName,lastName,privilege)";
 	}
 
 	@Override
 	public String getValToInsert() {
-		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",%d)",userID,password,firstName,lastName,privilege);
+		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%d)",userID,password,identityNumber,firstName,lastName,privilege);
 	}
 
 	//convert array Which was obtained from DB to an actual User
@@ -237,7 +245,9 @@ public class User extends DBtranslation implements UserStatus {
 			case "subscriptionMethod":
 				recover.setSubscriptionMethod((int)ob.getValtoArray(i));
 				break;
-
+			case "identityNumber":
+				recover.setIdentityNumber((String)ob.getValtoArray(i));
+				break;
 			default:
 				throw new InputMismatchException("you have inserred wrong to search statment");
 			 }//end switch
@@ -251,6 +261,7 @@ public class User extends DBtranslation implements UserStatus {
 		return "User [userID=" + userID + ", password=" + password + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", userStatus=" + userStatus + ", privilege=" + privilege + "]";
 	}
+
 
 
 }//end class User
