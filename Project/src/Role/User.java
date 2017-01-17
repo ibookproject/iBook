@@ -30,6 +30,21 @@ public class User extends DBtranslation implements UserStatus {
 		super();
 	}
 	
+	public User(String userID, String password, String identityNumber, String firstName, String lastName,
+			int userStatus, int privilege, int subscriptionRequest, int subscriptionMethod,
+			Date finishDateOfSubscription) {
+		super();
+		this.userID = userID;
+		this.password = password;
+		this.identityNumber = identityNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userStatus = userStatus;
+		this.privilege = privilege;
+		this.subscriptionRequest = subscriptionRequest;
+		this.subscriptionMethod = subscriptionMethod;
+		this.finishDateOfSubscription = finishDateOfSubscription;
+	}
 	public User(String userID, String password, String firstName, String lastName, int privilege) 
 	{
 		setUserID(userID);
