@@ -3,6 +3,8 @@ package ManagmentGUI;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 import client.DBSQLhandler;
 import Book.Review;
@@ -22,6 +25,10 @@ import Controller.UserController;
 import MenuGUI.LoginGUI;
 import Role.User;
 import Role.UserStatus;
+
+import javax.swing.border.MatteBorder;
+
+import java.awt.Color;
 
 
 /**
@@ -39,6 +46,8 @@ public class RemovePartReviewGUI extends JPanel {
 	private ReviewController r1;
 	private int ReviewID;
 	private String oldReview = new String();
+	private int conterOfText;
+	
 	public RemovePartReviewGUI(LoginGUI screen,int reviewID) {
 		super();
 		this.screen=screen;
@@ -53,30 +62,88 @@ public class RemovePartReviewGUI extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);	
 		
-		
+		 r = new Review(1, null, null,0, 1);// create review
+			ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, ""+ "reviewID=\""+ReviewID+"\"", screen.getClient());
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
+
+		JLabel Counterlabel = new JLabel("200");
+		Counterlabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		Counterlabel.setHorizontalAlignment(SwingConstants.CENTER);
+		Counterlabel.setForeground(Color.RED);
+		Counterlabel.setBounds(704, 450, 41, 23);
+		add(Counterlabel);
 		 btnBack = new JButton(backIcon);
 		 btnBack.setBounds(39, 52, 89, 23);
 		 add(btnBack);
 		 
 		 JLabel lblRemovePartOf = new JLabel("REMOVE PART OF REVIEW");
-		 lblRemovePartOf.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		 lblRemovePartOf.setBounds(322, 79, 234, 16);
+		 lblRemovePartOf.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+		 lblRemovePartOf.setBounds(252, 79, 304, 57);
 		 add(lblRemovePartOf);
 		 
 		 JTextArea textReview = new JTextArea();
-		 textReview.setFont(new Font("Courier New", Font.PLAIN, 13));
-		 r = new Review(1, null, null,0, 1);// create review
-			ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, ""
-					+ "reviewID=\""+ReviewID+"\"", screen.getClient());
+		 textReview.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 191, 255)));
+		 textReview.setLineWrap(true);
+		 textReview.setFont(new Font("Courier New", Font.PLAIN, 20));
+		 conterOfText=temp.get(0).getReviewContent().length();
+		 Counterlabel.setText(Integer.toString((200-conterOfText)));
+		 textReview.addKeyListener(new KeyAdapter() {
+		 @Override
+			public void keyTyped(KeyEvent a)
+			{
+				
+				if(textReview.getText().length()>=200)
+					a.consume();
+			
+			}
+		 
+		 
+		 @Override
+			public void keyPressed(KeyEvent pressedChar) {
+				if((pressedChar.getKeyChar()==8)&&(conterOfText>0))
+				{
+					
+					conterOfText--;
+					if(conterOfText<=50)
+						Counterlabel.setText(Integer.toString((200-conterOfText)));
+					//System.out.println(conterOfText);
+				}
+				else 
+				{
+					if((pressedChar.getKeyChar()!=8)&&conterOfText<200)
+					{
+						/*if((pressedChar.getKeyCode()==(222)||(pressedChar.getKeyCode()==(61))))
+							pressedChar.consume();*/
+					
+						//else
+						{
+						conterOfText++;
+						Counterlabel.setText(Integer.toString((200-conterOfText)));
+						}
+					}
+					//System.out.println(conterOfText);
+				}
+			}
+		
+		});
+		 //r = new Review(1, null, null,0, 1);// create review
+		//	ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, ""+ "reviewID=\""+ReviewID+"\"", screen.getClient());
 			
 		 textReview.setText(temp.get(0).getReviewContent()); //need to get text review
 		 oldReview=temp.get(0).getReviewContent();
 		 textReview.setBounds(136, 172, 556, 301);
 		 add(textReview);
 		 JButton btnSubmit = new JButton("Submit");
-		 btnSubmit.setBounds(369, 517, 97, 25);
+		 btnSubmit.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
+		 btnSubmit.setFont(new Font("Tahoma", Font.BOLD, 16));
+		 btnSubmit.setBounds(369, 517, 106, 37);
 		 add(btnSubmit);
+		 
+		 JButton button = new JButton("");
+		 button.setEnabled(false);
+		 button.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(250, 128, 114)));
+		 button.setBounds(698, 450, 50, 23);
+		 add(button);
 		
 		
 			
@@ -89,7 +156,8 @@ public class RemovePartReviewGUI extends JPanel {
 						{
 						
 						boolean result = ReviewController.UpdateReviewContent(r, "reviewContent=\""+textReview.getText()+"\"", "reviewID=\""+ReviewID+"\"",screen.getClient());
-						 oldReview=textReview.getText();
+						boolean result1 = ReviewController.UpdateReviewContent(r, "reviewStatus=\""+1+"\"", "reviewID=\""+ReviewID+"\"",screen.getClient());
+						oldReview=textReview.getText();
 						if(result)
 							JOptionPane.showMessageDialog(screen,"The new Review update sucsseccfully", "Warning",JOptionPane.WARNING_MESSAGE);
 						else JOptionPane.showMessageDialog(screen,"Update Review process FAILED", "Warning",JOptionPane.WARNING_MESSAGE);

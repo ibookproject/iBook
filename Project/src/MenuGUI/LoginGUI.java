@@ -22,6 +22,8 @@ import client.DBSQLhandler;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JPasswordField;
+import java.awt.Color;
+import javax.swing.border.MatteBorder;
 
 public class LoginGUI extends JFrame {
 
@@ -122,6 +124,9 @@ public class LoginGUI extends JFrame {
 			FirstPanel.setLayout(null);
 			
 			JButton btnLogin = new JButton("Login");
+			btnLogin.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
+			btnLogin.setBackground(new Color(224, 255, 255));
+			btnLogin.setFont(new Font("Tahoma", Font.BOLD, 16));
 			btnLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					User u=null;
@@ -273,44 +278,42 @@ public class LoginGUI extends JFrame {
 					}
 				}
 			});
-			btnLogin.setBounds(386, 321, 89, 23);
+			btnLogin.setBounds(565, 342, 118, 35);
 			FirstPanel.add(btnLogin);
 
 			JLabel lblLogin = new JLabel("LOGIN");
-			lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblLogin.setBounds(401, 28, 85, 23);
+			lblLogin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 29));
+			lblLogin.setBounds(369, 75, 125, 65);
 			FirstPanel.add(lblLogin);
 
 			txtUserID = new JTextField();
-			txtUserID.setBounds(374, 232, 112, 20);
+			txtUserID.setFont(new Font("Tahoma", Font.PLAIN, 17));
+			txtUserID.setBounds(337, 323, 157, 35);
 			FirstPanel.add(txtUserID);
 			txtUserID.setColumns(10);
 			
 			pwdPassword = new JPasswordField();
+			pwdPassword.setFont(new Font("Tahoma", Font.PLAIN, 17));
 	
 			pwdPassword.setText("");
-			pwdPassword.setBounds(374, 263, 112, 20);
+			pwdPassword.setBounds(337, 371, 157, 33);
 			FirstPanel.add(pwdPassword);
 
 			JLabel lblUserId = new JLabel("USER ID:");
-			lblUserId.setBounds(279, 235, 87, 14);
+			lblUserId.setFont(new Font("Tahoma", Font.BOLD, 20));
+			lblUserId.setBounds(185, 325, 106, 33);
 			FirstPanel.add(lblUserId);
 
 			JLabel lblPassword = new JLabel("PASSWORD:");
-			lblPassword.setBounds(279, 266, 87, 14);
+			lblPassword.setFont(new Font("Tahoma", Font.BOLD, 20));
+			lblPassword.setBounds(175, 371, 134, 35);
 			FirstPanel.add(lblPassword);
-
-			JTextPane txtpnUser = new JTextPane();
-			txtpnUser.setEditable(false);
-			txtpnUser
-					.setText("1-user menu 2-reader menu 3-librarian worker 4-qualified editor 5-librarian menu 6-librarian meneger menu");
-			txtpnUser.setBounds(597, 208, 112, 136);
-			FirstPanel.add(txtpnUser);
-
-			JLabel label = new JLabel(
-					"\u05EA\u05DB\u05E0\u05D9\u05E1\u05D5 \u05D1\u05D9\u05D5\u05E1\u05E8 \u05D0\u05D9\u05D9\u05D3\u05D9 \u05D0\u05EA \u05D0\u05D7\u05D3 \u05DE\u05D4\u05DE\u05E1\u05E4\u05E8\u05D9\u05DD \u05D4\u05D0\u05DC\u05D5 \u05DB\u05D3\u05D9 \u05DC\u05D4\u05D9\u05DB\u05E0\u05E1 \u05DC\u05EA\u05E4\u05E8\u05D9\u05D8 \u05D4\u05DE\u05EA\u05D0\u05D9\u05DD");
-			label.setBounds(438, 137, 415, 80);
-			FirstPanel.add(label);
+			
+			JButton bntBackground = new JButton("");
+			bntBackground.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
+			bntBackground.setEnabled(false);
+			bntBackground.setBounds(131, 262, 586, 200);
+			FirstPanel.add(bntBackground);
 			
 
 		}

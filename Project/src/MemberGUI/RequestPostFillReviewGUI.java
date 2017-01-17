@@ -31,6 +31,9 @@ import java.awt.event.KeyEvent;
 import java.awt.Color;
 
 import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.UIManager;
 
 
 
@@ -47,6 +50,8 @@ public class RequestPostFillReviewGUI extends JPanel
 	private int conterOfText;
 	public RequestPostFillReviewGUI(LoginGUI screen,int bookId) {
 		super();
+		bookID=bookId;
+		setBorder(new LineBorder(UIManager.getColor("Button.background")));
 		//this.bookID=bookId;
 		this.screen=screen;
 		initialize();
@@ -62,33 +67,35 @@ public class RequestPostFillReviewGUI extends JPanel
 		Counterlabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		Counterlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		Counterlabel.setForeground(Color.RED);
-		Counterlabel.setBounds(719, 409, 27, 23);
+		Counterlabel.setBounds(717, 469, 27, 23);
 		add(Counterlabel);
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 		
 		JLabel lblFillAReview = new JLabel("Fill a review");
-		lblFillAReview.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblFillAReview.setBounds(384, 59, 290, 16);
+		lblFillAReview.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 22));
+		lblFillAReview.setBounds(357, 67, 166, 83);
 		add(lblFillAReview);
 		
 		
 		JLabel lblReviewDate = new JLabel("Review Date:");
-		lblReviewDate.setBounds(271, 141, 81, 16);
+		lblReviewDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblReviewDate.setBounds(123, 238, 128, 19);
 		add(lblReviewDate);
 		
-		JLabel lblBookID = new JLabel("Book ID:");
-		lblBookID.setBounds(271, 170, 56, 16);
-		add(lblBookID);
-		
 		JLabel lblReviewContent = new JLabel("Review Content:");
-		lblReviewContent.setBounds(271, 199, 94, 16);
+		lblReviewContent.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblReviewContent.setBounds(123, 263, 128, 29);
 		add(lblReviewContent);
 		
 		textFieldReviewDate = new JTextField();
+		textFieldReviewDate.setEditable(false);
+		textFieldReviewDate.setBackground(UIManager.getColor("Button.background"));
+		textFieldReviewDate.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(240, 240, 240)));
+		textFieldReviewDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldReviewDate.setEnabled(false);
-		textFieldReviewDate.setBounds(384, 138, 116, 22);
+		textFieldReviewDate.setBounds(263, 236, 89, 23);
 
 		date = new Date();
 		String txtDate = new SimpleDateFormat("yyyy/MM/dd").format(date);
@@ -98,53 +105,52 @@ public class RequestPostFillReviewGUI extends JPanel
 		date = new Date(txtDate);
 			
 		JTextArea textAreaReviewContent = new JTextArea();
+		textAreaReviewContent.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
 		textAreaReviewContent.setLineWrap(true);
-		textAreaReviewContent.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textAreaReviewContent.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textAreaReviewContent.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent a)
+			{
+				
+				if(textAreaReviewContent.getText().length()>=50)
+					a.consume();
+			
+			}
 			@Override
 			public void keyPressed(KeyEvent pressedChar) {
 				if((pressedChar.getKeyChar()==8)&&(conterOfText>0))
 				{
+					
 					conterOfText--;
 					if(conterOfText<=50)
 						Counterlabel.setText(Integer.toString((50-conterOfText)));
 					//System.out.println(conterOfText);
-					
 				}
 				else 
 				{
 					if((pressedChar.getKeyChar()!=8)&&conterOfText<50)
 					{
-						conterOfText++;
-						Counterlabel.setText(Integer.toString((50-conterOfText)));
-						
-					}
-					else if(conterOfText>=50)
+						/*if((pressedChar.getKeyCode()==(222)||(pressedChar.getKeyCode()==(61))))
+							pressedChar.consume();*/
+					
+						//else
 						{
 						conterOfText++;
-							JOptionPane.showMessageDialog(screen,"There are enough characters !\n please remove "+(conterOfText-50)+" of characters", "Warning",JOptionPane.WARNING_MESSAGE);
-							
+						Counterlabel.setText(Integer.toString((50-conterOfText)));
 						}
+					}
 					//System.out.println(conterOfText);
 				}
 			}
 		
 		});
-		textAreaReviewContent.setBounds(384, 199, 323, 233);
+		textAreaReviewContent.setBounds(263, 263, 431, 233);
 		add(textAreaReviewContent);
 		
-		JTextField textFieldBookID = new JTextField();
-		textFieldBookID.setText("");
-		textFieldBookID.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		textFieldBookID.setBounds(384, 167, 116, 22);
-		add(textFieldBookID);
-		textFieldBookID.setColumns(10);
-		
 		JButton btnPost = new JButton("Post");
+		btnPost.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnPost.setBorder(new LineBorder(new Color(0, 191, 255), 2));
 		btnPost.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			//convert the current time to String
@@ -155,13 +161,12 @@ public class RequestPostFillReviewGUI extends JPanel
 		        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
 
 				//String txtDate = new SimpleDateFormat("yyyy/dd/MM").format(date);
-		        if(textFieldBookID.getText().equals(""))
-					JOptionPane.showMessageDialog(screen,"Please insert BookID ! ", "Warning",JOptionPane.WARNING_MESSAGE);
-		        else if(!(textAreaReviewContent.getText().equals(""))&&(conterOfText<=50))
+		       
+		        if(!(textAreaReviewContent.getText().equals(""))&&(conterOfText<=50))
 				{
-		        Review r = new Review(timeRightNow,textAreaReviewContent.getText(),0,Integer.parseInt(textFieldBookID.getText()));
+		        Review r = new Review(timeRightNow,textAreaReviewContent.getText(),0,bookID);
 		        Book b=new Book();
-				ArrayList<Book> temp = bookController.SearchBook("bookID",b,"bookID=\""+Integer.parseInt(textFieldBookID.getText())+"\"", screen.getClient());//call search book method from book controller
+				ArrayList<Book> temp = bookController.SearchBook("bookID",b,"bookID=\""+bookID+"\"", screen.getClient());//call search book method from book controller
 				if(temp==null)
 					JOptionPane.showMessageDialog(screen,"not found any book result\n", "Warning",JOptionPane.WARNING_MESSAGE);
 				else{
@@ -180,8 +185,14 @@ public class RequestPostFillReviewGUI extends JPanel
 		        	JOptionPane.showMessageDialog(screen,"Please insert Review content ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		});
-		btnPost.setBounds(357, 509, 97, 25);
+		btnPost.setBounds(351, 529, 123, 40);
 		add(btnPost);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(250, 128, 114)));
+		btnNewButton.setEnabled(false);
+		btnNewButton.setBounds(706, 467, 50, 29);
+		add(btnNewButton);
 		
 		
 	}
