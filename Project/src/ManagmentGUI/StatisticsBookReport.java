@@ -47,7 +47,8 @@ public class StatisticsBookReport extends JPanel {
 	private JLabel lblSearchersdb;
 	private JProgressBar progressBar;
 	private JPanel insidePanel;
-	
+	private JLabel lblError;
+
 	public StatisticsBookReport(LoginGUI screen) {
 		super();
 		this.screen = screen;
@@ -71,34 +72,43 @@ public class StatisticsBookReport extends JPanel {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-		}});
+			}
+		});
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
-		
+
 		lblOrdersdb = new JLabel("");
 		lblOrdersdb.setBounds(236, 182, 46, 14);
 		add(lblOrdersdb);
-		
+
 		lblSearchersdb = new JLabel("");
 		lblSearchersdb.setBounds(236, 224, 46, 14);
 		add(lblSearchersdb);
-		
+
 		insidePanel = new JPanel();
 		insidePanel.setBounds(219, 98, 430, 427);
 		add(insidePanel);
 		
+		lblError = new JLabel("");
+		lblError.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		insidePanel.add(lblError);
 
 	}
-	public void setResult(int purchase,int searches)
-	{	
-		//lblOrdersdb.setText(Integer.toString(purchase));
-		//lblSearchersdb.setText(Integer.toString(searches));
-        HistogramPanel histogramPan = new HistogramPanel();
-        histogramPan.addHistogramColumn("Purchase", purchase, Color.RED);
-        histogramPan.addHistogramColumn("Searches", searches, Color.YELLOW);
-        histogramPan.layoutHistogram();
-        insidePanel.add(histogramPan);
-        insidePanel.updateUI();
-		
+
+	public void setResult(int purchase, int searches) {
+		if (purchase != 0 || searches != 0) {
+			HistogramPanel histogramPan = new HistogramPanel();
+			histogramPan.addHistogramColumn("Purchase", purchase, Color.RED);
+			histogramPan.addHistogramColumn("Searches", searches, Color.YELLOW);
+			histogramPan.layoutHistogram();
+			insidePanel.add(histogramPan);
+			insidePanel.updateUI();
+		}
+		else
+		{
+			lblError.setText("There is no purchase or searches to this book :(");
+			lblError.setForeground(Color.RED);
+		}
 	}
+		
 }

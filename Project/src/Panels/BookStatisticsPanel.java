@@ -160,7 +160,7 @@ public class BookStatisticsPanel extends JPanel {
 				if(searcRes != null){
 					for(SearchToBook stb2: searcRes)
 						NumberOfSearches += stb2.getNumberOfSearches();	
-				}		 
+				}	
 				sbr.setResult(NumberOfCarts, NumberOfSearches);
 				/* HistogramPanel panel = new HistogramPanel();
 			        panel.addHistogramColumn("Kokoriko", 100, Color.RED);

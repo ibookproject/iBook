@@ -104,43 +104,7 @@ public class SetAccountSubscriptionGUI extends JPanel {
 			lblListOfUsers.setText("You don't have any new requests!");
 			lblListOfUsers.setForeground(Color.GREEN);
 		}
-		//JOptionPane.showMessageDialog(screen,"not found any user to be updated by his subscription method\n", "Warning",
-		//		JOptionPane.WARNING_MESSAGE);
-	//	panel.add(new UserSubscriptionPanel(screen , u));
-	//	panel.add(new UserSubscriptionPanel(screen));
-		//panel.add(new UserSubscriptionPanel(screen));
-	//	panel.add(new UserSubscriptionPanel(screen));
-	//	panel.add(new UserSubscriptionPanel(screen));
-	//	panel.add(new UserSubscriptionPanel(screen));
-	//	panel.add(new UserSubscriptionPanel(screen));
-		
-		/*
-		 * דוגמא להשתמש ברדיו באטן JRadioButton catButton = new
-		 * JRadioButton(catString); catButton.setMnemonic(KeyEvent.VK_C);
-		 * catButton.setActionCommand(catString);
-		 * 
-		 * JRadioButton dogButton = new JRadioButton(dogString);
-		 * dogButton.setMnemonic(KeyEvent.VK_D);
-		 * dogButton.setActionCommand(dogString);
-		 * 
-		 * JRadioButton rabbitButton = new JRadioButton(rabbitString);
-		 * rabbitButton.setMnemonic(KeyEvent.VK_R);
-		 * rabbitButton.setActionCommand(rabbitString);
-		 * 
-		 * JRadioButton pigButton = new JRadioButton(pigString);
-		 * pigButton.setMnemonic(KeyEvent.VK_P);
-		 * pigButton.setActionCommand(pigString);
-		 * 
-		 * //Group the radio buttons. ButtonGroup group = new ButtonGroup();
-		 * group.add(birdButton); group.add(catButton); group.add(dogButton);
-		 * group.add(rabbitButton); group.add(pigButton);
-		 * 
-		 * //Register a listener for the radio buttons.
-		 * birdButton.addActionListener(this);
-		 * catButton.addActionListener(this); dogButton.addActionListener(this);
-		 * rabbitButton.addActionListener(this);
-		 * pigButton.addActionListener(this);
-		 */
+
 
 	}
 }
