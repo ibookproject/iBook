@@ -26,11 +26,13 @@ import Book.Subject;
 import Book.SubjectToBook;
 import Controller.CartController;
 import Controller.FormatController;
+import Controller.UserController;
 import Controller.BookController;
 import MenuGUI.LoginGUI;
 import Panels.CartCheckBoxBooklistPanel;
 import Panels.FormatCheckBoxBooklistPanel;
 import Panels.SearchReviewPanel;
+import Role.User;
 import client.DBgenericObject;
 import command.joinCommand;
 import command.joinObject;
@@ -56,16 +58,15 @@ public class CartManagerGUI extends JPanel {
 	public JButton btnBack ;
 	private int UserIdAtDataBase;
 	private JScrollPane scrollPaneMain;
+	private ArrayList <User> searcRes;
 	private Date date;
+	private int cnt;
 
 
-
-
-	
-	
 	public CartManagerGUI(LoginGUI screen,int UserIdAtDataBase) {
 		super();
 		this.screen=screen;
+		cnt=0;
 		initialize();
 		this.UserIdAtDataBase=UserIdAtDataBase;
 	}
@@ -81,8 +82,11 @@ public class CartManagerGUI extends JPanel {
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
-		
-		
+		User u= new User();
+
+		//searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionMethod,privilege",u,"subscriptionMethod=\"" + 1 + "\""+" && " + "userID=\"" + screen.getTempID() + "\"", screen.getClient());//call search book method from book controller
+		//if(searcRes!=null)
+		//{
 		
 		/////////////////////
 		scrollPaneMain = new JScrollPane();
@@ -115,7 +119,6 @@ public class CartManagerGUI extends JPanel {
 			scrollPaneMain.setVisible(true);
 			for(Book tempb:bbb)
 				panel.add(new CartCheckBoxBooklistPanel(screen,tempb,tempb.getBookID()));
-
 		} 
 		else 
 		{
@@ -123,9 +126,7 @@ public class CartManagerGUI extends JPanel {
 			scrollPaneMain.setVisible(false);
 			JOptionPane.showMessageDialog(screen,"Your cart is Empty", "no results",JOptionPane.QUESTION_MESSAGE);
 		}
-		
-		
-		
+
 		JLabel lblButFromCart = new JLabel("Buy From Cart");
 		lblButFromCart.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblButFromCart.setBounds(379, 52, 163, 23);
@@ -142,40 +143,43 @@ public class CartManagerGUI extends JPanel {
 		ArrayList<Integer> tempBooksId = new 	ArrayList<Integer> ();
 			if(panel.getComponentCount()!=0)
 			{
+				Cart c= new Cart();
+				date = new Date();
+				String txtDate = new SimpleDateFormat("yyyy/MM/dd").format(date);
+				SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd"); 
+				date = new Date(txtDate);
 				for(int i=0;i<panel.getComponentCount();i++)
 				{
 					if((((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.isSelected())==true)
 					{
 						tempBooksId.add(((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getBookID());
 						flag=1;
+						cnt++;
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(46, 139, 87)));
-
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setEnabled(false);
-						System.out.println((((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID);
+						CartController.UpdateCart(c, "status=\""+1+"\"" + " && "+"buyDate=\""+txtDate+"\"", "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\"", screen.getClient());
+						((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setSelected(false);
 					}
 					//panel.updateUI();
 				}
-				if(flag==1)
+				System.out.println(cnt);
+				System.out.println(panel.getComponentCount());
+				if(cnt==panel.getComponentCount()) 
+					JOptionPane.showMessageDialog(screen,"You Bought all your Cart Book's list !", "Warning",JOptionPane.WARNING_MESSAGE);
+				else if(flag==1)
 				{
-					Cart c= new Cart();
-					date = new Date();
-					String txtDate = new SimpleDateFormat("yyyy/MM/dd").format(date);
-					SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd"); 
-					date = new Date(txtDate);
-		System.out.println((((CartCheckBoxBooklistPanel)panel.getComponent(0))).BookID);
-			for(int i=0;i<tempBooksId.size();i++)
-			{
-				CartController.UpdateCart(c, "status=\""+1+"\"" + " && "+"buyDate=\""+txtDate+"\"", "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\"", screen.getClient());
-
-			}
- 			JOptionPane.showMessageDialog(screen,"The Purshace  successfully  !", "done",JOptionPane.INFORMATION_MESSAGE);
+			
+					JOptionPane.showMessageDialog(screen,"The Purshace  successfully  !", "done",JOptionPane.INFORMATION_MESSAGE);
 				}				
-				else JOptionPane.showMessageDialog(screen,"you must to choose at list 1 book to buy !", "Warning",JOptionPane.WARNING_MESSAGE);
+				else if (cnt==panel.getComponentCount()) 
+							JOptionPane.showMessageDialog(screen,"You Bought all your Cart Book's list !", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 			else JOptionPane.showMessageDialog(screen,"no Chossen book's to buy", "Warning",JOptionPane.WARNING_MESSAGE);
 	}
 });		
 		btnBuy.setBounds(390, 467, 59, 23);
 		add(btnBuy);		
-	}
+//	}
+	//else JOptionPane.showMessageDialog(screen,"NO subscriptionMethod !!! ", "Warning",JOptionPane.WARNING_MESSAGE);
+	}	
 }

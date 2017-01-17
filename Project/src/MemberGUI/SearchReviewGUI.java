@@ -46,6 +46,7 @@ public class SearchReviewGUI extends JPanel {
 	private ArrayList<Review> temp;
 	private String titleBook;
 	private int index;
+	private int flag;
 	
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
@@ -53,6 +54,7 @@ public class SearchReviewGUI extends JPanel {
 	public SearchReviewGUI(LoginGUI screen) {
 		super();
 		bookId=-1;
+		flag=0;
 		pann=this;
 		this.screen=screen;
 		initialize();
@@ -87,7 +89,9 @@ public class SearchReviewGUI extends JPanel {
 		add(textFieldBook);
 		textFieldBook.setColumns(10);
 		
+		
 		JComboBox comboBoxOfBooks = new JComboBox();
+		
 		comboBoxOfBooks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 index=comboBoxOfBooks.getSelectedIndex();
@@ -97,7 +101,8 @@ public class SearchReviewGUI extends JPanel {
 					bookId=-1;
 				System.out.println(bookId);
 				
-				
+				if(flag!=0)
+				{			
 				if(bookId!=-1)
 				{
 					 r = new Review(1, null, null,0, 1);// create review
@@ -124,7 +129,10 @@ public class SearchReviewGUI extends JPanel {
  				comboBoxOfBooks.removeAllItems();
 						 
 			}
+				flag=1;
+			}
 		});
+		
 		comboBoxOfBooks.setBounds(223, 120, 412, 20);
 		add(comboBoxOfBooks);
 		
