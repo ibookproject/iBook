@@ -61,7 +61,6 @@ public class CartManagerGUI extends JPanel {
 	public static JPanel panel;
 	public LoginGUI screen;
 	public JButton btnBack ;
-	private int UserIdAtDataBase;
 	private JScrollPane scrollPaneMain;
 	private ArrayList <User> searcRes;
 	private Date date;
@@ -73,12 +72,8 @@ public class CartManagerGUI extends JPanel {
 		this.screen=screen;
 		cnt=0;
 		initialize();
-		this.UserIdAtDataBase=UserIdAtDataBase;
 	}
 
-	/**
-	 * This method initializes StudentForm
-	 */
 	private void initialize() {
 		
 		this.setSize(850, 625);
@@ -99,7 +94,7 @@ public class CartManagerGUI extends JPanel {
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
-		scrollPaneMain.setBounds(272, 132, 337, 324);
+		scrollPaneMain.setBounds(229, 132, 430, 335);
 		scrollPaneMain.setVisible(false);
 		add(scrollPaneMain);
 
@@ -119,13 +114,13 @@ public class CartManagerGUI extends JPanel {
 		ArrayList<Book> bbb;
 		/**JOIN BETWEEN BOOK AND CART**/
 		bbb=CartController.GetCartListForUser("book.bookID,book.title,book.author,book.price",c,temp,"userID=\""+screen.getTempID() +"\""+" && "+"status=0" , screen.getClient());
-		//System.out.print(bbb);
+
 		if (bbb != null) {
 			panel.removeAll();
 			panel.setVisible(true);
 			scrollPaneMain.setVisible(true);
-			for(Book tempb:bbb)
-				panel.add(new CartCheckBoxBooklistPanel(screen,tempb,tempb.getBookID()));
+			for(int i=0;i<bbb.size();i++)
+				panel.add(new CartCheckBoxBooklistPanel(screen,bbb.get(i),bbb.get(i).getBookID(),panel,i));
 		} 
 		else 
 		{
@@ -166,6 +161,7 @@ public class CartManagerGUI extends JPanel {
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setEnabled(false);
 						CartController.UpdateCart(c, "status=\""+1+"\"" + " && "+"buyDate=\""+txtDate+"\"", "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\"", screen.getClient());
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setSelected(false);
+						((CartCheckBoxBooklistPanel)panel.getComponent(i)).btnDownloadBookAgain.setVisible(true);
 						
 						// ************ SAVE FILE *****************//
 						final JFileChooser fc = new JFileChooser();
@@ -177,8 +173,6 @@ public class CartManagerGUI extends JPanel {
 					{
 						System.out.println(fc.getSelectedFile());
 						System.out.println((FileTypeFilter)fc.getFileFilter());
-						//for(Integer b:tempBooksId)
-					//	{
 						try {
 							FileWriter fw = new FileWriter(fc.getSelectedFile().getAbsolutePath()+(FileTypeFilter)fc.getFileFilter());
 							PrintWriter pw = new PrintWriter(fw);						
@@ -191,10 +185,11 @@ public class CartManagerGUI extends JPanel {
 							pw.println("******************The Book Pagess********************");
 							pw.println("******************The Book Pagess********************");
 							pw.close();
-						} catch (IOException ex) {
+						} 
+						catch (IOException ex)
+						{
 							System.out.println(ex);
 						}
-					//	}
 					}			
 					}
 					//panel.updateUI();
@@ -204,16 +199,14 @@ public class CartManagerGUI extends JPanel {
 				if(cnt==panel.getComponentCount()) 
 					JOptionPane.showMessageDialog(screen,"You Bought all your Cart Book's list !", "Warning",JOptionPane.WARNING_MESSAGE);
 				else if(flag==1)
-				{
-		
-					JOptionPane.showMessageDialog(screen,"The Purshace  successfully  !", "done",JOptionPane.INFORMATION_MESSAGE);
-	
-				}				
+						JOptionPane.showMessageDialog(screen,"The Purshace  successfully  !", "done",JOptionPane.INFORMATION_MESSAGE);
+				else if (cnt==0)  
+						JOptionPane.showMessageDialog(screen,"no Chossen book's to buy", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 			else JOptionPane.showMessageDialog(screen,"no Chossen book's to buy", "Warning",JOptionPane.WARNING_MESSAGE);
 	}
 });		
-		btnBuy.setBounds(390, 467, 59, 23);
+		btnBuy.setBounds(385, 478, 59, 23);
 		add(btnBuy);		
 	}
 	else JOptionPane.showMessageDialog(screen,"NO subscriptionMethod !!! ", "Warning",JOptionPane.WARNING_MESSAGE);

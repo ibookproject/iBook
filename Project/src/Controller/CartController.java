@@ -9,6 +9,7 @@ import Book.SubjectToBook;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 import command.DBtranslation;
+import command.deleteCommand;
 import command.joinCommand;
 import command.joinObject;
 import command.searchCommand;
@@ -142,6 +143,22 @@ public class CartController {
 		return (ArrayList<DBgenericObject>)client.getResultObject();
 	//	return joinAnswer.convertBack((ArrayList<DBgenericObject>)client.getResultObject(),"bookID,title,author,buyDate");
 		
+	}
+	
+	public static boolean DeleteFromCart(Cart c , String searchCondition, DBSQLhandler client)
+	{
+		client.deleteFromDB(new deleteCommand<DBtranslation>(c, searchCondition));
+		while(!client.GetGotMessag()){//add user to DB
+			try{
+			Thread.sleep(250);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	
