@@ -1,5 +1,6 @@
 package MenuGUI;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -33,6 +34,11 @@ public class UserMenu extends JPanel {
 	protected JLabel lblUserMenu;
 	private User u;
 	public JButton btnDisconnect;
+	private JLabel lblSearchLogo;
+	private JLabel labeLsubscriotonSogo;
+	private JLabel lblBackground;
+	private JLabel lblBack;
+
 	
 	/**
 	 * This is the default constructor
@@ -47,9 +53,18 @@ public class UserMenu extends JPanel {
 		pann=this;
 		initialize();
 		lblUserMenu = new JLabel("iBOOK Menu");
-		lblUserMenu.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblUserMenu.setBounds(387, 11, 116, 14);
+		lblUserMenu.setFont(new Font("BN Elements", Font.BOLD | Font.ITALIC, 26));
+		lblUserMenu.setBounds(311, 11, 192, 42);
 		add(lblUserMenu);
+		
+
+		
+		lblBack = new JLabel("");
+		lblBack.setIcon(new ImageIcon("libraryPhoto.png"));
+		lblBack.setBounds(207, 66, 443, 514);
+		add(lblBack);
+		
+		
 	}
 
 	private void initialize() {
@@ -58,6 +73,9 @@ public class UserMenu extends JPanel {
 		this.setLayout(null);
 		
 		btnSearchBook = new JButton("Search Book");
+		btnSearchBook.setIcon(new ImageIcon("Search50.png"));
+		btnSearchBook.setFont(new Font("Tahoma", Font.BOLD, 13));
+		
 		btnSearchBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -71,12 +89,16 @@ public class UserMenu extends JPanel {
 				screen.setContentPane(sbg);//send to search book window
 			}
 		});
-		btnSearchBook.setBounds(325, 36, 223, 23);
+		
+		
+		btnSearchBook.setBounds(12, 66, 193, 53);
 		add(btnSearchBook);
 		
 				///---///
 		
 		 btnSearchReview = new JButton("Search Review");
+		 btnSearchReview.setIcon(new ImageIcon("Search50.png"));
+		 btnSearchReview.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSearchReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -91,11 +113,12 @@ public class UserMenu extends JPanel {
 				screen.setContentPane(srg);//send to search review window
 			}
 		});
-		btnSearchReview.setBounds(325, 104, 223, 23);
+		btnSearchReview.setBounds(12, 192, 193, 53);
 		add(btnSearchReview);
 		
 		
-		btnSetSubscription = new JButton("Request Set Subscription");
+		btnSetSubscription = new JButton("Request Subscription");
+		btnSetSubscription.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSetSubscription.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -111,10 +134,11 @@ public class UserMenu extends JPanel {
 			}
 		});
 		
-		btnSetSubscription.setBounds(325, 70, 223, 23);
+		btnSetSubscription.setBounds(12, 129, 193, 53);
 		add(btnSetSubscription);
 		
 		btnDisconnect = new JButton("Disconnect");
+		btnDisconnect.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		
 	//	ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID",u,"userStatus=\""+"1"+"\"",screen.getClient());
@@ -124,12 +148,7 @@ public class UserMenu extends JPanel {
 				UserController.UpdateUserStatus(u, "userStatus=\""+"0"+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
 				}
 			});
-		btnDisconnect.setBounds(712, 22, 116, 23);
+		btnDisconnect.setBounds(698, 541, 140, 39);
 		add(btnDisconnect);
 	}
-
-
-	
-
-	
 }

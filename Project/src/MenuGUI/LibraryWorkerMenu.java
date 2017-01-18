@@ -1,20 +1,26 @@
 
 package MenuGUI;
 
+import java.awt.Font;
 import java.awt.GridBagLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Rectangle;
+
 import javax.swing.JTextField;
 
 import ManagmentGUI.CreateNewAccountGUI;
 import ManagmentGUI.SetAccountSubscriptionGUI;
 import MemberGUI.SearchBookGUI;
 
+import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -39,7 +45,8 @@ public class LibraryWorkerMenu extends ReaderMenu {
 		this.setSize(850, 600);
 		this.setLayout(null);	
 		
-		JButton btnCreateNewAcount = new JButton("Create new acount");
+		JButton btnCreateNewAcount = new JButton("Create acount");
+		btnCreateNewAcount.setIcon(new ImageIcon("NewAcount.png"));
 		btnCreateNewAcount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -53,10 +60,13 @@ public class LibraryWorkerMenu extends ReaderMenu {
 				screen.setContentPane(cna);//send to search book window
 			}
 		});
-		btnCreateNewAcount.setBounds(325, 205, 223, 23);
+		btnCreateNewAcount.setBounds(12, 318, 193, 53);
+		btnCreateNewAcount.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnCreateNewAcount);
 		
-		JButton btnSetAcountSubscription = new JButton("Set Account Subscription");
+		
+		JButton btnSetAcountSubscription = new JButton("Set Subscription");
+		btnSetAcountSubscription.setIcon(new ImageIcon("ok.png"));
 		btnSetAcountSubscription.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -70,7 +80,8 @@ public class LibraryWorkerMenu extends ReaderMenu {
 				screen.setContentPane(sas);//send to search book window
 			}
 		});
-		btnSetAcountSubscription.setBounds(325, 239, 223, 23);
+		btnSetAcountSubscription.setBounds(12, 381, 193, 53);
+		btnSetAcountSubscription.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnSetAcountSubscription);
 	
 	}

@@ -7,6 +7,7 @@ import ManagmentGUI.FormatManagmentGUI;
 import ManagmentGUI.InventoryManagmentGUI;
 import ManagmentGUI.RemovePartReviewGUI;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -42,7 +43,8 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 		this.setSize(850, 625);
 		this.setLayout(null);	
 		
-		JButton btnInventoryManagment = new JButton("Inventory managment");
+		JButton btnInventoryManagment = new JButton("Inventory");
+		btnInventoryManagment.setIcon(new ImageIcon("inventoy.png"));
 		
 		btnInventoryManagment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -57,7 +59,8 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 				screen.setContentPane(Im);//
 			}
 		});
-		btnInventoryManagment.setBounds(325, 305, 223, 23);
+		btnInventoryManagment.setBounds(12, 507, 189, 53);
+		btnInventoryManagment.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnInventoryManagment);
 		
 		JButton btnFormatManagment = new JButton("Format managment");
@@ -74,7 +77,8 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 				screen.setContentPane(Fm);//
 			}
 		});
-		btnFormatManagment.setBounds(325, 339, 223, 23);
+		btnFormatManagment.setBounds(651, 66, 189, 53);
+		btnFormatManagment.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnFormatManagment);
 
 	}

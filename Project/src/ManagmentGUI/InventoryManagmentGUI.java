@@ -43,6 +43,11 @@ public class InventoryManagmentGUI extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setBounds(355, 49, 175, 22);
 		add(lblNewLabel);
+
+		JLabel lblinventoryGif = new JLabel("");
+		lblinventoryGif.setIcon(new ImageIcon("inventory.gif"));
+		lblinventoryGif.setBounds(555, 155, 375, 505);
+		add(lblinventoryGif);
 		
 		JButton btnDelete = new JButton("Delete book");
 		btnDelete.addActionListener(new ActionListener() {

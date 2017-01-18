@@ -1,6 +1,7 @@
 
 package MenuGUI;
 
+import java.awt.Font;
 import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
@@ -8,6 +9,7 @@ import javax.swing.JLabel;
 
 import java.awt.Rectangle;
 
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
@@ -44,7 +46,8 @@ public class QualifiedEditorMenu extends LibraryWorkerMenu {
 		this.setLayout(null);	
 		
 		
-		JButton btnSendingConfirmationReview = new JButton("Sending Confirmation Review");
+		JButton btnSendingConfirmationReview = new JButton("Confirm Review");
+		btnSendingConfirmationReview.setIcon(new ImageIcon("ok.png"));
 		if(this.Permssion==4){
 		btnSendingConfirmationReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -76,7 +79,8 @@ public class QualifiedEditorMenu extends LibraryWorkerMenu {
 					screen.setContentPane(Scr);//
 				}
 			});}
-		btnSendingConfirmationReview.setBounds(325, 272, 223, 23);
+		btnSendingConfirmationReview.setBounds(12, 444, 193, 53);
+		btnSendingConfirmationReview.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnSendingConfirmationReview);
 	
 	}

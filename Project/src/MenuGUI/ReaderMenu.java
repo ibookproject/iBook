@@ -1,6 +1,7 @@
 
 package MenuGUI;
 
+import java.awt.Font;
 import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
@@ -8,6 +9,7 @@ import javax.swing.JLabel;
 
 import java.awt.Rectangle;
 
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
@@ -28,6 +30,9 @@ import java.awt.event.ActionEvent;
 public class ReaderMenu extends UserMenu {
 
 		public int UserIdAtDataBase1; // save the user id at the data base , need it for the buy from cart query
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public ReaderMenu(LoginGUI screen,int UserIdAtDataBase) {
 		super(screen);
 		this.screen=screen;
@@ -52,23 +57,6 @@ public class ReaderMenu extends UserMenu {
 		this.setLayout(null);
 		
 	
-		JButton btnNewButton = new JButton("Post / fill review");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				////////////////////////button to back panel from panel /////////////////////////////////////////////
-				SearchBook s=new SearchBook(null,null);
-				RequestPostFillReviewGUI Pfr=new RequestPostFillReviewGUI(screen,1,s);
-				Pfr.btnBack.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						screen.setContentPane(pann);
-					}
-				////////////////////////button to back panel from panel/////////////////////////////////////////////
-				});
-				screen.setContentPane(Pfr);//
-			}
-		});
-		btnNewButton.setBounds(325, 138, 223, 23);
-		add(btnNewButton);
 		
 		JButton btnDisplayCartManager = new JButton("Buy From Cart");
 		btnDisplayCartManager.addActionListener(new ActionListener() {
@@ -84,8 +72,11 @@ public class ReaderMenu extends UserMenu {
 				screen.setContentPane(Bfc);//
 			}
 		});
-		btnDisplayCartManager.setBounds(325, 172, 223, 23);
+		btnDisplayCartManager.setBounds(12, 255, 193, 53);
+		btnDisplayCartManager.setIcon(new ImageIcon("cart.png"));
+		btnDisplayCartManager.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnDisplayCartManager);
+		
 		
 	
 	}

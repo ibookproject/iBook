@@ -12,6 +12,13 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLayeredPane;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
@@ -24,10 +31,10 @@ public class UpdateUserInfoGUI extends JPanel {
 		public JButton btnBack;
 		private JFrame screen;
 		private JPanel pann;
-		private JTextField textField;
-		private JTextField textField_1;
-		private JTextField textField_2;
-		private JTextField textField_3;
+		private JTextField FirstNameTextField;
+		private JTextField LastNameTextField;
+		private JTextField UserIDTextField;
+		private JTextField PasswordtextField;
 
 		public UpdateUserInfoGUI(JFrame screen) {
 			super();
@@ -44,108 +51,112 @@ public class UpdateUserInfoGUI extends JPanel {
 			this.setLayout(null);	
 			
 			JLabel lblNewLabel = new JLabel("Update User Information");
-			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblNewLabel.setBounds(355, 49, 248, 22);
+			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+			lblNewLabel.setBounds(341, 54, 289, 45);
 			add(lblNewLabel);
 			
 			ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
 			btnBack = new JButton(backIcon);
 			btnBack.setBounds(39, 52, 89, 23);
 			add(btnBack);
-			
-			JLabel lblEnterUserId = new JLabel("Choose Worker");
-			lblEnterUserId.setBounds(34, 160, 115, 14);
-			add(lblEnterUserId);
-			
-			JLabel lblChooseOneOption = new JLabel("Role");
-			lblChooseOneOption.setBounds(34, 235, 115, 14);
-			add(lblChooseOneOption);
-		   
 		    
-		    JComboBox comboBox = new JComboBox(); // יהיה מסוג יוזר
-		    comboBox.setBounds(159, 157, 160, 20);
-		    add(comboBox);
+		    JLabel lblUserId = new JLabel("User ID:");
+		    lblUserId.setFont(new Font("Tahoma", Font.BOLD, 18));
+		    lblUserId.setBounds(34, 133, 96, 23);
+		    add(lblUserId);
 		    
-		    JComboBox comboBox_1 = new JComboBox();
-		    comboBox_1.setBounds(159, 232, 160, 20);
-		    comboBox_1.addItem("User");
-		    comboBox_1.addItem("Reader");
-		    comboBox_1.addItem("Worker");
-		    comboBox_1.addItem("Qualified Editor");
-		    comboBox_1.addItem("Manager");
-		    add(comboBox_1);
+		    UserIDTextField = new JTextField();
+		    UserIDTextField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		    UserIDTextField.setBounds(141, 124, 188, 39);
+		    add(UserIDTextField);
+		    UserIDTextField.setColumns(10);
 		    
-		    JLabel lblFirstName = new JLabel("First name");
-		    lblFirstName.setBounds(34, 185, 115, 14);
+		    JButton btnSelect = new JButton("Select");
+		    btnSelect.setFont(new Font("Tahoma", Font.BOLD, 16));
+		    btnSelect.setBounds(397, 133, 97, 25);
+		    add(btnSelect);
+		    
+		    JComboBox PrivilagecomboBox = new JComboBox();
+		    PrivilagecomboBox.setModel(new DefaultComboBoxModel(new String[] {"User", "Reader", "Worker", "Qualified Editor", "Manager"}));
+		    PrivilagecomboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		    PrivilagecomboBox.setBounds(214, 353, 155, 34);
+		    PrivilagecomboBox.addItem("User");
+		    PrivilagecomboBox.addItem("Reader");
+		    PrivilagecomboBox.addItem("Worker");
+		    PrivilagecomboBox.addItem("Qualified Editor");
+		    PrivilagecomboBox.addItem("Manager");
+		    add(PrivilagecomboBox);
+		    
+		    JLabel lblFirstName = new JLabel("First name:");
+		    lblFirstName.setFont(new Font("Tahoma", Font.BOLD, 16));
+		    lblFirstName.setBounds(34, 185, 115, 37);
 		    add(lblFirstName);
 		    
-		    JLabel lblLastName = new JLabel("Last name");
-		    lblLastName.setBounds(34, 210, 115, 14);
+		    JLabel lblLastName = new JLabel("Last name:");
+		    lblLastName.setFont(new Font("Tahoma", Font.BOLD, 16));
+		    lblLastName.setBounds(401, 186, 115, 34);
 		    add(lblLastName);
 		    
-		    textField = new JTextField();
-		    textField.setBounds(159, 182, 160, 20);
-		    add(textField);
-		    textField.setColumns(10);
+		    FirstNameTextField = new JTextField();
+		    FirstNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		    FirstNameTextField.setBounds(141, 185, 188, 37);
+		    add(FirstNameTextField);
+		    FirstNameTextField.setColumns(10);
 		    
-		    textField_1 = new JTextField();
-		    textField_1.setBounds(159, 207, 160, 20);
-		    add(textField_1);
-		    textField_1.setColumns(10);
+		    LastNameTextField = new JTextField();
+		    LastNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		    LastNameTextField.setBounds(510, 185, 195, 36);
+		    add(LastNameTextField);
+		    LastNameTextField.setColumns(10);
 		    
-		    JLabel lblEmail = new JLabel("Email");
-		    lblEmail.setBounds(34, 260, 115, 14);
-		    add(lblEmail);
-		    
-		    textField_2 = new JTextField();
-		    textField_2.setBounds(159, 257, 160, 20);
-		    add(textField_2);
-		    textField_2.setColumns(10);
-		    
-		    JLabel lblPassword = new JLabel("Password");
-		    lblPassword.setBounds(34, 285, 115, 14);
+		    JLabel lblPassword = new JLabel("Password:");
+		    lblPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
+		    lblPassword.setBounds(34, 251, 89, 34);
 		    add(lblPassword);
 		    
-		    textField_3 = new JTextField();
-		    textField_3.setBounds(159, 282, 160, 20);
-		    add(textField_3);
-		    textField_3.setColumns(10);
-		    
 		    JButton btnNewButton = new JButton("Update");
-		    btnNewButton.setBounds(405, 528, 89, 23);
+		    btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+		    btnNewButton.setBounds(667, 536, 115, 45);
 		    add(btnNewButton);
+		    
+		    JLabel lblUserStstus = new JLabel("User ststus:");
+		    lblUserStstus.setFont(new Font("Tahoma", Font.BOLD, 16));
+		    lblUserStstus.setBounds(34, 487, 115, 37);
+		    add(lblUserStstus);
+		    
+		    JComboBox UserStatuscomboBox = new JComboBox();
+		    UserStatuscomboBox.setModel(new DefaultComboBoxModel(new String[] {"DISCONNECTED", "LOCK"}));
+		    UserStatuscomboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		    UserStatuscomboBox.setBounds(214, 487, 155, 37);
+		    add(UserStatuscomboBox);
+		    
+		    JLabel lblPrivilage = new JLabel("Privilage:");
+		    lblPrivilage.setFont(new Font("Tahoma", Font.BOLD, 16));
+		    lblPrivilage.setBounds(34, 352, 115, 37);
+		    add(lblPrivilage);
+		    
+		    PasswordtextField = new JTextField();
+		    PasswordtextField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		    PasswordtextField.setColumns(10);
+		    PasswordtextField.setBounds(141, 250, 188, 37);
+		    add(PasswordtextField);
+		    
+		    JLabel lblSubscriptionMethod = new JLabel("Subscription Method:");
+		    lblSubscriptionMethod.setFont(new Font("Tahoma", Font.BOLD, 16));
+		    lblSubscriptionMethod.setBounds(34, 417, 177, 34);
+		    add(lblSubscriptionMethod);
+		    
+		    JComboBox SubscriptionMethodcomboBox = new JComboBox();
+		    SubscriptionMethodcomboBox.setModel(new DefaultComboBoxModel(new String[] {"NONE", "SINGLE", "MONTHLY", "YEARLY"}));
+		    SubscriptionMethodcomboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		    SubscriptionMethodcomboBox.setBounds(214, 416, 155, 37);
+		    add(SubscriptionMethodcomboBox);
+		    
+		    JLabel lblFinishdatesub = new JLabel("Finish Date Subscription:");
+		    lblFinishdatesub.setFont(new Font("Tahoma", Font.BOLD, 16));
+		    lblFinishdatesub.setBounds(417, 417, 213, 34);
+		    add(lblFinishdatesub);
 
-	/*
-		    JRadioButton catButton = new JRadioButton(catString);
-		    catButton.setMnemonic(KeyEvent.VK_C);
-		    catButton.setActionCommand(catString);
-
-		    JRadioButton dogButton = new JRadioButton(dogString);
-		    dogButton.setMnemonic(KeyEvent.VK_D);
-		    dogButton.setActionCommand(dogString);
-
-		    JRadioButton rabbitButton = new JRadioButton(rabbitString);
-		    rabbitButton.setMnemonic(KeyEvent.VK_R);
-		    rabbitButton.setActionCommand(rabbitString);
-
-		    JRadioButton pigButton = new JRadioButton(pigString);
-		    pigButton.setMnemonic(KeyEvent.VK_P);
-		    pigButton.setActionCommand(pigString);
-
-		    //Group the radio buttons.
-		    ButtonGroup group = new ButtonGroup();
-		    group.add(birdButton);
-		    group.add(catButton);
-		    group.add(dogButton);
-		    group.add(rabbitButton);
-		    group.add(pigButton);
-
-		    //Register a listener for the radio buttons.
-		    birdButton.addActionListener(this);
-		    catButton.addActionListener(this);
-		    dogButton.addActionListener(this);
-		    rabbitButton.addActionListener(this);
-		    pigButton.addActionListener(this);*/
 		
 		}
 	}

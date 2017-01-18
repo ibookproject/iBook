@@ -86,7 +86,12 @@ public class SearchBookGUI extends JPanel {
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
-
+		
+		JLabel lblcarryingBooksGif = new JLabel("");
+		lblcarryingBooksGif.setIcon(new ImageIcon("carryingbooks.gif"));
+		lblcarryingBooksGif.setBounds(555, 155, 375, 505);
+		add(lblcarryingBooksGif);
+		
 		lblSearchBook = new JLabel("Search Book");
 		lblSearchBook.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblSearchBook.setBounds(355, 49, 175, 22);

@@ -8,21 +8,30 @@ import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
 import Role.User;
 import Role.UserStatus;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+
 import Controller.UserController;
 import DB.Test;
 import client.DBSQLhandler;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import javax.swing.JPasswordField;
+
 import java.awt.Color;
+
 import javax.swing.border.MatteBorder;
 
 public class LoginGUI extends JFrame {
@@ -126,7 +135,7 @@ public class LoginGUI extends JFrame {
 			
 			JButton btnLogin = new JButton("Login");
 			btnLogin.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
-			btnLogin.setBackground(new Color(224, 255, 255));
+		//	btnLogin.setBackground(new Color(224, 255, 255));
 			btnLogin.setFont(new Font("Tahoma", Font.BOLD, 16));
 			btnLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -139,7 +148,7 @@ public class LoginGUI extends JFrame {
 					try{
 							u=new User(txtUserID.getText()/*ID*/, pwdPassword.getText()/*Password*/);
 				
-					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID,privilege,userStatus",u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"",client);
+					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID,password,identityNumber,firstName,lastName,userStatus,privilege,subscriptionRequest,subscriptionMethod,finishDateOfSubscription",u,"userID=\""+u.getUserID()+"\" && password=\""+u.getPassword()+"\"",client);
 					if(temp==null||temp.isEmpty())
 					{
 						JOptionPane.showMessageDialog(screen,"wrong password/username", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -167,8 +176,18 @@ public class LoginGUI extends JFrame {
 							if(temp.get(0).getUserStatus()==UserStatus.CONNECTED)
 								JOptionPane.showMessageDialog(screen,"this user is already connected!", "Warning",JOptionPane.WARNING_MESSAGE);
 							else
-						{
-							temp.get(0).setUserStatus(UserStatus.CONNECTED);
+							{
+								Date date = new Date();
+							//	String txtDate = new SimpleDateFormat("yyyy/MM/dd").format(date); 
+							//	date = new Date(txtDate);
+								temp.get(0).setUserStatus(UserStatus.CONNECTED);
+								if(temp.get(0).getSubscriptionMethod()!=UserStatus.NONE)
+									if(temp.get(0).getFinishDateOfSubscription().before(date))
+									{
+										UserController.UpdateUserStatus(u, "subscriptionMethod=0", "subscriptionMethod<>0 && userID=\""+ txtUserID.getText()+"\"", screen.client);
+										JOptionPane.showMessageDialog(screen,"SORRY yours subscription has been finished !", "Warning",JOptionPane.WARNING_MESSAGE);
+
+									}
 							setTempID(temp.get(0).getUserID());
 							UserController.UpdateUserStatus(u, "userStatus=\""+"1"+"\"", "userID=\""+txtUserID.getText()+"\"", screen.client);
 							Test.setExitID(temp.get(0).getUserID());
@@ -295,9 +314,9 @@ public class LoginGUI extends JFrame {
 			pwdPassword.setBounds(337, 371, 157, 33);
 			FirstPanel.add(pwdPassword);
 
-			JLabel lblUserId = new JLabel("USER ID:");
+			JLabel lblUserId = new JLabel("USER NAME:");
 			lblUserId.setFont(new Font("Tahoma", Font.BOLD, 20));
-			lblUserId.setBounds(185, 325, 106, 33);
+			lblUserId.setBounds(175, 323, 140, 33);
 			FirstPanel.add(lblUserId);
 
 			JLabel lblPassword = new JLabel("PASSWORD:");
@@ -310,7 +329,7 @@ public class LoginGUI extends JFrame {
 			bntBackground.setEnabled(false);
 			bntBackground.setBounds(131, 262, 586, 200);
 			FirstPanel.add(bntBackground);
-			ImageIcon logo=new ImageIcon("IbookIcon.png");
+			ImageIcon logo=new ImageIcon("IbookIcon500.png");
 			JLabel lblNewLabel = new JLabel("");
 			lblNewLabel.setBounds(156, 24, 488, 236);
 			lblNewLabel.setIcon(logo);
