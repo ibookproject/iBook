@@ -1,6 +1,3 @@
-/Book/
-/Controller/
-/DB/
 /ManagmentGUI/
 /MemberGUI/
 /MenuGUI/
@@ -9,4 +6,3 @@
 /client/
 /command/
 /ocsf/
-/test/

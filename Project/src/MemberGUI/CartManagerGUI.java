@@ -88,7 +88,8 @@ public class CartManagerGUI extends JPanel {
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 		User u= new User();
-
+		
+		//checking if there is any subscription method
 		searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionMethod,privilege",u,"subscriptionMethod<>\"" + 0 + "\""+" && " + "userID=\"" + screen.getTempID() + "\"", screen.getClient());//call search book method from book controller
 		if(searcRes!=null)
 		{
@@ -116,6 +117,7 @@ public class CartManagerGUI extends JPanel {
 		temp.add(new joinObject(c.getClassName(), b.getClassName(), "bookID"));
 		
 		ArrayList<Book> bbb;
+		/**JOIN BETWEEN BOOK AND CART**/
 		bbb=CartController.GetCartListForUser("book.bookID,book.title,book.author,book.price",c,temp,"userID=\""+screen.getTempID() +"\""+" && "+"status=0" , screen.getClient());
 		//System.out.print(bbb);
 		if (bbb != null) {
@@ -164,6 +166,36 @@ public class CartManagerGUI extends JPanel {
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setEnabled(false);
 						CartController.UpdateCart(c, "status=\""+1+"\"" + " && "+"buyDate=\""+txtDate+"\"", "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\"", screen.getClient());
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setSelected(false);
+						
+						// ************ SAVE FILE *****************//
+						final JFileChooser fc = new JFileChooser();
+						//fc.setCurrentDirectory(new java.io.File("C:/Users/kfir/Desktop"));
+						fc.setFileFilter(new FileTypeFilter(".txt","Text File"));
+						fc.setDialogTitle( "SAVE THE BOOK !! :   " +"author : " +((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getAuthor()+"  ,  " + " title :  "+ ((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getTitle());
+					//	fc.setFileFilter(new FileTypeFilter(".PDF","PDF"));
+					if(fc.showSaveDialog(null)==JFileChooser.APPROVE_OPTION)
+					{
+						System.out.println(fc.getSelectedFile());
+						System.out.println((FileTypeFilter)fc.getFileFilter());
+						//for(Integer b:tempBooksId)
+					//	{
+						try {
+							FileWriter fw = new FileWriter(fc.getSelectedFile().getAbsolutePath()+(FileTypeFilter)fc.getFileFilter());
+							PrintWriter pw = new PrintWriter(fw);						
+							pw.println("author : " +((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getAuthor()+"  ,  " + " title :  "+ ((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getTitle());
+							pw.println();
+							pw.println("******************The Book Pagess********************");
+							pw.println("******************The Book Pagess********************");
+							pw.println("******************The Book Pagess********************");
+							pw.println("******************The Book Pagess********************");
+							pw.println("******************The Book Pagess********************");
+							pw.println("******************The Book Pagess********************");
+							pw.close();
+						} catch (IOException ex) {
+							System.out.println(ex);
+						}
+					//	}
+					}			
 					}
 					//panel.updateUI();
 				}
@@ -173,34 +205,10 @@ public class CartManagerGUI extends JPanel {
 					JOptionPane.showMessageDialog(screen,"You Bought all your Cart Book's list !", "Warning",JOptionPane.WARNING_MESSAGE);
 				else if(flag==1)
 				{
-			
+		
 					JOptionPane.showMessageDialog(screen,"The Purshace  successfully  !", "done",JOptionPane.INFORMATION_MESSAGE);
-					/*
-					 *this is for hen 
-					 *all this code you need to inesrt we the buynig selected!
-					final JFileChooser fc = new JFileChooser();
-					//fc.setCurrentDirectory(new java.io.File("C:/Users/kfir/Desktop"));
-					fc.setFileFilter(new FileTypeFilter(".txt","Text File"));
-					fc.setFileFilter(new FileTypeFilter(".PDF","PDF"));
-				if(fc.showSaveDialog(null)==JFileChooser.APPROVE_OPTION){
-					System.out.println(fc.getSelectedFile());
-					System.out.println((FileTypeFilter)fc.getFileFilter());
-					for(Integer b:tempBooksId){
-					try {
-						FileWriter fw = new FileWriter(fc.getSelectedFile().getAbsolutePath()+(FileTypeFilter)fc.getFileFilter());
-						PrintWriter pw = new PrintWriter(fw);
-						
-						pw.println(b);
-						pw.close();
-					} catch (IOException ex) {
-						System.out.println(ex);
-					}
-					}
-					}
-					*/
+	
 				}				
-				else if (cnt==panel.getComponentCount()) 
-							JOptionPane.showMessageDialog(screen,"You Bought all your Cart Book's list !", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 			else JOptionPane.showMessageDialog(screen,"no Chossen book's to buy", "Warning",JOptionPane.WARNING_MESSAGE);
 	}
