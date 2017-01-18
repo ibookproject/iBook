@@ -173,7 +173,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 					 {
 						 //	public Book( String title, String language, String author, String summary, boolean bookEnable,String keyword,String content)
 
-				 	Book b = new Book(title.getText().trim(),lang.getText().trim(),author.getText().trim(),summary.getText().trim(),true,keyword.getText().trim(),contents.getText().trim(),Float.parseFloat(price.getText().trim())); // create new book
+				 	Book b = new Book(title.getText().trim(),lang.getText().trim(),author.getText().trim(),summary.getText().trim(),1,keyword.getText().trim(),contents.getText().trim(),Float.parseFloat(price.getText().trim())); // create new book
 				 	
 					ArrayList<Book> temp = BookController.SearchBook("title,language",b, "title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\"", screen.getClient());//call search book method from book controller
 				 	//System.out.println(temp);
@@ -198,7 +198,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 				 }
 				 else // its update
 				 {
-					 	Book b = new Book(title.getText(),lang.getText(),author.getText(),summary.getText(),true,keyword.getText(),contents.getText()); // create new book
+					 	Book b = new Book(title.getText(),lang.getText(),author.getText(),summary.getText(),1,keyword.getText(),contents.getText()); // create new book
 						//boolean result=bookController.AddBook(b,screen.getClient()); // return true or false from the controller DB
 						boolean result=BookController.UpdateBook(b, "title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\""+" && "+"language=\""+lang.getText().trim()+"\""+" && "+"summary=\""+summary.getText().trim()+"\""+" && "+"content=\""+contents.getText().trim()+"\""+" && "+"summary=\""+summary.getText().trim()+"\""+" && "+"keyword=\""+keyword.getText().trim()+"\""+" && "+"price=\""+Float.parseFloat(price.getText().trim())+"\"", "bookID=\""+Bookid+ "\"", screen.getClient()); // return true or false from the controller DB
 

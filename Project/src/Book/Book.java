@@ -14,7 +14,7 @@ public class Book extends DBtranslation  {
 	private String language;
 	private String author;
 	private String summary;
-	private boolean bookEnable;
+	private int bookEnable;
 	private String[] keyword;
 	private String[] content;
 	private long numberOfOrder;
@@ -33,7 +33,7 @@ public class Book extends DBtranslation  {
 	}
 	
 	//Contractor to insert form DB without keyword and content
-	public Book(int bookID, String title, String language, String author, String summary, boolean bookEnable) {
+	public Book(int bookID, String title, String language, String author, String summary, int bookEnable) {
 		super();
 		this.bookID = bookID;
 		this.title = title;
@@ -43,7 +43,7 @@ public class Book extends DBtranslation  {
 		this.bookEnable = bookEnable; //bookEnable for display temporary remove
 	}
 	//Contractor to search form DB without keyword and content
-	public Book(String title, String language, String author, String summary, boolean bookEnable) {
+	public Book(String title, String language, String author, String summary, int bookEnable) {
 		super();
 		this.title = title;
 		this.language = language;
@@ -59,7 +59,7 @@ public class Book extends DBtranslation  {
 	}
 	
 	//Contractor to insert form DB with keyword and content
-	public Book( String title, String language, String author, String summary, boolean bookEnable,String keyword,String content)
+	public Book( String title, String language, String author, String summary, int bookEnable,String keyword,String content)
 	{
 		this(title,language,author,summary,bookEnable);
 		this.keyword=keyword.split(" ");
@@ -69,7 +69,7 @@ public class Book extends DBtranslation  {
 	
 	
 	//Contractor to insert form DB with keyword and content and price and numberOfOrders
-	public Book( String title, String language, String author, String summary, boolean bookEnable,String keyword,String content,float price)
+	public Book( String title, String language, String author, String summary, int bookEnable,String keyword,String content,float price)
 	{
 		this(title,language,author,summary,bookEnable);
 		this.keyword=keyword.split(" ");
@@ -132,11 +132,11 @@ public class Book extends DBtranslation  {
 		this.summary = summary;
 	}
 	//bookEnable for display temporary remove
-	public boolean isBookEnable() {
+	public int isBookEnable() {
 		return bookEnable;
 	}
 	//bookEnable for display temporary remove
-	public void setBookEnable(boolean bookEnable) {
+	public void setBookEnable(int bookEnable) {
 		this.bookEnable = bookEnable;
 	}
 
@@ -213,7 +213,7 @@ public class Book extends DBtranslation  {
 	@Override
 	public String getValToInsert() {
 		int temp=0;
-		if(bookEnable)temp=1;
+		if(bookEnable==1)temp=1;
 		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",%d,\"%s\",\"%s\",0,%f)",title,language,author,summary,temp,getKeywordToString(),getContentToString(),price);
 	}
 	@Override
@@ -230,7 +230,7 @@ public class Book extends DBtranslation  {
 		 if(fromSentence.indexOf('*')>=0)
 			 for(DBgenericObject ob:arr)
 			 {
-				 convertedArr.add(new Book((int)ob.getValtoArray(0),(String)ob.getValtoArray(1),(String)ob.getValtoArray(2),(String)ob.getValtoArray(3),(String)ob.getValtoArray(4),((int)ob.getValtoArray(5))==1));
+				 convertedArr.add(new Book((int)ob.getValtoArray(0),(String)ob.getValtoArray(1),(String)ob.getValtoArray(2),(String)ob.getValtoArray(3),(String)ob.getValtoArray(4),(int)ob.getValtoArray(5)));
 			 }
 		else
 		for(DBgenericObject ob:arr)
@@ -272,9 +272,10 @@ public class Book extends DBtranslation  {
 			case "price":
 				recover.setPrice((float)ob.getValtoArray(i));
 				break;
-			case "numberOfOrder":
-				recover.setNumberOfOrder((long)ob.getValtoArray(i));
+			case "bookEnable":
+				recover.setBookEnable((int)ob.getValtoArray(i));
 				break;
+				
 			default:
 				throw new InputMismatchException("you have inserred wrong to search statment");
 			 }//end switch
@@ -296,7 +297,7 @@ public class Book extends DBtranslation  {
 		temp+=", "+author;
 	if(summary!=null)
 		temp+=", "+summary;
-	if(bookEnable==true)
+	if(bookEnable==1)
 		temp+=", yes";
 	else
 		temp+=", no";

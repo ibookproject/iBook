@@ -122,7 +122,8 @@ public class LibraryManagerMenu extends LibrarianMenu {
 		btnUserStatistics.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnUserStatistics);
 		
-		JButton btnBookrate = new JButton("Book rate");
+		JButton btnBookrate = new JButton("Book rate        ");
+		btnBookrate.setIcon(new ImageIcon("rate.png"));
 		btnBookrate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 ////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -136,7 +137,7 @@ public class LibraryManagerMenu extends LibrarianMenu {
 		screen.setContentPane(Rbr);//send to search book window
 			}
 		});
-		btnBookrate.setBounds(651, 318, 189, 53);
+		btnBookrate.setBounds(651, 381, 189, 53);
 		btnBookrate.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnBookrate);
 	
