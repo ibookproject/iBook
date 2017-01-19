@@ -16,6 +16,10 @@ public class Cart extends DBtranslation {
 	private float price;
 	private int status;
 	private String buyDate;
+	public static final int BOUGHT=1;//to show the orders
+	public static final int ORDERD =0;//client didn't bought already
+	public static final int DELETED=2;//the client bought and don't want to see on cart
+	
 	public Cart()
 	{
 		super();
@@ -25,7 +29,7 @@ public class Cart extends DBtranslation {
 		this.userID=userID;
 		this.bookID=bookID;
 		this.price=price;
-		this.status=0;
+		this.status=ORDERD;
 		this.buyDate=date;
 	}
 	public Cart(String userID,int bookID,float price)
@@ -58,7 +62,16 @@ public class Cart extends DBtranslation {
 		return status;
 	}
 	public void setStatus(int status) {
-		this.status = status;
+		switch(status){
+		case BOUGHT:
+			this.status=BOUGHT;
+		case ORDERD:
+			this.status=ORDERD;
+		case DELETED:
+			this.status=DELETED;
+		default:
+			throw new InputMismatchException("incurrent status insrted");
+		}
 	}
 	public String getDate() {
 		return buyDate;
