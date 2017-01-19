@@ -52,7 +52,7 @@ public class Cart extends DBtranslation {
 	}
 
 	public void setUserID(String userID) {
-		if (userID == null || userID.equals("") || Validation.ContentValidation(userID) == false)
+		if (userID == null || userID.equals("") || Validation.regularValidation(userID) == false)
 			throw new InputMismatchException("you have  inserted wrong userName");
 		this.userID = userID;
 	}

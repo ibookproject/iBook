@@ -55,7 +55,7 @@ public class Review extends DBtranslation {
 		return reviewContent;
 	}
 	public void setReviewContent(String reviewContent) {
-		if (reviewContent == null || reviewContent.equals("") || Validation.ContentValidation(reviewContent) == false)
+		if (reviewContent == null || reviewContent.equals("") || Validation.regularValidation(reviewContent) == false)
 			throw new InputMismatchException("you have  inserted wrong Content");
 		this.reviewContent = reviewContent;
 	}

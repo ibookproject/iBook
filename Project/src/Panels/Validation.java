@@ -17,7 +17,7 @@ public class Validation {
 	 */
 	public static boolean ContentValidation(String name) {
 		boolean status = false;
-		String namePattern = "(.*)(|%\"'&=+)(.*)";
+		String namePattern = "[|%\"'&=]+";
 		Pattern pattern = Pattern.compile(namePattern);
 		Matcher matcher = pattern.matcher(name);
 
@@ -28,6 +28,18 @@ public class Validation {
 		return status;
 	}
 	
+
+	/**
+	 * @author  Sagi
+	 * @param name, the input to validate
+	 * @return false if contain any of the forbbien char--> |,%,\,",',&,=
+	 * @return true in any other situation  
+	 */
+	public static boolean regularValidation(String name) {
+		if (name==null||name.indexOf('|')>0||name.indexOf('%')>0||name.indexOf('\\')>0||name.indexOf('\"')>0||name.indexOf('&')>0||name.indexOf('=')>0)
+			return false;
+		return true;
+	}
 	
 	/**
 	 * @author Almog Yamin

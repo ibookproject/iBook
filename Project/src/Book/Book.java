@@ -136,7 +136,7 @@ public class Book extends DBtranslation  {
 	}
 
 	public void setSummary(String summary) {
-		if (summary == null || summary.equals("") || Validation.ContentValidation(summary) == false)
+		if (summary == null || summary.equals("") || Validation.regularValidation(summary) == false)
 			throw new InputMismatchException("you have inserted wrong summary");
 		this.summary = summary;
 	}
