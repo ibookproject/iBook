@@ -215,7 +215,7 @@ public class User extends DBtranslation implements UserStatus {
 	}
 
 	public void setFinishDateOfSubscription(Date finishDateOfSubscription) {
-		if (finishDateOfSubscription.before(Calendar.getInstance().getTime()))
+		if (finishDateOfSubscription!=null&&finishDateOfSubscription.before(Calendar.getInstance().getTime()))
 			throw new InputMismatchException("you insert wrong date");
 
 		this.finishDateOfSubscription = finishDateOfSubscription;
