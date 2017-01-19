@@ -165,7 +165,10 @@ public class CartManagerGUI extends JPanel {
 						
 						// ************ SAVE FILE *****************//
 						final JFileChooser fc = new JFileChooser();
-						//fc.setCurrentDirectory(new java.io.File("C:/Users/kfir/Desktop"));
+						//fc.setCurrentDirectory(new java.io.File("C:/Users/kfir/Desktop"));;
+						fc.setFileFilter(new FileTypeFilter(".pdf","PDF"));
+						fc.setFileFilter(new FileTypeFilter(".doc","Word Document"));
+						fc.setFileFilter(new FileTypeFilter(".fb2","Fiction Book"));
 						fc.setFileFilter(new FileTypeFilter(".txt","Text File"));
 						fc.setDialogTitle( "SAVE THE BOOK !! :   " +"author : " +((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getAuthor()+"  ,  " + " title :  "+ ((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getTitle());
 					//	fc.setFileFilter(new FileTypeFilter(".PDF","PDF"));
