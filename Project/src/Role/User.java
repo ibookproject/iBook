@@ -61,7 +61,7 @@ public class User extends DBtranslation implements UserStatus {
 		setUserStatus(userStatus);
 		setSubscriptionRequest(subscriptionRequest);
 		setSubscriptionMethod(subscriptionMethod);
-		setFinishDateOfSubscription(finishDateOfSubscription);
+		this.finishDateOfSubscription=finishDateOfSubscription;
 	}
 
 
