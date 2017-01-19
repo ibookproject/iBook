@@ -119,7 +119,7 @@ public class RequestPostFillReviewGUI extends JPanel
 			{
 				char c = a.getKeyChar();
 				String charToString = Character.toString(c);
-				if(!ContentValidation(charToString))
+				if(!Validation.ContentValidation(charToString))
 					{
 					a.consume();
 					
@@ -145,7 +145,7 @@ public class RequestPostFillReviewGUI extends JPanel
 					{
 						char c = pressedChar.getKeyChar();
 						String charToString = Character.toString(c);
-						if(!ContentValidation(charToString))
+						if(!Validation.ContentValidation(charToString))
 							{
 							JOptionPane.showMessageDialog(screen,"Incorrect input char\n", "Warning",JOptionPane.WARNING_MESSAGE);
 							pressedChar.consume();
@@ -214,17 +214,5 @@ public class RequestPostFillReviewGUI extends JPanel
 		add(btnNewButton);
 		
 		
-	}
-	public static boolean ContentValidation(String name) {
-		boolean status = false;
-		String namePattern = "[|%\"'&=]";
-		Pattern pattern = Pattern.compile(namePattern);
-		Matcher matcher = pattern.matcher(name);
-
-		if (matcher.matches())
-			status = false;
-		else
-			status = true;
-		return status;
 	}
 }

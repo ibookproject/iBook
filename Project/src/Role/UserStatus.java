@@ -22,4 +22,9 @@ public interface UserStatus {
 	public static final int MONTHLY=2;
 	public static final int YEARLY=3;
 	//
+	
+	//
+	public static final int FNAMESIZE=15;
+	public static final int LNAMESIZE=25;
+	//
 }

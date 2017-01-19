@@ -298,36 +298,37 @@ public class LoginGUI extends JFrame {
 					}
 				}
 			});
-			btnLogin.setBounds(565, 342, 118, 35);
-			FirstPanel.add(btnLogin);
-
-			txtUserID = new JTextField();
-			txtUserID.setFont(new Font("Tahoma", Font.PLAIN, 17));
-			txtUserID.setBounds(337, 323, 157, 35);
-			FirstPanel.add(txtUserID);
-			txtUserID.setColumns(10);
+			
+						txtUserID = new JTextField();
+						txtUserID.setFont(new Font("Tahoma", Font.PLAIN, 17));
+						txtUserID.setBounds(302, 296, 192, 35);
+						FirstPanel.add(txtUserID);
+						txtUserID.setColumns(10);
 			
 			pwdPassword = new JPasswordField();
 			pwdPassword.setFont(new Font("Tahoma", Font.PLAIN, 17));
-	
-			pwdPassword.setText("");
-			pwdPassword.setBounds(337, 371, 157, 33);
-			FirstPanel.add(pwdPassword);
+			
+					pwdPassword.setText("");
+					pwdPassword.setBounds(302, 355, 192, 33);
+					FirstPanel.add(pwdPassword);
+			btnLogin.setBounds(534, 355, 118, 35);
+			FirstPanel.add(btnLogin);
 
 			JLabel lblUserId = new JLabel("USER NAME:");
 			lblUserId.setFont(new Font("Tahoma", Font.BOLD, 20));
-			lblUserId.setBounds(175, 323, 140, 33);
+			lblUserId.setBounds(156, 296, 140, 33);
 			FirstPanel.add(lblUserId);
 
 			JLabel lblPassword = new JLabel("PASSWORD:");
 			lblPassword.setFont(new Font("Tahoma", Font.BOLD, 20));
-			lblPassword.setBounds(175, 371, 134, 35);
+			lblPassword.setBounds(156, 353, 134, 35);
 			FirstPanel.add(lblPassword);
 			
 			JButton bntBackground = new JButton("");
+			bntBackground.setBackground(Color.GRAY);
 			bntBackground.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
 			bntBackground.setEnabled(false);
-			bntBackground.setBounds(131, 262, 586, 200);
+			bntBackground.setBounds(131, 273, 553, 154);
 			FirstPanel.add(bntBackground);
 			ImageIcon logo=new ImageIcon("IbookIcon500.png");
 			JLabel lblNewLabel = new JLabel("");

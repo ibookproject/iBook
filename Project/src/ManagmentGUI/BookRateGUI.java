@@ -403,7 +403,7 @@ public class BookRateGUI extends JPanel {
 			arrayCounter[i]=-1;*/
 		
 		for(int i=0;i<allcarts.size();i++)	//go over the purchases book in Cart-counter number of purchases
-			if(allcarts.get(i).isStatus()==1)
+			if(allcarts.get(i).getStatus()==1)
 				arrayCounter[allcarts.get(i).getBookID()-1]++;
 		
 		for(int i=0;i<maxBookID;i++)

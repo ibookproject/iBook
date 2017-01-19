@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.InputMismatchException;
 
+import Panels.Validation;
 import client.DBgenericObject;
 import command.DBtranslation;
 
@@ -19,6 +20,10 @@ public class Book extends DBtranslation  {
 	private String[] content;
 	private long numberOfOrder;
 	private float price;
+	public static final int ENABLE=1;
+	public static final int DISEABLE=0;
+	public static final int TITLESIZE=50;
+	public static final int AUTHORSIZE=30;
 	//private String cont;
 	
 	//empty constructor
@@ -29,41 +34,35 @@ public class Book extends DBtranslation  {
 	public Book(int bookID)
 	{
 		super();	
-		this.bookID=bookID;
+		setBookID(bookID);
+	}
+	public Book(String title, String author) {
+		super();
+		setTitle(title);
+		setAuthor(author);
+	}
+	public Book(String title, String language, String author, String summary, int bookEnable) {
+		this(title,author);
+		setLanguage(language);
+		setSummary(summary);
+		setBookEnable(bookEnable);
 	}
 	
 	//Contractor to insert form DB without keyword and content
 	public Book(int bookID, String title, String language, String author, String summary, int bookEnable) {
-		super();
-		this.bookID = bookID;
-		this.title = title;
-		this.language = language;
-		this.author = author;
-		this.summary = summary;
-		this.bookEnable = bookEnable; //bookEnable for display temporary remove
+		this(title,language,author,summary,bookEnable);
+		setBookID(bookID);
 	}
 	//Contractor to search form DB without keyword and content
-	public Book(String title, String language, String author, String summary, int bookEnable) {
-		super();
-		this.title = title;
-		this.language = language;
-		this.author = author;
-		this.summary = summary;
-		this.bookEnable = bookEnable;
-	}
-	
-	public Book(String title, String author) {
-		super();
-		this.title = title;
-		this.author = author;
-	}
+
+
 	
 	//Contractor to insert form DB with keyword and content
 	public Book( String title, String language, String author, String summary, int bookEnable,String keyword,String content)
 	{
 		this(title,language,author,summary,bookEnable);
-		this.keyword=keyword.split(" ");
-		this.content=content.split(" ");
+		setKeyword(keyword);
+		setContent(content);
 		
 	}
 	
@@ -71,10 +70,8 @@ public class Book extends DBtranslation  {
 	//Contractor to insert form DB with keyword and content and price and numberOfOrders
 	public Book( String title, String language, String author, String summary, int bookEnable,String keyword,String content,float price)
 	{
-		this(title,language,author,summary,bookEnable);
-		this.keyword=keyword.split(" ");
-		this.content=content.split(" ");
-		this.price=price;
+		this(title,language,author,summary,bookEnable,keyword,content);
+		setPrice(price);
 		this.numberOfOrder=0;
 		
 	}
@@ -90,6 +87,8 @@ public class Book extends DBtranslation  {
 		this.bookEnable = b.isBookEnable();
 		this.keyword=b.getKeyword();
 		this.content=b.getContent();
+		this.price=b.getPrice();
+		this.numberOfOrder=b.getNumberOfOrder();
 	}
 	
 	public int getBookID() {
@@ -97,6 +96,8 @@ public class Book extends DBtranslation  {
 	}
 
 	public void setBookID(int bookID) {
+		if(bookID<0)
+				throw new InputMismatchException("you have  inserted wrong book ID");
 		this.bookID = bookID;
 	}
 
@@ -105,6 +106,8 @@ public class Book extends DBtranslation  {
 	}
 
 	public void setTitle(String title) {
+		if (title == null || title.equals("") || Validation.TitleValidation(title,TITLESIZE) == false)
+			throw new InputMismatchException("you have  inserted wrong title");
 		this.title = title;
 	}
 
@@ -113,6 +116,8 @@ public class Book extends DBtranslation  {
 	}
 
 	public void setLanguage(String language) {
+		if (language == null || language.equals("") || Validation.NameValidation(language,10) == false)
+			throw new InputMismatchException("you have  inserted wrong language");
 		this.language = language;
 	}
 
@@ -121,7 +126,9 @@ public class Book extends DBtranslation  {
 	}
 
 	public void setAuthor(String author) {
-		this.author = author;
+		if (author == null || author.equals("") || Validation.AuthorValidation(author,AUTHORSIZE) == false)
+			throw new InputMismatchException("you have  inserted wrong author");
+		this.author=author;
 	}
 
 	public String getSummary() {
@@ -129,6 +136,8 @@ public class Book extends DBtranslation  {
 	}
 
 	public void setSummary(String summary) {
+		if (summary == null || summary.equals("") || Validation.ContentValidation(summary) == false)
+			throw new InputMismatchException("you have inserted wrong summary");
 		this.summary = summary;
 	}
 	//bookEnable for display temporary remove
@@ -137,6 +146,16 @@ public class Book extends DBtranslation  {
 	}
 	//bookEnable for display temporary remove
 	public void setBookEnable(int bookEnable) {
+		switch(bookEnable){
+		case DISEABLE:
+			this.bookEnable=DISEABLE;
+			break;
+		case ENABLE:
+			this.bookEnable=ENABLE;
+			break;
+		default:
+			throw new InputMismatchException("you have insert wrong book status");
+		}
 		this.bookEnable = bookEnable;
 	}
 
@@ -161,6 +180,9 @@ public class Book extends DBtranslation  {
 	}
 	
 	public void setKeyword(String keyword) {/// splite form DB
+		if(keyword==null||keyword.equals("")||keyword.equals(" "))
+			this.keyword=new String[]{" "};
+		else
 		this.keyword=keyword.split(" ");
 	}
 	
@@ -181,6 +203,9 @@ public class Book extends DBtranslation  {
 		this.content = content;
 	}
 	public void setContent(String content){//splite from DB
+		if(content==null||content.equals("")||content.equals(" "))
+			this.content=new String[]{" "};
+		else
 		this.content=content.split(" ");
 	}
 
@@ -188,6 +213,8 @@ public class Book extends DBtranslation  {
 		return numberOfOrder;
 	}
 	public void setNumberOfOrder(long numberOfOrder) {
+		if(numberOfOrder<0)
+			throw new InputMismatchException("you have insert wrong number of order");
 		this.numberOfOrder = numberOfOrder;
 	}
 
@@ -197,6 +224,8 @@ public class Book extends DBtranslation  {
 	}
 	
 	public void setPrice(float price) {
+		if(price<0)
+			throw new InputMismatchException("you have inserted negative price");
 		this.price = price;
 	}
 
