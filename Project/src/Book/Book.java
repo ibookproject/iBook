@@ -304,9 +304,12 @@ public class Book extends DBtranslation  {
 			case "bookEnable":
 				recover.setBookEnable((int)ob.getValtoArray(i));
 				break;
+			case "numberOfOrder":
+				recover.setNumberOfOrder((long)ob.getValtoArray(i));
+			
 				
 			default:
-				throw new InputMismatchException("you have inserred wrong to search statment");
+				//throw new InputMismatchException("you have inserred wrong to search statment");
 			 }//end switch
 		 }//end for
 		 return recover;

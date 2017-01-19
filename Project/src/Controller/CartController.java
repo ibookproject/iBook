@@ -124,9 +124,7 @@ public class CartController {
 		Cart c=new Cart();
 		ArrayList<joinObject> temp =new ArrayList<joinObject>();
 		
-		
 		//the first object is the assiation class and the second is to join with
-		
 		
 		temp.add(new joinObject(c.getClassName(), b.getClassName(), "bookID"));
 		

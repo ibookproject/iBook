@@ -181,9 +181,6 @@ import java.awt.Font;
 
 import javax.swing.JRadioButton;
 
-
-
-
 public class BookRateGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -193,6 +190,9 @@ public class BookRateGUI extends JPanel {
 	private JTextField textFieldAutohr;
 	private JTextField textFieldBook;
 	private int bookId;
+	private long numOfOrder;
+	private int rate;
+	private String title;
 	private ArrayList<Book> tempBooks;
 	private JPanel Mainpann;
 	private JLabel lblBookRate;
@@ -285,9 +285,9 @@ public class BookRateGUI extends JPanel {
 				 {
 				 	Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
 				 	
-				 	if(textFieldAutohr.getText().isEmpty()==false)
+				 	if(textFieldAutohr.getText().isEmpty()==false)//"summary LIKE '%" + textFieldSummary.getText() + "%'"
 				 	{
-				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim()+ "\"" + " && "+"author=\""+textFieldAutohr.getText().trim()+"\"", screen.getClient());
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim()+"%'" +" && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'", screen.getClient());
 				 		 if(tempBooks==null)
 				 		 {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -295,7 +295,6 @@ public class BookRateGUI extends JPanel {
 				 		 }
 				 		 else
 				 		 {
-				 		//	if(flagFirstTime==1)
 				 			comboBoxChooseBook.removeAllItems();
 							for(int i=0;i<tempBooks.size();i++)
 								comboBoxChooseBook.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
@@ -306,7 +305,7 @@ public class BookRateGUI extends JPanel {
 				 	}
 			 	else
 			 	{
-			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title=\""+textFieldBook.getText().trim() +"\"", screen.getClient());
+			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim()+ "'", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
 							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -320,13 +319,7 @@ public class BookRateGUI extends JPanel {
 							 comboBoxChooseBook.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
 			 	}
- 			/*Hen wrote
-				comboBox.removeAllItems();
-				for(int i=0;i<temp.size();i++)
-					comboBox.addItem(temp.get(i).getTitle() + " , " + temp.get(i).getAuthor());
-					*/
-
-			}}
+				 }}
 			}); 
 		btnSearch.setBounds(645, 88, 89, 23);
 		add(btnSearch);
@@ -338,34 +331,14 @@ public class BookRateGUI extends JPanel {
 			{
 				
 				if(bookId!=-1)
-				{	
-					JOptionPane.showMessageDialog(screen,"Cool!!! ", "Warning",JOptionPane.WARNING_MESSAGE);
-					
+				{						
 					if(rdbtnAbsoluteRate.isSelected())
-						{
-						flag=1;
-						rdbtnAbsoluteRateSelected();
-						}
+						rate=BookController.absoluteBookRate(bookId,screen.getClient(),screen,1);
 					else
 						if(rdbtnProportionRate.isSelected())
-						{
-							flag=2;
-						}
+							rate=BookController.propotionBookRate(bookId,screen.getClient(),screen);
 						else
 						JOptionPane.showMessageDialog(screen,"You need to choose kind of rate! ", "Warning",JOptionPane.WARNING_MESSAGE);
-					
-						
-							
-				//	SubjectToBook stb=new 
-				////////////////////////button to back panel from panel /////////////////////////////////////////////
-				//AddOrUpdateBookGUI goback=new AddOrUpdateBookGUI(screen,0, bookId,Mainpann); 
-				//goback.btnBack.addActionListener(new ActionListener() {
-					//public void actionPerformed(ActionEvent e) {
-					//	screen.setContentPane(pann);
-					//}
-				////////////////////////button to back panel from panel/////////////////////////////////////////////
-				//});
-				//screen.setContentPane(goback);//send to search book window
 				}
 				else 
 					JOptionPane.showMessageDialog(screen,"there is no book to select ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -374,120 +347,6 @@ public class BookRateGUI extends JPanel {
 		});
 		btnSelect.setBounds(377, 250, 89, 23);
 		add(btnSelect);
-		
-
-	
-	}
-	public void rdbtnAbsoluteRateSelected()
-	{
-		ArrayList<Book> allBooks=new ArrayList<Book>();
-	
-		ArrayList<Cart> allcarts=new ArrayList<Cart>();
-		Cart c=new Cart();
-		allcarts=CartController.SearchCart("userID,bookID,price,status", c,  "status=\""+1+"\""/*+"&&"+"bookID=\""+bookId+"\""*/, screen.getClient());
-		Book b=new Book();
-		//"title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\""
-		allBooks=BookController.SearchBook("bookID,title,language,author,summary,content,keyword", b, "bookEnable=\""+1+"\"", screen.getClient());
-		
-		int maxBookID=0;
-		int bookIdNumPurchase;
-		for(Book b4:allBooks)
-			if(b4.getBookID()>maxBookID)
-				maxBookID=b4.getBookID();
-		
-		int[] arrayCounter=new int[maxBookID];
-		int[] arrayCounterSort=new int[maxBookID];
-		ArrayList<Integer> arrayListCounter=new ArrayList<Integer>();
-		
-		/*for(int i=0;i<maxBookID;i++)		//initialize the countArray
-			arrayCounter[i]=-1;*/
-		
-		for(int i=0;i<allcarts.size();i++)	//go over the purchases book in Cart-counter number of purchases
-			if(allcarts.get(i).getStatus()==1)
-				arrayCounter[allcarts.get(i).getBookID()-1]++;
-		
-		for(int i=0;i<maxBookID;i++)
-			arrayCounterSort[i]=arrayCounter[i];
-		for(int i=0;i<maxBookID;i++)
-		{
-			System.out.println(arrayCounter[i]);
-		}
-		
-		insertionSort(arrayCounterSort);
-		int counter=0;
-		bookIdNumPurchase=arrayCounter[bookId-1];		//number of purchase of bookID
-		
-		for(int i=maxBookID-1;i>0;i--)
-		{
-			counter++;
-			if(arrayCounterSort[i]==bookIdNumPurchase)
-				break;
-		}
-		
-		System.out.println("The counter is:"+counter);
-	/*	for(int i=0;i<maxBookID;i++)
-		{
-			System.out.println(arrayCounter[i]);
-		}
-		
-		
-		for(int i=0;i<maxBookID;i++)		//update the IntegerArrayList
-			arrayListCounter.add(arrayCounter[i]);
-		
-		for(int i=0;i<arrayListCounter.size();i++)
-		{
-			System.out.println(arrayListCounter.get(i).toString());
-		//	counter++;
-			//if(arrayListCounterSorted.get(i)==bookIdNumPurchase)
-				
-		}
-		ArrayList<Integer> arrayListCounterSorted=new ArrayList<Integer>();
-		for(Integer r:arrayListCounter)		//update the sortArray
-			arrayListCounterSorted.add(r);
-		
-		Collections.sort(arrayListCounterSorted);
-		
-		//int rateBook=0;
-		for(int i=arrayListCounterSorted.size()-1;i>0;i--)
-		{
-			System.out.println(arrayListCounterSorted.get(i).toString());
-			
-			counter++;
-			if(arrayListCounterSorted.get(i)==bookIdNumPurchase)
-				break;
-		}
-		
-
-				
-			
-		for(Book b4:allBooks)
-			System.out.println(b4.toString()+"");
-		for(Cart b4:allcarts)
-			System.out.println(b4.toString()+"");
-		Collections.sort(allBooks, Book.IdBookNum);
-		
-		Collections.sort(allcarts, Cart.IdBookNum);
-		System.out.println("");
-		for(Cart b4:allcarts)
-			System.out.println(b4.toString()+"");
-		JOptionPane.showMessageDialog(screen,"The list is sortted", "Warning",JOptionPane.WARNING_MESSAGE);*/
-	}
-	public void rdbtnProportionRateSelected()
-	{
-		
-	}
-	public static void insertionSort(int array[]) {
-	    int n = array.length;
-	    for (int j = 1; j < n; j++) {
-	        int key = array[j];
-	        int i = j-1;
-	        while ( (i > -1) && ( array [i] > key ) ) {
-	            array [i+1] = array [i];
-	            i--;
-	        }
-	        array[i+1] = key;
-	       
-	    }
 	}
 }
 
