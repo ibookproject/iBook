@@ -125,7 +125,7 @@ public class ReviewController {
 		//the first object is the assosiation class and the second is to join with
 		temp.add(new joinObject(r.getClassName(), b.getClassName(), "bookID"));
 		
-		client.joinSearchInDB(new joinCommand<Review>("review.bookID,review.reviewID,review.reviewContent,review.reviewDate,book.title",r,temp,"review.reviewStatus=\""+0 +"\""));
+		client.joinSearchInDB(new joinCommand<Review>("review.bookID,review.reviewID,review.reviewContent,review.reviewDate,book.title",r,temp,"review.reviewStatus=0"));
 		while(!	client.GetGotMessag()){//search book in db
 			try{
 			Thread.sleep(500);

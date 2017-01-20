@@ -146,16 +146,6 @@ public class SearchBookGUI extends JPanel {
 		comboBoxDomain.setBounds(393, 452, 116, 22);
 		add(comboBoxDomain);
 
-		//comboBoxDomain.getSelectedItem();
-	/*	comboBoxFormat = new JComboBox<String>();
-		comboBoxFormat.addItem(" ");
-		comboBoxFormat.addItem("PDF");
-		comboBoxFormat.addItem("DOC");
-		comboBoxFormat.addItem("FB2");
-
-		comboBoxFormat.setBounds(393, 502, 116, 22);
-		add(comboBoxFormat);*/
-
 		textFieldSummary = new JTextField();
 		textFieldSummary.setBounds(393, 302, 116, 22);
 		add(textFieldSummary);
@@ -306,6 +296,7 @@ public class SearchBookGUI extends JPanel {
 										bookKeywordsChoose.add(b1);	
 							}
 						}
+						else
 						{
 							JOptionPane.showMessageDialog(screen,"Theres no books in the chosen kewords", "Warning",JOptionPane.WARNING_MESSAGE);
 							flagNotFoundBook=1;
@@ -330,6 +321,7 @@ public class SearchBookGUI extends JPanel {
 									bookKeywordsDomains.add(b1);
 						}
 					}
+					else
 					{
 						JOptionPane.showMessageDialog(screen,"Theres no books in the chosen domain or kewords", "Warning",JOptionPane.WARNING_MESSAGE);
 						flagNotFoundBook=1;
@@ -426,6 +418,7 @@ public class SearchBookGUI extends JPanel {
 				
 				flagIfNotFill=0;
 				flagNotFoundBook=0;
+				flag=0;
 			}
 		});
 		btnSearch.setBounds(326, 537, 97, 25);

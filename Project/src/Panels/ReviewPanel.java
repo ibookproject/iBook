@@ -53,7 +53,7 @@ public class ReviewPanel extends JPanel{
 	private int Permission;
 	private JPanel pann;
 	
-	public ReviewPanel(LoginGUI screen,int reviewID,String reviewContent,String bookTitle,int permission,JPanel pan/*,String reviewDate*/) {
+	public ReviewPanel(LoginGUI screen,int reviewID,String reviewContent,String bookTitle,int permission,JPanel pan,String reviewDate) {
 		setBackground(Color.WHITE);
 		setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 200, 0))));
 		setPreferredSize(new Dimension(731, 128));
@@ -61,20 +61,17 @@ public class ReviewPanel extends JPanel{
 		reviewId=reviewID;
 		Permission=permission;
 		pann=pan;
-	//	review=r;
 		
 		lblDate = new JLabel("Date:");
 		lblDate.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
 		lblDate.setBounds(46, 75, 103, 23);
 		add(lblDate);
 		
-		//Book b=new Book();
-	//	ArrayList<Book> book=BookController.SearchBook("title", b, "bookID=\""+r.getBookID()+"\"", screen.getClient());
 		lblNewTitle = new JLabel(bookTitle);
 		lblNewTitle.setBounds(155, 11, 93, 25);
 		add(lblNewTitle);
 		
-		lblNewDate = new JLabel(""/*reviewDate*/);
+		lblNewDate = new JLabel(reviewDate);
 		lblNewDate.setBounds(106, 82, 161, 16);
 		add(lblNewDate);
 		
@@ -104,8 +101,6 @@ public class ReviewPanel extends JPanel{
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
-			//JOptionPane.showMessageDialog(screen,"okkkkkkkkkkkkkkkk", "Warning",JOptionPane.WARNING_MESSAGE);
-			//setReviewID();
 ////////////////////////button to back to confirmation review from remove part of review /////////////////////////////////////////////
 			RemovePartReviewGUI Rpr=new RemovePartReviewGUI(screen,reviewID);
 			
@@ -119,11 +114,8 @@ public class ReviewPanel extends JPanel{
 
 ////////////////////////button to back to confirmation review from remove part of review/////////////////////////////////////////////
 		
-		/*	if(flagReviewChoose==1)
-			{*/
-				screen.setContentPane(Rpr);
-			//	flagReviewChoose=0;
-			
+	
+				screen.setContentPane(Rpr);			
 		}
 	});
 	

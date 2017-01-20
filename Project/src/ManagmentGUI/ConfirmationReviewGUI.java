@@ -24,6 +24,7 @@ import Controller.BookController;
 import Panels.BookPanel;
 import Panels.ReviewPanel;
 import Panels.UserSubscriptionPanel;
+import Panels.Validation;
 import MenuGUI.LoginGUI;
 import Role.User;
 import Role.UserStatus;
@@ -31,14 +32,24 @@ import Role.UserStatus;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.InputMismatchException;
 
 import javax.swing.JCheckBox;
 import javax.swing.border.MatteBorder;
 
 import client.DBgenericObject;
 
+/**
+ * @author  Coral Carmeli
+ * 
+ * The method take care of the confirm of the review- where the review status=0 its needed to 
+ * confirm/not confirm(Qualified Editor) or remove Part of Review(Librarian/Library manager)
+ * 
+ */
 public class ConfirmationReviewGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -50,13 +61,11 @@ public class ConfirmationReviewGUI extends JPanel {
 	private JLabel confirmLbl ;
 	private JButton btnNotConfirm;
 	private JButton btnConfirm ;
-	private JLabel lblDate ;
-	private JCheckBox chckbxBookName;
-	private int reviewID;
 	private int flagReviewChoose=0;
 	private JScrollPane scrollPaneMain;
 	private JPanel panel;
 	private ArrayList<ReviewPanel> reviewPanels;
+	
 	
 	public ConfirmationReviewGUI(LoginGUI screen,int permission) {
 		super();
@@ -121,7 +130,6 @@ public class ConfirmationReviewGUI extends JPanel {
 						panel.removeAll();
 						showReviews();
 					}
-					
 				}
 				else
 					JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -148,7 +156,7 @@ public class ConfirmationReviewGUI extends JPanel {
 					}
 					if(flagReviewChoose==1)
 					{
-						JOptionPane.showMessageDialog(screen,"The review was Confirmed\n", "Success",JOptionPane.OK_OPTION);	
+						JOptionPane.showMessageDialog(screen,"The review was Confirmed\n", "Success",JOptionPane.YES_OPTION);	
 						panel.removeAll();
 						showReviews();
 					}
@@ -162,13 +170,20 @@ public class ConfirmationReviewGUI extends JPanel {
 		add(btnConfirm);
 	}
 	
+	
+	/**
+	 * @author  Coral Carmeli
+	 * @param no parameters
+	 * Show the reviews which the review status=0 
+	 */
 	public void showReviews()
 	{
 		ArrayList<DBgenericObject> joinAnswerReviewBook=new ArrayList<DBgenericObject>();
 		try 
 		{
 			joinAnswerReviewBook = ReviewController.searchJoinReviewBook(screen.getClient());
-		} catch (SQLException e) 
+		} 
+		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
@@ -181,10 +196,13 @@ public class ConfirmationReviewGUI extends JPanel {
 			reviewPanels=new ArrayList<ReviewPanel>();
 			for(int i=0;i<joinAnswerReviewBook.size();i++)
 			{
-				//send to reviewPanel:reviewID,reviewContent,BookTitle,ReviewDate
-				reviewPanels.add(new ReviewPanel(this.screen,(int)joinAnswerReviewBook.get(i).getValtoArray(1),(String)joinAnswerReviewBook.get(i).getValtoArray(2),(String)joinAnswerReviewBook.get(i).getValtoArray(4),Permission,pann/*,(String)joinAnswerReviewBook.get(i).getValtoArray(3)*/));
+				//send to reviewPanel:reviewID,reviewContent,BookTitle,permission,pann,ReviewDate
+			
+				Date d = (Date)(joinAnswerReviewBook.get(i).getValtoArray(3));
+				String txtDate = new SimpleDateFormat("dd/MM/yyyy").format(d);
+					reviewPanels.add(new ReviewPanel(this.screen,(int)joinAnswerReviewBook.get(i).getValtoArray(1),(String)joinAnswerReviewBook.get(i).getValtoArray(2),(String)joinAnswerReviewBook.get(i).getValtoArray(4),Permission,pann,txtDate));	
+					panel.add(reviewPanels.get(i));
 				
-				panel.add(reviewPanels.get(i));
 			}
 		}
 	}
