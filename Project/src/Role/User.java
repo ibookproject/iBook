@@ -57,6 +57,7 @@ public class User extends DBtranslation implements UserStatus {
 		setPrivilege(privilege);
 		setIdentityNumber(identityNumber);
 		setSubscriptionMethod(NONE);
+		setSubscriptionRequest(NONE);
 		this.userStatus = DISCONNECTED;
 		setFinishDateOfSubscription(d);
 	}
