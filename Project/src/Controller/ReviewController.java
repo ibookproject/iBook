@@ -5,12 +5,15 @@ import java.util.ArrayList;
 
 import Book.Book;
 import Book.Review;
+import Book.SubjectToBook;
 import Role.User;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 import command.DBtranslation;
 import command.deleteCommand;
 import command.insertCommand;
+import command.joinCommand;
+import command.joinObject;
 import command.searchCommand;
 import command.updateCommand;
 /**
@@ -54,14 +57,12 @@ public class ReviewController {
  * @param client
  * @return boolean (true if successfully/false if not successfully)
  */
-	public static boolean UpdateReviewContent(Review r, String updateCondition,
-			String searchCondition, DBSQLhandler client) // boolean function
+	public static boolean UpdateReviewContent(Review r, String updateCondition,String searchCondition, DBSQLhandler client) // boolean function
 															// that return true
 															// if user updated
 															// else false.
 	{
-		client.UpdateInDB(new updateCommand<DBtranslation>(r, searchCondition,
-				updateCondition));
+		client.UpdateInDB(new updateCommand<DBtranslation>(r, searchCondition,updateCondition));
 		while (!client.GetGotMessag()) {// add user to DB
 			try {
 				Thread.sleep(250);
@@ -114,4 +115,26 @@ public class ReviewController {
 
 	/* ##################################################################### */
 
+	
+	public static ArrayList<DBgenericObject> searchJoinReviewBook(/*int reviewID,int bookID,*/DBSQLhandler client) throws SQLException
+	{
+		Book b=new Book();
+		Review r=new Review();
+		ArrayList<joinObject> temp =new ArrayList<joinObject>();
+		
+		//the first object is the assosiation class and the second is to join with
+		temp.add(new joinObject(r.getClassName(), b.getClassName(), "bookID"));
+		
+		client.joinSearchInDB(new joinCommand<Review>("review.bookID,review.reviewID,review.reviewContent,review.reviewDate,book.title",r,temp,"review.reviewStatus=\""+0 +"\""));
+		while(!	client.GetGotMessag()){//search book in db
+			try{
+			Thread.sleep(500);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+			}
+		}
+		return (ArrayList<DBgenericObject>)client.getResultObject();
+	}
 }

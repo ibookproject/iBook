@@ -64,7 +64,7 @@ public class RemovePartReviewGUI extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);	
 		
-		 r = new Review(1, null, null,0, 1);// create review
+		 r = new Review();// create review
 			ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, ""+ "reviewID=\""+ReviewID+"\"", screen.getClient());
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
 

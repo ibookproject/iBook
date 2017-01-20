@@ -105,7 +105,7 @@ public class SearchReviewGUI extends JPanel {
 				{			
 				if(bookId!=-1)
 				{
-					 r = new Review(1, null, null,0, 1);// create review
+					 r = new Review();// create review
 					 titleBook=tempBooks.get(index).getTitle();
 					temp = ReviewController.SearchReviews("reviewID,reviewDate,reviewContent,reviewStatus,bookID", r, ""+ "bookID=\""+bookId+"\""+ " && "+"reviewStatus=\""+"1"+"\"", screen.getClient());
 					System.out.println(temp);

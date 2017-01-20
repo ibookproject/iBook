@@ -94,8 +94,7 @@ public class Cart extends DBtranslation {
 	}
 
 	public void setDate(String d) {
-		if (d == null || d.equals("") || Validation.DateValidation(d, "YYYY/MM/DD") == false
-				|| Validation.DateValidation(d, "YYYY.MM.DD") == false)
+		if (d == null || d.equals("") || Validation.DateValidation(d)==false)
 			throw new InputMismatchException("you have  inserted wrong buy date");
 		this.buyDate = d;
 	}

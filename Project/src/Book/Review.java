@@ -39,16 +39,15 @@ public class Review extends DBtranslation {
 	}
 	public void setReviewID(int reviewID) {
 		if(reviewID<0)
-			throw new InputMismatchException("you have  inserted wrong review ID");
+			throw new InputMismatchException("you have inserted wrong review ID");
 		this.reviewID = reviewID;
 	}
 	public String getReviewDate() {
 		return reviewDate;
 	}
 	public void setReviewDate(String reviewDate) {
-		if (reviewDate == null || reviewDate.equals("") || Validation.DateValidation(reviewDate, "YYYY/MM/DD") == false
-				|| Validation.DateValidation(reviewDate, "YYYY.MM.DD") == false)
-			throw new InputMismatchException("you have  inserted wrong review date");
+		if (reviewDate == null || reviewDate.equals("") || Validation.DateValidation(reviewDate) == false)
+			throw new InputMismatchException("you have inserted wrong review date");
 		this.reviewDate=reviewDate;
 	}
 	public String getReviewContent() {
@@ -56,7 +55,7 @@ public class Review extends DBtranslation {
 	}
 	public void setReviewContent(String reviewContent) {
 		if (reviewContent == null || reviewContent.equals("") || Validation.regularValidation(reviewContent) == false)
-			throw new InputMismatchException("you have  inserted wrong Content");
+			throw new InputMismatchException("you have inserted wrong Content");
 		this.reviewContent = reviewContent;
 	}
 	public int getReviewStatus() {
@@ -123,7 +122,7 @@ public class Review extends DBtranslation {
 					break;
 				case "reviewDate":
 					Date d = (Date)ob.getValtoArray(i);
-					String txtDate = new SimpleDateFormat("dd/MM/yyyy").format(d);
+					String txtDate = new SimpleDateFormat("yyyy/MM/DD").format(d);
 					recover.setReviewDate(txtDate);
 					break;
 				case "reviewContent":
