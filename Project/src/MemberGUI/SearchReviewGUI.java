@@ -98,9 +98,7 @@ public class SearchReviewGUI extends JPanel {
 				if (index!=-1)
 					bookId=tempBooks.get(index).getBookID();
 				else 
-					bookId=-1;
-				System.out.println(bookId);
-				
+					bookId=-1;				
 				if(flag!=0)
 				{			
 				if(bookId!=-1)
@@ -108,14 +106,12 @@ public class SearchReviewGUI extends JPanel {
 					 r = new Review();// create review
 					 titleBook=tempBooks.get(index).getTitle();
 					temp = ReviewController.SearchReviews("reviewID,reviewDate,reviewContent,reviewStatus,bookID", r, ""+ "bookID=\""+bookId+"\""+ " && "+"reviewStatus=\""+"1"+"\"", screen.getClient());
-					System.out.println(temp);
-
 					if (temp != null) {
 						panel.removeAll();
 						panel.setVisible(true);
 						scrollPaneMain.setVisible(true);
-						for(Review r:temp)
-							panel.add(new SearchReviewPanel(screen,r,titleBook));						
+						for(Review rr:temp)
+							panel.add(new SearchReviewPanel(screen,rr,titleBook));						
 					} 
 					else 
 					{
@@ -173,7 +169,7 @@ public class SearchReviewGUI extends JPanel {
 				 }
 				 else
 				 {
-				 	Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
+				 	Book b = new Book(); // create new book
 				 	
 				 	 if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)
 				 	{
@@ -241,10 +237,8 @@ public class SearchReviewGUI extends JPanel {
 
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);
-	//	btnBack.setIcon(backIcon);
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
-		
-	//+ " && "+"bookEnable=\""+1+"\""
+
 	}
 }

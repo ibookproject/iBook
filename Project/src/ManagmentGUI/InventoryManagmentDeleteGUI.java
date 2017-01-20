@@ -120,7 +120,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 
-					Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
+				Book b=new Book();
 				 	 if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty())
 				 	 {
 							JOptionPane.showMessageDialog(screen,"you must fill the name of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -140,11 +140,10 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 					 				comboBox.removeAllItems();
 								for(int i=0;i<tempBooks.size();i++)
 									comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
-					 		 }
-	 
+					 		 }	 
 					 	}
 				 	else if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty()==false)
-				 	{
+				 	{			 		
 				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 						 if(tempBooks==null)
 				 		 {
@@ -167,7 +166,6 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 								textFieldBook.setText("");textFieldAutohr.setText("");
 				 				comboBox.removeAllItems();
-
 				 		 }
 				 		 else
 				 		 {

@@ -103,7 +103,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			 
-				Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
+				Book b = new Book();
 			 	 if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty())
 			 	 {
 						JOptionPane.showMessageDialog(screen,"you must fill the name/author of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);

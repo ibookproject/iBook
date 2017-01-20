@@ -30,6 +30,7 @@ import Controller.BookController;
 import MenuGUI.LoginGUI;
 import Panels.FormatCheckBoxBooklistPanel;
 import Panels.SearchReviewPanel;
+import Panels.Validation;
 import command.joinCommand;
 import command.joinObject;
 
@@ -53,7 +54,6 @@ public class FormatManagmentGUI extends JPanel {
 	private ArrayList<Domain> resultDomains;
 	private ArrayList<Subject> resultSubjects;
 	private JComboBox SubjectBox;
-    private int coubtflag; // not use for now
 	private JScrollPane scrollPaneMain;
 	public static JPanel panel;
 
@@ -63,7 +63,6 @@ public class FormatManagmentGUI extends JPanel {
 
 	public FormatManagmentGUI(LoginGUI screen) {
 		super();		
-		coubtflag=0;
 		this.screen=screen;
 		initialize();
 	}
@@ -115,7 +114,7 @@ public class FormatManagmentGUI extends JPanel {
 		JComboBox DomainBox = new JComboBox();
 		SubjectBox = new JComboBox();
 
-		Domain d = new Domain("1");
+		Domain d = new Domain();
 		
 		 resultDomains = FormatController.GetAllDomain(d,screen.getClient());//
 		 	if(resultDomains!=null)
@@ -129,7 +128,7 @@ public class FormatManagmentGUI extends JPanel {
 			if(resultDomains!=null)
 			{
 				DomainBox.setSelectedIndex(0);
-				Subject s=new Subject(3,"1");  //create empty project
+				Subject s=new Subject();
 				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
 				if(resultSubjects!=null&&!resultSubjects.isEmpty())
 				{
@@ -190,7 +189,7 @@ public class FormatManagmentGUI extends JPanel {
 		
 		DomainBox.addActionListener(new ActionListener() {// domain combobox lisener
 			public void actionPerformed(ActionEvent e) {
-				Subject s=new Subject(3,"1");  //create empty project
+				Subject s=new Subject();  //create empty project
 				if(DomainBox.getItemAt(0)!=null)
 				{	
 				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
@@ -243,6 +242,8 @@ public class FormatManagmentGUI extends JPanel {
 				
 				if(!s.isEmpty())
 					{
+					if(Validation.NameValidation(DomainTextField.getText().trim(),20)==true)
+					{
 					Domain d = new Domain(DomainTextField.getText().trim()); //   	
 					ArrayList<Domain> temp = FormatController.SearchDomain("DomainName",d, "domainName=\""+DomainTextField.getText().trim()+ "\"" ,screen.getClient());
 					if(temp==null)
@@ -263,9 +264,11 @@ public class FormatManagmentGUI extends JPanel {
 			 			JOptionPane.showMessageDialog(screen,"The domain was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
 			 			
 			 		}
-			 		} else {JOptionPane.showMessageDialog(screen,"format is already EXSIT ! ", "Warning",JOptionPane.WARNING_MESSAGE);DomainTextField.setText("");}
+			 		} else {JOptionPane.showMessageDialog(screen,"domain is already EXSIT ! ", "Warning",JOptionPane.WARNING_MESSAGE);DomainTextField.setText("");}
+					}
+					else {JOptionPane.showMessageDialog(screen,"domain field is contain numbers  ! ", "Warning",JOptionPane.WARNING_MESSAGE);DomainTextField.setText("");}
 				}
-				else JOptionPane.showMessageDialog(screen,"format field is empty ! ", "Warning",JOptionPane.WARNING_MESSAGE);
+				else JOptionPane.showMessageDialog(screen,"domain field is empty ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		
@@ -291,6 +294,8 @@ public class FormatManagmentGUI extends JPanel {
 				String s=SubjectTextField.getText().trim();
 				if(!s.isEmpty())
 				{
+					if(Validation.NameValidation(SubjectTextField.getText().trim(),20)==true)
+					{
 					////////////////////////////////////
 					int id=((Domain) DomainBox.getSelectedItem()).getDomainID();/// here is the problem
 					//////////////////////////////////////
@@ -314,6 +319,9 @@ public class FormatManagmentGUI extends JPanel {
 		 		}
 				} else {JOptionPane.showMessageDialog(screen,"Subject  is already EXSIT ! ", "Warning",JOptionPane.WARNING_MESSAGE);SubjectTextField.setText("");}
 				}
+					else {JOptionPane.showMessageDialog(screen,"subject field is contain numbers  ! ", "Warning",JOptionPane.WARNING_MESSAGE);SubjectTextField.setText("");}
+				}
+					
 				else JOptionPane.showMessageDialog(screen,"Subject field is empty ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			
 		}
@@ -356,7 +364,6 @@ public class FormatManagmentGUI extends JPanel {
 					}
 			
 					//print for now....
-					System.out.print(++coubtflag);
 					System.out.println("books after deleting: ");
 					for(int i=0;i<AllBookList.size();i++)
 					System.out.println(AllBookList.get(i).getBookID());
