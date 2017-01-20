@@ -320,19 +320,20 @@ public class Book extends DBtranslation  {
 		/*return "book [bookID=" + bookID + ", title=" + title + ", language=" + language + ", author=" + author
 				+ ", summary=" + summary + ", bookEnable=" + bookEnable + "]";
 	*/
-	String temp=String.format("%d",bookID);
+	String temp="Book ID  : ";
+	temp += String.format("%d",bookID);
 	if(title!=null)
-		temp+=", "+title;
-	if(language!=null)
-		temp+=", "+language;
+		temp+=",  Title: "+title;
 	if(author!=null)
-		temp+=", "+author;
-	if(summary!=null)
-		temp+=", "+summary;
+		temp+=",  Author: "+author;
+	if(language!=null)
+		temp+=",  Language: "+language;
+	/*if(summary!=null)
+		temp+=", "+summary;*/
 	if(bookEnable==1)
-		temp+=", yes";
+		temp+=", book Enable";
 	else
-		temp+=", no";
+		temp+=", book disable";
 	return temp;
 	}//rnd toString
 

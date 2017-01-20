@@ -27,6 +27,7 @@ import Book.Review;
 import Controller.BookController;
 import Controller.ReviewController;
 import MenuGUI.LoginGUI;
+import Panels.BookStatisticsPanel;
 import Panels.SearchReviewPanel;
 
 
@@ -37,8 +38,8 @@ import Panels.SearchReviewPanel;
  */
 
 public class TemporaryRemoveBookGUI extends JPanel {
-	private JTextField textFieldAutohr;
-	private JTextField textFieldBook;
+	private JTextField textFieldAuthor;
+	private JTextField textFieldBookTitle;
 	private int bookId;
 	private ArrayList<Book> tempBooks;
 	private LoginGUI screen;
@@ -48,6 +49,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 	private String titleBook;
 	private int index;
 	private int flag;
+	private JComboBox<Book> comboBoxOfBooks;
 	
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
@@ -72,47 +74,34 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);	
 		
-		JLabel lblNewLabel = new JLabel("Search Review's of book");
-		lblNewLabel.setFont(new Font("BN Elements", Font.BOLD, 20));
-		lblNewLabel.setBounds(242, 32, 351, 53);
-		add(lblNewLabel);
+		JLabel lblHeader = new JLabel("Temporary Remove Book");
+		lblHeader.setFont(new Font("BN Elements", Font.BOLD, 20));
+		lblHeader.setBounds(242, 32, 351, 53);
+		add(lblHeader);
 		
 		JLabel lblNameOfAuthor = new JLabel("name of author:");
 		lblNameOfAuthor.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNameOfAuthor.setBounds(39, 236, 148, 57);
+		lblNameOfAuthor.setBounds(39, 206, 148, 57);
 		add(lblNameOfAuthor);
 		
-		textFieldAutohr = new JTextField();
-		textFieldAutohr.setBounds(180, 246, 127, 39);
-		add(textFieldAutohr);
-		textFieldAutohr.setColumns(10);
+		textFieldAuthor = new JTextField();
+		textFieldAuthor.setBounds(180, 217, 164, 39);
+		add(textFieldAuthor);
+		textFieldAuthor.setColumns(10);
 		
 		JLabel lblNameOfBook = new JLabel("name of book:");
 		lblNameOfBook.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNameOfBook.setBounds(39, 145, 164, 57);
 		add(lblNameOfBook);
 		
-		textFieldBook = new JTextField();
-		textFieldBook.addKeyListener(new KeyAdapter() {
-		    	@Override
-		    	public void keyPressed(KeyEvent key) {
-		    		if((textFieldBook.getText().length()>=0)&&(key.getKeyCode()!=8))
-		    		{
-				    //	btnSelect.setEnabled(true);
-				   // 	identN=textFieldBook.getText();
-		    		}
-		    	//	else if((textFieldBook.getText().length()==1)&&(key.getKeyCode()==8))
-		    			//	btnSelect.setEnabled(false);
-		    			
-		    	}
-		    });
-		textFieldBook.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldBook.setBounds(180, 155, 127, 39);
-		add(textFieldBook);
-		textFieldBook.setColumns(10);
+		textFieldBookTitle = new JTextField();
+		textFieldBookTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldBookTitle.setBounds(180, 155, 164, 39);
+		add(textFieldBookTitle);
+		textFieldBookTitle.setColumns(10);
 		
 		
-		JComboBox comboBoxOfBooks = new JComboBox();
+		comboBoxOfBooks = new JComboBox();
 		comboBoxOfBooks.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		comboBoxOfBooks.addActionListener(new ActionListener() {
@@ -127,7 +116,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 			}
 		});
 		
-		comboBoxOfBooks.setBounds(512, 154, 325, 39);
+		comboBoxOfBooks.setBounds(387, 125, 441, 39);
 		add(comboBoxOfBooks);
 		
 
@@ -148,7 +137,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 			}
 		});
 		btnHide.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnHide.setBounds(76, 374, 127, 49);
+		btnHide.setBounds(242, 505, 127, 49);
 		add(btnHide);
 		
 		JButton btnShow = new JButton("Show");
@@ -166,7 +155,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 			}
 		});
 		btnShow.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnShow.setBounds(268, 374, 127, 49);
+		btnShow.setBounds(515, 505, 127, 49);
 		add(btnShow);
 	
 		
@@ -174,6 +163,52 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				////////////////////////button to back panel from panel /////////////////////////////////////////////
+			StatisticsBookReport sbr=new StatisticsBookReport(screen);
+			sbr.btnBack.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						screen.setContentPane(pann);
+					}
+				////////////////////////button to back panel from panel/////////////////////////////////////////////
+				});
+			comboBoxOfBooks.removeAllItems();		
+				if ((textFieldBookTitle.getText().isEmpty())&&(textFieldAuthor.getText().isEmpty()))
+					JOptionPane.showMessageDialog(screen, "you must fill one field at least ", "Warning",
+							JOptionPane.WARNING_MESSAGE);
+				else
+				{
+					Book b = new Book(); // create
+					if(textFieldBookTitle.getText().isEmpty())
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAuthor.getText().trim() +"%'", screen.getClient());
+					else if(textFieldAuthor.getText().isEmpty())
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBookTitle.getText().trim() +"%'", screen.getClient());				
+					else
+					{
+						tempBooks = BookController.SearchBook(
+								"title,author,bookID", b, "title LIKE '%"+textFieldBookTitle.getText().trim() +"%'"
+										+ " && " + "author LIKE '%"+textFieldAuthor.getText().trim() +"%'",screen.getClient());
+					}
+					if(tempBooks != null)
+					{
+						int i=0;
+						for (Book bt : tempBooks)
+						{
+						//	comboBoxOfBooks.addItem("BookID:"+tempBooks.get(i).getBookID()+"   , Name: "+tempBooks.get(i).getTitle().trim() + "   , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+							comboBoxOfBooks.addItem(bt);
+							i++;
+						}
+					}
+					else
+						JOptionPane.showMessageDialog(screen, "The book is not found!", "Warning",
+								JOptionPane.WARNING_MESSAGE);
+					textFieldBookTitle.setText("");
+					textFieldAuthor.setText("");
+				}
+
+			}
+		});
+		/*btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 
@@ -268,8 +303,8 @@ public class TemporaryRemoveBookGUI extends JPanel {
 			 	}
 
 			}}
-			}); 
-		btnSearch.setBounds(352, 200, 120, 39);
+			}); */
+		btnSearch.setBounds(125, 288, 120, 39);
 		add(btnSearch);
 
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
@@ -280,7 +315,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
 		btnNewButton.setEnabled(false);
-		btnNewButton.setBounds(12, 125, 488, 193);
+		btnNewButton.setBounds(12, 125, 351, 219);
 		add(btnNewButton);
 		
 		
