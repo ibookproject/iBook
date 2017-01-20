@@ -9,6 +9,7 @@ import Book.Book;
 import Book.Subject;
 import Controller.BookController;
 import MenuGUI.LoginGUI;
+import Panels.Validation;
 
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
@@ -111,6 +112,8 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 	 }
 				 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)
 				 	{
+				 		if(Validation.NameValidation(textFieldAutohr.getText(), 20)==true)
+				 		{
 				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+ "&&"+"bookEnable=\""+1+"\"", screen.getClient());
 				 		 if(tempBooks==null)
 				 		 {
@@ -124,6 +127,8 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 							for(int i=0;i<tempBooks.size();i++)
 								comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 				 		 }
+				 		} else {JOptionPane.showMessageDialog(screen,"Not allowed Number at author field! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldAutohr.setText("");}
+
  
 				 	}
 			 	else if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty()==false)
@@ -144,6 +149,8 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 	}
 			 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty())
 			 	{
+			 		if(Validation.NameValidation(textFieldAutohr.getText(), 20)==true)
+			 		{
 			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
@@ -158,6 +165,8 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 			 	for(int i=0;i<tempBooks.size();i++)
 			 			 		comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
+			 		} else {JOptionPane.showMessageDialog(screen,"Not allowed Number at author field! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldAutohr.setText("");}
+
 			 	}
 			}
 			}); 
