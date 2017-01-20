@@ -20,17 +20,18 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JTextArea;
 
 public class AddOrUpdateBookGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField title;
 	private JTextField lang;
-	private JTextField summary;
 	private JTextField contents;
 	private JTextField keyword;
 	private JTextField author;
 	private JTextField price;
+	private JTextArea summary;
 	public JButton btnBack ;
 	private ArrayList<Book> tempBooks;
 	private int Bookid;
@@ -75,69 +76,76 @@ public class AddOrUpdateBookGUI extends JPanel {
 		lblAddUpdate.setBounds(346, 26, 217, 30);
 		add(lblAddUpdate);
 		
+		 summary = new JTextArea();
+		 summary.setLineWrap(true);
+		summary.setBounds(119, 306, 169, 69);
+		add(summary);
+		
 		JLabel lblPrice = new JLabel("Price:");
-		lblPrice.setBounds(50, 252, 46, 14);
+		lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPrice.setBounds(26, 265, 62, 30);
 		add(lblPrice);
 		JLabel lblPleaseFillThe = new JLabel("please fill the fields : ");
-		lblPleaseFillThe.setBounds(111, 76, 140, 14);
+		lblPleaseFillThe.setBounds(119, 69, 140, 14);
 		add(lblPleaseFillThe);
 		
 		JLabel lblTitle = new JLabel("Title :");
-		lblTitle.setBounds(50, 99, 62, 14);
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTitle.setBounds(26, 94, 62, 14);
 		add(lblTitle);
 		
 		JLabel lblLanguage = new JLabel("Language : ");
+		lblLanguage.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblLanguage.setBounds(26, 124, 86, 14);
 		add(lblLanguage);
 		
 		JLabel lblSummary = new JLabel("Summary :");
-		lblSummary.setBounds(26, 149, 74, 14);
+		lblSummary.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSummary.setBounds(26, 321, 84, 30);
 		add(lblSummary);
 		
 		JLabel lblContents = new JLabel("Contents : ");
-		lblContents.setBounds(26, 174, 74, 14);
+		lblContents.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblContents.setBounds(26, 155, 102, 30);
 		add(lblContents);
 		
 		JLabel lblKeywords = new JLabel("Keywords : ");
-		lblKeywords.setBounds(26, 199, 74, 14);
+		lblKeywords.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblKeywords.setBounds(26, 196, 102, 20);
 		add(lblKeywords);
 		
 		JLabel lblAuthor = new JLabel("Author :");
-		lblAuthor.setBounds(36, 227, 60, 14);
+		lblAuthor.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblAuthor.setBounds(26, 240, 74, 14);
 		add(lblAuthor);
 		
 		title = new JTextField();
-		title.setBounds(100, 96, 86, 20);
+		title.setBounds(138, 93, 121, 20);
 		add(title);
 		title.setColumns(10);
 		
 		lang = new JTextField();
-		lang.setBounds(100, 124, 86, 20);
+		lang.setBounds(138, 123, 121, 20);
 		add(lang);
 		lang.setColumns(10);
 		
-		summary = new JTextField();
-		summary.setBounds(100, 149, 86, 20);
-		add(summary);
-		summary.setColumns(10);
-		
 		contents = new JTextField();
-		contents.setBounds(100, 174, 86, 20);
+		contents.setBounds(138, 162, 121, 20);
 		add(contents);
 		contents.setColumns(10);
 		
 		keyword = new JTextField();
-		keyword.setBounds(100, 199, 86, 20);
+		keyword.setBounds(138, 198, 121, 20);
 		add(keyword);
 		keyword.setColumns(10);
 		
 		author = new JTextField();
-		author.setBounds(100, 224, 86, 20);
+		author.setBounds(141, 239, 118, 20);
 		add(author);
 		author.setColumns(10);
 		
 		price = new JTextField();
-		price.setBounds(100, 252, 86, 20);
+		price.setBounds(141, 275, 118, 20);
 		add(price);
 		price.setColumns(10);
 		
@@ -147,11 +155,9 @@ public class AddOrUpdateBookGUI extends JPanel {
 			
 			Book tempObject = new Book(); // create new book
 			 tempBooks = BookController.SearchBook("bookID,title,author,language,summary,keyword,content,price",tempObject, "bookID=\""+Bookid+ "\"" , screen.getClient());
-			 //System.out.println(Bookid);
 			 
 			 title.setText(tempBooks.get(0).getTitle());
-			//System.out.println(tempBooks.get(0).getPrice());
-			// price.setText(String.format("%f", tempBooks.get(0).getPrice()));
+
 			 price.setText(String.valueOf(tempBooks.get(0).getPrice()));
 			 author.setText(tempBooks.get(0).getAuthor());
 			 summary.setText(tempBooks.get(0).getSummary());
@@ -181,7 +187,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 					  
 					  if(Validation.regularValidation(author.getText())==false)
 							warnings += "author field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-					  if(Validation.NameValidation(title.getText(), 20)==false)
+					  if(Validation.AuthorValidation(author.getText(), 20)==false)
 							warnings += "author field - Must contain only English letters \n";
 
 					  if(Validation.regularValidation(price.getText())==false)
@@ -229,8 +235,6 @@ public class AddOrUpdateBookGUI extends JPanel {
 							JOptionPane.showMessageDialog(screen, warnings, "Warning", JOptionPane.WARNING_MESSAGE);
 					 else
 					 {
-						 //	public Book( String title, String language, String author, String summary, boolean bookEnable,String keyword,String content)
-
 				 	Book b = new Book(title.getText().trim(),lang.getText().trim(),author.getText().trim(),summary.getText().trim(),1,keyword.getText().trim(),contents.getText().trim(),Float.parseFloat(price.getText().trim())); // create new book
 				 	
 					ArrayList<Book> temp = BookController.SearchBook("title,language",b, "title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\"", screen.getClient());//call search book method from book controller
@@ -269,7 +273,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 					  
 					  if(Validation.regularValidation(author.getText())==false)
 							warnings += "author field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-					  if(Validation.NameValidation(title.getText(), 20)==false)
+					  if(Validation.AuthorValidation(author.getText(), 20)==false)
 							warnings += "author field - Must contain only English letters \n";
 
 					  if(Validation.regularValidation(price.getText())==false)
@@ -287,7 +291,6 @@ public class AddOrUpdateBookGUI extends JPanel {
 					 else
 					 {
 					 	Book b = new Book(title.getText(),lang.getText(),author.getText(),summary.getText(),1,keyword.getText(),contents.getText()); // create new book
-						//boolean result=bookController.AddBook(b,screen.getClient()); // return true or false from the controller DB
 						boolean result=BookController.UpdateBook(b, "title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\""+" && "+"language=\""+lang.getText().trim()+"\""+" && "+"summary=\""+summary.getText().trim()+"\""+" && "+"content=\""+contents.getText().trim()+"\""+" && "+"summary=\""+summary.getText().trim()+"\""+" && "+"keyword=\""+keyword.getText().trim()+"\""+" && "+"price=\""+Float.parseFloat(price.getText().trim())+"\"", "bookID=\""+Bookid+ "\"", screen.getClient()); // return true or false from the controller DB
 
 					 	if (result==false)
@@ -314,7 +317,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 			btnAdd.setText("Add book");
 			else if(ISUpdateOrAdd==0)
 				btnAdd.setText("Update book");
-		btnAdd.setBounds(377, 281, 120, 23);
+		btnAdd.setBounds(374, 436, 120, 23);
 		add(btnAdd);	
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png"); 
 		 btnBack = new JButton(backIcon);
@@ -325,7 +328,6 @@ public class AddOrUpdateBookGUI extends JPanel {
 		});
 		btnBack.setBounds(11, 33, 89, 23);
 		add(btnBack);
-
 	}
 }
 

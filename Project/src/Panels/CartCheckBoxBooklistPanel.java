@@ -49,30 +49,24 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 	public int BookID;
 	public  int index;
 	public  int IsBought;
-//	public int price;
-	//public int UserId;
 	public JButton RemoveButton;
 	public Book book;
 	public JButton btnDownloadBookAgain;
 	public  JButton RemoveAfterBuy;
-	
-	
+
 	public CartCheckBoxBooklistPanel(LoginGUI screen,Book book,int BookID,JPanel panel,int indeex,int IsBought) {
 		this.book=book;
 		this.IsBought=IsBought;
 		this.index=indeex;
 		this.panel=panel;
 		this.BookID=BookID;
-		//this.price=price;
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(0, 0, 0)));
 
 		setPreferredSize(new Dimension(494, 73));
 		setLayout(null);
-	
 		ImageIcon backIcon =new ImageIcon("src/images/download.png");
-		
-		
+
 		lblAnswerfromserver = new JLabel("");
 		lblAnswerfromserver.setBounds(415, 66, 152, 14);
 		add(lblAnswerfromserver);
@@ -160,12 +154,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 			}
 		});
 		RemoveAfterBuy.setBounds(315, 5, 83, 23);
-		add(RemoveAfterBuy);
-				
-	}
-	public void SetIsBought(int IsBought)
-	{
-		this.IsBought=IsBought;
+		add(RemoveAfterBuy);		
 	}
 }
 

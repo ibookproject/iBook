@@ -44,7 +44,6 @@ import java.awt.event.ActionEvent;
 
 
 public class FormatManagmentGUI extends JPanel {
-
 	private static final long serialVersionUID = 1L;
 	private JTextField DomainTextField;
 	private JTextField SubjectTextField;
@@ -56,8 +55,6 @@ public class FormatManagmentGUI extends JPanel {
 	private JComboBox SubjectBox;
 	private JScrollPane scrollPaneMain;
 	public static JPanel panel;
-
-    
     private ArrayList<SubjectToBook> specificBooksWtihSelectedSubject;
     private ArrayList<Book> AllBookList;
 
@@ -66,10 +63,7 @@ public class FormatManagmentGUI extends JPanel {
 		this.screen=screen;
 		initialize();
 	}
-
-	
-	private void initialize() {
-		
+	private void initialize() {	
 		this.setLayout(null);	
 		this.setSize(850, 600);
 		
@@ -88,10 +82,8 @@ public class FormatManagmentGUI extends JPanel {
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		scrollPaneMain.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-
 		////////////////////
-		
-		 
+
 		JLabel lblFormatManagment = new JLabel("Format managment");
 		lblFormatManagment.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblFormatManagment.setBounds(322, 33, 154, 39);
@@ -113,15 +105,11 @@ public class FormatManagmentGUI extends JPanel {
 		
 		JComboBox DomainBox = new JComboBox();
 		SubjectBox = new JComboBox();
-
-		Domain d = new Domain();
-		
+		Domain d = new Domain();	
 		 resultDomains = FormatController.GetAllDomain(d,screen.getClient());//
 		 	if(resultDomains!=null)
 			for(Domain dd:resultDomains) // adding all the Domain names to the checkbox
-				DomainBox.addItem(dd);
-				
-			
+				DomainBox.addItem(dd);				
 			
 			// this is for the first time that we get in the format managar , if the domain list is not null..->
 			//..-> we will do " selected item " for to show all the subject list for the first time ! 
@@ -135,7 +123,6 @@ public class FormatManagmentGUI extends JPanel {
 				for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
 					SubjectBox.addItem(ddd);
 				SubjectBox.setSelectedIndex(0);
-				//+ " && "+"bookEnable=\""+1+"\""
 
 				//getting all the book at the DB
 				Book tempObject = new Book(); // create new book
@@ -145,14 +132,6 @@ public class FormatManagmentGUI extends JPanel {
 				//getting all the books that the selected subject is attach to them.
 				SubjectToBook btemp=new SubjectToBook();														//"domainName=\""+DomainTextField.getText().trim()+ "\""
 				specificBooksWtihSelectedSubject=FormatController.SearchSubjectAtSubjectToBook("nameSubject,domainID,bookID", btemp, "nameSubject=\"" +resultSubjects.get(0).getNameSubject()+"\"", screen.getClient());
-				//System.out.println(specificBooksWtihSelectedSubject);
-				
-				/*
-				for(int i=0;i<AllBookList.size();i++)
-					System.out.println(AllBookList.get(i).getAuthor()+" ,  " +AllBookList.get(i).getTitle());
-				System.out.println();System.out.println();
-				*/
-				
 				//make haluka !
 				if(specificBooksWtihSelectedSubject!=null)
 				for(int i=0;i<AllBookList.size();i++)
@@ -331,21 +310,17 @@ public class FormatManagmentGUI extends JPanel {
 		
 		SubjectBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				///////////////////////////////////////////////
-				//if(coubtflag%2==0)
-				//{
-				
+
 			//getting all the book at the DB
 			Book tempObject = new Book(); // create new book
 			AllBookList=BookController.SearchBook("bookID,title,language,author",tempObject,"bookEnable=\""+1+"\"", screen.getClient());
 			
 			//getting all the books that the selected subject is attach to them.
-				//SubjectBox.setSelectedIndex(0);
 				if(SubjectBox.getItemCount()!=0)
 				{
 					SubjectToBook btemp=new SubjectToBook();													
 					specificBooksWtihSelectedSubject=FormatController.SearchSubjectAtSubjectToBook("nameSubject,domainID,bookID", btemp, "nameSubject=\"" +((Subject)SubjectBox.getSelectedItem()).getNameSubject()+"\"", screen.getClient());
-					//System.out.println(specificBooksWtihSelectedSubject);
+
 			
 					//make haluka !
 					if(specificBooksWtihSelectedSubject!=null)
@@ -433,8 +408,7 @@ public class FormatManagmentGUI extends JPanel {
 		});
 		btnAtachBook.setBounds(311, 440, 165, 32);
 		add(btnAtachBook);
-		
-		
+	
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.setBounds(84, 44, 67, 20);

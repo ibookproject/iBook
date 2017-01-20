@@ -79,7 +79,7 @@ public class Validation {
 	/**
 	 * @author hen saada
 	 * @param name, the input to validate
-	 * @return true if contain only engish letters Dot,comma,numbers and the lenght is not above len.(len under 128)
+	 * @return true if contain only legal float number , include only 1 dote and numbers.
 	 * @return false in any other situation  
 	 */	
 	public static String PriceValidation(String price) {
@@ -110,8 +110,7 @@ public class Validation {
 						return warnings;
 			  }
 		  return "";
-		  
-		
+	
 	}
 	/**
 	 * @author Kfir Girstein
@@ -202,8 +201,7 @@ public class Validation {
 			return true;
 		
 		return false;
-				
-		
+
 		}
 	
 }
