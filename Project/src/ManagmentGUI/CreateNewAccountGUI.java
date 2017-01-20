@@ -17,6 +17,7 @@ import Book.Book;
 import Controller.UserController;
 import MenuGUI.LoginGUI;
 import Role.User;
+import Panels.Validation;
 
 public class CreateNewAccountGUI extends JPanel {
 
@@ -28,6 +29,7 @@ public class CreateNewAccountGUI extends JPanel {
 	private JTextField txtFirstName;
 	private JTextField txtLastName;
 	private JTextField txtPassword;
+	private JTextField txtIdentity;
 
 	public CreateNewAccountGUI(LoginGUI screen) {
 		super();
@@ -38,93 +40,135 @@ public class CreateNewAccountGUI extends JPanel {
 	}
 
 	private void initialize() {
-		
+
 		this.setSize(850, 625);
-		this.setLayout(null);	
-		
+		this.setLayout(null);
+
 		JLabel lblNewLabel = new JLabel("Create New Account");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setBounds(355, 49, 175, 22);
 		add(lblNewLabel);
-		
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
+
+		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
-		
-		JButton btnCreate = new JButton("Create");
 
-		btnCreate.setBounds(342, 326, 89, 23);
+		JButton btnCreate = new JButton("Create");
+		btnCreate.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+		btnCreate.setBounds(708, 531, 89, 37);
 		add(btnCreate);
-		
-		JLabel lblFirstName = new JLabel("First Name");
-		lblFirstName.setBounds(39, 136, 89, 14);
+
+		JLabel lblFirstName = new JLabel("First Name:");
+		lblFirstName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblFirstName.setBounds(39, 273, 89, 20);
 		add(lblFirstName);
-		
-		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(39, 161, 89, 14);
+
+		JLabel lblLastName = new JLabel("Last Name:");
+		lblLastName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblLastName.setBounds(39, 333, 89, 20);
 		add(lblLastName);
-		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(39, 186, 89, 14);
+
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPassword.setBounds(39, 393, 89, 20);
 		add(lblPassword);
-		
+
 		txtFirstName = new JTextField();
-		txtFirstName.setBounds(204, 133, 118, 20);
+		txtFirstName.setBounds(239, 268, 146, 30);
 		add(txtFirstName);
 		txtFirstName.setColumns(10);
-		
+
 		txtLastName = new JTextField();
-		txtLastName.setBounds(204, 158, 118, 20);
+		txtLastName.setBounds(239, 328, 146, 30);
 		add(txtLastName);
 		txtLastName.setColumns(10);
-		
+
 		txtPassword = new JTextField();
-		txtPassword.setBounds(204, 183, 118, 20);
+		txtPassword.setBounds(239, 388, 146, 30);
 		add(txtPassword);
 		txtPassword.setColumns(10);
-		
-		JLabel lblUserId = new JLabel("User ID");
-		lblUserId.setBounds(39, 111, 46, 14);
+
+		JLabel lblUserId = new JLabel("User ID:");
+		lblUserId.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblUserId.setBounds(39, 153, 89, 20);
 		add(lblUserId);
-		
+
 		txtUserID = new JTextField();
-		txtUserID.setBounds(204, 108, 118, 20);
+		txtUserID.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		txtUserID.setBounds(239, 148, 146, 30);
 		add(txtUserID);
 		txtUserID.setColumns(10);
-		
+
 		JLabel lblAnswermessage = new JLabel("");
 		lblAnswermessage.setBounds(169, 287, 443, 14);
 		add(lblAnswermessage);
-		
-		
+
+		JLabel lblIdentity = new JLabel("Identity Number:");
+		lblIdentity.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblIdentity.setBounds(39, 213, 122, 20);
+		add(lblIdentity);
+
+		txtIdentity = new JTextField();
+		txtIdentity.setColumns(10);
+		txtIdentity.setBounds(239, 208, 146, 30);
+		add(txtIdentity);
+
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				User u = new User(txtUserID.getText(), txtPassword.getText(), txtFirstName.getText(),
-						txtLastName.getText(), 1);//create user from text fields
-				ArrayList<User> temp= (ArrayList<User>)UserController.SearchUser("userID",u,"userID=\""+u.getUserID()+"\"",screen.getClient());
-				if(temp==null||temp.isEmpty())
-				{
+				String warnings = "ERROR :\n";
+				if (!Validation.regularValidation(txtUserID.getText()))
+					warnings += "User Id - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
+				if (!Validation.UserIDValidation(txtIdentity.getText()))
+					warnings += "Identity Number - Must contain 9 NUMBERS\n";
+				if (!Validation.PasswordValidation(txtPassword.getText()))
+					warnings += "Password - The following characters are not allowed :|,%,\\," + "\",',&,=\n";
+				if (!Validation.NameValidation(txtFirstName.getText().trim(), 20))
+					warnings += "First name - Must contain only English letters\n";
+				if (!Validation.NameValidation(txtLastName.getText().trim(), 20))
+					warnings += "Last name - Must contain only English letters";
+				if (warnings.equalsIgnoreCase("ERROR :\n")) {
+					if (!(txtUserID.getText() == "" || txtIdentity.getText() == "" || txtPassword.getText() == ""
+							|| txtFirstName.getText() == "" || txtLastName.getText() == "")) {
+						User u = new User(txtUserID.getText(), txtIdentity.getText(), txtPassword.getText(),
+								txtFirstName.getText(), txtLastName.getText(), 1);// create
+																					// user
+																					// from
+																					// text
+																					// fields
+						ArrayList<User> temp = (ArrayList<User>) UserController.SearchUser("userID", u, "userID=\""
+								+ txtUserID.getText() + "\" OR identityNumber=\"" + txtIdentity.getText() + "\"",
+								screen.getClient());
+						if (temp == null || temp.isEmpty()) {
 
-					boolean result = UserController.CreateNewAccount(u, screen.getClient());//
-				 	if (result==false)
-						JOptionPane.showMessageDialog(screen,"Add user process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
-				 	else
-				 	{
-				 		JOptionPane.showMessageDialog(screen,"The user was added successfully to DB !", "done",JOptionPane.INFORMATION_MESSAGE);
-				 		txtLastName.setText("");
-				 		txtFirstName.setText("");
-				 		txtUserID.setText("");	
-				 		txtPassword.setText("");
-				 	}
-				}
+							boolean result = UserController.CreateNewAccount(u, screen.getClient());//
+							if (result == false)
+								JOptionPane.showMessageDialog(screen, "Add user process FAILED ! ", "Warning",
+										JOptionPane.WARNING_MESSAGE);
+							else {
+								JOptionPane.showMessageDialog(screen, "The user was added successfully to DB !", "done",
+										JOptionPane.INFORMATION_MESSAGE);
+								txtLastName.setText("");
+								txtFirstName.setText("");
+								txtUserID.setText("");
+								txtPassword.setText("");
+								txtIdentity.setText("");
+							}
+						}
 
-				else
-					JOptionPane.showMessageDialog(screen,"User name already exist. Try another user name\n", "Warning",JOptionPane.WARNING_MESSAGE);
+						else
+							JOptionPane.showMessageDialog(screen,
+									"User name or Identity number is already exist. Please try another user name\n",
+									"Warning", JOptionPane.WARNING_MESSAGE);
 
-					}
-
+					} else
+						JOptionPane.showMessageDialog(screen, "You must fill all fields", "Warning",
+								JOptionPane.WARNING_MESSAGE);
+				} else
+					JOptionPane.showMessageDialog(screen, warnings, "Warning", JOptionPane.WARNING_MESSAGE);
+			}
 		});
-		
+
 	}
 }

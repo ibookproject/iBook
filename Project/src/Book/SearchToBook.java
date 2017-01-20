@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
 
-import Panels.Validation;
 import client.DBgenericObject;
 import command.DBtranslation;
 
@@ -17,9 +16,9 @@ public class SearchToBook extends DBtranslation{
 	
 	public SearchToBook(int bookID, String searchDate, int numberOfSearches) {
 		super();
-		setBookID(bookID);
-		setSearchDate(searchDate);
-		setNumberOfSearches(numberOfSearches);
+		this.bookID = bookID;
+		this.searchDate = searchDate;
+		this.numberOfSearches = numberOfSearches;
 	}
 	
 	public SearchToBook()
@@ -36,19 +35,12 @@ public class SearchToBook extends DBtranslation{
 		return numberOfSearches;
 	}
 	public void setBookID(int bookID) {
-		if(bookID<0)
-			throw new InputMismatchException("you have inserted negative book ID");
 		this.bookID = bookID;
 	}
 	public void setSearchDate(String searchDate) {
-		if (searchDate == null || searchDate.equals("") || Validation.DateValidation(searchDate, "YYYY/MM/DD") == false
-				|| Validation.DateValidation(searchDate, "YYYY.MM.DD") == false)
-			throw new InputMismatchException("you have  inserted wrong search date");
 		this.searchDate = searchDate;
 	}
 	public void setNumberOfSearches(long numberOfSearches) {
-		if(numberOfSearches<0)
-			throw new InputMismatchException("you have inserted negativ number of searches");
 		this.numberOfSearches = numberOfSearches;
 	}
 	@Override
@@ -94,7 +86,7 @@ public class SearchToBook extends DBtranslation{
 				break;
 			case "status":
 				Date d = (Date)ob.getValtoArray(i);
-				String txtDate = new SimpleDateFormat("dd/MM/yyyy").format(d);
+				String txtDate = new SimpleDateFormat("yyyy/MM/dd").format(d);
 				recover.setSearchDate(txtDate);
 				break;
 

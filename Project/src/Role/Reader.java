@@ -5,8 +5,8 @@ import java.util.InputMismatchException;
 public class Reader extends User{
 
 	private int subscriptionMethod;
-	public Reader(String userID, String password, String firstName, String lastName, int privilege,int subscriptionMethod) {
-		super(userID, password, firstName, lastName, privilege);
+	public Reader(String userID,String identityNumber, String password, String firstName, String lastName, int privilege,int subscriptionMethod) {
+		super(userID, identityNumber,password, firstName, lastName, privilege);
 		setSubscriptionMethod(subscriptionMethod);
 	}
 	public int getSubscriptionMethod() {

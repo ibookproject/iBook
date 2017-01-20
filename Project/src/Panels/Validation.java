@@ -98,12 +98,12 @@ public class Validation {
 	/**
 	 * @author Almog Yamin
 	 * @param name, the input to validate
-	 * @return true if matches only the regex: enlgish letter/numbers/!@#$%^&*()_+-=/. 
+	 * @return true if matches only the regex: enlgish letter/numbers/!@#$^*()_+-/.  
 	 * and the lenght is not above 20
 	 * @return false in any other situation  
 	 */
 	public static boolean PasswordValidation(String name) {
-		String namePattern = "[A-Za-z0-9!@#$%^&*()_+-=/. ]+";
+		String namePattern = "[A-Za-z0-9!@#$^*()_+-/. ]+";
 		Pattern pattern = Pattern.compile(namePattern);
 		Matcher matcher = pattern.matcher(name);
 

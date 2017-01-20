@@ -1,4 +1,3 @@
-
 package ManagmentGUI;
 
 import java.awt.Color;
@@ -7,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -92,6 +93,19 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		add(lblNameOfBook);
 		
 		textFieldBook = new JTextField();
+		textFieldBook.addKeyListener(new KeyAdapter() {
+		    	@Override
+		    	public void keyPressed(KeyEvent key) {
+		    		if((textFieldBook.getText().length()>=0)&&(key.getKeyCode()!=8))
+		    		{
+				    //	btnSelect.setEnabled(true);
+				   // 	identN=textFieldBook.getText();
+		    		}
+		    	//	else if((textFieldBook.getText().length()==1)&&(key.getKeyCode()==8))
+		    			//	btnSelect.setEnabled(false);
+		    			
+		    	}
+		    });
 		textFieldBook.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textFieldBook.setBounds(180, 155, 127, 39);
 		add(textFieldBook);

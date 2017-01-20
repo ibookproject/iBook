@@ -33,37 +33,42 @@ public class User extends DBtranslation implements UserStatus {
 	public User() {
 		super();
 	}
+
 	public User(String userID) {
 		super();
 		setUserID(userID);
 	}
-
 
 	public User(String userID, String password) {
 		super();
 		setUserID(userID);
 		setPassword(password);
 	}
-	public User(String userID, String password, String firstName, String lastName, int privilege) {
+
+	public User(String userID, String identityNumber, String password, String firstName, String lastName,
+			int privilege) {
 		super();
+		Date d = new Date();
 		setUserID(userID);
 		setPassword(password);
 		setFirstName(firstName);
 		setLastName(lastName);
 		setPrivilege(privilege);
+		setIdentityNumber(identityNumber);
+		setSubscriptionMethod(NONE);
 		this.userStatus = DISCONNECTED;
+		setFinishDateOfSubscription(d);
 	}
 
 	public User(String userID, String password, String identityNumber, String firstName, String lastName,
 			int userStatus, int privilege, int subscriptionRequest, int subscriptionMethod,
 			Date finishDateOfSubscription) {
-		this(userID, password, firstName, lastName, privilege);
+		this(userID, identityNumber, password, firstName, lastName, privilege);
 		setUserStatus(userStatus);
 		setSubscriptionRequest(subscriptionRequest);
 		setSubscriptionMethod(subscriptionMethod);
-		this.finishDateOfSubscription=finishDateOfSubscription;
+		this.finishDateOfSubscription = finishDateOfSubscription;
 	}
-
 
 	public String getUserID() {
 		return userID;
@@ -145,16 +150,16 @@ public class User extends DBtranslation implements UserStatus {
 	public void setSubscriptionMethod(int subscriptionMethod) {
 		switch (subscriptionMethod) {
 		case NONE:
-			this.subscriptionRequest = NONE;
+			this.subscriptionMethod = NONE;
 			break;
 		case YEARLY:
-			this.subscriptionRequest = YEARLY;
+			this.subscriptionMethod = YEARLY;
 			break;
 		case MONTHLY:
-			this.subscriptionRequest = MONTHLY;
+			this.subscriptionMethod = MONTHLY;
 			break;
 		case SINGLE:
-			this.subscriptionRequest = SINGLE;
+			this.subscriptionMethod = SINGLE;
 			break;
 		default:
 			throw new InputMismatchException("wrong subscription inserted");
@@ -215,7 +220,7 @@ public class User extends DBtranslation implements UserStatus {
 	}
 
 	public void setFinishDateOfSubscription(Date finishDateOfSubscription) {
-		if (finishDateOfSubscription!=null&&finishDateOfSubscription.before(Calendar.getInstance().getTime()))
+		if (finishDateOfSubscription != null && finishDateOfSubscription.before(Calendar.getInstance().getTime()))
 			throw new InputMismatchException("you insert wrong date");
 
 		this.finishDateOfSubscription = finishDateOfSubscription;
@@ -248,7 +253,12 @@ public class User extends DBtranslation implements UserStatus {
 		ArrayList<User> convertedArr = new ArrayList<User>();
 
 		for (DBgenericObject ob : arr)
-			convertedArr.add(convertDBObject(ob, selectSentence));// for each// val in// arr this// back to// book
+			convertedArr.add(convertDBObject(ob, selectSentence));// for each//
+																	// val in//
+																	// arr
+																	// this//
+																	// back to//
+																	// book
 		return convertedArr;
 
 	}

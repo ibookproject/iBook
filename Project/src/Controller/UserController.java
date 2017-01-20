@@ -98,4 +98,23 @@ public class UserController {
 			wg.setVisible(false);
 			return true;	// means the user add successful	
 	}
+	public static boolean UpdateUserInfo(User u , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
+	{
+			client.UpdateInDB(new updateCommand<DBtranslation>(u, searchCondition, updateCondition));
+			WaitGif wg=new WaitGif();
+			while(!client.GetGotMessag()){//add user to DB
+				try{
+				Thread.sleep(250);
+				wg.setVisible(true);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+					return false;
+				}
+			}
+			wg.setVisible(false);
+			return true;	// means the user add successful	
+	}
+	
 }

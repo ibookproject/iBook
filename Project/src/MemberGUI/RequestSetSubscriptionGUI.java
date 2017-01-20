@@ -63,7 +63,7 @@ public class RequestSetSubscriptionGUI extends JPanel {
 			radioButtonChoose = UserStatus.SINGLE;
 			}
 		});
-			rdbtnSingl.setBounds(56, 217, 186, 54);
+			rdbtnSingl.setBounds(47, 212, 203, 67);
 		add(rdbtnSingl);
 		
 		JRadioButton rdbtnMonthly = new JRadioButton("Monthly subscription");
@@ -73,7 +73,7 @@ public class RequestSetSubscriptionGUI extends JPanel {
 				radioButtonChoose = UserStatus.MONTHLY;
 				}
 			});
-		rdbtnMonthly.setBounds(301, 217, 209, 54);
+		rdbtnMonthly.setBounds(309, 212, 203, 67);
 		add(rdbtnMonthly);
 		
 		JRadioButton rdbtnYearly = new JRadioButton("Yearly subscription");
@@ -83,7 +83,7 @@ public class RequestSetSubscriptionGUI extends JPanel {
 				radioButtonChoose = UserStatus.YEARLY;
 				}
 			});
-		rdbtnYearly.setBounds(571, 217, 194, 54);
+		rdbtnYearly.setBounds(571, 212, 203, 67);
 		add(rdbtnYearly);
 		
 		JLabel lblRequestToSet = new JLabel("REQUEST TO SET SUBSCRIPTION");
@@ -163,23 +163,22 @@ public class RequestSetSubscriptionGUI extends JPanel {
 		btnSendRequest.setBounds(348, 481, 148, 46);
 		add(btnSendRequest);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setEnabled(false);
-		btnNewButton.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
-		btnNewButton.setBounds(44, 209, 209, 73);
-		add(btnNewButton);
+		JButton btnBorderButtonSingle = new JButton("");
+		btnBorderButtonSingle.setEnabled(false);
+		btnBorderButtonSingle.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
+		btnBorderButtonSingle.setBounds(44, 209, 209, 73);
+		add(btnBorderButtonSingle);
 		
-		JButton button = new JButton("");
-		button.setEnabled(false);
-		button.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
-		button.setBounds(293, 209, 227, 73);
-		add(button);
+		JButton btnBorderButtonMothly = new JButton("");
+		btnBorderButtonMothly.setEnabled(false);
+		btnBorderButtonMothly.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
+		btnBorderButtonMothly.setBounds(306, 209, 209, 73);
+		add(btnBorderButtonMothly);
 		
-		JButton button_1 = new JButton("");
-		button_1.setEnabled(false);
-		button_1.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
-		button_1.setBounds(562, 209, 215, 73);
-		add(button_1);
+		JButton btnBorderButtonYearly = new JButton("");
+		btnBorderButtonYearly.setEnabled(false);
+		btnBorderButtonYearly.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
+		btnBorderButtonYearly.setBounds(568, 209, 209, 73);
+		add(btnBorderButtonYearly);
 	}
-	
 }

@@ -32,12 +32,14 @@ public class LibraryManagerMenu extends LibrarianMenu {
 	private LoginGUI screen;
 	private JPanel pann;
 	private int Permission;
+	private int UserIdAtDataBase;
 	
 	public LibraryManagerMenu(LoginGUI screen,int permission ,int UserIdAtDataBase) {
 		super(screen,permission,UserIdAtDataBase);
 		this.screen=screen;
 		pann=this;
 		this.Permission=permission;
+		this.UserIdAtDataBase =UserIdAtDataBase;
 		initialize();
 	}
 
@@ -51,7 +53,7 @@ public class LibraryManagerMenu extends LibrarianMenu {
 		btnUpdateUserInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
-				UpdateUserInfoGUI Uui=new UpdateUserInfoGUI(screen);
+				UpdateUserInfoGUI Uui=new UpdateUserInfoGUI(screen,Permission,UserIdAtDataBase);
 				Uui.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
