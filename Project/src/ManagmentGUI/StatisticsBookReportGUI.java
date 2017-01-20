@@ -67,21 +67,24 @@ public class StatisticsBookReportGUI extends JPanel {
 		add(btnBack);
 
 		JLabel lblBookName = new JLabel("Book title:");
-		lblBookName.setBounds(166, 106, 91, 19);
+		lblBookName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblBookName.setBounds(153, 111, 91, 19);
 		add(lblBookName);
 
 		textFieldBookTitle = new JTextField();
+		textFieldBookTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textFieldBookTitle.setColumns(10);
-		textFieldBookTitle.setBounds(245, 105, 148, 20);
+		textFieldBookTitle.setBounds(245, 105, 148, 30);
 		add(textFieldBookTitle);
 
 		JLabel lblAuthor = new JLabel("Author name:");
-		lblAuthor.setBounds(445, 106, 100, 19);
+		lblAuthor.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblAuthor.setBounds(429, 111, 100, 19);
 		add(lblAuthor);
 
 		textFieldAuthor = new JTextField();
 		textFieldAuthor.setColumns(10);
-		textFieldAuthor.setBounds(535, 105, 148, 20);
+		textFieldAuthor.setBounds(535, 105, 148, 30);
 		add(textFieldAuthor);
 
 		JScrollPane scrollPaneMain = new JScrollPane();
@@ -100,6 +103,7 @@ public class StatisticsBookReportGUI extends JPanel {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		Book b=new Book();
 		JButton btnSearch = new JButton("Search");
+		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -117,7 +121,7 @@ public class StatisticsBookReportGUI extends JPanel {
 							JOptionPane.WARNING_MESSAGE);
 				else
 				{
-					Book b = new Book(textFieldBookTitle.getText().trim(), textFieldAuthor.getText().trim()); // create
+					Book b = new Book(); // create
 					if(textFieldBookTitle.getText().isEmpty())
 				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAuthor.getText().trim() +"%'", screen.getClient());
 					else if(textFieldAuthor.getText().isEmpty())//"author LIKE '%"+textFieldAuthor.getText().trim() +"%'"
@@ -143,7 +147,7 @@ public class StatisticsBookReportGUI extends JPanel {
 
 			}
 		});
-		btnSearch.setBounds(710, 103, 89, 23);
+		btnSearch.setBounds(710, 103, 89, 30);
 		add(btnSearch);
 
 	}

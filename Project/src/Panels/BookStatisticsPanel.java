@@ -52,58 +52,70 @@ public class BookStatisticsPanel extends JPanel {
 	public BookStatisticsPanel(LoginGUI screen, Book b , JPanel pann) {
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 139, 87)));
-		setPreferredSize(new Dimension(577, 185));
+		setPreferredSize(new Dimension(604, 175));
 		setLayout(null);
 		JButton btnGetStatistics = new JButton("Get Statistics");
-		btnGetStatistics.setBounds(397, 106, 119, 23);
+		btnGetStatistics.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnGetStatistics.setBounds(395, 114, 131, 29);
 		add(btnGetStatistics);
 
 		JLabel lblBookid = new JLabel("Book ID:");
+		lblBookid.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblBookid.setBounds(20, 31, 147, 14);
 		add(lblBookid);
 
 		JLabel lblBookiddb = new JLabel(Integer.toString(b.getBookID()));
-		lblBookiddb.setBounds(118, 31, 141, 14);
+		lblBookiddb.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblBookiddb.setBounds(134, 23, 141, 30);
 		add(lblBookiddb);
 
 		JLabel lblBookTitle = new JLabel("Book Title:");
+		lblBookTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblBookTitle.setBounds(20, 80, 147, 14);
 		add(lblBookTitle);
 
 		JLabel lblBookTitledb = new JLabel(b.getTitle());
-		lblBookTitledb.setBounds(118, 80, 141, 14);
+		lblBookTitledb.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblBookTitledb.setBounds(134, 72, 141, 30);
 		add(lblBookTitledb);
 
 		JLabel lblAuthor = new JLabel("Author Name:");
+		lblAuthor.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblAuthor.setBounds(20, 129, 147, 14);
 		add(lblAuthor);
 
 		JLabel lblAuthordb = new JLabel(b.getAuthor());
-		lblAuthordb.setBounds(118, 129, 141, 14);
+		lblAuthordb.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblAuthordb.setBounds(134, 122, 141, 30);
 		add(lblAuthordb);
 
 		JLabel lblFromDate = new JLabel("From date:");
-		lblFromDate.setBounds(269, 31, 87, 14);
+		lblFromDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblFromDate.setBounds(269, 34, 87, 14);
 		add(lblFromDate);
 
 		txtFromDate = new JTextField();
+		txtFromDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtFromDate.setEditable(false);
-		txtFromDate.setBounds(366, 28, 86, 20);
+		txtFromDate.setBounds(355, 25, 97, 30);
 		add(txtFromDate);
 		txtFromDate.setColumns(10);
 
 		JLabel lblToDate = new JLabel("to date:");
-		lblToDate.setBounds(269, 66, 87, 14);
+		lblToDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblToDate.setBounds(269, 71, 87, 14);
 		add(lblToDate);
 
 		txtToDate = new JTextField();
+		txtToDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtToDate.setEditable(false);
-		txtToDate.setBounds(366, 63, 86, 20);
+		txtToDate.setBounds(355, 63, 97, 31);
 		add(txtToDate);
 		txtToDate.setColumns(10);
 		
 		//create button and there object
 		JButton btnChooseFromDate = new JButton("Choose Date");
+		btnChooseFromDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		//perform action listener
 		btnChooseFromDate.addActionListener(new ActionListener() 
 		{	
@@ -120,11 +132,12 @@ public class BookStatisticsPanel extends JPanel {
 			}
 		});
 		//set button bound
-		btnChooseFromDate.setBounds(451, 28, 102, 20);
+		btnChooseFromDate.setBounds(451, 25, 126, 30);
 		//add button in contentPane
 		add(btnChooseFromDate);
 		
 		JButton btnChooseToDate = new JButton("Choose Date");
+		btnChooseToDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnChooseToDate.addActionListener(new ActionListener() 
 		{	
 			//performed action
@@ -138,7 +151,7 @@ public class BookStatisticsPanel extends JPanel {
 				txtToDate.setText(new DatePicker(f).setPickedDate());
 			}
 		});
-		btnChooseToDate.setBounds(451, 63, 102, 20);
+		btnChooseToDate.setBounds(451, 63, 126, 31);
 		add(btnChooseToDate);
 		btnGetStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

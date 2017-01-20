@@ -41,10 +41,12 @@ public class UserSubscriptionPanel extends JPanel{
 	public UserSubscriptionPanel(LoginGUI screen,User u) {
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 139, 87)));
-		setPreferredSize(new Dimension(577, 121));
+		setPreferredSize(new Dimension(577, 138));
 		setLayout(null);
 		JButton btnConfirmSubscription = new JButton("Confirm");
+		btnConfirmSubscription.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		JButton btnRejectSubscription = new JButton("Reject");
+		btnRejectSubscription.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 
 		btnConfirmSubscription.addActionListener(new ActionListener() {
@@ -116,37 +118,44 @@ public class UserSubscriptionPanel extends JPanel{
 					
 			}
 		});
-		btnRejectSubscription.setBounds(469, 32, 87, 23);
+		btnRejectSubscription.setBounds(453, 32, 101, 23);
 		add(btnRejectSubscription);
-		btnConfirmSubscription.setBounds(369, 32, 87, 23);
+		btnConfirmSubscription.setBounds(342, 32, 101, 23);
 		add(btnConfirmSubscription);
 		
 		JLabel lblUserid = new JLabel("UserID:");
-		lblUserid.setBounds(22, 11, 147, 14);
+		lblUserid.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblUserid.setBounds(22, 10, 147, 14);
 		add(lblUserid);
 		
 		JLabel lblUderiddb = new JLabel(u.getUserID());
-		lblUderiddb.setBounds(179, 11, 141, 14);
+		lblUderiddb.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblUderiddb.setBounds(191, 10, 141, 14);
 		add(lblUderiddb);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
-		lblFirstName.setBounds(22, 36, 147, 14);
+		lblFirstName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblFirstName.setBounds(22, 40, 147, 14);
 		add(lblFirstName);
 		
 		JLabel lblFirstnamedb = new JLabel(u.getFirstName());
-		lblFirstnamedb.setBounds(179, 36, 141, 14);
+		lblFirstnamedb.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblFirstnamedb.setBounds(191, 40, 141, 14);
 		add(lblFirstnamedb);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
-		lblLastName.setBounds(22, 61, 147, 14);
+		lblLastName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblLastName.setBounds(22, 70, 147, 14);
 		add(lblLastName);
 		
 		JLabel lblLastnamedb = new JLabel(u.getLastName());
-		lblLastnamedb.setBounds(179, 61, 141, 14);
+		lblLastnamedb.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblLastnamedb.setBounds(191, 70, 141, 14);
 		add(lblLastnamedb);
 		
 		JLabel lblRequestSubscription = new JLabel("Request Subscription:");
-		lblRequestSubscription.setBounds(22, 86, 147, 14);
+		lblRequestSubscription.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblRequestSubscription.setBounds(22, 100, 161, 14);
 		add(lblRequestSubscription);
 		
 		String choose="";
@@ -165,11 +174,12 @@ public class UserSubscriptionPanel extends JPanel{
 
 		JLabel lblRequestsubscriptiondb = new JLabel(choose);
 		lblRequestsubscriptiondb.setForeground(Color.BLUE);
-		lblRequestsubscriptiondb.setBounds(179, 86, 141, 14);
+		lblRequestsubscriptiondb.setBounds(191, 100, 141, 14);
 		add(lblRequestsubscriptiondb);
 		
 		lblAnswerfromserver = new JLabel();
-		lblAnswerfromserver.setBounds(379, 66, 152, 14);
+		lblAnswerfromserver.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblAnswerfromserver.setBounds(342, 66, 212, 34);
 		add(lblAnswerfromserver);
 		
 			
