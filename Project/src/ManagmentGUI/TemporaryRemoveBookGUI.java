@@ -109,6 +109,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 
 		comboBoxOfBooks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(comboBoxOfBooks.getItemCount()!=0){
 				comboBoxOfBooks.updateUI();
 				if (comboBoxOfBooks.getItemAt(comboBoxOfBooks.getSelectedIndex()).isBookEnable() == 0) {
 					btnShow.setEnabled(true);
@@ -117,7 +118,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 					btnShow.setEnabled(false);
 					btnHide.setEnabled(true);
 				}
-
+				}
 			}
 		});
 
@@ -175,7 +176,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 					}
 					//////////////////////// button to back panel from
 					//////////////////////// panel/////////////////////////////////////////////
-				});
+				});		
 				comboBoxOfBooks.removeAllItems();
 				if ((textFieldBookTitle.getText().isEmpty()) && (textFieldAuthor.getText().isEmpty()))
 					JOptionPane.showMessageDialog(screen, "you must fill one field at least ", "Warning",
@@ -193,8 +194,10 @@ public class TemporaryRemoveBookGUI extends JPanel {
 										+ "author LIKE '%" + textFieldAuthor.getText().trim() + "%'",
 								screen.getClient());
 					}
+					
 					if (tempBooks != null) {
 						int i = 0;
+						
 						for (Book bt : tempBooks) {
 							// comboBoxOfBooks.addItem("BookID:"+tempBooks.get(i).getBookID()+"
 							// , Name: "+tempBooks.get(i).getTitle().trim() + "
@@ -209,8 +212,8 @@ public class TemporaryRemoveBookGUI extends JPanel {
 					textFieldBookTitle.setText("");
 					textFieldAuthor.setText("");
 				}
-
 			}
+			
 		});
 		/*
 		 * btnSearch.addActionListener(new ActionListener() { public void
