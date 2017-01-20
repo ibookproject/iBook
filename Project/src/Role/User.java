@@ -1,5 +1,6 @@
 package Role;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -220,7 +221,7 @@ public class User extends DBtranslation implements UserStatus {
 	}
 
 	public void setFinishDateOfSubscription(Date finishDateOfSubscription) {
-		if (finishDateOfSubscription != null && finishDateOfSubscription.before(Calendar.getInstance().getTime()))
+		if (finishDateOfSubscription /*!*/== null/* && finishDateOfSubscription.before(Calendar.getInstance().getTime())*/)// almog change it becouse i think this check is not right.
 			throw new InputMismatchException("you insert wrong date");
 
 		this.finishDateOfSubscription = finishDateOfSubscription;
@@ -237,13 +238,14 @@ public class User extends DBtranslation implements UserStatus {
 
 	@Override
 	public String getAttributeToInsert() {
-		return "(userID,password,identityNumber,firstName,lastName,privilege)";
+		return "(userID,password,identityNumber,firstName,lastName,privilege,subscriptionMethod,finishDateOfSubscription)";
 	}
 
 	@Override
 	public String getValToInsert() {
-		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%d)", userID, password, identityNumber, firstName,
-				lastName, privilege);
+		
+		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%d,%d,\"%s\")", userID, password, identityNumber, firstName,
+				lastName, privilege, subscriptionMethod, new SimpleDateFormat("yyyy/MM/dd").format(finishDateOfSubscription));
 	}
 
 	// convert array Which was obtained from DB to an actual User
