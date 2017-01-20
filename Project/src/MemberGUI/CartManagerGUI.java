@@ -110,17 +110,37 @@ public class CartManagerGUI extends JPanel {
 		ArrayList<joinObject> temp =new ArrayList<joinObject>();
 
 		temp.add(new joinObject(c.getClassName(), b.getClassName(), "bookID"));
-		
+		int flag=0;
 		ArrayList<Book> bbb;
 		/**JOIN BETWEEN BOOK AND CART**/
-		bbb=CartController.GetCartListForUser("book.bookID,book.title,book.author,book.price",c,temp,"userID=\""+screen.getTempID() +"\""+" && "+"status=0" , screen.getClient());
-
+		// get all the book at cart that is status 0 or 1 means not buy or already buy but not buy and then delete
+		bbb=CartController.GetCartListForUser("book.bookID,book.title,book.author,book.price",c,temp,"userID=\""+screen.getTempID() +"\""+" && "+"status=\""+Cart.BOUGHT+"\"", screen.getClient());
 		if (bbb != null) {
+			flag=1;
 			panel.removeAll();
 			panel.setVisible(true);
 			scrollPaneMain.setVisible(true);
 			for(int i=0;i<bbb.size();i++)
-				panel.add(new CartCheckBoxBooklistPanel(screen,bbb.get(i),bbb.get(i).getBookID(),panel,i));
+			{
+				panel.add(new CartCheckBoxBooklistPanel(screen,bbb.get(i),bbb.get(i).getBookID(),panel,i,1));
+				((CartCheckBoxBooklistPanel)panel.getComponent(i)).setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(46, 139, 87)));
+				((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setSelected(false);
+				((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setEnabled(false);
+				((CartCheckBoxBooklistPanel)panel.getComponent(i)).btnDownloadBookAgain.setVisible(true);
+				((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveAfterBuy.setVisible(true);
+				((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveButton.setVisible(false);
+			}
+		} 
+		bbb=CartController.GetCartListForUser("book.bookID,book.title,book.author,book.price",c,temp,"userID=\""+screen.getTempID() +"\""+" && "+"status=\""+Cart.ORDERD+"\"" , screen.getClient());
+		if (bbb != null) {
+			if(flag==0)
+			{
+			panel.removeAll();
+			panel.setVisible(true);
+			scrollPaneMain.setVisible(true);
+			}
+			for(int i=0;i<bbb.size();i++)
+				panel.add(new CartCheckBoxBooklistPanel(screen,bbb.get(i),bbb.get(i).getBookID(),panel,i,0));
 		} 
 		else 
 		{
@@ -159,10 +179,13 @@ public class CartManagerGUI extends JPanel {
 						cnt++;
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(46, 139, 87)));
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setEnabled(false);
-						CartController.UpdateCart(c, "status=\""+1+"\"" + " && "+"buyDate=\""+txtDate+"\"", "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\"", screen.getClient());
+						CartController.UpdateCart(c, "status=\""+Cart.BOUGHT+"\"" + " && "+"buyDate=\""+txtDate+"\"", "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\"", screen.getClient());
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setSelected(false);
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).btnDownloadBookAgain.setVisible(true);
-						
+						((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveAfterBuy.setVisible(true);
+						((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveButton.setVisible(false);
+						panel.updateUI();
+
 						// ************ SAVE FILE *****************//
 						final JFileChooser fc = new JFileChooser();
 						//fc.setCurrentDirectory(new java.io.File("C:/Users/kfir/Desktop"));;
@@ -195,14 +218,16 @@ public class CartManagerGUI extends JPanel {
 						}
 					}			
 					}
-					//panel.updateUI();
 				}
 				System.out.println(cnt);
 				System.out.println(panel.getComponentCount());
 				if(cnt==panel.getComponentCount()) 
 					JOptionPane.showMessageDialog(screen,"You Bought all your Cart Book's list !", "Warning",JOptionPane.WARNING_MESSAGE);
 				else if(flag==1)
+				{
+					cnt=0;
 						JOptionPane.showMessageDialog(screen,"The Purshace  successfully  !", "done",JOptionPane.INFORMATION_MESSAGE);
+				}
 				else if (cnt==0)  
 						JOptionPane.showMessageDialog(screen,"no Chossen book's to buy", "Warning",JOptionPane.WARNING_MESSAGE);
 			}

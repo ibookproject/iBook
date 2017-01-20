@@ -16,35 +16,9 @@ import command.searchCommand;
 import command.updateCommand;
 
 public class CartController {
-	/*
-	 * BuyFromCart-kfir
-	 * AddToCart-kfir
-	 * RemoveFromCart-kfir
-	 * GetAllOrders-kfir
-	 * */
 
-	/*
-	public static ArrayList<Cart> GetAllBooksToBuyByUserId(String fromSentence,Cart s,String condition,DBSQLhandler client)
-	{
-		
-		client.searchInDB(new searchCommand<Cart>(fromSentence,s,condition));
-		while(!client.GetGotMessag()){
-			try{
-			Thread.sleep(250);
-			}
-			catch(InterruptedException ex)
-			{
-				System.out.println("InterruptedException "+ex);
-			}
-		}
-		try {
-			
-			return  Cart.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), fromSentence);
-		} catch (SQLException e) {
-			return null;
-		}
-	}
-	*/
+
+
 	
 	public static ArrayList<Cart> SearchCart(String fromSentence,Cart t,String condition,DBSQLhandler client)
 	{

@@ -46,15 +46,18 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 	public static JPanel panel;
 	public int BookID;
 	public int index;
+	public  int IsBought;
 //	public int price;
 	//public int UserId;
-
+	public JButton RemoveButton;
 	public Book book;
 	public JButton btnDownloadBookAgain;
+	public  JButton RemoveAfterBuy;
 	
 	
-	public CartCheckBoxBooklistPanel(LoginGUI screen,Book book,int BookID,JPanel panel,int index) {
+	public CartCheckBoxBooklistPanel(LoginGUI screen,Book book,int BookID,JPanel panel,int index,int IsBought) {
 		this.book=book;
+		this.IsBought=IsBought;
 		this.index=index;
 		this.panel=panel;
 		this.BookID=BookID;
@@ -75,21 +78,21 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 		chckbxNewCheckBox.setBounds(6, 7, 288, 69);
 		add(chckbxNewCheckBox);
 		
-		JButton btnNewButton = new JButton("Remove");
-		btnNewButton.addActionListener(new ActionListener() {
+		RemoveButton = new JButton("Remove");
+		RemoveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int answer=JOptionPane.showConfirmDialog(null, "are you sure??","Warning !!", JOptionPane.YES_NO_OPTION);
 					if(answer==0)//means yes
-					{
+					{						
 						Cart c=new Cart();
 						CartController.DeleteFromCart(c, "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+BookID+"\"", screen.getClient());
 						panel.remove(index);
-						panel.updateUI();
-					}
+						panel.updateUI();	
+					}									
 			}
 		});
-		btnNewButton.setBounds(300, 19, 83, 23);
-		add(btnNewButton);
+		RemoveButton.setBounds(300, 19, 83, 23);
+		add(RemoveButton);
 		
 		btnDownloadBookAgain = new JButton("Download again");
 		btnDownloadBookAgain.addActionListener(new ActionListener() {
@@ -122,7 +125,30 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 		btnDownloadBookAgain.setBounds(289, 53, 116, 23);
 		btnDownloadBookAgain.setVisible(false);
 		add(btnDownloadBookAgain);
+		 RemoveAfterBuy = new JButton("Remove");
+		RemoveAfterBuy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int answer=JOptionPane.showConfirmDialog(null, "are you sure??","Warning !!", JOptionPane.YES_NO_OPTION);
+				if(answer==0)//means yes
+				{
+					Cart c=new Cart();
+					CartController.UpdateCart(c, "status=\""+Cart.DELETED+"\"" , "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+BookID+"\"", screen.getClient());
+					panel.remove(index);
+					panel.updateUI();
+				}
+				
+			}
+		});
+		RemoveAfterBuy.setBounds(300, 19, 83, 23);
+		add(RemoveAfterBuy);
 		
+	
+		
+		
+	}
+	public void SetIsBought(int IsBought)
+	{
+		this.IsBought=IsBought;
 	}
 }
 
