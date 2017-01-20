@@ -77,6 +77,43 @@ public class Validation {
 		return false;
 	}
 	/**
+	 * @author hen saada
+	 * @param name, the input to validate
+	 * @return true if contain only engish letters Dot,comma,numbers and the lenght is not above len.(len under 128)
+	 * @return false in any other situation  
+	 */	
+	public static String PriceValidation(String price) {
+
+			int cnt=0;
+		  String warnings="";
+		  for(int i=0;i<price.length();i++)
+			  if(price.charAt(i)=='.')
+			  {
+				  if(++cnt==2)
+				  {
+						warnings = "price field - Must contain more then 1 '.'  \n";
+						return warnings;
+				  }
+			  }
+	
+		  for(int i=0;i<price.length();i++)
+			  if((price.charAt(i)>'A'&&price.charAt(i)<'Z')||((price.charAt(i)>'a'&&price.charAt(i)<'z'))&&(price.charAt(i)!='.'))
+			  {
+				warnings = "price field - Must contain only numbers letters \n";
+				return warnings;
+			  }
+
+		  for(int i=0;i<price.length();i++)
+			  if(price.charAt(i)=='.'&&(i==0||i==price.length()-1))
+			  {
+						warnings = "price field - Must contain only Ligal Number \n";
+						return warnings;
+			  }
+		  return "";
+		  
+		
+	}
+	/**
 	 * @author Kfir Girstein
 	 * @param name, the input to validate
 	 * @param len ,the lenght you want to validate
