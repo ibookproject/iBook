@@ -85,16 +85,16 @@ public class CartManagerGUI extends JPanel {
 		User u= new User();
 		
 		//checking if there is any subscription method
-		searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionMethod,privilege",u,"subscriptionMethod<>\"" + 0 + "\""+" && " + "userID=\"" + screen.getTempID() + "\"", screen.getClient());//call search book method from book controller
-		if(searcRes!=null)
-		{
+		//searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionMethod,privilege",u,"subscriptionMethod<>\"" + 0 + "\""+" && " + "userID=\"" + screen.getTempID() + "\"", screen.getClient());//call search book method from book controller
+	//	if(searcRes!=null)
+	//	{
 		
 		/////////////////////
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
-		scrollPaneMain.setBounds(229, 132, 430, 335);
+		scrollPaneMain.setBounds(205, 132, 517, 355);
 		scrollPaneMain.setVisible(false);
 		add(scrollPaneMain);
 
@@ -234,9 +234,9 @@ public class CartManagerGUI extends JPanel {
 			else JOptionPane.showMessageDialog(screen,"no Chossen book's to buy", "Warning",JOptionPane.WARNING_MESSAGE);
 	}
 });		
-		btnBuy.setBounds(385, 478, 59, 23);
+		btnBuy.setBounds(417, 519, 80, 39);
 		add(btnBuy);		
-	}
-	else JOptionPane.showMessageDialog(screen,"NO subscriptionMethod !!! ", "Warning",JOptionPane.WARNING_MESSAGE);
+//	}
+//	else JOptionPane.showMessageDialog(screen,"NO subscriptionMethod !!! ", "Warning",JOptionPane.WARNING_MESSAGE);
 	}	
 }
