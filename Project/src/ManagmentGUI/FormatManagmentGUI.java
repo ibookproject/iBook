@@ -221,7 +221,7 @@ public class FormatManagmentGUI extends JPanel {
 				
 				if(!s.isEmpty())
 					{
-					if(Validation.NameValidation(DomainTextField.getText().trim(),20)==true)
+					if(Validation.NameValidation(DomainTextField.getText().trim(),20)==true&&Validation.regularValidation(DomainTextField.getText().trim())==true)
 					{
 					Domain d = new Domain(DomainTextField.getText().trim()); //   	
 					ArrayList<Domain> temp = FormatController.SearchDomain("DomainName",d, "domainName=\""+DomainTextField.getText().trim()+ "\"" ,screen.getClient());
@@ -245,7 +245,7 @@ public class FormatManagmentGUI extends JPanel {
 			 		}
 			 		} else {JOptionPane.showMessageDialog(screen,"domain is already EXSIT ! ", "Warning",JOptionPane.WARNING_MESSAGE);DomainTextField.setText("");}
 					}
-					else {JOptionPane.showMessageDialog(screen,"domain field is contain numbers  ! ", "Warning",JOptionPane.WARNING_MESSAGE);DomainTextField.setText("");}
+					else {JOptionPane.showMessageDialog(screen,"Iligel domain field  ! ", "Warning",JOptionPane.WARNING_MESSAGE);DomainTextField.setText("");}
 				}
 				else JOptionPane.showMessageDialog(screen,"domain field is empty ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
@@ -273,7 +273,7 @@ public class FormatManagmentGUI extends JPanel {
 				String s=SubjectTextField.getText().trim();
 				if(!s.isEmpty())
 				{
-					if(Validation.NameValidation(SubjectTextField.getText().trim(),20)==true)
+					if(Validation.NameValidation(SubjectTextField.getText().trim(),20)==true&&Validation.regularValidation(SubjectTextField.getText().trim())==true)
 					{
 					////////////////////////////////////
 					int id=((Domain) DomainBox.getSelectedItem()).getDomainID();/// here is the problem
@@ -298,7 +298,7 @@ public class FormatManagmentGUI extends JPanel {
 		 		}
 				} else {JOptionPane.showMessageDialog(screen,"Subject  is already EXSIT ! ", "Warning",JOptionPane.WARNING_MESSAGE);SubjectTextField.setText("");}
 				}
-					else {JOptionPane.showMessageDialog(screen,"subject field is contain numbers  ! ", "Warning",JOptionPane.WARNING_MESSAGE);SubjectTextField.setText("");}
+					else {JOptionPane.showMessageDialog(screen,"Iligel subject field  ! ", "Warning",JOptionPane.WARNING_MESSAGE);SubjectTextField.setText("");}
 				}
 					
 				else JOptionPane.showMessageDialog(screen,"Subject field is empty ! ", "Warning",JOptionPane.WARNING_MESSAGE);

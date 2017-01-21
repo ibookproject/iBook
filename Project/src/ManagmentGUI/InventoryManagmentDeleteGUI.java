@@ -46,18 +46,12 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	private int bookId;
 	private ArrayList<Book> tempBooks;
 	private LoginGUI screen;
-	//public static JPanel panel;
-	//private JScrollPane scrollPaneMain;
-	//private ArrayList<Book> books;
-	//private JPanel pann;
 	private int index;
 	
 
 	public InventoryManagmentDeleteGUI(LoginGUI screen ) {
 		super();
 		bookId=-1;
-		//this.tempBooks=books;
-	//	pann=this;
 		this.screen=screen;
 		initialize();
 	}
