@@ -140,12 +140,12 @@ public class AddOrUpdateBookGUI extends JPanel {
 		keyword.setColumns(10);
 		
 		author = new JTextField();
-		author.setBounds(141, 239, 118, 20);
+		author.setBounds(138, 239, 121, 20);
 		add(author);
 		author.setColumns(10);
 		
 		price = new JTextField();
-		price.setBounds(141, 275, 118, 20);
+		price.setBounds(138, 275, 121, 20);
 		add(price);
 		price.setColumns(10);
 		
@@ -190,8 +190,8 @@ public class AddOrUpdateBookGUI extends JPanel {
 					  if(Validation.AuthorValidation(author.getText(), 20)==false)
 							warnings += "author field - Must contain only English letters \n";
 
-					  if(Validation.regularValidation(price.getText())==false)
-							warnings += "price field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
+				//	  if(Validation.regularValidation(price.getText())==false)
+						//	warnings += "price field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
 					String answer= Validation.PriceValidation(price.getText());
 					if(answer!="")
 						warnings +=answer;
@@ -238,7 +238,6 @@ public class AddOrUpdateBookGUI extends JPanel {
 				 	Book b = new Book(title.getText().trim(),lang.getText().trim(),author.getText().trim(),summary.getText().trim(),1,keyword.getText().trim(),contents.getText().trim(),Float.parseFloat(price.getText().trim())); // create new book
 				 	
 					ArrayList<Book> temp = BookController.SearchBook("title,language",b, "title=\""+title.getText().trim()+ "\"" + " && "+"author=\""+author.getText().trim()+"\"", screen.getClient());//call search book method from book controller
-				 	//System.out.println(temp);
 					if(temp==null||temp.isEmpty())
 					{
 						
@@ -276,8 +275,8 @@ public class AddOrUpdateBookGUI extends JPanel {
 					  if(Validation.AuthorValidation(author.getText(), 20)==false)
 							warnings += "author field - Must contain only English letters \n";
 
-					  if(Validation.regularValidation(price.getText())==false)
-							warnings += "price field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
+					//  if(Validation.regularValidation(price.getText())==false)
+						//	warnings += "price field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
 						String answer= Validation.PriceValidation(price.getText());
 						if(answer!="")
 							warnings +=answer;

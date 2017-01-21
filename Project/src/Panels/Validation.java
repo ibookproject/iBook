@@ -95,7 +95,8 @@ public class Validation {
 						return warnings;
 				  }
 			  }
-	
+			if (price.contains("|")||price.contains("|")||price.contains("%")||price.contains("\\")||price.contains("&")|| price.contains("\"")||price.contains("="))
+				return "price field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
 		  for(int i=0;i<price.length();i++)
 			  if((price.charAt(i)>'A'&&price.charAt(i)<'Z')||((price.charAt(i)>'a'&&price.charAt(i)<'z'))&&(price.charAt(i)!='.'))
 			  {
