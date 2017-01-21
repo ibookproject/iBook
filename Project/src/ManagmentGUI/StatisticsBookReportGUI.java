@@ -125,10 +125,10 @@ public class StatisticsBookReportGUI extends JPanel {
 				else {
 					String warnings = "ERROR :\n";
 					if (Validation.AuthorValidation(textFieldAuthor.getText().trim(), 20) == false)
-						if (textFieldAuthor.getText() != "")
+						if (!textFieldAuthor.getText().isEmpty())
 							warnings += "author field - Must contain only English letters \n";
 					if (Validation.TitleValidation(textFieldBookTitle.getText().trim(), 20) == false) // check validation fields
-						if (textFieldBookTitle.getText() != "")
+						if (!textFieldBookTitle.getText().isEmpty())
 							warnings += "title field - Must contain only English letters or numbers\n";
 						if (warnings == "ERROR :\n") {
 							Book b = new Book(); // create
@@ -150,10 +150,14 @@ public class StatisticsBookReportGUI extends JPanel {
 									panel.add(new BookStatisticsPanel(screen, bt, pann));
 								panel.updateUI();
 							} else
+							{
 								JOptionPane.showMessageDialog(screen, "The book is not found!", "Warning",
 										JOptionPane.WARNING_MESSAGE);
+								panel.updateUI();
+							}
 							textFieldBookTitle.setText("");
 							textFieldAuthor.setText("");
+							
 						}
 					else {
 						JOptionPane.showMessageDialog(screen, warnings, "Warning", JOptionPane.WARNING_MESSAGE);

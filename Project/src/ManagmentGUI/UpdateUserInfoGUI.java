@@ -25,6 +25,7 @@ import Controller.UserController;
 import MenuGUI.LibraryManagerMenu;
 import MenuGUI.LoginGUI;
 import Panels.DatePicker;
+import Panels.Validation;
 import Role.User;
 
 import java.awt.event.ActionListener;
@@ -87,30 +88,52 @@ public class UpdateUserInfoGUI extends JPanel {
 
 		JLabel lblUserId = new JLabel("User ID:");
 		lblUserId.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblUserId.setBounds(34, 120, 96, 23);
+		lblUserId.setBounds(34, 113, 96, 30);
 		add(lblUserId);
 		btnUpdate = new JButton("Update");
 		btnUpdate.setEnabled(false);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean result = false;
-				User u = new User(UserIDTextField.getText()/* ID */);
-				if (UserController.UpdateUserStatus(u,
-						"firstName=\"" + FirstNameTextField.getText() + "\"" + " && lastName=\""
-								+ LastNameTextField.getText() + "\"" + " && password=\"" + PasswordtextField.getText()
-								+ "\"" + " && privilege=\"" + (PrivilagecomboBox.getSelectedIndex() + 1) + "\""
-								+ " && userStatus=\"" + UserStatuscomboBox.getSelectedIndex() + "\""
-								+ " && subscriptionMethod=\"" + SubscriptionMethodcomboBox.getSelectedIndex() + "\""
-								+ " && finishDateOfSubscription=\"" + txtFinishDate.getText() + "\"",
-						"userID=\"" + UserIDTextField.getText() + "\"", screen.getClient())) {
-					JOptionPane.showMessageDialog(screen, "User updated successfully", "Plain",
-							JOptionPane.INFORMATION_MESSAGE);
-					LibraryManagerMenu lmm = new LibraryManagerMenu(screen, permission, userIdAtDataBase);
-					screen.setContentPane(lmm);
-				} else
-					JOptionPane.showMessageDialog(screen, "User updated procces faild", "Error",
-							JOptionPane.ERROR_MESSAGE);
+				/*
+				 * private JTextField FirstNameTextField; private JTextField
+				 * LastNameTextField; private JTextField UserIDTextField;
+				 * private JTextField PasswordtextField; private JTextField
+				 * txtFinishDate;
+				 */
 
+				String warnings = "ERROR :\n";
+				if (!Validation.PasswordValidation(PasswordtextField.getText()))
+					warnings += "Password - The following characters are not allowed :|,%,\\," + "\",',&,=\n";
+				if (!Validation.NameValidation(FirstNameTextField.getText().trim(), 20))
+					warnings += "First name - Must contain only English letters\n";
+				if (!Validation.NameValidation(LastNameTextField.getText().trim(), 20))
+					warnings += "Last name - Must contain only English letters";
+				if (warnings.equalsIgnoreCase("ERROR :\n")) {
+					if (!(PasswordtextField.getText().isEmpty() || FirstNameTextField.getText().isEmpty()
+							|| LastNameTextField.getText().isEmpty())) {
+						User u = new User(UserIDTextField.getText()/* ID */);
+						if (UserController.UpdateUserStatus(u,
+								"firstName=\"" + FirstNameTextField.getText() + "\"" + " && lastName=\""
+										+ LastNameTextField.getText() + "\"" + " && password=\""
+										+ PasswordtextField.getText() + "\"" + " && privilege=\""
+										+ (PrivilagecomboBox.getSelectedIndex() + 1) + "\"" + " && userStatus=\""
+										+ UserStatuscomboBox.getSelectedIndex() + "\"" + " && subscriptionMethod=\""
+										+ SubscriptionMethodcomboBox.getSelectedIndex() + "\""
+										+ " && finishDateOfSubscription=\"" + txtFinishDate.getText() + "\"",
+								"userID=\"" + UserIDTextField.getText() + "\"", screen.getClient())) {
+							JOptionPane.showMessageDialog(screen, "User updated successfully", "Plain",
+									JOptionPane.INFORMATION_MESSAGE);
+							LibraryManagerMenu lmm = new LibraryManagerMenu(screen, permission, userIdAtDataBase);
+							screen.setContentPane(lmm);
+						} else
+							JOptionPane.showMessageDialog(screen, "User updated procces faild", "Error",
+									JOptionPane.ERROR_MESSAGE);
+					} else
+						JOptionPane.showMessageDialog(screen, "You must fill all fields", "Error",
+								JOptionPane.ERROR_MESSAGE);
+				} else
+					JOptionPane.showMessageDialog(screen, warnings, "Error",
+							JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		btnUpdate.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -142,7 +165,7 @@ public class UpdateUserInfoGUI extends JPanel {
 		PrivilagecomboBox.setModel(new DefaultComboBoxModel(
 				new String[] { "USER", "READER", "WORKER", "QUALIFIED EDITOR", "LIBRARIAN", "MANAGER" }));
 		PrivilagecomboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		PrivilagecomboBox.setBounds(627, 250, 188, 37);
+		PrivilagecomboBox.setBounds(240, 350, 188, 30);
 		PrivilagecomboBox.setEnabled(false);
 		add(PrivilagecomboBox);
 
@@ -150,7 +173,7 @@ public class UpdateUserInfoGUI extends JPanel {
 		SubscriptionMethodcomboBox
 				.setModel(new DefaultComboBoxModel(new String[] { "NONE", "SINGLE", "MONTHLY", "YEARLY" }));
 		SubscriptionMethodcomboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		SubscriptionMethodcomboBox.setBounds(240, 350, 188, 37);
+		SubscriptionMethodcomboBox.setBounds(240, 450, 188, 30);
 		SubscriptionMethodcomboBox.setEnabled(false);
 		add(SubscriptionMethodcomboBox);
 
@@ -158,52 +181,55 @@ public class UpdateUserInfoGUI extends JPanel {
 		UserStatuscomboBox.setEnabled(false);
 		UserStatuscomboBox.setModel(new DefaultComboBoxModel(new String[] { "DISCONNECTED", "CONNECTED", "LOCK" }));
 		UserStatuscomboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		UserStatuscomboBox.setBounds(240, 300, 188, 37);
+		UserStatuscomboBox.setBounds(240, 400, 188, 30);
 		add(UserStatuscomboBox);
 
 		btnSelect = new JButton("Select");
 		btnSelect.setEnabled(false);
 		btnSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (Validation.IDValidation(UserIDTextField.getText())) {
+					User u = new User(UserIDTextField.getText()/* ID */);
 
-				User u = new User(UserIDTextField.getText()/* ID */);
+					temp = (ArrayList<User>) UserController.SearchUser(
+							"userID,password,identityNumber,firstName,"
+									+ "lastName,userStatus,privilege,subscriptionRequest,subscriptionMethod,finishDateOfSubscription",
+							u, "userID=\"" + u.getUserID() + "\"", screen.getClient());
+					if (temp == null || temp.isEmpty())
+						JOptionPane.showMessageDialog(screen, "User ID not found.", "Warning",
+								JOptionPane.WARNING_MESSAGE);
 
-				temp = (ArrayList<User>) UserController.SearchUser(
-						"userID,password,identityNumber,firstName,"
-								+ "lastName,userStatus,privilege,subscriptionRequest,subscriptionMethod,finishDateOfSubscription",
-						u, "userID=\"" + u.getUserID() + "\"", screen.getClient());
-				if (temp == null || temp.isEmpty())
-					JOptionPane.showMessageDialog(screen, "wrong password/username", "Warning",
+					else {
+						FirstNameTextField.setText(temp.get(0).getFirstName());
+						LastNameTextField.setText(temp.get(0).getLastName());
+						PasswordtextField.setText(temp.get(0).getPassword());
+						PrivilagecomboBox.setSelectedIndex(temp.get(0).getPriviliege() - 1);
+						SubscriptionMethodcomboBox.setSelectedIndex(temp.get(0).getSubscriptionMethod());
+						UserStatuscomboBox.setSelectedIndex(temp.get(0).getUserStatus());
+						if (temp.get(0).getFinishDateOfSubscription() != null)
+							txtFinishDate.setText(new SimpleDateFormat("yyyy/MM/dd")
+									.format(temp.get(0).getFinishDateOfSubscription()));
+
+						UserIDTextField.setEditable(false);
+						FirstNameTextField.setEnabled(true);
+						LastNameTextField.setEnabled(true);
+						PasswordtextField.setEnabled(true);
+						PrivilagecomboBox.setEnabled(true);
+						SubscriptionMethodcomboBox.setEnabled(true);
+						UserStatuscomboBox.setEnabled(true);
+						btnSelect.setEnabled(false);
+						btnUpdate.setEnabled(true);
+						btnChooseDate.setEnabled(true);
+
+					}
+
+				} else
+					JOptionPane.showMessageDialog(screen, "User ID must contain only numbers (0-9)", "Warning",
 							JOptionPane.WARNING_MESSAGE);
-
-				else {
-					FirstNameTextField.setText(temp.get(0).getFirstName());
-					LastNameTextField.setText(temp.get(0).getLastName());
-					PasswordtextField.setText(temp.get(0).getPassword());
-					PrivilagecomboBox.setSelectedIndex(temp.get(0).getPriviliege() - 1);
-					SubscriptionMethodcomboBox.setSelectedIndex(temp.get(0).getSubscriptionMethod());
-					UserStatuscomboBox.setSelectedIndex(temp.get(0).getUserStatus());
-					if (temp.get(0).getFinishDateOfSubscription() != null)
-						txtFinishDate.setText(
-								new SimpleDateFormat("yyyy/MM/dd").format(temp.get(0).getFinishDateOfSubscription()));
-
-					UserIDTextField.setEditable(false);
-					FirstNameTextField.setEnabled(true);
-					LastNameTextField.setEnabled(true);
-					PasswordtextField.setEnabled(true);
-					PrivilagecomboBox.setEnabled(true);
-					SubscriptionMethodcomboBox.setEnabled(true);
-					UserStatuscomboBox.setEnabled(true);
-					btnSelect.setEnabled(false);
-					btnUpdate.setEnabled(true);
-					btnChooseDate.setEnabled(true);
-
-				}
-
 			}
 		});
 		btnSelect.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnSelect.setBounds(484, 113, 97, 39);
+		btnSelect.setBounds(470, 113, 97, 30);
 		add(btnSelect);
 
 		UserIDTextField = new JTextField();
@@ -218,64 +244,64 @@ public class UpdateUserInfoGUI extends JPanel {
 		});
 
 		UserIDTextField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		UserIDTextField.setBounds(240, 113, 188, 39);
+		UserIDTextField.setBounds(240, 113, 188, 30);
 		add(UserIDTextField);
 		UserIDTextField.setColumns(10);
 
 		JLabel lblFirstName = new JLabel("First name:");
 		lblFirstName.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblFirstName.setBounds(34, 200, 115, 37);
+		lblFirstName.setBounds(34, 200, 115, 30);
 		add(lblFirstName);
 
 		JLabel lblLastName = new JLabel("Last name:");
 		lblLastName.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblLastName.setBounds(466, 200, 115, 34);
+		lblLastName.setBounds(34, 300, 115, 30);
 		add(lblLastName);
 
 		FirstNameTextField = new JTextField();
 		FirstNameTextField.setEnabled(false);
 		FirstNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		FirstNameTextField.setBounds(240, 200, 188, 37);
+		FirstNameTextField.setBounds(240, 200, 188, 30);
 		add(FirstNameTextField);
 		FirstNameTextField.setColumns(10);
 
 		LastNameTextField = new JTextField();
 		LastNameTextField.setEnabled(false);
 		LastNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		LastNameTextField.setBounds(627, 200, 188, 37);
+		LastNameTextField.setBounds(240, 300, 188, 30);
 		add(LastNameTextField);
 		LastNameTextField.setColumns(10);
 
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblPassword.setBounds(34, 250, 89, 34);
+		lblPassword.setBounds(34, 250, 89, 30);
 		add(lblPassword);
 
 		JLabel lblUserStstus = new JLabel("User status:");
 		lblUserStstus.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblUserStstus.setBounds(34, 300, 115, 37);
+		lblUserStstus.setBounds(34, 400, 115, 30);
 		add(lblUserStstus);
 
 		JLabel lblPrivilage = new JLabel("Privilege:");
 		lblPrivilage.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblPrivilage.setBounds(466, 250, 115, 37);
+		lblPrivilage.setBounds(34, 350, 115, 30);
 		add(lblPrivilage);
 
 		PasswordtextField = new JTextField();
 		PasswordtextField.setEnabled(false);
 		PasswordtextField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		PasswordtextField.setColumns(10);
-		PasswordtextField.setBounds(240, 250, 188, 37);
+		PasswordtextField.setBounds(240, 250, 188, 30);
 		add(PasswordtextField);
 
 		JLabel lblSubscriptionMethod = new JLabel("Subscription Method:");
 		lblSubscriptionMethod.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblSubscriptionMethod.setBounds(34, 350, 177, 34);
+		lblSubscriptionMethod.setBounds(34, 450, 177, 30);
 		add(lblSubscriptionMethod);
 
 		JLabel lblFinishdatesub = new JLabel("Finish Date Subscription:");
 		lblFinishdatesub.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblFinishdatesub.setBounds(34, 400, 213, 34);
+		lblFinishdatesub.setBounds(34, 500, 213, 30);
 		add(lblFinishdatesub);
 
 		// create button and there object
@@ -296,14 +322,14 @@ public class UpdateUserInfoGUI extends JPanel {
 			}
 		});
 		// set button bound
-		btnChooseDate.setBounds(426, 400, 153, 37);
+		btnChooseDate.setBounds(426, 500, 153, 30);
 		// add button in contentPane
 		add(btnChooseDate);
 
 		txtFinishDate = new JTextField();
 		txtFinishDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtFinishDate.setEnabled(false);
-		txtFinishDate.setBounds(240, 400, 188, 37);
+		txtFinishDate.setBounds(240, 500, 188, 30);
 		add(txtFinishDate);
 		txtFinishDate.setColumns(10);
 

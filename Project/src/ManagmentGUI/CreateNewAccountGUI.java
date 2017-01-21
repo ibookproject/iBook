@@ -128,7 +128,7 @@ public class CreateNewAccountGUI extends JPanel {
 					warnings += "First name - Must contain only English letters\n";
 				if (!Validation.NameValidation(txtLastName.getText().trim(), 20))
 					warnings += "Last name - Must contain only English letters";
-				if (warnings.equalsIgnoreCase("ERROR :\n")) {
+				if (warnings.equals("ERROR :\n")) {
 					if (!(txtUserID.getText() == "" || txtIdentity.getText() == "" || txtPassword.getText() == ""
 							|| txtFirstName.getText() == "" || txtLastName.getText() == "")) {
 						User u = new User(txtUserID.getText(), txtIdentity.getText(), txtPassword.getText(),
