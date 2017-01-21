@@ -78,74 +78,75 @@ public class AddOrUpdateBookGUI extends JPanel {
 		
 		 summary = new JTextArea();
 		 summary.setLineWrap(true);
-		summary.setBounds(119, 306, 169, 69);
+		summary.setBounds(119, 400, 169, 99);
 		add(summary);
 		
 		JLabel lblPrice = new JLabel("Price:");
 		lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPrice.setBounds(26, 265, 62, 30);
+		lblPrice.setBounds(26, 350, 62, 30);
 		add(lblPrice);
 		JLabel lblPleaseFillThe = new JLabel("please fill the fields : ");
-		lblPleaseFillThe.setBounds(119, 69, 140, 14);
+		lblPleaseFillThe.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPleaseFillThe.setBounds(119, 69, 200, 20);
 		add(lblPleaseFillThe);
 		
 		JLabel lblTitle = new JLabel("Title :");
 		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTitle.setBounds(26, 94, 62, 14);
+		lblTitle.setBounds(26, 100, 62, 20);
 		add(lblTitle);
 		
 		JLabel lblLanguage = new JLabel("Language : ");
 		lblLanguage.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblLanguage.setBounds(26, 124, 86, 14);
+		lblLanguage.setBounds(26, 150, 86, 20);
 		add(lblLanguage);
 		
 		JLabel lblSummary = new JLabel("Summary :");
 		lblSummary.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblSummary.setBounds(26, 321, 84, 30);
+		lblSummary.setBounds(26, 400, 84, 30);
 		add(lblSummary);
 		
 		JLabel lblContents = new JLabel("Contents : ");
 		lblContents.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblContents.setBounds(26, 155, 102, 30);
+		lblContents.setBounds(26, 200, 102, 20);
 		add(lblContents);
 		
 		JLabel lblKeywords = new JLabel("Keywords : ");
 		lblKeywords.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblKeywords.setBounds(26, 196, 102, 20);
+		lblKeywords.setBounds(26, 250, 102, 20);
 		add(lblKeywords);
 		
 		JLabel lblAuthor = new JLabel("Author :");
 		lblAuthor.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAuthor.setBounds(26, 240, 74, 14);
+		lblAuthor.setBounds(26, 300, 74, 30);
 		add(lblAuthor);
 		
 		title = new JTextField();
-		title.setBounds(138, 93, 121, 20);
+		title.setBounds(138, 100, 121, 30);
 		add(title);
 		title.setColumns(10);
 		
 		lang = new JTextField();
-		lang.setBounds(138, 123, 121, 20);
+		lang.setBounds(138, 150, 121, 30);
 		add(lang);
 		lang.setColumns(10);
 		
 		contents = new JTextField();
-		contents.setBounds(138, 162, 121, 20);
+		contents.setBounds(138, 200, 121, 30);
 		add(contents);
 		contents.setColumns(10);
 		
 		keyword = new JTextField();
-		keyword.setBounds(138, 198, 121, 20);
+		keyword.setBounds(138, 250, 121, 30);
 		add(keyword);
 		keyword.setColumns(10);
 		
 		author = new JTextField();
-		author.setBounds(138, 239, 121, 20);
+		author.setBounds(138, 300, 121, 30);
 		add(author);
 		author.setColumns(10);
 		
 		price = new JTextField();
-		price.setBounds(138, 275, 121, 20);
+		price.setBounds(138, 350, 121, 30);
 		add(price);
 		price.setColumns(10);
 		
@@ -169,6 +170,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 		}
 
 		JButton btnAdd = new JButton();
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -239,7 +241,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 			btnAdd.setText("Add book");
 			else if(ISUpdateOrAdd==0)
 				btnAdd.setText("Update book");
-		btnAdd.setBounds(374, 436, 120, 23);
+		btnAdd.setBounds(372, 531, 120, 30);
 		add(btnAdd);	
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png"); 
 		 btnBack = new JButton(backIcon);
