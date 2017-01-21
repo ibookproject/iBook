@@ -50,6 +50,7 @@ public class InventoryManagmentGUI extends JPanel {
 		add(lblinventoryGif);
 		
 		JButton btnDelete = new JButton("Delete book");
+		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -66,9 +67,10 @@ public class InventoryManagmentGUI extends JPanel {
 		});
 	
 		
-		btnDelete.setBounds(245, 176, 103, 23);
+		btnDelete.setBounds(191, 176, 145, 30);
 		add(btnDelete);
 		JButton btnAddupdate = new JButton("Add book");
+		btnAddupdate.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnAddupdate.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -82,7 +84,7 @@ public class InventoryManagmentGUI extends JPanel {
 				screen.setContentPane(aOu);//send to search book window
 			}
 		});
-		btnAddupdate.setBounds(378, 176, 122, 23);
+		btnAddupdate.setBounds(366, 176, 122, 30);
 		add(btnAddupdate);
 		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
 		 btnBack = new JButton(backIcon);
@@ -90,6 +92,7 @@ public class InventoryManagmentGUI extends JPanel {
 		add(btnBack);
 		
 		JButton btnUpdateBook = new JButton("Update book");
+		btnUpdateBook.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnUpdateBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -103,7 +106,7 @@ public class InventoryManagmentGUI extends JPanel {
 				screen.setContentPane(search);//send to search book window
 			}
 		});
-		btnUpdateBook.setBounds(524, 176, 128, 23);
+		btnUpdateBook.setBounds(512, 176, 145, 30);
 		add(btnUpdateBook);
 	
 	}
