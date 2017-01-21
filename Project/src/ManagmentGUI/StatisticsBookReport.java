@@ -35,6 +35,7 @@ import client.DBgenericObject;
 
 import javax.swing.JTextArea;
 import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
 
 public class StatisticsBookReport extends JPanel {
 
@@ -47,7 +48,7 @@ public class StatisticsBookReport extends JPanel {
 	private JLabel lblSearchersdb;
 	private JProgressBar progressBar;
 	private JPanel insidePanel;
-	private JLabel lblError;
+	private JLabel lblResult;
 
 	public StatisticsBookReport(LoginGUI screen) {
 		super();
@@ -62,10 +63,10 @@ public class StatisticsBookReport extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Statistics Book Report");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(355, 49, 175, 22);
-		add(lblNewLabel);
+		JLabel lblHeader = new JLabel("Statistics Book Report");
+		lblHeader.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblHeader.setBounds(355, 49, 175, 22);
+		add(lblHeader);
 
 		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);
@@ -77,25 +78,27 @@ public class StatisticsBookReport extends JPanel {
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 
-		lblOrdersdb = new JLabel("");
+	/*	lblOrdersdb = new JLabel("");
 		lblOrdersdb.setBounds(236, 182, 46, 14);
 		add(lblOrdersdb);
 
 		lblSearchersdb = new JLabel("");
 		lblSearchersdb.setBounds(236, 224, 46, 14);
-		add(lblSearchersdb);
+		add(lblSearchersdb);*/
 
 		insidePanel = new JPanel();
-		insidePanel.setBounds(219, 98, 430, 427);
+		insidePanel.setBounds(241, 156, 430, 427);
 		add(insidePanel);
 		
-		lblError = new JLabel("");
-		lblError.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		insidePanel.add(lblError);
+		lblResult = new JLabel("");
+		lblResult.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResult.setBounds(241, 96, 430, 33);
+		add(lblResult);
+		lblResult.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 	}
 
-	public void setResult(int purchase, int searches) {
+	public void setResult(int purchase, int searches , int bookid) {
 		if (purchase != 0 || searches != 0) {
 			HistogramPanel histogramPan = new HistogramPanel();
 			histogramPan.addHistogramColumn("Purchase", purchase, Color.RED);
@@ -103,11 +106,15 @@ public class StatisticsBookReport extends JPanel {
 			histogramPan.layoutHistogram();
 			insidePanel.add(histogramPan);
 			insidePanel.updateUI();
+			Book b=new Book();
+			ArrayList<Book> ab = new ArrayList<Book>();
+			ab = BookController.SearchBook("title,author", b, "bookID =\"" + bookid + "\"" , screen.getClient());
+			lblResult.setText("The Book: " + ab.get(0).getTitle() + "                BY: "+ab.get(0).getAuthor());
 		}
 		else
 		{
-			lblError.setText("There is no purchase or searches to this book :(");
-			lblError.setForeground(Color.RED);
+			lblResult.setText("There is no purchase or searches to this book :(");
+			lblResult.setForeground(Color.RED);
 		}
 	}
 		

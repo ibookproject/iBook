@@ -36,7 +36,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.spi.CalendarNameProvider;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
@@ -47,9 +49,11 @@ public class BookStatisticsPanel extends JPanel {
 	private JTextField txtToDate;
 	private ArrayList<Cart> cartRes;
 	private ArrayList<SearchToBook> searcRes;
+	private Date from;
+	private Date to;
 	// private java.util.Date date;
 
-	public BookStatisticsPanel(LoginGUI screen, Book b , JPanel pann) {
+	public BookStatisticsPanel(LoginGUI screen, Book b, JPanel pann) {
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 139, 87)));
 		setPreferredSize(new Dimension(604, 175));
@@ -95,97 +99,130 @@ public class BookStatisticsPanel extends JPanel {
 		add(lblFromDate);
 
 		txtFromDate = new JTextField();
-		txtFromDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtFromDate.setEditable(false);
+		txtFromDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtFromDate.setBounds(355, 25, 97, 30);
 		add(txtFromDate);
 		txtFromDate.setColumns(10);
 
-		JLabel lblToDate = new JLabel("to date:");
+		JLabel lblToDate = new JLabel("To date:");
 		lblToDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblToDate.setBounds(269, 71, 87, 14);
 		add(lblToDate);
 
 		txtToDate = new JTextField();
-		txtToDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtToDate.setEditable(false);
+		txtToDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtToDate.setBounds(355, 63, 97, 31);
 		add(txtToDate);
 		txtToDate.setColumns(10);
-		
-		//create button and there object
+
+		// create button and there object
 		JButton btnChooseFromDate = new JButton("Choose Date");
 		btnChooseFromDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		//perform action listener
-		btnChooseFromDate.addActionListener(new ActionListener() 
-		{	
-			//performed action
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				//create frame new object  f
+		// perform action listener
+		btnChooseFromDate.addActionListener(new ActionListener() {
+			// performed action
+			public void actionPerformed(ActionEvent arg0) {
+				// create frame new object f
 				JFrame f = new JFrame();
 				f.setLocation(400, 400);
 				f.setBounds(200, 200, 200, 200);
-				//set text which is collected by date picker i.e. set date 
-				txtFromDate.setText(new DatePicker(f).setPickedDate());
+				// set text which is collected by date picker i.e. set date
+				String dfrom = new DatePicker(f).setPickedDate();
+				txtFromDate.setText(dfrom);
+				DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+				try {
+					from = (Date) format.parse(dfrom);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		});
-		//set button bound
+		// set button bound
 		btnChooseFromDate.setBounds(451, 25, 126, 30);
-		//add button in contentPane
+		// add button in contentPane
 		add(btnChooseFromDate);
-		
+
 		JButton btnChooseToDate = new JButton("Choose Date");
 		btnChooseToDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnChooseToDate.addActionListener(new ActionListener() 
-		{	
-			//performed action
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				//create frame new object  f
+		btnChooseToDate.addActionListener(new ActionListener() {
+			// performed action
+			public void actionPerformed(ActionEvent arg0) {
+				// create frame new object f
 				JFrame f = new JFrame();
 				f.setLocation(400, 400);
 				f.setBounds(200, 200, 200, 200);
-				//set text which is collected by date picker i.e. set date 
-				txtToDate.setText(new DatePicker(f).setPickedDate());
+				// set text which is collected by date picker i.e. set date
+				String dfrom = new DatePicker(f).setPickedDate();
+				txtToDate.setText(dfrom);
+				DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+				try {
+					to = (Date) format.parse(dfrom);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnChooseToDate.setBounds(451, 63, 126, 31);
 		add(btnChooseToDate);
 		btnGetStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				////////////////////////button to back panel from panel /////////////////////////////////////////////
-				StatisticsBookReport sbr=new StatisticsBookReport(screen);
+				//////////////////////// button to back panel from panel
+				//////////////////////// /////////////////////////////////////////////
+				StatisticsBookReport sbr = new StatisticsBookReport(screen);
 				sbr.btnBack.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							screen.setContentPane(pann);
-						}});
-				screen.setContentPane(sbr);//send to search book window	
-				int NumberOfSearches=0;
-				int NumberOfCarts = 0;
-				Cart c = new Cart();
-				SearchToBook stb = new SearchToBook();
-				cartRes = CartController.SearchCart("userID", c, "buyDate between '"+ txtFromDate.getText() +"' AND '"+txtToDate.getText()+"' && bookID=\""+ b.getBookID()+ "\" && status=\""+ 1 + "\"",screen.getClient());//call search book method from book controller
-				searcRes = BookController.SearchSearchToBook("numberOfSearches", stb, "SearchDate between '"+ txtFromDate.getText() +"' AND '"+txtToDate.getText()+"' && bookID=\""+ b.getBookID()+ "\"",screen.getClient());//call search book method from book controller
-				if(cartRes != null)
-					NumberOfCarts = cartRes.size();
-				if(searcRes != null){
-					for(SearchToBook stb2: searcRes)
-						NumberOfSearches += stb2.getNumberOfSearches();	
-				}	
-				sbr.setResult(NumberOfCarts, NumberOfSearches);
-				/* HistogramPanel panel = new HistogramPanel();
-			        panel.addHistogramColumn("Kokoriko", 100, Color.RED);
-			        panel.addHistogramColumn("B", 690, Color.YELLOW);
-			       
-				sbr.add(panel);*/
+					public void actionPerformed(ActionEvent e) {
+						screen.setContentPane(pann);
+					}
+				});
+
+				if ((!txtToDate.getText().equals("")) && (!txtFromDate.getText().equals(""))) {
+					if (from.before(to)) {
+						screen.setContentPane(sbr);// send to search book window
+						int NumberOfSearches = 0;
+						int NumberOfCarts = 0;
+						int bookid = 0;
+						Cart c = new Cart();
+						SearchToBook stb = new SearchToBook();
+						cartRes = CartController.SearchCart("bookID", c,
+								"buyDate between '" + txtFromDate.getText() + "' AND '" + txtToDate.getText()
+										+ "' && bookID=\"" + b.getBookID() + "\" && status=\"" + 1 + "\"",
+								screen.getClient());// call search book method
+													// from
+													// book controller
+						searcRes = BookController.SearchSearchToBook(
+								"bookID,numberOfSearches", stb, "SearchDate between '" + txtFromDate.getText()
+										+ "' AND '" + txtToDate.getText() + "' && bookID=\"" + b.getBookID() + "\"",
+								screen.getClient());// call search book method
+													// from
+													// book controller
+						if (cartRes != null) {
+							NumberOfCarts = cartRes.size();
+							bookid = cartRes.get(0).getBookID();
+						}
+						if (searcRes != null) {
+							for (SearchToBook stb2 : searcRes)
+								NumberOfSearches += stb2.getNumberOfSearches();
+							bookid = searcRes.get(0).getBookID();
+						}
+						sbr.setResult(NumberOfCarts, NumberOfSearches, bookid);
+
+					} else
+						JOptionPane.showMessageDialog(screen, "'from' date need to be before 'to' date.\nTry again.",
+								"Warning", JOptionPane.WARNING_MESSAGE);
+
+				} else
+					JOptionPane.showMessageDialog(screen, "One of the dates fields are empty.\nTry again", "Warning",
+							JOptionPane.WARNING_MESSAGE);
 			}
-			});
+		});
 
 	}
 }
 // how to print the date right now:
 // String dateRightNow = new
 // SimpleDateFormat("yyyy/MM/dd").format(cal.getTime());
-

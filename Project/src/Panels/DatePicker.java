@@ -136,9 +136,15 @@ public class DatePicker
         	for (int x = 6 + dayOfWeek, day = 1; day <= daysInMonth; x++, day++)
         	//set text
         	button[x].setText("" + day);
+        	
         	l.setText(sdf.format(cal.getTime()));
         	//set title
         	d.setTitle("Date Picker");
+        	for(int x=0;x<49;x++)
+                if(button[x].getText()=="")
+             	   button[x].setEnabled(false);
+                else
+                	 button[x].setEnabled(true);
         }
  
         public String setPickedDate() 
