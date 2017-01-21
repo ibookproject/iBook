@@ -29,6 +29,7 @@ import Controller.CartController;
 import MenuGUI.LoginGUI;
 import Panels.*;
 import client.DBgenericObject;
+import javax.swing.SwingConstants;
 
 
 /**
@@ -64,8 +65,9 @@ public class StatisticsUserReportGUI extends JPanel
 		this.setLayout(null);	
 		
 		userReportLbl = new JLabel("Statistics User Report");
-		userReportLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		userReportLbl.setBounds(355, 49, 175, 22);
+		userReportLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		userReportLbl.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		userReportLbl.setBounds(355, 49, 236, 22);
 		add(userReportLbl);
 		
 		backIcon =new ImageIcon("src/images/backIcon.png");
@@ -75,17 +77,20 @@ public class StatisticsUserReportGUI extends JPanel
 		
 
 		textFieldID = new JTextField("");
-		textFieldID.setBounds(320, 129, 116, 22);
+		textFieldID.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldID.setBounds(320, 130, 116, 30);
 		add(textFieldID);
 		textFieldID.setColumns(10);
 
 		
 		lblUserID = new JLabel("User ID:");
-		lblUserID.setBounds(238, 133, 70, 14);
+		lblUserID.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblUserID.setBounds(218, 130, 70, 20);
 		add(lblUserID);
 				
 		lblDate = new JLabel("From Date:");
-		lblDate.setBounds(238, 180, 70, 22);
+		lblDate.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblDate.setBounds(192, 181, 96, 20);
 		add(lblDate);
 		
 		scrollPaneMain = new JScrollPane();
@@ -103,14 +108,16 @@ public class StatisticsUserReportGUI extends JPanel
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		txtFromDate = new JTextField();
+		txtFromDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtFromDate.setBackground(Color.WHITE);
 		txtFromDate.setEditable(false);
-		txtFromDate.setBounds(320, 181, 116, 20);
+		txtFromDate.setBounds(320, 181, 116, 30);
 		add(txtFromDate);
 		txtFromDate.setColumns(10);
 		
 		//create button and there object
 		JButton btnChooseFromDate = new JButton("Choose Date");
+		btnChooseFromDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		//perform action listener
 		btnChooseFromDate.addActionListener(new ActionListener() 
 		{	
@@ -126,7 +133,7 @@ public class StatisticsUserReportGUI extends JPanel
 
 			}
 		});
-		btnChooseFromDate.setBounds(448, 180, 116, 22);
+		btnChooseFromDate.setBounds(435, 181, 143, 30);
 		add(btnChooseFromDate);
 		
 		/**
@@ -137,6 +144,7 @@ public class StatisticsUserReportGUI extends JPanel
 		 */
 
 		btnGetReports = new JButton("Get report");
+		btnGetReports.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnGetReports.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -169,7 +177,7 @@ public class StatisticsUserReportGUI extends JPanel
 				}
 			}	
 		});
-		btnGetReports.setBounds(598, 129, 107, 23);
+		btnGetReports.setBounds(598, 129, 125, 30);
 		add(btnGetReports);
 	}
 }

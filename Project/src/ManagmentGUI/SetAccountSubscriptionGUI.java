@@ -61,8 +61,8 @@ public class SetAccountSubscriptionGUI extends JPanel {
 		this.setLayout(null);
 
 		JLabel lblHeaderSetAccountSubscription = new JLabel("Set Account Subscription");
-		lblHeaderSetAccountSubscription.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblHeaderSetAccountSubscription.setBounds(355, 49, 207, 22);
+		lblHeaderSetAccountSubscription.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblHeaderSetAccountSubscription.setBounds(355, 49, 260, 22);
 		add(lblHeaderSetAccountSubscription);
 
 		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
@@ -74,8 +74,8 @@ public class SetAccountSubscriptionGUI extends JPanel {
 		ButtonGroup group = new ButtonGroup();
 		
 		JLabel lblListOfUsers = new JLabel("LIST OF USERS WITH REQUESTED SUBSCRIPTION");
-		lblListOfUsers.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblListOfUsers.setBounds(287, 111, 369, 33);
+		lblListOfUsers.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblListOfUsers.setBounds(238, 110, 452, 33);
 		add(lblListOfUsers);
 
 		scrollPaneMain = new JScrollPane();

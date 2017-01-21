@@ -86,8 +86,8 @@ public class ConfirmationReviewGUI extends JPanel {
 		add(btnBack);
 		
 		confirmLbl = new JLabel("Confirmation Review");
-		confirmLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		confirmLbl.setBounds(355, 35, 175, 22);
+		confirmLbl.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		confirmLbl.setBounds(355, 35, 219, 22);
 		add(confirmLbl);
 		
 		scrollPaneMain = new JScrollPane();
@@ -113,7 +113,8 @@ public class ConfirmationReviewGUI extends JPanel {
 		}
 		
 		btnNotConfirm = new JButton("Not Confirm");
-		btnNotConfirm.setBounds(375, 544, 109, 25);
+		btnNotConfirm.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNotConfirm.setBounds(375, 544, 131, 30);
 		btnNotConfirm.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -149,6 +150,7 @@ public class ConfirmationReviewGUI extends JPanel {
 		add(btnNotConfirm);
 		
 		btnConfirm = new JButton("Confirm");
+		btnConfirm.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnConfirm.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -183,7 +185,7 @@ public class ConfirmationReviewGUI extends JPanel {
 					JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		});
-		btnConfirm.setBounds(238, 544, 109, 25);
+		btnConfirm.setBounds(238, 544, 109, 30);
 		add(btnConfirm);
 	}
 	

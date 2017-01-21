@@ -29,6 +29,7 @@ import Controller.ReviewController;
 import MenuGUI.LoginGUI;
 import Panels.BookStatisticsPanel;
 import Panels.SearchReviewPanel;
+import javax.swing.SwingConstants;
 
 /**
  * 
@@ -79,8 +80,9 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		this.setLayout(null);
 
 		JLabel lblHeader = new JLabel("Temporary Remove Book");
-		lblHeader.setFont(new Font("BN Elements", Font.BOLD, 20));
-		lblHeader.setBounds(242, 32, 351, 53);
+		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHeader.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 21));
+		lblHeader.setBounds(242, 32, 257, 53);
 		add(lblHeader);
 
 		JLabel lblNameOfAuthor = new JLabel("name of author:");

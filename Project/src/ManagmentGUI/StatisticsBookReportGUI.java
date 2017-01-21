@@ -33,6 +33,7 @@ import Role.User;
 import client.DBgenericObject;
 
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class StatisticsBookReportGUI extends JPanel {
 
@@ -58,8 +59,9 @@ public class StatisticsBookReportGUI extends JPanel {
 		this.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Statistics Book Report");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(355, 49, 175, 22);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblNewLabel.setBounds(355, 49, 234, 22);
 		add(lblNewLabel);
 
 		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
@@ -68,8 +70,8 @@ public class StatisticsBookReportGUI extends JPanel {
 		add(btnBack);
 
 		JLabel lblBookName = new JLabel("Book title:");
-		lblBookName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblBookName.setBounds(153, 111, 91, 19);
+		lblBookName.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblBookName.setBounds(147, 111, 91, 19);
 		add(lblBookName);
 
 		textFieldBookTitle = new JTextField();
@@ -79,8 +81,8 @@ public class StatisticsBookReportGUI extends JPanel {
 		add(textFieldBookTitle);
 
 		JLabel lblAuthor = new JLabel("Author name:");
-		lblAuthor.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAuthor.setBounds(429, 111, 100, 19);
+		lblAuthor.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblAuthor.setBounds(417, 111, 112, 19);
 		add(lblAuthor);
 
 		textFieldAuthor = new JTextField();
@@ -104,7 +106,7 @@ public class StatisticsBookReportGUI extends JPanel {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		Book b = new Book();
 		JButton btnSearch = new JButton("Search");
-		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//////////////////////// button to back panel from panel

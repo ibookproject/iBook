@@ -64,8 +64,9 @@ public class StatisticsBookReport extends JPanel {
 		this.setLayout(null);
 
 		JLabel lblHeader = new JLabel("Statistics Book Report");
-		lblHeader.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblHeader.setBounds(355, 49, 175, 22);
+		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHeader.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblHeader.setBounds(355, 49, 240, 22);
 		add(lblHeader);
 
 		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
@@ -92,9 +93,9 @@ public class StatisticsBookReport extends JPanel {
 		
 		lblResult = new JLabel("");
 		lblResult.setHorizontalAlignment(SwingConstants.CENTER);
-		lblResult.setBounds(241, 96, 430, 33);
+		lblResult.setBounds(166, 96, 571, 33);
 		add(lblResult);
-		lblResult.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblResult.setFont(new Font("Tahoma", Font.BOLD, 16));
 
 	}
 

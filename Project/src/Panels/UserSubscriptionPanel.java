@@ -44,9 +44,9 @@ public class UserSubscriptionPanel extends JPanel{
 		setPreferredSize(new Dimension(577, 138));
 		setLayout(null);
 		JButton btnConfirmSubscription = new JButton("Confirm");
-		btnConfirmSubscription.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnConfirmSubscription.setFont(new Font("Tahoma", Font.BOLD, 16));
 		JButton btnRejectSubscription = new JButton("Reject");
-		btnRejectSubscription.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnRejectSubscription.setFont(new Font("Tahoma", Font.BOLD, 16));
 
 
 		btnConfirmSubscription.addActionListener(new ActionListener() {

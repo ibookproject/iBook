@@ -78,7 +78,7 @@ public class UpdateUserInfoGUI extends JPanel {
 
 		JLabel lblTitel = new JLabel("Update User Information");
 		lblTitel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		lblTitel.setBounds(341, 30, 289, 45);
+		lblTitel.setBounds(341, 30, 263, 45);
 		add(lblTitel);
 
 		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");

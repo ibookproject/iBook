@@ -227,35 +227,41 @@ public class BookRateGUI extends JPanel {
 		
 		
 		lblBookRate = new JLabel("Book Rate");
-		lblBookRate.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblBookRate.setBounds(361, 33, 195, 46);
+		lblBookRate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblBookRate.setBounds(361, 33, 117, 46);
 		add(lblBookRate);
 		
 		lblNameOfAuthor = new JLabel("name of author:");
-		lblNameOfAuthor.setBounds(398, 92, 108, 19);
+		lblNameOfAuthor.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNameOfAuthor.setBounds(415, 90, 131, 30);
 		add(lblNameOfAuthor);
 		
 		textFieldAutohr = new JTextField();
-		textFieldAutohr.setBounds(504, 91, 86, 20);
+		textFieldAutohr.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldAutohr.setBounds(550, 90, 86, 30);
 		add(textFieldAutohr);
 		textFieldAutohr.setColumns(10);
 		
 		lblNameOfBook = new JLabel("name of book:");
-		lblNameOfBook.setBounds(213, 94, 111, 19);
+		lblNameOfBook.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNameOfBook.setBounds(161, 90, 117, 30);
 		add(lblNameOfBook);
 		
 		textFieldBook = new JTextField();
-		textFieldBook.setBounds(300, 90, 86, 20);
+		textFieldBook.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldBook.setBounds(285, 90, 86, 30);
 		add(textFieldBook);
 		textFieldBook.setColumns(10);
 		
 		
 		rdbtnAbsoluteRate = new JRadioButton("Absolute Rate");
-		rdbtnAbsoluteRate.setBounds(278, 193, 123, 25);
+		rdbtnAbsoluteRate.setFont(new Font("Tahoma", Font.BOLD, 16));
+		rdbtnAbsoluteRate.setBounds(225, 188, 146, 30);
 		add(rdbtnAbsoluteRate);
 		
 		rdbtnProportionRate = new JRadioButton("Proportion Rate");
-		rdbtnProportionRate.setBounds(468, 193, 123, 25);
+		rdbtnProportionRate.setFont(new Font("Tahoma", Font.BOLD, 16));
+		rdbtnProportionRate.setBounds(468, 193, 157, 25);
 		add(rdbtnProportionRate);
 		
 		ButtonGroup group = new ButtonGroup();
@@ -274,10 +280,11 @@ public class BookRateGUI extends JPanel {
 				System.out.println(bookId);
 			}
 		});
-		comboBoxChooseBook.setBounds(225, 141, 412, 20);
+		comboBoxChooseBook.setBounds(225, 141, 412, 30);
 		add(comboBoxChooseBook);
 		
 		JButton btnSearch = new JButton("Search");
+		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -311,10 +318,11 @@ public class BookRateGUI extends JPanel {
 				 	}
 				 }
 			}); 
-		btnSearch.setBounds(645, 88, 89, 23);
+		btnSearch.setBounds(687, 90, 89, 30);
 		add(btnSearch);
 		
 		JButton btnSelect = new JButton("Select");
+		btnSelect.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSelect.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 

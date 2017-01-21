@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class AddOrUpdateBookGUI extends JPanel {
 
@@ -68,85 +69,86 @@ public class AddOrUpdateBookGUI extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);	
 		JLabel lblAddUpdate = new JLabel();
+		lblAddUpdate.setHorizontalAlignment(SwingConstants.CENTER);
 		if(ISUpdateOrAdd==1)
 		 lblAddUpdate.setText("Add book");
 		else if(ISUpdateOrAdd==0)
 			 lblAddUpdate.setText("Update book");
-		lblAddUpdate.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblAddUpdate.setBounds(346, 26, 217, 30);
+		lblAddUpdate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblAddUpdate.setBounds(246, 26, 411, 30);
 		add(lblAddUpdate);
 		
 		 summary = new JTextArea();
 		 summary.setLineWrap(true);
-		summary.setBounds(119, 400, 169, 99);
+		summary.setBounds(119, 430, 169, 99);
 		add(summary);
 		
 		JLabel lblPrice = new JLabel("Price:");
-		lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPrice.setBounds(26, 350, 62, 30);
+		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPrice.setBounds(26, 380, 62, 30);
 		add(lblPrice);
 		JLabel lblPleaseFillThe = new JLabel("please fill the fields : ");
 		lblPleaseFillThe.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPleaseFillThe.setBounds(119, 69, 200, 20);
+		lblPleaseFillThe.setBounds(119, 89, 200, 20);
 		add(lblPleaseFillThe);
 		
 		JLabel lblTitle = new JLabel("Title :");
-		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTitle.setBounds(26, 100, 62, 20);
+		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblTitle.setBounds(26, 130, 62, 20);
 		add(lblTitle);
 		
 		JLabel lblLanguage = new JLabel("Language : ");
-		lblLanguage.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblLanguage.setBounds(26, 150, 86, 20);
+		lblLanguage.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblLanguage.setBounds(26, 180, 102, 20);
 		add(lblLanguage);
 		
 		JLabel lblSummary = new JLabel("Summary :");
-		lblSummary.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblSummary.setBounds(26, 400, 84, 30);
+		lblSummary.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblSummary.setBounds(26, 430, 89, 30);
 		add(lblSummary);
 		
 		JLabel lblContents = new JLabel("Contents : ");
-		lblContents.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblContents.setBounds(26, 200, 102, 20);
+		lblContents.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblContents.setBounds(26, 230, 102, 20);
 		add(lblContents);
 		
 		JLabel lblKeywords = new JLabel("Keywords : ");
-		lblKeywords.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblKeywords.setBounds(26, 250, 102, 20);
+		lblKeywords.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblKeywords.setBounds(26, 280, 102, 20);
 		add(lblKeywords);
 		
 		JLabel lblAuthor = new JLabel("Author :");
-		lblAuthor.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAuthor.setBounds(26, 300, 74, 30);
+		lblAuthor.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblAuthor.setBounds(26, 330, 74, 30);
 		add(lblAuthor);
 		
 		title = new JTextField();
-		title.setBounds(138, 100, 121, 30);
+		title.setBounds(138, 130, 121, 30);
 		add(title);
 		title.setColumns(10);
 		
 		lang = new JTextField();
-		lang.setBounds(138, 150, 121, 30);
+		lang.setBounds(138, 180, 121, 30);
 		add(lang);
 		lang.setColumns(10);
 		
 		contents = new JTextField();
-		contents.setBounds(138, 200, 121, 30);
+		contents.setBounds(138, 230, 121, 30);
 		add(contents);
 		contents.setColumns(10);
 		
 		keyword = new JTextField();
-		keyword.setBounds(138, 250, 121, 30);
+		keyword.setBounds(138, 280, 121, 30);
 		add(keyword);
 		keyword.setColumns(10);
 		
 		author = new JTextField();
-		author.setBounds(138, 300, 121, 30);
+		author.setBounds(138, 330, 121, 30);
 		add(author);
 		author.setColumns(10);
 		
 		price = new JTextField();
-		price.setBounds(138, 350, 121, 30);
+		price.setBounds(138, 380, 121, 30);
 		add(price);
 		price.setColumns(10);
 		

@@ -59,8 +59,8 @@ public class BookStatisticsPanel extends JPanel {
 		setPreferredSize(new Dimension(604, 175));
 		setLayout(null);
 		JButton btnGetStatistics = new JButton("Get Statistics");
-		btnGetStatistics.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnGetStatistics.setBounds(395, 114, 131, 29);
+		btnGetStatistics.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnGetStatistics.setBounds(395, 114, 141, 29);
 		add(btnGetStatistics);
 
 		JLabel lblBookid = new JLabel("Book ID:");

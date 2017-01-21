@@ -18,6 +18,7 @@ import Controller.UserController;
 import MenuGUI.LoginGUI;
 import Role.User;
 import Panels.Validation;
+import javax.swing.SwingConstants;
 
 public class CreateNewAccountGUI extends JPanel {
 
@@ -45,8 +46,9 @@ public class CreateNewAccountGUI extends JPanel {
 		this.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Create New Account");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(355, 49, 175, 22);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblNewLabel.setBounds(355, 49, 257, 26);
 		add(lblNewLabel);
 
 		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
@@ -61,18 +63,18 @@ public class CreateNewAccountGUI extends JPanel {
 		add(btnCreate);
 
 		JLabel lblFirstName = new JLabel("First Name:");
-		lblFirstName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblFirstName.setBounds(39, 273, 89, 20);
+		lblFirstName.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblFirstName.setBounds(39, 273, 120, 20);
 		add(lblFirstName);
 
 		JLabel lblLastName = new JLabel("Last Name:");
-		lblLastName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblLastName.setBounds(39, 333, 89, 20);
+		lblLastName.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblLastName.setBounds(39, 333, 120, 20);
 		add(lblLastName);
 
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPassword.setBounds(39, 393, 89, 20);
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPassword.setBounds(39, 393, 120, 20);
 		add(lblPassword);
 
 		txtFirstName = new JTextField();
@@ -91,7 +93,7 @@ public class CreateNewAccountGUI extends JPanel {
 		txtPassword.setColumns(10);
 
 		JLabel lblUserId = new JLabel("User ID:");
-		lblUserId.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblUserId.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblUserId.setBounds(39, 153, 89, 20);
 		add(lblUserId);
 
@@ -106,8 +108,8 @@ public class CreateNewAccountGUI extends JPanel {
 		add(lblAnswermessage);
 
 		JLabel lblIdentity = new JLabel("Identity Number:");
-		lblIdentity.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblIdentity.setBounds(39, 213, 122, 20);
+		lblIdentity.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblIdentity.setBounds(39, 213, 153, 20);
 		add(lblIdentity);
 
 		txtIdentity = new JTextField();
