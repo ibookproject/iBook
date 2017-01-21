@@ -174,61 +174,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 
 				 if(ISUpdateOrAdd==1)//means its add flag page 
 				 {
-					 String warnings = "ERROR :\n";
-					  if(Validation.regularValidation(title.getText())==false)
-							warnings += "title field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-					  if(Validation.TitleValidation(title.getText(),20)==false)
-							warnings += "title field - Must contain only English letters or numbers\n";
-
-					  if(Validation.regularValidation(lang.getText())==false)
-							warnings += "language field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-					  if(Validation.NameValidation(lang.getText(), 20)==false)
-							warnings += "language field - Must contain only English letters \n";
-					  
-					  if(Validation.regularValidation(author.getText())==false)
-							warnings += "author field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-					  if(Validation.AuthorValidation(author.getText(), 20)==false)
-							warnings += "author field - Must contain only English letters \n";
-
-				//	  if(Validation.regularValidation(price.getText())==false)
-						//	warnings += "price field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-					String answer= Validation.PriceValidation(price.getText());
-					if(answer!="")
-						warnings +=answer;
-					  
-					/*
-					  int flag=0,cnt=0;
-					  for(int i=0;i<price.getText().length();i++)
-						  if(price.getText().charAt(i)=='.')
-						  {
-							  if(++cnt==2)
-							  {
-									warnings += "price field - Must contain more then 1 '.'  \n";
-									flag=1;
-									break;
-							  }
-						  }
-					  if(flag==0)
-					  for(int i=0;i<price.getText().length();i++)
-						  if((price.getText().charAt(i)>'A'&&price.getText().charAt(i)<'Z')||((price.getText().charAt(i)>'a'&&price.getText().charAt(i)<'z'))&&(price.getText().charAt(i)!='.'))
-						  {
-							warnings += "price field - Must contain only numbers letters \n";
-							flag=1;
-							break;
-						  }
-					  if(flag==0)
-					  for(int i=0;i<price.getText().length();i++)
-						  if(price.getText().charAt(i)=='.'&&(i==0||i==price.getText().length()-1))
-						  {
-									warnings += "price field - Must contain only Ligal Number \n";
-									break;
-						  }
-					  flag=0;
-					  */
-					  
-					  if(Validation.regularValidation(keyword.getText())==false)
-							warnings += "keword field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-						 
+					 String warnings=InputValidation();				 
 					 if(title.getText().isEmpty()||lang.getText().isEmpty()||author.getText().isEmpty()||summary.getText().isEmpty()||contents.getText().isEmpty()||keyword.getText().isEmpty()||price.getText().isEmpty())
 							JOptionPane.showMessageDialog(screen,"please fill all the book fields!! ", "Warning",JOptionPane.WARNING_MESSAGE);
 					 else if(!warnings.equalsIgnoreCase("ERROR :\n"))
@@ -259,30 +205,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 				 }
 				 else // its update
 				 {
-					 String warnings = "ERROR :\n";
-					  if(Validation.regularValidation(title.getText())==false)
-							warnings += "title field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-					  if(Validation.TitleValidation(title.getText(),20)==false)
-							warnings += "title field - Must contain only English letters or numbers\n";
-
-					  if(Validation.regularValidation(lang.getText())==false)
-							warnings += "language field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-					  if(Validation.NameValidation(lang.getText(), 20)==false)
-							warnings += "language field - Must contain only English letters \n";
-					  
-					  if(Validation.regularValidation(author.getText())==false)
-							warnings += "author field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-					  if(Validation.AuthorValidation(author.getText(), 20)==false)
-							warnings += "author field - Must contain only English letters \n";
-
-					//  if(Validation.regularValidation(price.getText())==false)
-						//	warnings += "price field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-						String answer= Validation.PriceValidation(price.getText());
-						if(answer!="")
-							warnings +=answer;
-					  if(Validation.regularValidation(keyword.getText())==false)
-							warnings += "keword field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-						 
+					 String warnings=InputValidation();		
 					 if(title.getText().isEmpty()||lang.getText().isEmpty()||author.getText().isEmpty()||summary.getText().isEmpty()||contents.getText().isEmpty()||keyword.getText().isEmpty()||price.getText().isEmpty())
 							JOptionPane.showMessageDialog(screen,"please fill all the book fields!! ", "Warning",JOptionPane.WARNING_MESSAGE);
 					 else if(!warnings.equalsIgnoreCase("ERROR :\n"))
@@ -328,6 +251,32 @@ public class AddOrUpdateBookGUI extends JPanel {
 		btnBack.setBounds(11, 33, 89, 23);
 		add(btnBack);
 	}
-}
+	public String InputValidation()
+	{
+		 String warnings = "ERROR :\n";
+		  if(Validation.regularValidation(title.getText())==false)
+				warnings += "title field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
+		  if(Validation.TitleValidation(title.getText(),20)==false)
+				warnings += "title field - Must contain only English letters or numbers\n";
 
+		  if(Validation.regularValidation(lang.getText())==false)
+				warnings += "language field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
+		  if(Validation.NameValidation(lang.getText(), 20)==false)
+				warnings += "language field - Must contain only English letters \n";
+		  
+		  if(Validation.regularValidation(author.getText())==false)
+				warnings += "author field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
+		  if(Validation.AuthorValidation(author.getText(), 20)==false)
+				warnings += "author field - Must contain only English letters \n";
+
+	//	  if(Validation.regularValidation(price.getText())==false)
+			//	warnings += "price field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
+		String answer= Validation.PriceValidation(price.getText());
+		if(answer!="")
+			warnings +=answer;
+		  if(Validation.regularValidation(keyword.getText())==false)
+				warnings += "keword field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
+		  return warnings;		
+	}
+}
 

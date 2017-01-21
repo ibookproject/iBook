@@ -112,7 +112,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 	 }
 				 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)
 				 	{
-				 		if(Validation.NameValidation(textFieldAutohr.getText(), 20)==true)
+				 		if(Validation.AuthorValidation(textFieldAutohr.getText(), 20)==true&&Validation.TitleValidation(textFieldBook.getText(), 20)==true&&Validation.regularValidation(textFieldAutohr.getText())==true&&Validation.regularValidation(textFieldBook.getText())==true)
 				 		{
 				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+ "&&"+"bookEnable=\""+1+"\"", screen.getClient());
 				 		 if(tempBooks==null)
@@ -127,12 +127,16 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 							for(int i=0;i<tempBooks.size();i++)
 								comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 				 		 }
-				 		} else {JOptionPane.showMessageDialog(screen,"Not allowed Number at author field! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldAutohr.setText("");}
-
- 
+				 		} else 
+				 		{
+				 			if(Validation.TitleValidation(textFieldBook.getText(), 20)==false||Validation.regularValidation(textFieldBook.getText())==false){JOptionPane.showMessageDialog(screen,"Iligel title field! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldBook.setText("");}
+				 			 if(Validation.AuthorValidation(textFieldAutohr.getText(), 20)==false||Validation.regularValidation(textFieldAutohr.getText())==false){JOptionPane.showMessageDialog(screen,"Iligel author field! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldAutohr.setText("");}
+				 			 }
 				 	}
 			 	else if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty()==false)
 			 	{
+			 		if(Validation.TitleValidation(textFieldBook.getText(), 20)==true&&Validation.regularValidation(textFieldBook.getText())==true)
+			 		{
 			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
@@ -146,10 +150,13 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 			 	for(int i=0;i<tempBooks.size();i++)
 			 			 		comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
+			 		}
+		 		else {JOptionPane.showMessageDialog(screen," Iligal title field! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldBook.setText("");}
+
 			 	}
 			 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty())
 			 	{
-			 		if(Validation.NameValidation(textFieldAutohr.getText(), 20)==true)
+			 		if(Validation.AuthorValidation(textFieldAutohr.getText(), 20)==true&&Validation.regularValidation(textFieldAutohr.getText())==true)
 			 		{
 			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "+"bookEnable=\""+1+"\"", screen.getClient());
 					 if(tempBooks==null)
@@ -165,7 +172,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 			 	for(int i=0;i<tempBooks.size();i++)
 			 			 		comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
-			 		} else {JOptionPane.showMessageDialog(screen,"Not allowed Number at author field! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldAutohr.setText("");}
+			 		} else {JOptionPane.showMessageDialog(screen,"Iligal author field!! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldAutohr.setText("");}
 
 			 	}
 			}

@@ -76,6 +76,24 @@ public class Validation {
 		
 		return false;
 	}
+	
+	/**
+	 * @author Kfir Girstein
+	 * @param name, the input to validate
+	 * @param len ,the lenght you want to validate
+	 * @return true if contain only engish letters Dot,comma,numbers and the lenght is not above len.(len under 128)
+	 * @return false in any other situation  
+	 */	
+	public static boolean AuthorValidation(String name,int len) {
+		String namePattern = "([A-Za-z .]+)";
+		Pattern pattern = Pattern.compile(namePattern);
+		Matcher matcher = pattern.matcher(name);
+
+		if (matcher.matches()&&name.length()<len&&len<128)
+			return true;
+		
+		return false;
+	}
 	/**
 	 * @author hen saada
 	 * @param name, the input to validate
@@ -113,23 +131,7 @@ public class Validation {
 		  return "";
 	
 	}
-	/**
-	 * @author Kfir Girstein
-	 * @param name, the input to validate
-	 * @param len ,the lenght you want to validate
-	 * @return true if contain only engish letters Dot,comma,numbers and the lenght is not above len.(len under 128)
-	 * @return false in any other situation  
-	 */	
-	public static boolean AuthorValidation(String name,int len) {
-		String namePattern = "([A-Za-z .]+)";
-		Pattern pattern = Pattern.compile(namePattern);
-		Matcher matcher = pattern.matcher(name);
 
-		if (matcher.matches()&&name.length()<len&&len<128)
-			return true;
-		
-		return false;
-	}
 
 
 	/**
