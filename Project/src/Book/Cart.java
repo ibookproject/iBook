@@ -106,12 +106,13 @@ public class Cart extends DBtranslation {
 
 	@Override
 	public String getValToInsert() {
-		return String.format("(%s,%d,%d,%f)", userID, bookID, status, price);
+		//return String.format("(\"%s\",\"%s\",%d,%d)",reviewDate,reviewContent,reviewStatus,bookID);
+		return String.format("(%s,%d,%d,%f,\"%s\")", userID, bookID, status, price,buyDate);
 	}
 
 	@Override
 	public String getAttributeToInsert() {
-		return "(userID,bookID,status,price)";
+		return "(userID,bookID,status,price,buyDate)";
 	}
 
 	public String toString() {
@@ -123,11 +124,7 @@ public class Cart extends DBtranslation {
 		ArrayList<Cart> convertedArr = new ArrayList<Cart>();
 
 		for (DBgenericObject ob : arr)
-			convertedArr.add(convertDBObject(ob, fromSentence));// for each val
-																// in arr this
-																// convert back
-																// to book
-
+			convertedArr.add(convertDBObject(ob, fromSentence));// for each val in array convert back to book
 		return convertedArr;
 
 	}
@@ -151,7 +148,7 @@ public class Cart extends DBtranslation {
 				break;
 			case "buyDate":
 				Date d = (Date) ob.getValtoArray(i);
-				String txtDate = new SimpleDateFormat("dd/MM/yyyy").format(d);
+				String txtDate = new SimpleDateFormat("yyyy/MM/DD").format(d);
 				recover.setDate(txtDate);
 				/* recover.setDate((Date)ob.getValtoArray(i)); */
 				break;

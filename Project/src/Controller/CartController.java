@@ -10,6 +10,7 @@ import client.DBSQLhandler;
 import client.DBgenericObject;
 import command.DBtranslation;
 import command.deleteCommand;
+import command.insertCommand;
 import command.joinCommand;
 import command.joinObject;
 import command.searchCommand;
@@ -71,8 +72,28 @@ public class CartController {
 		}
 	
 		}
-	
+	/**
+	 * @author Coral Carmeli
+	 * @param Cart,client
+	 * @return The result of adding a new cart to the list-success or not
+	 * The method add a new record to the Cart list
+	 */
 
+	public static boolean AddToCart(Cart c , DBSQLhandler client)
+	{
+		client.insertToDB(new insertCommand<DBtranslation>(c)); 	
+		while(!client.GetGotMessag()){//add book to DB
+			try{
+			Thread.sleep(250);
+			}
+			catch(InterruptedException ex)
+			{
+				System.out.println("InterruptedException "+ex);
+				return false;
+			}
+		}
+		return true;	// means the cart add successful	
+	}
 
 	
 	public static boolean UpdateCart(Cart c, String updateCondition,

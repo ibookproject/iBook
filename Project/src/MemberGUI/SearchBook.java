@@ -10,8 +10,10 @@ import java.util.ArrayList;
 
 import Book.Book;
 import Controller.BookController;
+import Controller.UserController;
 import MenuGUI.LoginGUI;
 import Panels.BookPanel;
+import Role.User;
 import client.DBgenericObject;
 import command.showAllCommand;
 
@@ -26,6 +28,8 @@ public class SearchBook extends JPanel {
 	private ArrayList<Book> searchRes;
 	public static JPanel panel;
 	private JScrollPane scrollPaneMain;
+	private int userPrivelege=0;
+	private User u;
 
 	public SearchBook(LoginGUI screen,ArrayList<Book> books) {
 		super();
@@ -76,10 +80,15 @@ public class SearchBook extends JPanel {
 	{	
 		this.searchRes=list;
 		if(searchRes!=null)
-			
+		
+		u=new User();
+		ArrayList<User> user= (ArrayList<User>) UserController.SearchUser("userID,privilege",u,"userID=\""+screen.getTempID()+"\"",screen.getClient());
+		if((user!=null)&&(user.isEmpty()==false))
+			userPrivelege=user.get(0).getPriviliege();
+		
 		for(Book b:searchRes)
 		{
-			panel.add(new BookPanel(this.screen,b,this));
+			panel.add(new BookPanel(this.screen,b,this,userPrivelege));
 			panel.updateUI();
 		}
 	}

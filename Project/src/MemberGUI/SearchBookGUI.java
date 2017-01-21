@@ -22,6 +22,7 @@ import Controller.FormatController;
 import Controller.BookController;
 import ManagmentGUI.RemovePartReviewGUI;
 import MenuGUI.LoginGUI;
+import Role.User;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,15 +64,18 @@ public class SearchBookGUI extends JPanel {
 	private int flag=0;
 	private int flagIfNotFill;
 	private int flagNotFoundBook;
+	private User u;
 
 	public SearchBookGUI(LoginGUI screen) {
 		super();
 		this.screen = screen;
 		pann = this;
 		flagNotFoundBook=0;
+		this.u=u;
 		initialize();
+		
 	}
-
+	
 	private void initialize() {
 
 		this.setSize(850, 625);
@@ -86,8 +90,6 @@ public class SearchBookGUI extends JPanel {
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
-		
-	
 		
 		lblSearchBook = new JLabel("Search Book");
 		lblSearchBook.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -129,14 +131,7 @@ public class SearchBookGUI extends JPanel {
 		chckbxDomain.setBounds(257, 450, 111, 25);
 		add(chckbxDomain);
 
-		/*chckbxFormat = new JCheckBox("Format");
-		chckbxFormat.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbxFormat.setBounds(257, 500, 111, 25);
-		add(chckbxFormat);*/
-
 		comboBoxDomain = new JComboBox<Domain>();
-		//comboBoxDomain.addItem(" ");
-		//comboBoxDomain.setSelectedIndex(0);
 		Domain d=new Domain();
 		ArrayList<Domain> domainList=FormatController.GetAllDomain(d, screen.getClient());
 		
@@ -175,10 +170,6 @@ public class SearchBookGUI extends JPanel {
 		textFieldLanguage.setBounds(393, 252, 116, 22);
 		add(textFieldLanguage);
 		textFieldLanguage.setColumns(10);
-
-		
-
-		
 		
 		ArrayList<Book> bookss=new ArrayList<Book>();
 		btnSearch = new JButton("Search");
@@ -188,6 +179,7 @@ public class SearchBookGUI extends JPanel {
 				SearchBook sb = new SearchBook(screen,bookss);
 				sb.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						//SearchBookGUI pan=new SearchBookGUI(screen);
 						screen.setContentPane(pann);
 					}
 // //////////////////////button back to Search book GUI/////////////////////////////////////////////
@@ -257,17 +249,14 @@ public class SearchBookGUI extends JPanel {
 						flag=1;
 						Book b1=new Book();
 						
-						ArrayList<Book> allBooks=BookController.SearchBook("bookID,title,language,author,summary,content,keyword", b1, "bookEnable=\""+1+"\"", screen.getClient());
+						ArrayList<Book> allBooks=BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price", b1, "bookEnable=\""+1+"\"", screen.getClient());
 						
 						for(Book b2:allBooks)
 						{
 							for(SubjectToBook s1:subjectDomainList)
 							{
 								if(b2.getBookID()==s1.getBookID())
-									{
 									bookDomainList.add(b2);
-									
-									}
 							}
 						}
 					}	
@@ -285,7 +274,7 @@ public class SearchBookGUI extends JPanel {
 					else
 					{
 						Book b2=new Book();
-						ArrayList<Book> bookKeywords=BookController.SearchBook("bookID,title,language,author,summary,content,keyword", b2, "bookEnable=\""+1+"\"", screen.getClient());
+						ArrayList<Book> bookKeywords=BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price", b2, "bookEnable=\""+1+"\"", screen.getClient());
 						if(bookKeywords!=null)
 						{
 							flag=2;
@@ -344,7 +333,7 @@ public class SearchBookGUI extends JPanel {
 									
 								else{
 					
-					ArrayList<Book> temp = BookController.SearchBook("bookID,title,language,author,summary,content,keyword",b,condition, screen.getClient());//call search book method from book controller
+					ArrayList<Book> temp = BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price",b,condition, screen.getClient());//call search book method from book controller
 					if (temp != null) 
 					{
 						if(flag==1)//Domain

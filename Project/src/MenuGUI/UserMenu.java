@@ -51,6 +51,7 @@ public class UserMenu extends JPanel {
 		
 		this.screen=screen;
 		pann=this;
+		u=new User(screen.getTempID());
 		initialize();
 		lblUserMenu = new JLabel("iBOOK Menu");
 		lblUserMenu.setFont(new Font("BN Elements", Font.BOLD | Font.ITALIC, 26));
@@ -142,7 +143,7 @@ public class UserMenu extends JPanel {
 		
 		
 	//	ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("userID",u,"userStatus=\""+"1"+"\"",screen.getClient());
-		u=new User(screen.getTempID());
+		//u=new User(screen.getTempID());
 		btnDisconnect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				UserController.UpdateUserStatus(u, "userStatus=\""+"0"+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());

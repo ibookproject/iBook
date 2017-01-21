@@ -14,16 +14,25 @@ import javax.swing.border.LineBorder;
 import javax.swing.JCheckBox;
 
 import Book.Book;
+import Book.Cart;
 import Book.Domain;
 import Controller.BookController;
+import Controller.CartController;
+import Controller.UserController;
 import MemberGUI.RequestPostFillReviewGUI;
 import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;
+import Role.User;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JInternalFrame;
@@ -32,7 +41,6 @@ import javax.swing.ScrollPaneConstants;
 public class BookPanel extends JPanel{
 	
 	private LoginGUI screen;
-	//private Book book;
 	private JLabel lblNewTitle;
 	private JLabel lblNewLanguage;
 	private JLabel lblLanguage;
@@ -40,21 +48,21 @@ public class BookPanel extends JPanel{
 	private JLabel lblAutor;
 	private JLabel lblNewAutor;
 	private JLabel lblSummary;
-	//private JLabel lblNewSummary ;
-//	private int bookID;
 	private SearchBook pann;
 	private JLabel lblTitle;
-	private JButton btnNewButton;
+	private JButton btnAddToCart;
 	private JTextArea textAreaSummary;
 	
-	public BookPanel(LoginGUI screen,Book b,SearchBook pan) {
+	
+	public BookPanel(LoginGUI screen,Book b,SearchBook pan,int User) {
 		pann=pan;
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(51, 102, 204)));
 		setPreferredSize(new Dimension(731, 212));
 		setLayout(null);
-	//	book=b;
 		
+		if(User>=2)
+		{
 		btnPostReview = new JButton("Post Review");
 		btnPostReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -73,10 +81,26 @@ public class BookPanel extends JPanel{
 		add(btnPostReview);
 		
 		
-		btnNewButton = new JButton("Add to Cart");
-		btnNewButton.setBounds(601, 156, 117, 25);
-		add(btnNewButton);
-		
+		btnAddToCart = new JButton("Add to Cart");
+		btnAddToCart.setBounds(601, 156, 117, 25);
+		btnAddToCart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				Calendar time = Calendar.getInstance();
+		        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
+				
+				//Date date = new Date();
+				//String txtDate = new SimpleDateFormat("yyyy/mm/dd").format(date);
+				System.out.println("The date is:"+timeRightNow);			
+				if((CartController.AddToCart(new Cart(screen.getTempID(),b.getBookID(),b.getPrice(),0,timeRightNow), screen.getClient()))==true)
+			 		JOptionPane.showMessageDialog(screen,"Add new Record to The Cart Done! ", "",JOptionPane.INFORMATION_MESSAGE);
+				else
+		        	JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed!", "Warning",JOptionPane.WARNING_MESSAGE);
+				
+			}
+		});
+		add(btnAddToCart);
+		}
 		lblLanguage = new JLabel("Language:");
 		lblLanguage.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
 		lblLanguage.setBounds(203, 41, 117, 37);
@@ -111,7 +135,6 @@ public class BookPanel extends JPanel{
 		lblTitle.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
 		lblTitle.setBounds(12, 48, 56, 23);
 		add(lblTitle);
-	//	add(textAreaSummary);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -127,8 +150,5 @@ public class BookPanel extends JPanel{
 		textAreaSummary.setBackground(new Color(153, 204, 255));
 		textAreaSummary.setForeground(new Color(0, 0, 0));
 		textAreaSummary.setText(b.getSummary());  
-		
-	
-			
 	}
 }
