@@ -105,7 +105,12 @@ public class ConfirmationReviewGUI extends JPanel {
 		scrollPaneMain.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		showReviews();
+		try {
+			showReviews();
+		} catch (SQLException e2) {
+			panel.removeAll();
+			JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
+		}
 		
 		btnNotConfirm = new JButton("Not Confirm");
 		btnNotConfirm.setBounds(375, 544, 109, 25);
@@ -128,7 +133,12 @@ public class ConfirmationReviewGUI extends JPanel {
 					{
 						JOptionPane.showMessageDialog(screen,"The review was Not confirmed\n", "Warning",JOptionPane.WARNING_MESSAGE);	
 						panel.removeAll();
-						showReviews();
+						try {
+							showReviews();
+						} catch (SQLException e1) {
+							panel.removeAll();
+							JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
+						}
 					}
 				}
 				else
@@ -143,7 +153,7 @@ public class ConfirmationReviewGUI extends JPanel {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(reviewPanels!=null)
+				if(reviewPanels!=null||reviewPanels.isEmpty()==false)
 				{
 					Review r=new Review();
 					for(ReviewPanel rp:reviewPanels)
@@ -157,8 +167,15 @@ public class ConfirmationReviewGUI extends JPanel {
 					if(flagReviewChoose==1)
 					{
 						JOptionPane.showMessageDialog(screen,"The review was Confirmed\n", "Success",JOptionPane.YES_OPTION);	
+						//panel.updateUI();
 						panel.removeAll();
-						showReviews();
+						try {
+							showReviews();
+						} catch (SQLException e1) {
+							panel.removeAll();
+							JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
+							
+						}
 					}
 					
 				}
@@ -176,19 +193,17 @@ public class ConfirmationReviewGUI extends JPanel {
 	 * @param no parameters
 	 * Show the reviews which the review status=0 
 	 */
-	public void showReviews()
+	public void showReviews() throws SQLException
 	{
 		ArrayList<DBgenericObject> joinAnswerReviewBook=new ArrayList<DBgenericObject>();
-		try 
+		joinAnswerReviewBook = ReviewController.searchJoinReviewBook(screen.getClient());
+		if((joinAnswerReviewBook==null)||(joinAnswerReviewBook.isEmpty()))
 		{
-			joinAnswerReviewBook = ReviewController.searchJoinReviewBook(screen.getClient());
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-		if(joinAnswerReviewBook.isEmpty())
+			panel.updateUI();
+			//panel.removeAll();
 			JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
+		}
+			
 		
 		else
 		{

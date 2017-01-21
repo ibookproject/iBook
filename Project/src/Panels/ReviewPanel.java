@@ -75,14 +75,14 @@ public class ReviewPanel extends JPanel{
 		lblNewDate.setBounds(106, 82, 161, 16);
 		add(lblNewDate);
 		
-		lblContent = new JLabel("Content:");
+		lblContent = new JLabel("\nContent:");
 		lblContent.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
-		lblContent.setBounds(253, 13, 103, 16);
+		lblContent.setBounds(254, 10, 81, 23);
 		add(lblContent);
 		
 		textAreaContent = new JTextArea();
 		textAreaContent.setText(reviewContent);
-		textAreaContent.setBounds(333, 13, 203, 102);
+		textAreaContent.setBounds(338, 12, 203, 102);
 		add(textAreaContent);
 		
 		lblBookTitle = new JLabel("Book Name:");

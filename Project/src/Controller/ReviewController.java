@@ -116,7 +116,7 @@ public class ReviewController {
 	/* ##################################################################### */
 
 	
-	public static ArrayList<DBgenericObject> searchJoinReviewBook(/*int reviewID,int bookID,*/DBSQLhandler client) throws SQLException
+	public static ArrayList<DBgenericObject> searchJoinReviewBook(/*int reviewID,int bookID,*/DBSQLhandler client) /*throws SQLException*/
 	{
 		Book b=new Book();
 		Review r=new Review();
@@ -125,8 +125,13 @@ public class ReviewController {
 		//the first object is the assosiation class and the second is to join with
 		temp.add(new joinObject(r.getClassName(), b.getClassName(), "bookID"));
 		
-		client.joinSearchInDB(new joinCommand<Review>("review.bookID,review.reviewID,review.reviewContent,review.reviewDate,book.title",r,temp,"review.reviewStatus=0"));
-		while(!	client.GetGotMessag()){//search book in db
+		try {
+			client.joinSearchInDB(new joinCommand<Review>("review.bookID,review.reviewID,review.reviewContent,review.reviewDate,book.title",r,temp,"review.reviewStatus=0"));
+		} catch (SQLException e) {
+		
+		}
+		while(!	client.GetGotMessag())
+		{//search book in db
 			try{
 			Thread.sleep(500);
 			}
@@ -135,6 +140,12 @@ public class ReviewController {
 				System.out.println("InterruptedException "+ex);
 			}
 		}
-		return (ArrayList<DBgenericObject>)client.getResultObject();
+
+		try {
+			return (ArrayList<DBgenericObject>)client.getResultObject();
+		} catch (SQLException e) {
+		
+		}
+		return null;
 	}
 }
