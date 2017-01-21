@@ -113,10 +113,12 @@ public class ReviewController {
 		return true; // means the book add successful
 	}
 
-	/* ##################################################################### */
-
-	
-	public static ArrayList<DBgenericObject> searchJoinReviewBook(/*int reviewID,int bookID,*/DBSQLhandler client) /*throws SQLException*/
+	/**
+	 * @author Coral Carmeli
+	 * @param client
+	 * @return The result of join between the 2 tables:'Book','Review' according the same bookID,return the requested fields.
+	 */
+	public static ArrayList<DBgenericObject> searchJoinReviewBook(DBSQLhandler client) /*throws SQLException*/
 	{
 		Book b=new Book();
 		Review r=new Review();

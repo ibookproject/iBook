@@ -90,7 +90,11 @@ public class CartController {
 		}
 		return true; // means the review update successful
 	}
-	
+	/**
+	 * @author Coral Carmeli
+	 * @param date(String), status(int),userId(String ),client
+	 * @return The result of join between the 2 tables:'Book','Cart' according the same bookID and the query conditions,return the requested fields.
+	 */
 	public static ArrayList<DBgenericObject> searchJoinCartBook(String date,int status,String userId,DBSQLhandler client) throws SQLException
 	{
 

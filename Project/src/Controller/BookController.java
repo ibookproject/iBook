@@ -31,6 +31,11 @@ import Panels.BookPerCart;
 
 public class BookController {
 
+	/**
+	 * @author Coral Carmeli
+	 * @param  fromSentence(String),Book,condition(String ),client
+	 * @return The Array list of books according the search query the user sends(with the conditions of-select,from and where)
+	 */
 	public static ArrayList<Book> SearchBook(String fromSentence,Book b,String condition,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
@@ -87,10 +92,7 @@ public class BookController {
 			}
 			return true;	// means the book add successful	
 	}
-	
-/*#####################################################################*/
-	
-	
+		
 	//new hen 10.1//
 	public static boolean UpdateBook(Book b , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
 	{
@@ -143,8 +145,12 @@ public class BookController {
 			return null;
 		}
 	}
-	
-	public static Comparator<Book> IdBookNum = new Comparator<Book>() {
+	/**
+	 * @author Coral Carmeli
+	 * @param not get
+	 * @return the array list sorted according the Comparator logic(number of orders of the book  with Book sent)
+	 */
+	public static Comparator<Book> numOfOrdersCompareBook = new Comparator<Book>() {
 
 		public int compare(Book b1, Book b2) {
 
@@ -155,6 +161,11 @@ public class BookController {
 			return (int) idNum2 - (int) idNum1;
 		}
 	};
+	/**
+	 * @author Coral Carmeli
+	 * @param not get
+	 * @return the array list sorted according the Comparator logic(number of orders of the book but with generic object sent)
+	 */
 	public static Comparator<DBgenericObject> numOfOrdersCompare = new Comparator<DBgenericObject>() {
 
 		@Override
@@ -167,7 +178,12 @@ public class BookController {
 			return (int) idNum2 - (int) idNum1;
 		}
 	};
-	public static int absoluteBookRate(int bookID,DBSQLhandler client,LoginGUI screen,int kindRate)
+	/**
+	 * @author Coral Carmeli
+	 * @param bookID(integer),client,LoginGUI -screen
+	 * @return the rate of the book agains all the books in the library
+	 */
+	public static int absoluteBookRate(int bookID,DBSQLhandler client,LoginGUI screen)
 	{
 		long numOfOrder=-1;
 		String title="";
@@ -177,7 +193,7 @@ public class BookController {
 		allBooks=BookController.SearchBook("bookID,title,language,author,summary,content,keyword,numberOfOrder", b, "bookEnable=1", client);
 		
 		
-		Collections.sort(allBooks, BookController.IdBookNum);
+		Collections.sort(allBooks, BookController.numOfOrdersCompareBook);
 		
 		System.out.println("After sort:");
 		
@@ -203,7 +219,11 @@ public class BookController {
 		}
 		return rate;
 	}
-
+	/**
+	 * @author Coral Carmeli
+	 * @param bookID(integer),client,LoginGUI -screen
+	 * @return the rate of the book agains all the books in the same domain
+	 */
 	public static int propotionBookRate(int bookID,DBSQLhandler client,LoginGUI screen)
 	{
 		String title="";
@@ -256,7 +276,11 @@ public class BookController {
 		}
 		return -1;
 	}	
-			
+	/**
+	 * @author Coral Carmeli
+	 * @param domainID(int),bookID(int),client
+	 * @return the result of the join between the 'Book' table and 'SubjectToBook' table
+	 */
 
 	public static ArrayList<DBgenericObject> searchJoinSubjectBook(int domainID,int bookID,DBSQLhandler client) throws SQLException
 	{

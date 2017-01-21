@@ -155,6 +155,7 @@ public class BookRateGUI extends JPanel {
 package ManagmentGUI;
 
 import javax.naming.ldap.SortKey;
+import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -181,6 +182,14 @@ import java.awt.Font;
 
 import javax.swing.JRadioButton;
 
+/**
+ * @author  Coral Carmeli
+ * 
+ * The class show the library manager the rate of the book according two options- 
+ * 1.Absolute rate is against all the books in the library .
+ * 2.Proportion rate is against the all books in the same domain.
+ * The manager needs first to search the book he want to know details on it.
+ */
 public class BookRateGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -190,9 +199,6 @@ public class BookRateGUI extends JPanel {
 	private JTextField textFieldAutohr;
 	private JTextField textFieldBook;
 	private int bookId;
-	private long numOfOrder;
-	private int rate;
-	private String title;
 	private ArrayList<Book> tempBooks;
 	private JPanel Mainpann;
 	private JLabel lblBookRate;
@@ -201,10 +207,6 @@ public class BookRateGUI extends JPanel {
 	private JComboBox comboBoxChooseBook;
 	private JRadioButton rdbtnAbsoluteRate;
 	private JRadioButton rdbtnProportionRate ;
-	private int flag;
-	private ArrayList<Book> allBooks;
-
-
 
 	public BookRateGUI(LoginGUI screen) {
 		super();
@@ -213,7 +215,6 @@ public class BookRateGUI extends JPanel {
 		pann=this;
 		initialize();
 	}
-
 	
 	private void initialize() {
 
@@ -257,6 +258,9 @@ public class BookRateGUI extends JPanel {
 		rdbtnProportionRate.setBounds(468, 193, 123, 25);
 		add(rdbtnProportionRate);
 		
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnAbsoluteRate);
+		group.add(rdbtnProportionRate);
 		
 		comboBoxChooseBook = new JComboBox();
 		comboBoxChooseBook.addActionListener(new ActionListener() {
@@ -268,8 +272,6 @@ public class BookRateGUI extends JPanel {
 					bookId=-1;
 			
 				System.out.println(bookId);
-				
-				 
 			}
 		});
 		comboBoxChooseBook.setBounds(225, 141, 412, 20);
@@ -279,37 +281,25 @@ public class BookRateGUI extends JPanel {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				 if(textFieldBook.getText().isEmpty())
-						JOptionPane.showMessageDialog(screen,"you must fill the name of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
+				 if(textFieldBook.getText().isEmpty()&&textFieldAutohr.getText().isEmpty())
+						JOptionPane.showMessageDialog(screen,"you must fill some of the field to search!! ", "Warning",JOptionPane.WARNING_MESSAGE);
 				 else
 				 {
-				 	Book b = new Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim()); // create new book
-				 	
-				 	if(textFieldAutohr.getText().isEmpty()==false)//"summary LIKE '%" + textFieldSummary.getText() + "%'"
-				 	{
+					 
+				 	Book b = new Book(); // create new book
+				 	if(textFieldBook.getText().isEmpty()==false&&textFieldAutohr.getText().isEmpty())//just title inserted
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim()+"%'", screen.getClient());
+				 	else if(textFieldBook.getText().isEmpty()&&textFieldAutohr.getText().isEmpty()==false)	//just author inserted
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b,"author LIKE '%"+textFieldAutohr.getText().trim()+"%'", screen.getClient());
+				 		
+				 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)//the 2 fields are not empty
 				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim()+"%'" +" && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'", screen.getClient());
-				 		 if(tempBooks==null)
-				 		 {
-								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
-								textFieldBook.setText("");textFieldAutohr.setText("");
-				 		 }
-				 		 else
-				 		 {
-				 			comboBoxChooseBook.removeAllItems();
-							for(int i=0;i<tempBooks.size();i++)
-								comboBoxChooseBook.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
-							
-				 		 }
 
-				 		 
-				 	}
-			 	else
-			 	{
-			 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim()+ "'", screen.getClient());
 					 if(tempBooks==null)
 			 		 {
-							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
-							textFieldBook.setText("");textFieldAutohr.setText("");
+							JOptionPane.showMessageDialog(screen,"No book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
+							textFieldBook.setText("");
+							textFieldAutohr.setText("");
 			 		 }
 			 		 else
 			 		 {
@@ -318,8 +308,8 @@ public class BookRateGUI extends JPanel {
 						 for(int i=0;i<tempBooks.size();i++)
 							 comboBoxChooseBook.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
-			 	}
-				 }}
+				 	}
+				 }
 			}); 
 		btnSearch.setBounds(645, 88, 89, 23);
 		add(btnSearch);
@@ -333,10 +323,10 @@ public class BookRateGUI extends JPanel {
 				if(bookId!=-1)
 				{						
 					if(rdbtnAbsoluteRate.isSelected())
-						rate=BookController.absoluteBookRate(bookId,screen.getClient(),screen,1);
+						BookController.absoluteBookRate(bookId,screen.getClient(),screen);
 					else
 						if(rdbtnProportionRate.isSelected())
-							rate=BookController.propotionBookRate(bookId,screen.getClient(),screen);
+							BookController.propotionBookRate(bookId,screen.getClient(),screen);
 						else
 						JOptionPane.showMessageDialog(screen,"You need to choose kind of rate! ", "Warning",JOptionPane.WARNING_MESSAGE);
 				}

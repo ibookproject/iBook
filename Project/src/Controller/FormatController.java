@@ -110,7 +110,11 @@ public class FormatController {
 	}
 	
 	
-	/*Coral made for search book*/
+	/**
+	 * @author Coral Carmeli
+	 * @param Subject,client
+	 * @return The ArrayList of Subject - the list of all subject in DB
+	 */
 	public static ArrayList<Subject> GetAllSubject(Subject s,DBSQLhandler client)// changes
 	{
 		// filed is need to look like "bookID,author,..."
@@ -150,10 +154,11 @@ public class FormatController {
 			return null;
 		}
 	}
-	/*Coral made*/
-	
-	
-	////////////////////new/////////////////////
+	/**
+	 * @author Coral Carmeli
+	 * @param fromSentence(String ),Subject, condition(String),client
+	 * @return The ArrayList of Subject - the list of all subject in the requested Domain
+	 */
 	public static ArrayList<Subject> SearchSubjectAtDomain(String fromSentence,Subject s,String condition,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
@@ -174,9 +179,7 @@ public class FormatController {
 			return null;
 		}
 	}
-	////////////////////new/////////////////////
-	
-	
+
 	public static ArrayList<SubjectToBook> SearchSubjectAtSubjectToBook(String fromSentence,SubjectToBook s,String whereSentence,DBSQLhandler client)
 	{
 		// filed is need to look like "userID,password,..."

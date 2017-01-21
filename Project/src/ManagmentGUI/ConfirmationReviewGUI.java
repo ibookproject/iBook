@@ -46,7 +46,7 @@ import client.DBgenericObject;
 /**
  * @author  Coral Carmeli
  * 
- * The method take care of the confirm of the review- where the review status=0 its needed to 
+ * The class take care of the confirm of the review- where the review status=0 its needed to 
  * confirm/not confirm(Qualified Editor) or remove Part of Review(Librarian/Library manager)
  * 
  */
