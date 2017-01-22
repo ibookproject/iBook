@@ -21,11 +21,14 @@ import MenuGUI.LoginGUI;
 
 import java.awt.Font;
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author Coral Carmeli
+ * This panel presents the book in the cart of the requested user in the method User Statistics
+ */
 public class BookPerCart extends JPanel{
 	
 	private LoginGUI screen;
-	//private Book book;
 	private JLabel lblNewTitle;
 	private JLabel lblNewBookID;
 	private JLabel lblBookID;
@@ -40,7 +43,6 @@ public class BookPerCart extends JPanel{
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) Color.ORANGE));
 		setPreferredSize(new Dimension(702, 59));
 		setLayout(null);
-		//book=b;
 		
 		lblBookID = new JLabel("Book ID:");
 		lblBookID.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
@@ -82,9 +84,5 @@ public class BookPerCart extends JPanel{
 		lblTitle.setBounds(150, 13, 57, 23);
 		add(lblTitle);
 	}
-	
-/*	public int getBookID()
-	{
-		return book.getBookID();
-	}*/
+
 }

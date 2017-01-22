@@ -35,7 +35,7 @@ import javax.swing.SwingConstants;
 
 /**
  * 
- * @author coral
+ * @author Coral Carmeli
  * Give to the manager the user statistics per ID and date
  */
 public class StatisticsUserReportGUI extends JPanel
@@ -59,6 +59,12 @@ public class StatisticsUserReportGUI extends JPanel
 		this.screen=screen;
 		initialize();
 	}
+	/**
+	 * @author Coral Carmeli
+	 * @param null
+	 * @return void
+	 * The method initialize the window of user statistics		
+	 */
 
 	private void initialize() 
 	{
@@ -132,13 +138,7 @@ public class StatisticsUserReportGUI extends JPanel
 		btnChooseFromDate.setBounds(435, 181, 143, 30);
 		add(btnChooseFromDate);
 		
-		/**
-		 * @author coral
-		 * @param date(from DB)
-		 * @return true if false if
-		 * 			
-		 */
-
+	
 		btnGetReports = new JButton("Get report");
 		btnGetReports.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnGetReports.addActionListener(new ActionListener() 

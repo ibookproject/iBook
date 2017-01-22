@@ -1,6 +1,10 @@
 package Panels;
 
-
+/**
+ * 
+ * @author Coral Carmeli
+ * This panel presents the details of the review in the method 'Confirmation Review'
+ */
 import javax.swing.JPanel;
 
 import java.awt.Dimension;
@@ -48,7 +52,6 @@ public class ReviewPanel extends JPanel{
 	private JLabel lblBookTitle;
 	private JCheckBox chckbxChooseReview;
 	private JButton btnRemovePartOf;
-	//private int chbxChoose;
 	private int reviewId;
 	private int Permission;
 	private JPanel pann;

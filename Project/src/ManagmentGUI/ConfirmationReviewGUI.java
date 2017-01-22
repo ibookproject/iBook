@@ -114,7 +114,7 @@ public class ConfirmationReviewGUI extends JPanel {
 		
 		btnNotConfirm = new JButton("Not Confirm");
 		btnNotConfirm.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNotConfirm.setBounds(375, 544, 131, 30);
+		btnNotConfirm.setBounds(477, 544, 152, 30);
 		btnNotConfirm.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -185,7 +185,7 @@ public class ConfirmationReviewGUI extends JPanel {
 					JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		});
-		btnConfirm.setBounds(238, 544, 109, 30);
+		btnConfirm.setBounds(264, 544, 152, 30);
 		add(btnConfirm);
 	}
 	

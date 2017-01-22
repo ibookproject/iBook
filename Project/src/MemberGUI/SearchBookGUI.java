@@ -33,7 +33,11 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-
+/**
+ * @author  Coral Carmel
+ * The class responsible to the search book of the user
+ * 
+ */
 public class SearchBookGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -51,31 +55,29 @@ public class SearchBookGUI extends JPanel {
 	private JTextField textAuthor;
 	private JCheckBox chckbxKeywords;
 	private JCheckBox chckbxDomain;
-	//private JCheckBox chckbxFormat;
 	private JComboBox<Domain> comboBoxDomain;
-	//private JComboBox<String> comboBoxFormat ;
 	private JTextField textFieldLanguage;
 	private JTextField textFieldKeywords;
 	private JTextField textFieldSummary;
 	private JTextField textFieldContents;
 	private JButton btnSearch;
-	private ArrayList<SubjectToBook> subjectDomainList;
-	private ArrayList<Book> bookDomainList;
 	private int flag=0;
 	private int flagIfNotFill;
 	private int flagNotFoundBook;
-	private User u;
 
 	public SearchBookGUI(LoginGUI screen) {
 		super();
 		this.screen = screen;
 		pann = this;
 		flagNotFoundBook=0;
-		this.u=u;
 		initialize();
 		
 	}
-	
+	/**
+	 * @author  Coral Carmeli
+	 * The method initialize the window of search
+	 * 
+	 */
 	private void initialize() {
 
 		this.setSize(850, 625);
@@ -92,45 +94,44 @@ public class SearchBookGUI extends JPanel {
 		add(btnBack);
 		
 		lblSearchBook = new JLabel("Search Book");
-		lblSearchBook.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSearchBook.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblSearchBook.setBounds(355, 49, 175, 22);
 		add(lblSearchBook);
 
 		chckbxTitle = new JCheckBox("Title");
-		chckbxTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbxTitle.setFont(new Font("Tahoma", Font.BOLD, 15));
 		chckbxTitle.setBounds(257, 150, 111, 25);
 		add(chckbxTitle);
 
 		chckbxAuthor = new JCheckBox("Author");
-		chckbxAuthor.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbxAuthor.setFont(new Font("Tahoma", Font.BOLD, 15));
 		chckbxAuthor.setBounds(257, 200, 111, 25);
 		add(chckbxAuthor);
 
 		chckbxLanguage = new JCheckBox("Language");
-		chckbxLanguage.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbxLanguage.setFont(new Font("Tahoma", Font.BOLD, 15));
 		chckbxLanguage.setBounds(257, 250, 111, 25);
 		add(chckbxLanguage);
 
 		chckbxSummary = new JCheckBox("Summary");
-		chckbxSummary.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbxSummary.setFont(new Font("Tahoma", Font.BOLD, 15));
 		chckbxSummary.setBounds(257, 300, 111, 25);
 		add(chckbxSummary);
 
 		chckbxContents = new JCheckBox("Contents");
-		chckbxContents.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbxContents.setFont(new Font("Tahoma", Font.BOLD, 15));
 		chckbxContents.setBounds(257, 350, 111, 25);
 		add(chckbxContents);
 
 		chckbxKeywords = new JCheckBox("Keywords");
-		chckbxKeywords.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbxKeywords.setFont(new Font("Tahoma", Font.BOLD, 15));
 		chckbxKeywords.setBounds(257, 400, 111, 25);
 		add(chckbxKeywords);
 
 		chckbxDomain = new JCheckBox("Domain");
-		chckbxDomain.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbxDomain.setFont(new Font("Tahoma", Font.BOLD, 15));
 		chckbxDomain.setBounds(257, 450, 111, 25);
 		add(chckbxDomain);
-
 		comboBoxDomain = new JComboBox<Domain>();
 		Domain d=new Domain();
 		ArrayList<Domain> domainList=FormatController.GetAllDomain(d, screen.getClient());
@@ -171,6 +172,12 @@ public class SearchBookGUI extends JPanel {
 		add(textFieldLanguage);
 		textFieldLanguage.setColumns(10);
 		
+		/**
+		 * @author  Coral Carmeli
+		 * 
+		 * The button "search" responsible on the functionality of the method
+		 * The logic of the search is in this listener
+		 */
 		ArrayList<Book> bookss=new ArrayList<Book>();
 		btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
@@ -387,8 +394,7 @@ public class SearchBookGUI extends JPanel {
 								else
 									temp1=temp;
 					} 
-					else //
-						//if(flagNotFoundBook==0)
+					else
 							{
 							JOptionPane.showMessageDialog(screen,"Not found any book result\n", "Warning",JOptionPane.WARNING_MESSAGE);
 							flagNotFoundBook=1;
@@ -412,6 +418,11 @@ public class SearchBookGUI extends JPanel {
 		});
 		btnSearch.setBounds(326, 537, 97, 25);
 		add(btnSearch);
+		
+		JLabel lblSearchBookGif = new JLabel("");
+		lblSearchBookGif.setIcon(new ImageIcon("C:\\Users\\coral\\Downloads\\ibook\\Project\\Search50.png"));
+		lblSearchBookGif.setBounds(480, 27, 69, 62);
+		add(lblSearchBookGif);
 	}
 	public void showMessageDialogErrorEmptyField()
 	{
@@ -421,5 +432,4 @@ public class SearchBookGUI extends JPanel {
 			flagIfNotFill=1;
 		}
 	}
-	
 }

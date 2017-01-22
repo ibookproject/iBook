@@ -10,33 +10,27 @@ import javax.swing.border.MatteBorder;
 
 import java.awt.Color;
 
-import javax.swing.border.LineBorder;
-import javax.swing.JCheckBox;
-
 import Book.Book;
 import Book.Cart;
-import Book.Domain;
-import Controller.BookController;
 import Controller.CartController;
-import Controller.UserController;
 import MemberGUI.RequestPostFillReviewGUI;
 import MemberGUI.SearchBook;
 import MenuGUI.LoginGUI;
-import Role.User;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
-import javax.swing.JInternalFrame;
 import javax.swing.ScrollPaneConstants;
+/**
+ * @author Coral Carmeli
+ * This class presents the panel of the book which shown in the Search book method			
+ */
 
 public class BookPanel extends JPanel{
 	
@@ -79,7 +73,11 @@ public class BookPanel extends JPanel{
 		});
 		btnPostReview.setBounds(601, 120, 117, 23);
 		add(btnPostReview);
-		
+		/**
+		 * @author Coral Carmeli
+		 * This Button 'Add to cart' insert a new record to the table 'Cart' according user ID and requested Book		
+		 */
+
 		
 		btnAddToCart = new JButton("Add to Cart");
 		btnAddToCart.setBounds(601, 156, 117, 25);
@@ -89,14 +87,19 @@ public class BookPanel extends JPanel{
 				Calendar time = Calendar.getInstance();
 		        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
 				
-				//Date date = new Date();
-				//String txtDate = new SimpleDateFormat("yyyy/mm/dd").format(date);
-				System.out.println("The date is:"+timeRightNow);			
-				if((CartController.AddToCart(new Cart(screen.getTempID(),b.getBookID(),b.getPrice(),0,timeRightNow), screen.getClient()))==true)
-			 		JOptionPane.showMessageDialog(screen,"Add new Record to The Cart Done! ", "",JOptionPane.INFORMATION_MESSAGE);
+				System.out.println("The date is:"+timeRightNow);	
+				Cart c=new Cart();
+				ArrayList<Cart> carts=new ArrayList<Cart>();
+				carts=CartController.SearchCart("userID", c, "userID=\""+screen.getTempID()+"\" && bookID=\""+b.getBookID()+"\" && buyDate=\""+timeRightNow+"\"", screen.getClient());
+				if(carts==null||carts.isEmpty())
+				{
+					if((CartController.AddToCart(new Cart(screen.getTempID(),b.getBookID(),b.getPrice(),0,timeRightNow), screen.getClient()))==true)
+						JOptionPane.showMessageDialog(screen,"Add new Record to The Cart Done! ", "",JOptionPane.INFORMATION_MESSAGE);
+					else
+						JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed!", "Warning",JOptionPane.WARNING_MESSAGE);
+				}
 				else
-		        	JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed!", "Warning",JOptionPane.WARNING_MESSAGE);
-				
+					JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed-There is allready this book for this user!", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		add(btnAddToCart);
