@@ -23,12 +23,13 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
 
 
-import Book.Cart;
 
+import Book.Cart;
 import Controller.CartController;
 import MenuGUI.LoginGUI;
 import Panels.*;
 import client.DBgenericObject;
+
 import javax.swing.SwingConstants;
 
 
@@ -115,20 +116,15 @@ public class StatisticsUserReportGUI extends JPanel
 		add(txtFromDate);
 		txtFromDate.setColumns(10);
 		
-		//create button and there object
 		JButton btnChooseFromDate = new JButton("Choose Date");
 		btnChooseFromDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		//perform action listener
 		btnChooseFromDate.addActionListener(new ActionListener() 
 		{	
-			//performed action
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				//create frame new object  f
 				JFrame f = new JFrame();
 				f.setLocation(400, 400);
 				f.setBounds(200, 200, 200, 200);
-				//set text which is collected by date picker i.e. set date 
 				txtFromDate.setText(new DatePicker(f).setPickedDate());
 
 			}
@@ -151,8 +147,16 @@ public class StatisticsUserReportGUI extends JPanel
 			{
 				
 				Cart t=new Cart();
-				if( txtFromDate.getText().isEmpty())
-					JOptionPane.showMessageDialog(screen,"Please fill the date field!", "Warning",JOptionPane.WARNING_MESSAGE);
+				if( txtFromDate.getText().isEmpty()||textFieldID.getText().isEmpty())
+					{
+					if(txtFromDate.getText().isEmpty())
+						JOptionPane.showMessageDialog(screen,"Please fill the date field!", "Warning",JOptionPane.WARNING_MESSAGE);
+					else if(textFieldID.getText().isEmpty())
+						JOptionPane.showMessageDialog(screen,"Please fill the user ID field!", "Warning",JOptionPane.WARNING_MESSAGE);
+					}
+				else 
+					if(Validation.IDValidation(textFieldID.getText().trim()) == false)
+						JOptionPane.showMessageDialog(screen,"Please fill the user ID correctly,just numbers!", "Warning",JOptionPane.WARNING_MESSAGE);
 				else
 				{
 					try
