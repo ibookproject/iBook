@@ -18,6 +18,7 @@ public class Review extends DBtranslation {
 	private int bookID;
 	public static final int CONFIREMED=1;
 	public static final int NOTCONFIREMED=0;
+	public static final int NOTIFICATION=-1;
 	//empty constactor
 	public Review(){
 		super();
@@ -68,6 +69,9 @@ public class Review extends DBtranslation {
 			break;
 		case NOTCONFIREMED:
 			this.reviewStatus=NOTCONFIREMED;
+			break;
+		case NOTIFICATION:
+			this.reviewStatus=NOTIFICATION;
 			break;
 		default:
 		throw new InputMismatchException("you have inserted wrong review status");

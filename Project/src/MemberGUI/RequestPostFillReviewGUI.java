@@ -182,7 +182,7 @@ public class RequestPostFillReviewGUI extends JPanel
 		       
 		        if(!(textAreaReviewContent.getText().equals(""))&&(conterOfText<=50))
 				{
-		        Review r = new Review(timeRightNow,textAreaReviewContent.getText(),0,bookID);
+		        Review r = new Review(timeRightNow,textAreaReviewContent.getText(),Review.NOTIFICATION,bookID);
 		        Book b=new Book();
 				ArrayList<Book> temp = BookController.SearchBook("bookID",b,"bookID=\""+bookID+"\"", screen.getClient());//call search book method from book controller
 				if(temp==null)

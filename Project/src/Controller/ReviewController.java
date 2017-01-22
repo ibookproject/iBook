@@ -128,7 +128,7 @@ public class ReviewController {
 		temp.add(new joinObject(r.getClassName(), b.getClassName(), "bookID"));
 		
 		try {
-			client.joinSearchInDB(new joinCommand<Review>("review.bookID,review.reviewID,review.reviewContent,review.reviewDate,book.title",r,temp,"review.reviewStatus=0"));
+			client.joinSearchInDB(new joinCommand<Review>("review.bookID,review.reviewID,review.reviewContent,review.reviewDate,book.title",r,temp,"review.reviewStatu<1"));
 		} catch (SQLException e) {
 		
 		}

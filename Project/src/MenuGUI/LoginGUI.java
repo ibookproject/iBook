@@ -23,6 +23,7 @@ import java.io.IOException;
 
 import Controller.UserController;
 import DB.Test;
+import Panels.TimerProject;
 import client.DBSQLhandler;
 
 import java.awt.event.WindowAdapter;
@@ -195,7 +196,6 @@ public class LoginGUI extends JFrame {
 					switch (temp.get(0).getPriviliege()) {
 							
 					case UserStatus.USER: {
-
 // //////////////////////button to back panel from panel// /////////////////////////////////////////////
 						UserMenu usm = new UserMenu(screen);
 						usm.btnDisconnect
@@ -253,6 +253,8 @@ public class LoginGUI extends JFrame {
 					}
 						break;
 					case UserStatus.LIBRRIAN: {
+						TimerProject y = new TimerProject();
+						y.start(screen);
 						LibrarianMenu usm = new LibrarianMenu(screen, 5,Integer.parseInt(txtUserID.getText()));
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
@@ -267,6 +269,8 @@ public class LoginGUI extends JFrame {
 					}
 						break;
 					case UserStatus.MANAGER: {
+						TimerProject y = new TimerProject();
+						y.start(screen);
 						LibraryManagerMenu usm = new LibraryManagerMenu(screen,
 								6,Integer.parseInt(txtUserID.getText()));
 						usm.btnDisconnect
