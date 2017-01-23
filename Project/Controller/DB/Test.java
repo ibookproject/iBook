@@ -24,7 +24,7 @@ public class Test {
 		}// take the IP of server the host
 		
 		//
-		host="192.168.10.250";
+		//host="192.168.10.250";
 		//
 		  LoginGUI loginFrame = new LoginGUI(host); // create StudentFrame
 		  /*

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import Book.Book;
 import Book.Domain;
+import Book.SubjectToBook;
 import Controller.BookController;
+import Controller.FormatController;
 import client.DBSQLhandler;
 import junit.framework.Assert;
 import junit.framework.TestCase;
@@ -18,6 +20,7 @@ public class SearchBookTest extends TestCase {
 	private String contents;
 	private String  keywords;
 	private String author;
+	private String titleNoAns;
 	private float price;
 	private String summary;
 	private DBSQLhandler client;
@@ -28,12 +31,15 @@ public class SearchBookTest extends TestCase {
 	}
 
 	protected void setUp() throws Exception {
+		
+		//here need to insert real val
 		title="kof";
-		author="kofiko";
-		language="kofiko";
+		author="j";
+		language="HEB";
 		contents="kofiko";
 		keywords="kofiko";
 		summary="kofiko";
+		titleNoAns="NoAns";
 		price=(float) 52.5;
 		String host="localhost";
 		try {
@@ -57,7 +63,6 @@ public class SearchBookTest extends TestCase {
 	 * check if the number of result is 1(the size of the arrayList)
 	 */
 	public void testOnlyOneResult() {
-		/*12CHF + 14 CHF = 26 CHF */
 		int expectedBook= 5;
 		int expectedSize= 1;
 		String condition="title=\""+ title+ "\"" + " && " + "author=\"" + author  + " && " + "language=\"" + language + " && " + "contents=\"" + contents+ " && " + "contents=\"" + keywords;
@@ -71,48 +76,39 @@ public class SearchBookTest extends TestCase {
 	 * check if the number of result is more then one 1(the size of the arrayList)
 	 */
 	public void testMoreThenOneResultByAuthor() {
-		/*12CHF + 14 CHF = 26 CHF */
 		Book expectedBook= new Book();
-		int expectedSize= 1;
-		ArrayList<Book> result=BookController.SearchBook("bookID,author", searchBook, "author=\""+author, client);
+		ArrayList<Book> result=BookController.SearchBook("bookID,author", searchBook, "author LIKE '%" +author + "%'", client);
 		assertTrue(result.size()>1);
-		for(int i=0;i<result.size();i++)
+		for(int i=0;i<result.size()-1;i++)
 		{
 			assertEquals(author, result.get(i).getAuthor());
+			assertEquals(author, result.get(i+1).getAuthor());
 			assertNotSame("The "+i+"and "+(i+1)+"bookID is ", result.get(i).getBookID(),result.get(i+1).getBookID());
 		}
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following author that initailize at SetUp
-	 * check if the number of result is more then one 1(the size of the arrayList)
+	 * check for the book with the following Language that initailize at SetUp
 	 */
 	public void testSearchByLanguage() {
-		/*12CHF + 14 CHF = 26 CHF */
 		Book expectedBook= new Book();
-		int expectedSize= 1;
-		ArrayList<Book> result=BookController.SearchBook("bookID,author", searchBook, "author=\""+author, client);
-		assertTrue(result.size()>1);
+		ArrayList<Book> result=BookController.SearchBook("bookID,Language", searchBook, "Language=\""+language, client);
 		for(int i=0;i<result.size();i++)
 		{
-			assertEquals(author, result.get(i).getAuthor());
+			assertEquals(language, result.get(i).getLanguage());
 			assertNotSame("The "+i+"and "+(i+1)+"bookID is ", result.get(i).getBookID(),result.get(i+1).getBookID());
 		}
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following author that initailize at SetUp
-	 * check if the number of result is more then one 1(the size of the arrayList)
+	 * check for the book with the following Summary that initailize at SetUp
 	 */
 	public void testSearchBySummary() {
-		/*12CHF + 14 CHF = 26 CHF */
 		Book expectedBook= new Book();
-		int expectedSize= 1;
-		ArrayList<Book> result=BookController.SearchBook("bookID,author", searchBook, "author=\""+author, client);
-		assertTrue(result.size()>1);
+		ArrayList<Book> result=BookController.SearchBook("bookID,Summary", searchBook, "Summary=\""+summary, client);
 		for(int i=0;i<result.size();i++)
 		{
-			assertEquals(author, result.get(i).getAuthor());
+			assertEquals(summary, result.get(i).getSummary());
 			assertNotSame("The "+i+"and "+(i+1)+"bookID is ", result.get(i).getBookID(),result.get(i+1).getBookID());
 		}
 	}
@@ -122,49 +118,50 @@ public class SearchBookTest extends TestCase {
 	 * check if the number of result is more then one 1(the size of the arrayList)
 	 */
 	public void testSearchByDomain() {
-		/*12CHF + 14 CHF = 26 CHF */
 		Book expectedBook= new Book();
-		int expectedSize= 1;
-		ArrayList<Book> result=BookController.SearchBook("bookID,author", searchBook, "author=\""+author, client);
-		assertTrue(result.size()>1);
+		ArrayList<SubjectToBook> result=FormatController.SearchBookInSubjectToBookAccordingDomain("bookID,dominID",new SubjectToBook(), "dominID=\""+bookDomain.getDomainID(), client);
 		for(int i=0;i<result.size();i++)
 		{
-			assertEquals(author, result.get(i).getAuthor());
+			assertEquals(bookDomain.getDomainID(), result.get(i).getDomainID());
 			assertNotSame("The "+i+"and "+(i+1)+"bookID is ", result.get(i).getBookID(),result.get(i+1).getBookID());
 		}
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following author that initailize at SetUp
-	 * check if the number of result is more then one 1(the size of the arrayList)
+	 * check for the book with the following Keywords that initailize at SetUp
 	 */
 	public void testSearchByKeywords() {
-		/*12CHF + 14 CHF = 26 CHF */
 		Book expectedBook= new Book();
-		int expectedSize= 1;
-		ArrayList<Book> result=BookController.SearchBook("bookID,author", searchBook, "author=\""+author, client);
-		assertTrue(result.size()>1);
+		ArrayList<Book> result=BookController.SearchBook("bookID,keyword", searchBook, "keyword=\""+keywords, client);
 		for(int i=0;i<result.size();i++)
 		{
-			assertEquals(author, result.get(i).getAuthor());
+			assertEquals(keywords, result.get(i).getKeywordString());
 			assertNotSame("The "+i+"and "+(i+1)+"bookID is ", result.get(i).getBookID(),result.get(i+1).getBookID());
 		}
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following author that initailize at SetUp
-	 * check if the number of result is more then one 1(the size of the arrayList)
+	 * check for the book with the following author and title that initailize at SetUp
 	 */
 	public void testCombination() {
-		/*12CHF + 14 CHF = 26 CHF */
 		Book expectedBook= new Book();
-		int expectedSize= 1;
-		ArrayList<Book> result=BookController.SearchBook("bookID,author", searchBook, "author=\""+author, client);
-		assertTrue(result.size()>1);
+		ArrayList<Book> result=BookController.SearchBook("bookID,author,title", searchBook, "author=\""+author+" && "+"title=\""+title, client);
 		for(int i=0;i<result.size();i++)
 		{
 			assertEquals(author, result.get(i).getAuthor());
+			assertEquals(title, result.get(i).getTitle());
 			assertNotSame("The "+i+"and "+(i+1)+"bookID is ", result.get(i).getBookID(),result.get(i+1).getBookID());
 		}
+	}
+	/**
+	 * @author kfir
+	 * check for the book with the following title titleNoAns that initailize at SetUp
+	 * check if the result size if 0 --> there is no one with the title: titleNoAns
+	 */
+	public void testNoResult() {
+		Book expectedBook= new Book();
+		int expectedSize= 0;
+		ArrayList<Book> result=BookController.SearchBook("bookID,title", searchBook, "title=\""+titleNoAns, client);
+		assertNull(result);
 	}
 }

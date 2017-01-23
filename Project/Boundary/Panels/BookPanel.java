@@ -145,6 +145,7 @@ public class BookPanel extends JPanel{
 		add(scrollPane);
 		
 		textAreaSummary = new JTextArea();
+		textAreaSummary.setEditable(false);
 		textAreaSummary.setFont(new Font("Monospaced", Font.PLAIN, 17));
 		textAreaSummary.setLineWrap(true);
 		textAreaSummary.setWrapStyleWord(true);

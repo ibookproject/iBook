@@ -22,12 +22,7 @@ public class AddBook extends ActionFixture {
 	private DBSQLhandler client;
 	
 	public void startBook(){
-		String host;
-		try {
-			host = args[0];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			host = "localhost";
-		}
+		String host="localhost";
 		try {
 			client = new DBSQLhandler(host, DEFAULT_PORT);// connection to
 															// server
@@ -60,7 +55,7 @@ public class AddBook extends ActionFixture {
 	}
 
 	public void setPrice(float price) {
-		setPrice(price);
+		newBook.setPrice(price);
 	}
 
 	public void setSummary(String summary) {
