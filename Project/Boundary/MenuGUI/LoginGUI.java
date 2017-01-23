@@ -56,6 +56,7 @@ public class LoginGUI extends JFrame {
 	private String userInput;
 	private String newStatus;
 	private String tempID;
+	private TimerProject y;
 	/**
 	 * @param host
 	 * Build the first window of the App - Login.
@@ -63,7 +64,6 @@ public class LoginGUI extends JFrame {
 	public LoginGUI(String host) {
 		super();
 		setResizable(false);
-
 		initialize();
 		tempID=null;
 		this.screen = this;
@@ -90,6 +90,8 @@ public class LoginGUI extends JFrame {
 				UserController.UpdateUserStatus(u, "userStatus=\"" + "0" + "\"", "userID=\"" + tempID + "\"",
 						getClient());
 					}
+				if(y!=null)
+				y.endTimer();
 				client.quit();
 				System.exit(0);
 				}
@@ -253,13 +255,14 @@ public class LoginGUI extends JFrame {
 					}
 						break;
 					case UserStatus.LIBRRIAN: {
-						TimerProject y = new TimerProject();
-						y.start(screen);
+						 TimerProject y = new TimerProject();
+						y.startTimer(screen);
 						LibrarianMenu usm = new LibrarianMenu(screen, 5,Integer.parseInt(txtUserID.getText()));
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
 										setContentPane(FirstPanel);
+										y.endTimer();
 									}
 									// //////////////////////button to back
 									// panel from
@@ -269,8 +272,8 @@ public class LoginGUI extends JFrame {
 					}
 						break;
 					case UserStatus.MANAGER: {
-						TimerProject y = new TimerProject();
-						y.start(screen);
+						 TimerProject y = new TimerProject();
+						y.startTimer(screen);
 						LibraryManagerMenu usm = new LibraryManagerMenu(screen,
 								6,Integer.parseInt(txtUserID.getText()));
 						usm.btnDisconnect

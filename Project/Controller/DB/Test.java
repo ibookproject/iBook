@@ -22,6 +22,10 @@ public class Test {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			host = "localhost";
 		}// take the IP of server the host
+		
+		//
+		host="192.168.10.250";
+		//
 		  LoginGUI loginFrame = new LoginGUI(host); // create StudentFrame
 		  /*
 		  loginFrame.addWindowListener(new WindowAdapter() {

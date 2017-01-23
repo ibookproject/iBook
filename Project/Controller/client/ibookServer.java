@@ -147,7 +147,8 @@ public class ibookServer extends AbstractServer {
 			} else
 				client.sendToClient("You Send wrong message");
 		} catch (Exception e) {
-			System.out.println("there is an TT " + e.getClass() + ": " + e);
+			if(e instanceof RuntimeException)
+			System.out.println("there is no answer form the query"+msg.toString());
 			try {
 				client.sendToClient(e);
 			} catch (IOException ex) {

@@ -1,0 +1,3 @@
+<fitsuite name="Add book" desc="add book in all the scenrios to our DB">
+    <testref>addBookSucceeded.fit</testref>
+</fitsuite>
