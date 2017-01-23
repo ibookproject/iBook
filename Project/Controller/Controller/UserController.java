@@ -15,19 +15,7 @@ import command.searchCommand;
 import command.updateCommand;
 
 public class UserController {
-	/*
-	 * SearchUser - Done
-	 * Login
-	 * UpdateUserInfo
-	 * CreateNewAccount
-	 * RequestStatisticUserReport
-	 * RequestSubscription - Done
-	 * SetStatusSubscription - Done
-	 * GetUserList
-	 * CheckUserDetails
-	 * UpdateUserStatus
-	 * */
-	
+
 	public static ArrayList<User> SearchUser(String fromSentence,User u,String whereSentence,DBSQLhandler client)
 	{
 		// filed is need to look like "userID,password,..."

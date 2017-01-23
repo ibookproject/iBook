@@ -1,60 +1,39 @@
 package MemberGUI;
 
 import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
 
 import Book.Book;
 import Book.Cart;
-import Book.Domain;
-import Book.Review;
-import Book.Subject;
-import Book.SubjectToBook;
 import Controller.CartController;
-import Controller.FormatController;
 import Controller.UserController;
-import Controller.BookController;
 import MenuGUI.LoginGUI;
 import Panels.CartCheckBoxBooklistPanel;
-import Panels.FormatCheckBoxBooklistPanel;
-import Panels.SearchReviewPanel;
 import Role.User;
-import client.DBgenericObject;
-import command.joinCommand;
 import command.joinObject;
 
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
-
-
-
 
 public class CartManagerGUI extends JPanel {
 
@@ -88,7 +67,6 @@ public class CartManagerGUI extends JPanel {
 		searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionMethod,privilege",u,"subscriptionMethod<>\"" + 0 + "\""+" && " + "userID=\"" + screen.getTempID() + "\"", screen.getClient());//call search book method from book controller
 		if(searcRes!=null)
 		{
-		
 		/////////////////////
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
@@ -113,7 +91,7 @@ public class CartManagerGUI extends JPanel {
 		int flag=0;
 		ArrayList<Book> bbb;
 		/**JOIN BETWEEN BOOK AND CART**/
-		// get all the book at cart that is status 0 or 1 means not buy or already buy but not buy and then delete
+		//get all the book at cart that is status 0 or 1 means not buy or already buy but not buy and then delete
 		bbb=CartController.GetCartListForUser("book.bookID,book.title,book.author,book.price",c,temp,"userID=\""+screen.getTempID() +"\""+" && "+"status=\""+Cart.BOUGHT+"\"", screen.getClient());
 		if (bbb != null) {
 			flag=1;
@@ -142,7 +120,7 @@ public class CartManagerGUI extends JPanel {
 			for(int i=0;i<bbb.size();i++)
 				panel.add(new CartCheckBoxBooklistPanel(screen,bbb.get(i),bbb.get(i).getBookID(),panel,i,0));
 		} 
-		else 
+		 if(panel.getComponentCount()==0)
 		{
 			panel.setVisible(false);
 			scrollPaneMain.setVisible(false);

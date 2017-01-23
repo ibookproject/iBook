@@ -6,6 +6,6 @@
 	<classpathentry kind="src" path="Entity"/>
 	<classpathentry kind="src" path="src/images"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/AlmoGSB/git/iBooki/Project/mysql-connector-java-3.1.11-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hensaada/Desktop/mysql-connector-java-3.1.11-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
