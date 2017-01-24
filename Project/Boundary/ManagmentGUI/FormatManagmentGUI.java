@@ -123,7 +123,6 @@ public class FormatManagmentGUI extends JPanel {
 				for(Subject ddd:resultSubjects) // adding all the Domain names to the checkbox
 					SubjectBox.addItem(ddd);
 				SubjectBox.setSelectedIndex(0);
-
 				//getting all the book at the DB
 				Book tempObject = new Book(); // create new book
 				AllBookList=BookController.SearchBook("bookID,title,language,author",tempObject,"bookEnable=\""+1+"\"", screen.getClient());
@@ -186,16 +185,11 @@ public class FormatManagmentGUI extends JPanel {
 		});
 		DomainBox.setBounds(339, 115, 75, 20);
 		add(DomainBox);
-		
-	
 		SubjectBox.setBounds(341, 237, 75, 20);
 		add(SubjectBox);
-		
 		JLabel lblChooseSubjectAt = new JLabel("Choose subject at Domain");
 		lblChooseSubjectAt.setBounds(313, 218, 150, 14);
-		
 		add(lblChooseSubjectAt);
-		
 		JLabel lblNewDomain = new JLabel("new domain : ");
 		lblNewDomain.setBounds(556, 114, 83, 14);
 		add(lblNewDomain);
@@ -267,9 +261,7 @@ public class FormatManagmentGUI extends JPanel {
 				{
 					if(Validation.NameValidation(SubjectTextField.getText().trim(),20)==true&&Validation.regularValidation(SubjectTextField.getText().trim())==true)
 					{
-					////////////////////////////////////
-					int id=((Domain) DomainBox.getSelectedItem()).getDomainID();/// here is the problem
-					//////////////////////////////////////
+					int id=((Domain) DomainBox.getSelectedItem()).getDomainID();
 				Subject sub = new Subject(id,s); // create new Subject	
 				ArrayList<Subject> temp = FormatController.SearchSubject("domainID,nameSubject",sub, "nameSubject=\""+s+ "\"" ,screen.getClient());				
 				if(temp==null)
@@ -327,8 +319,6 @@ public class FormatManagmentGUI extends JPanel {
 							}	 
 						}
 					}
-			
-
 						if(AllBookList!=null)
 						{
 							panel.removeAll();

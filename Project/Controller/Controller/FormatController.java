@@ -22,8 +22,7 @@ import command.showAllCommand;
  */
 public class FormatController {
 	
-/**
- * 
+/** 
  * @param fromSentence
  * string for the query sql " FROM"
  * @param domain
@@ -33,7 +32,7 @@ public class FormatController {
  * @param client
  * the current client that ask the query
  * @return
- *  The Array list of books according the search query the user sends(with the conditions of-select,from and where)
+ *  The result  Array list of books according the search query the user sends(with the conditions of-select,from and where)
  * @author hen saada 
  */
 	public static ArrayList<Domain> SearchDomain(String fromSentence,Domain domain,String whereSentence,DBSQLhandler client)
@@ -66,7 +65,7 @@ public class FormatController {
 	 * @param client
 	 * the current client that ask the query
 	 * @return
-	 *  The Array list of subject's according the search query the user sends(with the conditions of-select,from and where) - search specific subject
+	 *  The result Array list of subject's according the search query the user sends(with the conditions of-select,from and where) - search specific subject
 	 * @author hen saada
 	 */
 	public static ArrayList<Subject> SearchSubject(String fromSentence,Subject subject,String whereSentence,DBSQLhandler client)
@@ -89,13 +88,9 @@ public class FormatController {
 	}
 	
 	/**
-	 * 
-	 * @param fromSentence
-	 * string for the query sql " FROM"
+
 	 * @param domain
 	 * name of the table that get from this object 
-	 * @param whereSentence
-	 * string for the query sql "WHERE"
 	 * @param client
 	 * the current client that ask the query
 	 * @return
@@ -119,13 +114,9 @@ public class FormatController {
 	}
 	
 	/**
-	 * 
-	 * @param fromSentence
-	 * string for the query sql " FROM"
+
 	 * @param subject
 	 * name of the table that get from this object 
-	 * @param whereSentence
-	 * string for the query sql "WHERE"
 	 * @param client
 	 * the current client that ask the query
 	 * @return
@@ -150,17 +141,12 @@ public class FormatController {
 	
 	
 	/**
-	 * 
-	 * @param fromSentence
-	 * string for the query sql " FROM"
 	 * @param domain
 	 * name of the table that get from this object 
-	 * @param whereSentence
-	 * string for the query sql "WHERE"
 	 * @param client
 	 * the current client that ask the query
 	 * @return
-	 *  The Array list of Domain's name according the search query the user sends(with the conditions of-select,from and where) show all domain table
+	 *  The result Array list of Domain's name according the search query the user sends(with the conditions of-select,from and where) show all domain table
 	 * @author hen saada 
 	 * @author coral carmeli
 	 */
@@ -183,16 +169,12 @@ public class FormatController {
 	}
 	
 	/**
-	 * @param fromSentence
-	 * string for the query sql " FROM"
 	 * @param subject
 	 * name of the table that get from this object 
-	 * @param whereSentence
-	 * string for the query sql "WHERE"
 	 * @param client
 	 * the current client that ask the query
 	 * @return
-	 *  The Array list of Subject's name according the search query the user sends(with the conditions of-select,from and where) 
+	 *  The result Array list of Subject's name according the search query the user sends(with the conditions of-select,from and where) 
 	 * @author coral carmeli
 	 */
 	public static ArrayList<Subject> GetAllSubject(Subject subject,DBSQLhandler client)// changes
@@ -224,7 +206,7 @@ public class FormatController {
 	 * @param client
 	 * the current client that ask the query
 	 * @return
-	 *  The Array list of book's name according the search query the user sends(with the conditions of-select,from and where) 
+	 *  The result Array list of book's name according the search query the user sends(with the conditions of-select,from and where) 
 	 * @author coral carmeli
 	 * @author hensaada hen saada
 	 */
@@ -246,10 +228,19 @@ public class FormatController {
 			return null;
 		}
 	}
+
 	/**
-	 * @author Coral Carmeli
-	 * @param fromSentence(String ),Subject, condition(String),client
-	 * @return The ArrayList of Subject - the list of all subject in the requested Domain
+	 * @param fromSentence
+	 * string for the query sql " FROM"
+	 * @param subjectToBook
+	 * name of the  associates Table  that get from this object 
+	 * @param whereSentence
+	 * string for the query sql "WHERE"
+	 * @param client
+	 * the current client that ask the query
+	 * @return
+	 *  The result Array list of Subject - the list of all subject in the requested Domain
+	 * @author coral carmeli
 	 */
 	public static ArrayList<Subject> SearchSubjectAtDomain(String fromSentence,Subject s,String condition,DBSQLhandler client)
 	{
@@ -282,12 +273,12 @@ public class FormatController {
 	 * @param client
 	 * the current client that ask the query
 	 * @return
-	 *  The Array list of associates Table "SubjectToBook" according the search query the user sends(with the conditions of-select,from and where) searching specefic subject at the associates Table 
+	 *  The result Array list of associates Table "SubjectToBook" according the search query the user sends(with the conditions of-select,from and where) searching specefic subject at the associates Table 
 	 * @author hen saada
 	 */
-	public static ArrayList<SubjectToBook> SearchSubjectAtSubjectToBook(String fromSentence,SubjectToBook s,String whereSentence,DBSQLhandler client)
+	public static ArrayList<SubjectToBook> SearchSubjectAtSubjectToBook(String fromSentence,SubjectToBook SubjectToBookk,String whereSentence,DBSQLhandler client)
 	{
-		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,s,whereSentence));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,SubjectToBookk,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){
 			try{
 			Thread.sleep(50);
@@ -306,13 +297,8 @@ public class FormatController {
 
 	
 	/**
-	 * 
-	 * @param fromSentence
-	 * string for the query sql " FROM"
 	 * @param subjectToBook
 	 * name of the  associates Table  that get from this object 
-	 * @param whereSentence
-	 * string for the query sql "WHERE"
 	 * @param client
 	 * the current client that ask the query
 	 * @return
