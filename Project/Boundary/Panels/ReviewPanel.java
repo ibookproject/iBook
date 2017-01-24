@@ -60,15 +60,15 @@ public class ReviewPanel extends JPanel{
 	public ReviewPanel(LoginGUI screen,int reviewID,String reviewContent,String bookTitle,int permission,JPanel pan,String reviewDate) {
 		setBackground(Color.WHITE);
 		setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 200, 0))));
-		setPreferredSize(new Dimension(731, 128));
+		setPreferredSize(new Dimension(731, 149));
 		setLayout(null);
 		reviewId=reviewID;
 		Permission=permission;
 		pann=pan;
 		
-		lblDate = new JLabel("Date:");
+		lblDate = new JLabel("Review Date:");
 		lblDate.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
-		lblDate.setBounds(46, 75, 103, 23);
+		lblDate.setBounds(34, 102, 126, 23);
 		add(lblDate);
 		
 		lblNewTitle = new JLabel(bookTitle);
@@ -76,24 +76,24 @@ public class ReviewPanel extends JPanel{
 		add(lblNewTitle);
 		
 		lblNewDate = new JLabel(reviewDate);
-		lblNewDate.setBounds(106, 82, 161, 16);
+		lblNewDate.setBounds(155, 107, 93, 16);
 		add(lblNewDate);
 		
-		lblContent = new JLabel("\nContent:");
+		lblContent = new JLabel("Review \r\nContent:");
 		lblContent.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
-		lblContent.setBounds(240, 10, 81, 23);
+		lblContent.setBounds(310, 10, 150, 23);
 		add(lblContent);
 		
 		
 		
 		lblBookTitle = new JLabel("Book Name:");
 		lblBookTitle.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
-		lblBookTitle.setBounds(46, 10, 114, 23);
+		lblBookTitle.setBounds(34, 10, 114, 23);
 		add(lblBookTitle);
 		
 		chckbxChooseReview = new JCheckBox("");
 		chckbxChooseReview.setBackground(Color.WHITE);
-		chckbxChooseReview.setBounds(8, 47, 29, 25);
+		chckbxChooseReview.setBounds(8, 61, 29, 25);
 		add(chckbxChooseReview);
 		
 		btnRemovePartOf = new JButton("Remove Part Of Review");
@@ -121,7 +121,7 @@ public class ReviewPanel extends JPanel{
 		});
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(318, 12, 244, 102);
+		scrollPane.setBounds(240, 36, 322, 100);
 		add(scrollPane);
 		
 		textAreaContent = new JTextArea();
