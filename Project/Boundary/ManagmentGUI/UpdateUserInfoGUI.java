@@ -4,43 +4,31 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JFrame;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
 import java.awt.Font;
-
 import javax.swing.JTextField;
-import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JCheckBox;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLayeredPane;
-import javax.swing.UIManager;
-
 import Controller.UserController;
 import Extras.DatePicker;
 import Extras.Validation;
 import MenuGUI.LibraryManagerMenu;
 import MenuGUI.LoginGUI;
 import Role.User;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Date;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.security.acl.Permission;
 import java.text.SimpleDateFormat;
-import java.awt.Color;
-import javax.swing.border.MatteBorder;
 
+/**
+ * Update User Info GUI
+ * @author Sagi Entenberg
+ * @author Almog Yamin
+ */
 public class UpdateUserInfoGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -61,7 +49,15 @@ public class UpdateUserInfoGUI extends JPanel {
 	private JComboBox UserStatuscomboBox;
 	private ArrayList<User> temp;
 	private JComboBox PrivilagecomboBox;
-
+/**
+ *  Constructor
+ * @param screen
+ * 	LoginGUI extends JFram to build the panel
+ * @param permission
+ * the privilege of This Client
+ * @param UserIdAtDataBase
+ * 
+ */
 	public UpdateUserInfoGUI(LoginGUI screen, int permission, int UserIdAtDataBase) {
 		super();
 		this.screen = screen;

@@ -114,6 +114,11 @@ public class ReviewController {
 
 	public static boolean AddReview(Review review, DBSQLhandler client) // boolean
 	{
+		if(review==null||review.getReviewContent()==null||review.getReviewContent().equals("")||review.getUserSign()==null)
+		{
+			return false;
+		}
+
 		client.insertToDB(new insertCommand<DBtranslation>(review));
 		while (!client.GetGotMessag()) {
 			try {

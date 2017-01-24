@@ -173,21 +173,21 @@ public class RequestPostFillReviewGUI extends JPanel
 			public void actionPerformed(ActionEvent e) {
 			//convert the current time to String
 				Calendar time = Calendar.getInstance();
-				//we can use also with Date object and insert it to Calander ********* we need to choose
-				/*Date f  = new Date();
-				time.setTime(f);*/
 		        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
 
-				//String txtDate = new SimpleDateFormat("yyyy/dd/MM").format(date);
-		       
 		        if(!(textAreaReviewContent.getText().equals(""))&&(conterOfText<=50))
 				{
-		        Review r = new Review(timeRightNow,textAreaReviewContent.getText(),Review.NOTIFICATION,bookID);
+		        	
+		        Review r = new Review(textAreaReviewContent.getText(),bookID,screen.getTempID());
 		        Book b=new Book();
 				ArrayList<Book> temp = BookController.SearchBook("bookID",b,"bookID=\""+bookID+"\"", screen.getClient());//call search book method from book controller
 				if(temp==null)
 					JOptionPane.showMessageDialog(screen,"not found any book result\n", "Warning",JOptionPane.WARNING_MESSAGE);
 				else{
+					if (JOptionPane.showConfirmDialog(null, "Are you sign on the review?", "WARNING",
+					        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					    // yes option
+					
 		        boolean result = ReviewController.AddReview(r,screen.getClient());
 				if (result==false)
 					JOptionPane.showMessageDialog(screen,"Add Reviwe process FAILED ! ", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -197,12 +197,18 @@ public class RequestPostFillReviewGUI extends JPanel
 			 		screen.setContentPane(pan);
 			 	}
 				}//temp!=null
+					else{
+						JOptionPane.showMessageDialog(screen,"You must Sign on the review befor the post ! ", "",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}//yes no option
+			
 				}//else if
 		        else if(conterOfText>=50)
 		        	JOptionPane.showMessageDialog(screen,"There are too many characters ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 		        else
 		        	JOptionPane.showMessageDialog(screen,"Please insert Review content ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
+			
 		});
 		btnPost.setBounds(351, 529, 123, 40);
 		add(btnPost);

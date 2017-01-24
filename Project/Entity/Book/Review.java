@@ -16,6 +16,7 @@ public class Review extends DBtranslation {
 	private String reviewContent;
 	private int reviewStatus;
 	private int bookID;
+	private String UserSign;
 	public static final int CONFIREMED=1;
 	public static final int NOTCONFIREMED=0;
 	public static final int NOTIFICATION=-1;
@@ -34,6 +35,17 @@ public class Review extends DBtranslation {
 		setReviewContent(reviewContent);
 		setReviewStatus(reviewStatus);
 		setBookID(bookID);
+	}
+	public Review( String reviewContent, int bookID,String userSign) {
+		super();
+		Calendar time = Calendar.getInstance();
+        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
+		setReviewDate(timeRightNow);
+		setReviewContent(reviewContent);
+		setReviewStatus(NOTIFICATION);
+		setBookID(bookID);
+		setUserSign(userSign);
+        
 	}
 	public int getReviewID() {
 		return reviewID;
@@ -93,11 +105,11 @@ public class Review extends DBtranslation {
 	}
 	@Override
 	public String getAttributeToInsert() {
-		return "(reviewDate,reviewContent,reviewStatus,bookID)";
+		return "(reviewDate,reviewContent,reviewStatus,bookID,userSign)";
 	}
 	@Override
 	public String getValToInsert() {
-		return String.format("(\"%s\",\"%s\",%d,%d)",reviewDate,reviewContent,reviewStatus,bookID);
+		return String.format("(\"%s\",\"%s\",%d,%d,\"%s\")",reviewDate,reviewContent,reviewStatus,bookID,UserSign);
 	}
 
 	//convert array Which was obtained from DB to an actual Review
@@ -138,6 +150,9 @@ public class Review extends DBtranslation {
 				case "bookID":
 					recover.setBookID((int)ob.getValtoArray(i));
 					break;
+				case "userSign":
+					recover.setUserSign((String)ob.getValtoArray(i));
+					break;
 
 				default:
 					throw new InputMismatchException("you have inserred wrong to search statment");
@@ -149,8 +164,21 @@ public class Review extends DBtranslation {
 		@Override
 		public String toString() {
 			return "Review [reviewID=" + reviewID + ", reviewDate=" + reviewDate + ", reviewContent=" + reviewContent
-					+ ", reviewStatus=" + reviewStatus + ", bookID=" + bookID + "]";
+					+ ", reviewStatus=" + reviewStatus + ", bookID=" + bookID +",userSign="+ UserSign+"]";
 		}
+
+		public String getUserSign() {
+			
+			return UserSign;
+		}
+
+		public void setUserSign(String userSign) {
+			if (userSign == null || userSign.equals("") || Validation.regularValidation(userSign) == false)
+				throw new InputMismatchException("you have inserted wrong Content");
+			this.UserSign = userSign;
+		}
+		
+		
 		
 }
 
