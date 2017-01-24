@@ -348,7 +348,6 @@ public class FormatManagmentGUI extends JPanel {
 					scrollPaneMain.setVisible(false);
 				}
 			
-				//} else coubtflag++;
 			}
 		});
 			
@@ -385,7 +384,6 @@ public class FormatManagmentGUI extends JPanel {
 
 					}
 					else JOptionPane.showMessageDialog(screen,"no Chossen Subject & any book's", "Warning",JOptionPane.WARNING_MESSAGE);
-	
 			}
 		});
 		btnAtachBook.setBounds(311, 440, 165, 32);
