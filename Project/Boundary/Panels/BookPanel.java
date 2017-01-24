@@ -93,7 +93,7 @@ public class BookPanel extends JPanel{
 				carts=CartController.SearchCart("userID", c, "userID=\""+screen.getTempID()+"\" && bookID=\""+b.getBookID()+"\" && buyDate=\""+timeRightNow+"\"", screen.getClient());
 				if(carts==null||carts.isEmpty())
 				{
-					if((CartController.AddToCart(new Cart(screen.getTempID(),b.getBookID(),b.getPrice(),0,timeRightNow), screen.getClient()))==true)
+					if((CartController.AddToCart(new Cart(screen.getTempID(),b.getBookID(),0,timeRightNow), screen.getClient()))==true)
 						JOptionPane.showMessageDialog(screen,"Add new Record to The Cart Done! ", "",JOptionPane.INFORMATION_MESSAGE);
 					else
 						JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed!", "Warning",JOptionPane.WARNING_MESSAGE);

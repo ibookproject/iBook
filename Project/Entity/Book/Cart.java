@@ -14,7 +14,6 @@ public class Cart extends DBtranslation {
 
 	private String userID;
 	private int bookID;
-	private float price;
 	private int status;
 	private String buyDate;
 	public static final int BOUGHT = 1;// to show the orders
@@ -26,17 +25,16 @@ public class Cart extends DBtranslation {
 		super();
 	}
 
-	public Cart(String userID, int bookID, float price, int status, String date) {
-		this(userID, bookID, price);
+	public Cart(String userID, int bookID,  int status, String date) {
+		this(userID, bookID);
 		this.status = ORDERD;
 		setDate(date);
 	}
 
-	public Cart(String userID, int bookID, float price) {
+	public Cart(String userID, int bookID) {
 		super();
 		setUserID(userID);
 		setBookID(bookID);
-		setPrice(price);
 	}
 
 	public String getUserID() {
@@ -45,10 +43,6 @@ public class Cart extends DBtranslation {
 
 	public int getBookID() {
 		return bookID;
-	}
-
-	public float getPrice() {
-		return price;
 	}
 
 	public void setUserID(String userID) {
@@ -61,12 +55,6 @@ public class Cart extends DBtranslation {
 		if (bookID < 0)
 			throw new InputMismatchException("you have  inserted wrong book ID");
 		this.bookID = bookID;
-	}
-
-	public void setPrice(float price) {
-		if (price < 0)
-			throw new InputMismatchException("you have insert Negative price");
-		this.price = price;
 	}
 
 	public int getStatus() {
@@ -107,12 +95,12 @@ public class Cart extends DBtranslation {
 	@Override
 	public String getValToInsert() {
 		//return String.format("(\"%s\",\"%s\",%d,%d)",reviewDate,reviewContent,reviewStatus,bookID);
-		return String.format("(%s,%d,%d,%f,\"%s\")", userID, bookID, status, price,buyDate);
+		return String.format("(%s,%d,%d,\"%s\")", userID, bookID, status, buyDate);
 	}
 
 	@Override
 	public String getAttributeToInsert() {
-		return "(userID,bookID,status,price,buyDate)";
+		return "(userID,bookID,status,buyDate)";
 	}
 
 	public String toString() {
@@ -140,9 +128,6 @@ public class Cart extends DBtranslation {
 			case "bookID":
 				recover.setBookID((int) ob.getValtoArray(i));
 				break;
-			case "price":
-				recover.setPrice((float) ob.getValtoArray(i));
-				break;
 			case "status":
 				recover.setStatus((int) ob.getValtoArray(i));
 				break;
@@ -160,19 +145,19 @@ public class Cart extends DBtranslation {
 		return recover;
 	}
 
-	public static Comparator<Cart> IdBookNum = new Comparator<Cart>() {
+	/*public static Comparator<Cart> IdBookNum = new Comparator<Cart>() {
 
 		public int compare(Cart b1, Cart b2) {
 
 			float idNum1 = b1.getPrice();
 			float idNum2 = b2.getPrice();
 
-			/* For ascending order */
+			/* For ascending order 
 			return (int) idNum1 - (int) idNum2;
 
-			/* For descending order */
+			/* For descending order 
 			// rollno2-rollno1;
 		}
-	};
+	};*/
 
 }

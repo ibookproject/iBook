@@ -13,7 +13,7 @@ public class Order extends Cart {
 
 	public Order(String userID,int bookID,float price,Date buyDate)
 	{
-		super(userID,bookID,price);
+		super(userID,bookID);
 	//	this.status=0;
 		this.buyDate=buyDate;
 	}
@@ -22,7 +22,7 @@ public class Order extends Cart {
 		int temp=0;
 		//if(status==1)
 		//temp=1;
-		return (String.format("(%s,%d,%d,%f",getUserID(),getBookID(),temp,getPrice())+buyDate);
+		return (String.format("(%s,%d,%d",getUserID(),getBookID(),temp)+buyDate);
 	}
 	@Override
 	public String getAttributeToInsert() {
