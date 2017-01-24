@@ -1,40 +1,28 @@
 package ManagmentGUI;
 
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
-
 import Book.Book;
 import Book.Review;
 import Controller.BookController;
-import Controller.ReviewController;
 import MenuGUI.LoginGUI;
-import Panels.BookStatisticsPanel;
-import Panels.SearchReviewPanel;
 import javax.swing.SwingConstants;
 
 /**
- * 
+ * Temporary Remove Book GUI
  * @author Sagi Entenberg
- *
+ * @author Almog Yamin
  */
 
 public class TemporaryRemoveBookGUI extends JPanel {
@@ -59,8 +47,10 @@ public class TemporaryRemoveBookGUI extends JPanel {
 	public JButton btnBack;
 
 	/**
-	 * 
+	 * Constructor
 	 * @param screen
+	 * LoginGUI extends JFram to build the panel
+	 * 
 	 */
 	public TemporaryRemoveBookGUI(LoginGUI screen) {
 		super();
@@ -71,9 +61,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		initialize();
 	}
 
-	/**
-	 * initialize the frame
-	 */
+	
 	private void initialize() {
 
 		this.setSize(850, 625);
@@ -133,7 +121,6 @@ public class TemporaryRemoveBookGUI extends JPanel {
 				BookController.UpdateBook(b, "bookEnable=\"" + 0 + "\"",
 						"bookID=\"" + comboBoxOfBooks.getItemAt(comboBoxOfBooks.getSelectedIndex()).getBookID() + "\"",
 						screen.getClient());
-				// System.out.println("hide");
 				comboBoxOfBooks.getItemAt(comboBoxOfBooks.getSelectedIndex()).setBookEnable(0);
 				comboBoxOfBooks.updateUI();
 				btnHide.setEnabled(false);
@@ -153,12 +140,8 @@ public class TemporaryRemoveBookGUI extends JPanel {
 						screen.getClient());
 				comboBoxOfBooks.getItemAt(comboBoxOfBooks.getSelectedIndex()).setBookEnable(1);
 				comboBoxOfBooks.updateUI();
-				// System.out.println("Show");
-				// if(comboBoxOfBooks.getItemAt(comboBoxOfBooks.getSelectedIndex()).isBookEnable()
-				// == 1)
 				btnShow.setEnabled(false);
 				btnHide.setEnabled(true);
-
 			}
 		});
 		btnShow.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -201,10 +184,6 @@ public class TemporaryRemoveBookGUI extends JPanel {
 						int i = 0;
 						
 						for (Book bt : tempBooks) {
-							// comboBoxOfBooks.addItem("BookID:"+tempBooks.get(i).getBookID()+"
-							// , Name: "+tempBooks.get(i).getTitle().trim() + "
-							// , " +"Author: "+
-							// tempBooks.get(i).getAuthor().trim());
 							comboBoxOfBooks.addItem(bt);
 							i++;
 						}
@@ -217,78 +196,6 @@ public class TemporaryRemoveBookGUI extends JPanel {
 			}
 			
 		});
-		/*
-		 * btnSearch.addActionListener(new ActionListener() { public void
-		 * actionPerformed(ActionEvent e) {
-		 * 
-		 * 
-		 * 
-		 * if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().
-		 * isEmpty()) { comboBoxOfBooks.removeAllItems();
-		 * 
-		 * JOptionPane.showMessageDialog(screen,
-		 * "you must fill the name/author of the book !! ",
-		 * "Warning",JOptionPane.WARNING_MESSAGE); } else { Book b = new
-		 * Book(textFieldBook.getText().trim(),textFieldAutohr.getText().trim())
-		 * ; // create new book
-		 * 
-		 * if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText(
-		 * ).isEmpty()==false) { tempBooks =
-		 * BookController.SearchBook("title,author,bookID,bookEnable",b,
-		 * "title LIKE '%"+textFieldBook.getText().trim() +"%'"+ " && "+
-		 * "author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+
-		 * "&&"+"bookEnable=\""+1+"\"", screen.getClient()); if(tempBooks==null)
-		 * { comboBoxOfBooks.removeAllItems();
-		 * 
-		 * JOptionPane.showMessageDialog(screen,"no book results were found ",
-		 * "Warning",JOptionPane.WARNING_MESSAGE);
-		 * textFieldBook.setText("");textFieldAutohr.setText(""); } else { if(
-		 * tempBooks.get(0).isBookEnable()==1){ btnHide.setEnabled(true);
-		 * btnShow.setEnabled(false); } else{ btnHide.setEnabled(false);
-		 * btnShow.setEnabled(true); }
-		 * 
-		 * comboBoxOfBooks.removeAllItems(); for(int i=0;i<tempBooks.size();i++)
-		 * comboBoxOfBooks.addItem("BookID:"+tempBooks.get(i).getBookID()+
-		 * "   ,Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+
-		 * tempBooks.get(i).getAuthor().trim()); } } else
-		 * if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().
-		 * isEmpty()==false) { tempBooks =
-		 * BookController.SearchBook("title,author,bookID,bookEnable",b,
-		 * "title=\""+textFieldBook.getText().trim() +"\"", screen.getClient());
-		 * if(tempBooks==null) { comboBoxOfBooks.removeAllItems();
-		 * 
-		 * JOptionPane.showMessageDialog(screen,"no book results were found ",
-		 * "Warning",JOptionPane.WARNING_MESSAGE); textFieldBook.setText("");
-		 * textFieldAutohr.setText(""); } else { if(
-		 * tempBooks.get(0).isBookEnable()==1){ btnHide.setEnabled(true);
-		 * btnShow.setEnabled(false); } else{ btnHide.setEnabled(false);
-		 * btnShow.setEnabled(true); }
-		 * 
-		 * if(comboBoxOfBooks.getSize() != null)
-		 * comboBoxOfBooks.removeAllItems(); for(int i=0;i<tempBooks.size();i++)
-		 * comboBoxOfBooks.addItem("BookID:"+tempBooks.get(i).getBookID()+
-		 * "   ,Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+
-		 * tempBooks.get(i).getAuthor().trim()); } } else
-		 * if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText(
-		 * ).isEmpty()) { tempBooks =
-		 * BookController.SearchBook("title,author,bookID,bookEnable",b,
-		 * "author LIKE '%"+textFieldAutohr.getText().trim() +"%'"+ " && "
-		 * +"bookEnable=\""+1+"\"", screen.getClient()); if(tempBooks==null) {
-		 * comboBoxOfBooks.removeAllItems();
-		 * JOptionPane.showMessageDialog(screen,"no book results were found ",
-		 * "Warning",JOptionPane.WARNING_MESSAGE);
-		 * textFieldBook.setText("");textFieldAutohr.setText("");
-		 * comboBoxOfBooks.removeAllItems(); } else { if(
-		 * tempBooks.get(0).isBookEnable()==1){ btnHide.setEnabled(true);
-		 * btnShow.setEnabled(false); } else{ btnHide.setEnabled(false);
-		 * btnShow.setEnabled(true); } if(comboBoxOfBooks.getSize() != null)
-		 * comboBoxOfBooks.removeAllItems(); for(int i=0;i<tempBooks.size();i++)
-		 * comboBoxOfBooks.addItem("BookID:"+tempBooks.get(i).getBookID()+
-		 * "   ,Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+
-		 * tempBooks.get(i).getAuthor().trim()); } }
-		 * 
-		 * }} });
-		 */
 		btnSearch.setBounds(125, 288, 120, 39);
 		add(btnSearch);
 
