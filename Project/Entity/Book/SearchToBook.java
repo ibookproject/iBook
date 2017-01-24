@@ -55,7 +55,7 @@ public class SearchToBook extends DBtranslation{
 		return "searchtobook";
 	}
 	@Override
-	public String getAttributeToInsert() {
+	public String getValToInsert() {
 		return String.format("(%d,\"%s\",%d)",bookID,searchDate,numberOfSearches);
 	}
 	@Override
@@ -64,7 +64,7 @@ public class SearchToBook extends DBtranslation{
 				+ numberOfSearches + "]";
 	}
 	@Override
-	public String getValToInsert() {
+	public String getAttributeToInsert() {
 		return "(bookID,searchDate,numberOfSearches)";
 	}
 	
@@ -91,9 +91,9 @@ public class SearchToBook extends DBtranslation{
 			case "numberOfSearches":
 				recover.setNumberOfSearches((long)ob.getValtoArray(i));
 				break;
-			case "status":
+			case "SearchDate":
 				Date d = (Date)ob.getValtoArray(i);
-				String txtDate = new SimpleDateFormat("dd/MM/yyyy").format(d);
+				String txtDate = new SimpleDateFormat("yyyy/MM/dd").format(d);
 				recover.setSearchDate(txtDate);
 				break;
 

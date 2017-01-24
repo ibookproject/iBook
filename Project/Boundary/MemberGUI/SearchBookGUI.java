@@ -17,6 +17,7 @@ import command.searchCommand;
 import command.showAllCommand;
 import Book.Book;
 import Book.Domain;
+import Book.SearchToBook;
 import Book.SubjectToBook;
 import Controller.FormatController;
 import Controller.BookController;
@@ -32,11 +33,12 @@ import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 /**
  * @author  Coral Carmel
  * The class responsible to the search book of the user
- * 
  */
 public class SearchBookGUI extends JPanel {
 
@@ -61,17 +63,22 @@ public class SearchBookGUI extends JPanel {
 	private JTextField textFieldSummary;
 	private JTextField textFieldContents;
 	private JButton btnSearch;
-	private int flag=0;
-	private int flagIfNotFill;
+	private int flagIsEmpty=0;
+	private int flagError;
 	private int flagNotFoundBook;
+	private int flagNotFoundBook2;
+	private ArrayList<Book> bookKeywordsChoose=null;
+	private ArrayList<Book> bookDomainList=null;
+	private ArrayList<Book> temp = null;
+	private ArrayList<Book> temp1 = null;	
+	private ArrayList<Book> temp2 = null;
+	private ArrayList<Book> temp3 = null;
 
 	public SearchBookGUI(LoginGUI screen) {
 		super();
 		this.screen = screen;
 		pann = this;
-		flagNotFoundBook=0;
-		initialize();
-		
+		initialize();	
 	}
 	/**
 	 * @author  Coral Carmeli
@@ -192,252 +199,241 @@ public class SearchBookGUI extends JPanel {
 // //////////////////////button back to Search book GUI/////////////////////////////////////////////
 				});
 				Book b=new Book();
-				flagIfNotFill=0;
-				flagNotFoundBook=0;
-				//int flag
-				String condition = "";//initialize the condition
-				if (chckbxTitle.isSelected())
-					if(textTitle.getText().isEmpty())
-						showMessageDialogErrorEmptyField();
-					else
-						condition +="title LIKE '%"+textTitle.getText().trim() +"%'";
-				if (chckbxLanguage.isSelected()) {
-					if(textFieldLanguage.getText().isEmpty())
-						showMessageDialogErrorEmptyField();
-					else
-					{
-						if (!condition.equals(""))
-							condition += " && ";
-						condition += "language LIKE '%" + textFieldLanguage.getText().trim() + "%'";//add "language" to condition
-					}
-				}
-				if (chckbxAuthor.isSelected()) {
-					if(textAuthor.getText().isEmpty())
-						showMessageDialogErrorEmptyField();
-					else
-					{
-						if (!condition.equals(""))
-							condition += " && ";
-						condition += "author LIKE '%" + textAuthor.getText().trim() + "%'";//add "author" to condition
-					}
-				}
-				if (chckbxSummary.isSelected()) {
-					if(textFieldSummary.getText().isEmpty())
-						showMessageDialogErrorEmptyField();
-					else
-					{
-						if (!condition.equals(""))
-							condition += " && ";
-						condition += "summary LIKE '%" + textFieldSummary.getText() + "%'";//add "summary" to condition
-					}
-				}
-				if (chckbxContents.isSelected()) {
-					if(textFieldContents.getText().isEmpty())
-						showMessageDialogErrorEmptyField();
-					else
-					{
-						if (!condition.equals(""))
-							condition += " && ";
-						condition += "content LIKE '%" +textFieldContents.getText() + "%'";//add "content" to condition
-					}
-				}
-	
-				ArrayList<Book> bookKeywordsChoose=new ArrayList<Book>();
-				ArrayList<Book> bookKeywordsDomains=new ArrayList<Book>();
-				ArrayList<Book> bookDomainList=new 	ArrayList<Book>();
+				flagIsEmpty = 0;
+				flagError=0;
+				flagNotFoundBook = 0;
+				flagNotFoundBook2 = 0;
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				////////////////////////////////////////////////////////////////////////////////
-				if(chckbxDomain.isSelected())
-				{	
-					SubjectToBook s=new SubjectToBook();
-					Domain d=(Domain)comboBoxDomain.getSelectedItem();
-					ArrayList<SubjectToBook> subjectDomainList=FormatController.SearchBookInSubjectToBookAccordingDomain("bookID", s, "DomainID=\""+d.getDomainID()+"\"", screen.getClient());
-					if(subjectDomainList!=null)
-					{
-						flag=1;
-						Book b1=new Book();
-						
-						ArrayList<Book> allBooks=BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price", b1, "bookEnable=\""+1+"\"", screen.getClient());
-						
-						for(Book b2:allBooks)
-						{
-							for(SubjectToBook s1:subjectDomainList)
-							{
-								if(b2.getBookID()==s1.getBookID())
-									bookDomainList.add(b2);
-							}
-						}
-					}	
-					else
-						{
-						JOptionPane.showMessageDialog(screen,"Theres no books in the chosen domain", "Warning",JOptionPane.WARNING_MESSAGE);
-						flagNotFoundBook=1;
-						flagIfNotFill=1;
-						}
-						
-				}
-				if (chckbxKeywords.isSelected())
+				if((chckbxTitle.isSelected()||chckbxLanguage.isSelected()||chckbxAuthor.isSelected()||chckbxSummary.isSelected()||chckbxContents.isSelected()||chckbxDomain.isSelected()||chckbxKeywords.isSelected()))
 				{
-					if(textFieldKeywords.getText().isEmpty())
-						showMessageDialogErrorEmptyField();
-					else
-					{
-						Book b2=new Book();
-						ArrayList<Book> bookKeywords=BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price", b2, "bookEnable=\""+1+"\"", screen.getClient());
-						if(bookKeywords!=null)
-						{
-							flag=2;
-							for(Book b1:bookKeywords)
-							{
-								for(int i=0;i<b1.getKeyword().length;i++)
-									if(textFieldKeywords.getText().equals(b1.getKeyword()[i]))
-										bookKeywordsChoose.add(b1);	
-							}
-						}
+					String condition = "";//initialize the condition
+					if (chckbxTitle.isSelected())
+						if(textTitle.getText().isEmpty())
+							flagIsEmpty = 1;
+						else
+							condition +="title LIKE '%"+textTitle.getText().trim() +"%'";
+					if (chckbxLanguage.isSelected()) {
+						if(textFieldLanguage.getText().isEmpty())
+							flagIsEmpty = 1;
 						else
 						{
-							JOptionPane.showMessageDialog(screen,"Theres no books in the chosen kewords", "Warning",JOptionPane.WARNING_MESSAGE);
-							flagNotFoundBook=1;
-							}
-					
-							
-					}
-				}
-		
-			
-				
-				if(chckbxKeywords.isSelected()&&chckbxDomain.isSelected())		//AND between both ArrayList!
-				{
-					
-					if((bookDomainList!=null)&&(bookKeywordsChoose!=null))
-					{
-						flag=3;
-						for(Book b1:bookDomainList)
-						{
-							for(int i=0;i<bookKeywordsChoose.size();i++)
-								if(bookKeywordsChoose.get(i).getBookID()==b1.getBookID())
-									bookKeywordsDomains.add(b1);
+							if (!condition.equals(""))
+								condition += " && ";
+							condition += "language LIKE '%" + textFieldLanguage.getText().trim() + "%'";//add "language" to condition
 						}
 					}
-					else
-					{
-						JOptionPane.showMessageDialog(screen,"Theres no books in the chosen domain or kewords", "Warning",JOptionPane.WARNING_MESSAGE);
-						flagNotFoundBook=1;
-						}
-					
-				}
-				
-				if (!condition.equals("")||flag!=0) //if have some condition
-				{
-					ArrayList<Book> temp1 =new ArrayList<Book>();
-					if(condition.equals("")&&flag==1)
-						temp1=bookDomainList;
-					else
-						if(condition.equals("")&&flag==2)
-							temp1=bookKeywordsChoose;
+					if (chckbxAuthor.isSelected()) {
+						if(textAuthor.getText().isEmpty())
+							flagIsEmpty = 1;
 						else
-							if(condition.equals("")&&flag==3)
-								temp1=bookKeywordsDomains;
-							
-									
-								else{
-					
-					ArrayList<Book> temp = BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price",b,condition, screen.getClient());//call search book method from book controller
-					if (temp != null) 
-					{
-						if(flag==1)//Domain
 						{
-							if(bookDomainList!=null)
-								for(Book b1:bookDomainList)
-								{
-									for(int i=0;i<temp.size();i++)
-										if(temp.get(i).getBookID()==b1.getBookID())
-											temp1.add(b1);
-								}
+							if (!condition.equals(""))
+								condition += " && ";
+							condition += "author LIKE '%" + textAuthor.getText().trim() + "%'";//add "author" to condition
+						}
+					}
+					if (chckbxSummary.isSelected()) {
+						if(textFieldSummary.getText().isEmpty())
+							flagIsEmpty = 1;
+						else
+						{
+							if (!condition.equals(""))
+								condition += " && ";
+							condition += "summary LIKE '%" + textFieldSummary.getText() + "%'";//add "summary" to condition
+						}
+					}
+					if (chckbxContents.isSelected()) {
+						if(textFieldContents.getText().isEmpty())
+							flagIsEmpty = 1;
+						else
+						{
+							if (!condition.equals(""))
+								condition += " && ";
+							condition += "content LIKE '%" +textFieldContents.getText() + "%'";//add "content" to condition
+						}
+					}
+
+					if (chckbxDomain.isSelected()) 
+						{	
+							SubjectToBook s=new SubjectToBook();
+							Domain d=(Domain)comboBoxDomain.getSelectedItem();
+							ArrayList<SubjectToBook> subjectDomainList=FormatController.SearchBookInSubjectToBookAccordingDomain("bookID", s, "DomainID=\""+d.getDomainID()+"\"", screen.getClient());
+							if(subjectDomainList!=null)
+							{
+								Book b1=new Book();
+								ArrayList<Book> allBooks=BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price", b1, "bookEnable=\""+1+"\"", screen.getClient());
+								bookDomainList = new ArrayList<Book>();
+								for(Book b2:allBooks)
+									for(SubjectToBook s1:subjectDomainList)
+										if(b2.getBookID()==s1.getBookID())
+											bookDomainList.add(b2);
+							}	
 							else
-							{
-								flagNotFoundBook=1;
-								JOptionPane.showMessageDialog(screen,"Not found any book result\n", "Warning",JOptionPane.WARNING_MESSAGE);
-							}
-								
-						}
+								flagNotFoundBook = 1;													
+					}
+					if (chckbxKeywords.isSelected()) {
+						if(textFieldKeywords.getText().isEmpty())
+							flagIsEmpty = 1;
 						else
-							if(flag==2)//keywords
-							{
-								if(bookKeywordsChoose!=null)
-									for(Book b1:bookKeywordsChoose)
-									{
-										for(int i=0;i<temp.size();i++)
-											if(temp.get(i).getBookID()==b1.getBookID())
-												temp1.add(b1);
-									}
+						{
+								/*Book b2=new Book();
+								ArrayList<Book> bookKeywords=BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price", b2, "bookEnable=\""+1+"\"", screen.getClient());
+								if(bookKeywords!=null)
+								{
+									bookKeywordsChoose = new ArrayList<Book> ();
+									for(Book b1:bookKeywords)
+										for(int i=0;i<b1.getKeyword().length;i++)//
+											if(textFieldKeywords.getText().equalsIgnoreCase(b1.getKeyword()[i]))
+												bookKeywordsChoose.add(b1);	
+									if(bookKeywordsChoose.isEmpty())
+										flagNotFoundBook = 1;
+								}
 								else
+									flagError=1;		*/
+							bookKeywordsChoose = new ArrayList<Book> ();
+							bookKeywordsChoose=BookController.searchKeywords(textFieldKeywords.getText(),screen.getClient());
+							if(bookKeywordsChoose==null)
+								flagNotFoundBook = 1;
+						}
+					}
+					if(flagError == 0)
+						if(flagIsEmpty == 0)
+							if(flagNotFoundBook == 0)//the best schenario
+							{
+								temp = new ArrayList<Book> ();
+								temp1 = new ArrayList<Book>();	
+								temp2 = new ArrayList<Book>();
+								temp3 = new ArrayList<Book>();
+								if(!(condition == ""))
 								{
-									JOptionPane.showMessageDialog(screen,"Not found any book result\n", "Warning",JOptionPane.WARNING_MESSAGE);
-									flagNotFoundBook=1;
-								}
-							}
-							else
-								if(flag==3)//both domain and keywords
-								{
-									if(bookKeywordsDomains!=null)
-										for(Book b1:bookKeywordsDomains)
-										{
-											for(int i=0;i<temp.size();i++)
-												if(temp.get(i).getBookID()==b1.getBookID())
-													temp1.add(b1);
+										
+									temp = BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price",b,condition, screen.getClient());//call search book method from book controller
+									if(temp!=null)
+									{
+										if ( bookKeywordsChoose!= null) 
+										{	
+											for(Book b1:bookKeywordsChoose)
+												for(int i=0;i<temp.size();i++)
+													if(temp.get(i).getBookID()==b1.getBookID())
+														temp1.add(b1);
+											if(temp1.isEmpty())
+												flagNotFoundBook2=1;	
 										}
-									else
-									{
-										JOptionPane.showMessageDialog(screen,"Not found any book result\n", "Warning",JOptionPane.WARNING_MESSAGE);
-										flagNotFoundBook=1;
+										else
+											if(chckbxKeywords.isSelected())
+												flagNotFoundBook2=1;
+										
+										if( bookDomainList!= null)
+										{
+											for(Book b1:bookDomainList)
+												for(int i=0;i<temp.size();i++)
+													if(temp.get(i).getBookID()==b1.getBookID())
+														temp2.add(b1);
+											if(temp2.isEmpty())
+												flagNotFoundBook2=1;
+										}
+										else
+											if(chckbxDomain.isSelected())
+												flagNotFoundBook2=1;
+										if(chckbxDomain.isSelected()&&(chckbxKeywords.isSelected()))
+										{
+											for(Book b1:temp1)
+												for(Book b2:temp2)
+													if(b1.getBookID()==b2.getBookID())
+														temp3.add(b1);
+													
+											if(!temp3.isEmpty())
+												temp=temp3;
+											else
+												flagNotFoundBook2=1;				
+										}
+										else if(chckbxKeywords.isSelected())
+											temp=temp1;
+										else if(chckbxDomain.isSelected())
+											temp=temp2;				
 									}
+									else
+										flagNotFoundBook2=1;								
 								}
 								else
-									temp1=temp;
-					} 
-					else
-							{
-							JOptionPane.showMessageDialog(screen,"Not found any book result\n", "Warning",JOptionPane.WARNING_MESSAGE);
-							flagNotFoundBook=1;
-							}
-					}
-					
-					if(flagNotFoundBook==0)
-					{
-						sb.setList(temp1);
-						screen.setContentPane(sb);
-					}
-				} else //(condition)=="")empty
-					if(flagIfNotFill==0)
-						JOptionPane.showMessageDialog(screen,"Nothing has selected", "Warning",JOptionPane.WARNING_MESSAGE);
+								{
+									if(chckbxDomain.isSelected()&&(chckbxKeywords.isSelected()))
+									{
+										temp = new ArrayList<Book>();
+										if(( bookKeywordsChoose!= null) && ( bookDomainList!= null) )
+										{	
+											for(Book b1:bookDomainList)
+											{
+												for(int i=0;i<bookKeywordsChoose.size();i++)
+													if(bookKeywordsChoose.get(i).getBookID()==b1.getBookID())
+														temp.add(b1);
+											}
+											if(temp.isEmpty())
+												flagNotFoundBook2=1;
+										}
+										else
+											flagNotFoundBook2=1;
+									
+									}
+									else if(chckbxKeywords.isSelected())											
+												if(bookKeywordsChoose!= null)
+													temp = bookKeywordsChoose;
+												else
+													flagNotFoundBook2=1;																					
+									else if(chckbxDomain.isSelected())									
+										if(bookDomainList!= null)
+											temp = bookDomainList;
+										else
+											flagNotFoundBook2=1;																						
+								}
+								if(flagNotFoundBook2 == 0 )
+								{
+									textFieldLanguage.setText("");
+									textFieldKeywords.setText("");
+									textFieldSummary.setText("");
+									textFieldContents.setText("");
+									textTitle.setText("");
+									textAuthor.setText("");
+									chckbxContents.setSelected(false);
+									chckbxTitle.setSelected(false);
+									chckbxAuthor.setSelected(false);
+									chckbxLanguage.setSelected(false);
+									chckbxSummary.setSelected(false);
+									chckbxKeywords.setSelected(false);
+									chckbxDomain.setSelected(false);
+									Date d = new Date();
+									boolean isdate = false;
+									for(Book b3:temp)
+									{
+										SearchToBook stb = new SearchToBook();
+										ArrayList<SearchToBook> stbList = new ArrayList<SearchToBook>();
+										stbList = BookController.SearchSearchToBook("SearchDate", stb, "bookID=\"" + b3.getBookID() + "\" && SearchDate=\"" + new SimpleDateFormat("yyyy/MM/dd").format(d) +"\"", screen.getClient());
+										if(stbList != null)
+											isdate = BookController.UpdateSearchToBook(stb, "numberOfSearches = numberOfSearches + 1", "bookID=\"" + b3.getBookID() + "\" && SearchDate=\"" + new SimpleDateFormat("yyyy/MM/dd").format(d) +"\""  , screen.getClient());
+										else
+										{
+											stb= new SearchToBook(b3.getBookID() , new SimpleDateFormat("yyyy/MM/dd").format(d) , 1);
+											BookController.InsertSearchToBook(stb, screen.getClient());
+										}
+											
+									}
+									sb.setList(temp);
+									screen.setContentPane(sb);
+								}
+								else//no result books
+									JOptionPane.showMessageDialog(screen,"There is no results", "Warning",JOptionPane.WARNING_MESSAGE);
+								}
+							else//no result books
+								JOptionPane.showMessageDialog(screen,"There is no results", "Warning",JOptionPane.WARNING_MESSAGE);
+						else//one of the fields is empty
+							JOptionPane.showMessageDialog(screen,"Please fill the empty fields", "Warning",JOptionPane.WARNING_MESSAGE);
+					else//There are no books in the system
+						JOptionPane.showMessageDialog(screen,"There are no books in the system", "Warning",JOptionPane.WARNING_MESSAGE);
+				}
+				else//nothing selected
+					JOptionPane.showMessageDialog(screen,"Nothing is selected", "Warning",JOptionPane.WARNING_MESSAGE);
 				
-				
-				flagIfNotFill=0;
-				flagNotFoundBook=0;
-				flag=0;
-				textFieldLanguage.setText("");
-				textFieldKeywords.setText("");
-				textFieldSummary.setText("");
-				textFieldContents.setText("");
-				textTitle.setText("");
-				textAuthor.setText("");
-				chckbxContents.setSelected(false);
-				chckbxTitle.setSelected(false);
-				chckbxAuthor.setSelected(false);
-				chckbxLanguage.setSelected(false);
-				chckbxSummary.setSelected(false);
-				chckbxKeywords.setSelected(false);
-				chckbxDomain.setSelected(false);
-				
+
 			}
 		});
 		btnSearch.setBounds(326, 537, 97, 25);
@@ -447,13 +443,5 @@ public class SearchBookGUI extends JPanel {
 		lblSearchBookGif.setIcon(new ImageIcon("Extras/Images/Search50.png"));
 		lblSearchBookGif.setBounds(480, 27, 69, 62);
 		add(lblSearchBookGif);
-	}
-	public void showMessageDialogErrorEmptyField()
-	{
-		if(flagIfNotFill==0)
-		{
-				JOptionPane.showMessageDialog(screen,"You must fill the chosen empty fields", "Warning",JOptionPane.WARNING_MESSAGE);
-			flagIfNotFill=1;
-		}
 	}
 }

@@ -46,6 +46,7 @@ public class BookPanel extends JPanel{
 	private JLabel lblTitle;
 	private JButton btnAddToCart;
 	private JTextArea textAreaSummary;
+	private ArrayList<Cart> carts;
 	
 	
 	public BookPanel(LoginGUI screen,Book b,SearchBook pan,int User) {
@@ -77,14 +78,28 @@ public class BookPanel extends JPanel{
 		 * @author Coral Carmeli
 		 * This Button 'Add to cart' insert a new record to the table 'Cart' according user ID and requested Book		
 		 */
-
-		
 		btnAddToCart = new JButton("Add to Cart");
 		btnAddToCart.setBounds(601, 156, 117, 25);
+		
+		
+		Calendar time = Calendar.getInstance();
+        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
+		
+		System.out.println("The date is:"+timeRightNow);	
+		Cart c=new Cart();
+		carts=new ArrayList<Cart>();
+		carts=CartController.SearchCart("userID,bookID,buyDate", c, "userID=\""+screen.getTempID()+"\" && bookID=\""+b.getBookID()+"\" && buyDate=\""+timeRightNow+"\"", screen.getClient());
+		if(carts==null||carts.isEmpty())
+		{
+			add(btnAddToCart);
+		}
+		
+		
+		
 		btnAddToCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Calendar time = Calendar.getInstance();
+			/*	Calendar time = Calendar.getInstance();
 		        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
 				
 				System.out.println("The date is:"+timeRightNow);	
@@ -99,10 +114,34 @@ public class BookPanel extends JPanel{
 						JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed!", "Warning",JOptionPane.WARNING_MESSAGE);
 				}
 				else
+				{
+					btnAddToCart.setEnabled(false);
+					btnAddToCart.setText("Already in cart");
 					JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed-There is allready this book for this user!", "Warning",JOptionPane.WARNING_MESSAGE);
+			
+				}*/
+				
+				/*if(carts==null||carts.isEmpty())
+				{*/
+					if((CartController.AddToCart(new Cart(screen.getTempID(),b.getBookID(),0,timeRightNow), screen.getClient()))==true)
+					{
+						JOptionPane.showMessageDialog(screen,"Add new Record to The Cart Done! ", "",JOptionPane.INFORMATION_MESSAGE);
+						remove(btnAddToCart);
+					}
+					else
+						JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed!", "Warning",JOptionPane.WARNING_MESSAGE);
+				/*}
+				else
+				{
+					btnAddToCart.setEnabled(false);
+					btnAddToCart.setText("Already in cart");
+					JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed-There is allready this book for this user!", "Warning",JOptionPane.WARNING_MESSAGE);
+			
+				}*/
+					pann.updateUI();
 			}
 		});
-		add(btnAddToCart);
+		//add(btnAddToCart);
 		}
 		lblLanguage = new JLabel("Language:");
 		lblLanguage.setFont(new Font("VAGRounded BT", Font.BOLD, 21));

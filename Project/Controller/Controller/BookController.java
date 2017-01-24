@@ -125,7 +125,56 @@ public class BookController {
 			}
 			return true;	// means the user add successful	
 	}
+	public static boolean InsertSearchToBook(SearchToBook stb,DBSQLhandler client) // boolean function that return true if the add book done else false.
+	{
+			client.insertToDB(new insertCommand<DBtranslation>(stb)); 	
+			while(!client.GetGotMessag()){//add book to DB
+				try{
+				Thread.sleep(50);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+					return false;
+				}
+			}
+			return true;	// means the book add successful	
+	}
+	public static boolean UpdateSearchToBook(SearchToBook btb , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
+	{
+			client.UpdateInDB(new updateCommand<DBtranslation>(btb, searchCondition, updateCondition));
+			while(!client.GetGotMessag()){//add user to DB
+				try{
+				Thread.sleep(50);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+					return false;
+				}
+			}
+			return true;	// means the user add successful	
+	}
 
+	public static ArrayList<Book> searchKeywords(String g,DBSQLhandler client)
+	{
+		ArrayList<Book> bookKeywordsChoose=new ArrayList<Book>();
+		Book b2=new Book();
+		ArrayList<Book> bookKeywords=BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price", b2, "bookEnable=\""+1+"\"", client);
+		if(bookKeywords!=null)
+		{
+			bookKeywordsChoose = new ArrayList<Book> ();
+			for(Book b1:bookKeywords)
+				for(int i=0;i<b1.getKeyword().length;i++)//
+					if(g.equalsIgnoreCase(b1.getKeyword()[i]))
+						bookKeywordsChoose.add(b1);	
+			if(bookKeywordsChoose.isEmpty())
+				return null;
+			return bookKeywordsChoose;
+		}
+		else
+			return null;
+	}
 	public static boolean DeleteBook(Book b , String searchCondition, DBSQLhandler client)
 	{
 		client.deleteFromDB(new deleteCommand<DBtranslation>(b, searchCondition));
