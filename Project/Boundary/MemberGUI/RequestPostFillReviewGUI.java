@@ -158,7 +158,7 @@ public class RequestPostFillReviewGUI extends JPanel
 							Counterlabel.setText(Integer.toString((50-conterOfText)));
 						}
 					}
-					//System.out.println(conterOfText);
+					
 				}
 			}
 		
