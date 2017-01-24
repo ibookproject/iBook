@@ -1,5 +1,6 @@
 package MenuGUI;
 
+
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
@@ -188,7 +189,7 @@ public class LoginGUI extends JFrame {
 									if(temp.get(0).getFinishDateOfSubscription().before(date))
 									{
 										UserController.UpdateUserStatus(u, "subscriptionMethod=0", "subscriptionMethod<>0 && userID=\""+ txtUserID.getText()+"\"", screen.client);
-										JOptionPane.showMessageDialog(screen,"SORRY yours subscription has been finished !", "Warning",JOptionPane.WARNING_MESSAGE);
+										JOptionPane.showMessageDialog(screen,"SORRY! your subscription has been finished !", "Warning",JOptionPane.WARNING_MESSAGE);
 
 									}
 							setTempID(temp.get(0).getUserID());

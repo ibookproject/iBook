@@ -17,10 +17,12 @@ import Role.UserStatus;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.MatteBorder;
+import javax.swing.SwingConstants;
 
 
 
@@ -35,6 +37,8 @@ public class RequestSetSubscriptionGUI extends JPanel {
 	private int radioButtonChoose = 0;// integer to sent what the radio button
 	private LoginGUI screen;
 	private JPanel pann;
+	private JLabel lblFinishSubscriptionDate;
+	private ArrayList<User> temp;
 	
 	public RequestSetSubscriptionGUI(LoginGUI screen) {
 		super();
@@ -105,7 +109,7 @@ public class RequestSetSubscriptionGUI extends JPanel {
 					JOptionPane.showMessageDialog(screen,"                          Sorry!\nNo selected one of options", "Warning",JOptionPane.WARNING_MESSAGE);
 				else
 				{
-					ArrayList<User> temp= (ArrayList<User>) UserController.SearchUser("subscriptionMethod,subscriptionRequest",u,"userID=\""+screen.getTempID()+"\"",screen.getClient());
+					temp = (ArrayList<User>) UserController.SearchUser("subscriptionMethod,subscriptionRequest",u,"userID=\""+screen.getTempID()+"\"",screen.getClient());
 				
 					if(radioButtonChoose==UserStatus.SINGLE)
 					{
@@ -180,5 +184,30 @@ public class RequestSetSubscriptionGUI extends JPanel {
 		btnBorderButtonYearly.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
 		btnBorderButtonYearly.setBounds(568, 209, 209, 73);
 		add(btnBorderButtonYearly);
+		
+		lblFinishSubscriptionDate = new JLabel("");
+		temp = UserController.SearchUser("subscriptionMethod,finishDateOfSubscription", u, "userID=\"" + screen.getTempID() + "\"", screen.getClient());
+		if(temp.get(0).getSubscriptionMethod() != 0)
+		{
+			String method = "";
+			switch (temp.get(0).getSubscriptionMethod()) {
+			case UserStatus.SINGLE:
+				method = "SINGLE";
+				break;
+			case UserStatus.MONTHLY:
+				method = "MONTHLY";
+				break;
+			case UserStatus.YEARLY:
+				method = "YEARLY";
+				break;
+			}
+			lblFinishSubscriptionDate.setText("Your " + method + " subscription will end at: " + new SimpleDateFormat("yyyy/MM/dd").format(temp.get(0).getFinishDateOfSubscription()) );
+		}
+		else
+			lblFinishSubscriptionDate.setText("You don't have any Subscription. Choose one!");
+		lblFinishSubscriptionDate.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFinishSubscriptionDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblFinishSubscriptionDate.setBounds(189, 162, 451, 23);
+		add(lblFinishSubscriptionDate);
 	}
 }
