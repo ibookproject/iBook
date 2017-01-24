@@ -233,7 +233,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 								 boolean cancel=false;
 								 do{
 								JFileChooser fs=new JFileChooser(new File("c:\\"));
-								fs.setDialogTitle("Upload a file");
+								fs.setDialogTitle("Upload a Book");
 								fs.setBackground(new Color(245, 255, 250));
 								int result=fs.showOpenDialog(null);
 								
