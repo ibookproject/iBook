@@ -34,7 +34,7 @@ public class UserController {
 		client.searchInDB(new searchCommand<User>(fromSentence,user,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -62,7 +62,7 @@ public class UserController {
 			client.insertToDB(new insertCommand<DBtranslation>(user)); 	
 			while(!client.GetGotMessag()){//add user to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{
@@ -90,7 +90,7 @@ public class UserController {
 			client.UpdateInDB(new updateCommand<DBtranslation>(user, searchCondition, updateCondition));
 			while(!client.GetGotMessag()){//add user to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 
 				}
 				catch(InterruptedException ex)
@@ -122,7 +122,7 @@ public class UserController {
 			
 			while(!client.GetGotMessag()){//add user to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{
@@ -151,7 +151,7 @@ public class UserController {
 			client.UpdateInDB(new updateCommand<DBtranslation>(user, searchCondition, updateCondition));
 			while(!client.GetGotMessag()){//add user to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{

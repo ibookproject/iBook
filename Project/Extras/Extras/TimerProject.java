@@ -24,7 +24,7 @@ public class TimerProject {
 			if(TimerFlag){
 			Review r = new Review();
 			try{
-			arrR = ReviewController.SearchReviews("bookID", r, "reviewStatus =" + -1, client.getClient() );
+			arrR = ReviewController.SearchReviews("bookID", r, "reviewStatus =" + Review.NOTIFICATION, client.getClient() );
 			JOptionPane.showMessageDialog(null,"you have (" + arrR.size() + ") new review", "Message",JOptionPane.INFORMATION_MESSAGE);
 			ReviewController.UpdateReviewContent(r, "reviewStatus ="+0, "reviewStatus=" + -1,  client.getClient());
 			}

@@ -39,7 +39,7 @@ public class ReviewController {
 		client.searchInDB(new searchCommand<Review>(fromSentence, review,whereSentence));
 		while (!client.GetGotMessag()) {
 			try {
-				Thread.sleep(50);
+				Thread.sleep(10);
 			} catch (InterruptedException ex) {
 				System.out.println("InterruptedException " + ex);
 			}
@@ -70,7 +70,7 @@ public class ReviewController {
 		client.UpdateInDB(new updateCommand<DBtranslation>(review, searchCondition,updateCondition));
 		while (!client.GetGotMessag()) {
 			try {
-				Thread.sleep(50);
+				Thread.sleep(10);
 			} catch (InterruptedException ex) {
 				System.out.println("InterruptedException " + ex);
 				return false;
@@ -92,7 +92,7 @@ public class ReviewController {
 		client.deleteFromDB(new deleteCommand<DBtranslation>(review, searchCondition));
 		while (!client.GetGotMessag()) {
 			try {
-				Thread.sleep(50);
+				Thread.sleep(10);
 			} catch (InterruptedException ex) {
 				System.out.println("InterruptedException " + ex);
 
@@ -122,7 +122,7 @@ public class ReviewController {
 		client.insertToDB(new insertCommand<DBtranslation>(review));
 		while (!client.GetGotMessag()) {
 			try {
-				Thread.sleep(50);
+				Thread.sleep(10);
 			} catch (InterruptedException ex) {
 				System.out.println("InterruptedException " + ex);
 				return false;
@@ -156,7 +156,7 @@ public class ReviewController {
 		while(!	client.GetGotMessag())
 		{//search book in db
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{

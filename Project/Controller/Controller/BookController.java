@@ -47,7 +47,7 @@ public class BookController {
 		client.searchInDB(new searchCommand<Book>(fromSentence,book,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search book in db
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -67,7 +67,7 @@ public class BookController {
 		client.searchInDB(new searchCommand<SearchToBook>(fromSentence,btb,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search book in db
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -96,7 +96,7 @@ public class BookController {
 			client.insertToDB(new insertCommand<DBtranslation>(book)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{
@@ -122,7 +122,7 @@ public class BookController {
 			client.UpdateInDB(new updateCommand<DBtranslation>(b, searchCondition, updateCondition));
 			while(!client.GetGotMessag()){//add user to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{
@@ -137,7 +137,7 @@ public class BookController {
 			client.insertToDB(new insertCommand<DBtranslation>(stb)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{
@@ -152,7 +152,7 @@ public class BookController {
 			client.UpdateInDB(new updateCommand<DBtranslation>(btb, searchCondition, updateCondition));
 			while(!client.GetGotMessag()){//add user to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{
@@ -187,7 +187,7 @@ public class BookController {
 		client.deleteFromDB(new deleteCommand<DBtranslation>(b, searchCondition));
 		while(!client.GetGotMessag()){//add user to DB
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -203,7 +203,7 @@ public class BookController {
 		client.getAllTable(new showAllCommand<Book>(b));
 		while(!client.GetGotMessag()){//show table -domain
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -366,7 +366,7 @@ public class BookController {
 		client.joinSearchInDB(new joinCommand<SubjectToBook>("book.bookID,book.numberOfOrder,SubjectToBook.domainID",s,temp,"SubjectToBook.domainID=\""+domainID +"\""/*+" && "+"SubjectToBook.bookID=\"" +bookID+ "\""*/));
 		while(!	client.GetGotMessag()){//search book in db
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -392,7 +392,7 @@ public class BookController {
 		while (!client.GetGotMessag())
 		{
 			try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{

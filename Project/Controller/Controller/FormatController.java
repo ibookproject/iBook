@@ -41,7 +41,7 @@ public class FormatController {
 		client.searchInDB(new searchCommand<Domain>(fromSentence,domain,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -73,7 +73,7 @@ public class FormatController {
 		client.searchInDB(new searchCommand<Subject>(fromSentence,subject,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -102,7 +102,7 @@ public class FormatController {
 			client.insertToDB(new insertCommand<DBtranslation>(domain)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{
@@ -128,7 +128,7 @@ public class FormatController {
 			client.insertToDB(new insertCommand<DBtranslation>(subject)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{
@@ -153,12 +153,14 @@ public class FormatController {
 	public static ArrayList<Domain> GetAllDomain(Domain domain,DBSQLhandler client)// changes
 	{
 		client.getAllTable((new showAllCommand<Domain>(domain)));
+		while(!client.GetGotMessag()){
 		try{
-		Thread.sleep(50);
+		Thread.sleep(10);
 		}
 		catch(InterruptedException ex)
 		{
 			System.out.println("InterruptedException "+ex);
+		}
 		}
 		try {
 		return  Domain.convertBack((ArrayList<DBgenericObject>) client.getResultObject(),"DomainID,DomainName");
@@ -180,12 +182,14 @@ public class FormatController {
 	public static ArrayList<Subject> GetAllSubject(Subject subject,DBSQLhandler client)// changes
 	{
 		client.getAllTable((new showAllCommand<Subject>(subject)));
+		while(!client.GetGotMessag()){
 		try{
-		Thread.sleep(50);
+		Thread.sleep(10);
 		}
 		catch(InterruptedException ex)
 		{
 			System.out.println("InterruptedException "+ex);
+		}
 		}
 		try {
 		return  Subject.convertBack((ArrayList<DBgenericObject>) client.getResultObject(),"DomainID,nameSubject");
@@ -215,7 +219,7 @@ public class FormatController {
 		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,subjectToBook,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -247,7 +251,7 @@ public class FormatController {
 		client.searchInDB(new searchCommand<Subject>(fromSentence,s,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -281,7 +285,7 @@ public class FormatController {
 		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,SubjectToBookk,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -310,7 +314,7 @@ public class FormatController {
 			client.insertToDB(new insertCommand<DBtranslation>(subjectToBook)); 	
 			while(!client.GetGotMessag()){
 				try{
-				Thread.sleep(50);
+				Thread.sleep(10);
 				}
 				catch(InterruptedException ex)
 				{

@@ -36,7 +36,7 @@ public class CartController {
 		client.searchInDB(new searchCommand<Cart>(fromSentence,cart,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -74,7 +74,7 @@ public class CartController {
 		while(!client.GetGotMessag()){
 			try
 			{
-				Thread.sleep(50);
+				Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -107,7 +107,7 @@ public class CartController {
 		client.insertToDB(new insertCommand<DBtranslation>(cart)); 	
 		while(!client.GetGotMessag()){//add book to DB
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -136,7 +136,7 @@ public class CartController {
 				updateCondition));
 		while (!client.GetGotMessag()) {
 			try {
-				Thread.sleep(50);
+				Thread.sleep(10);
 			} catch (InterruptedException ex) {
 				System.out.println("InterruptedException " + ex);
 				return false;
@@ -180,7 +180,7 @@ public class CartController {
 		client.joinSearchInDB(new joinCommand<Cart>("book.bookID,book.title,book.author,cart.buyDate",cart,temp,"cart.userID=\""+userId +"\""+" && "+"cart.status=1"+" && "+"cart.buyDate>'"+date+"'"));
 		while(!	client.GetGotMessag()){//search book in db
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
@@ -209,7 +209,7 @@ public class CartController {
 		client.deleteFromDB(new deleteCommand<DBtranslation>(cart, searchCondition));
 		while(!client.GetGotMessag()){//add user to DB
 			try{
-			Thread.sleep(50);
+			Thread.sleep(10);
 			}
 			catch(InterruptedException ex)
 			{
