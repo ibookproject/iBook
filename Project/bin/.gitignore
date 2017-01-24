@@ -1,3 +1,4 @@
+/Book/
 /Controller/
 /DB/
 /Extras/
@@ -6,9 +7,8 @@
 /MemberGUI/
 /MenuGUI/
 /Panels/
+/Role/
 /TestCase/
 /client/
 /command/
 /ocsf/
-/Book/
-/Role/

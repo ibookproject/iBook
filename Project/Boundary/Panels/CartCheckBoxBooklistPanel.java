@@ -76,7 +76,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 		 chckbxNewCheckBox = new JCheckBox();
 		 chckbxNewCheckBox.setBackground(SystemColor.inactiveCaptionBorder);
 		chckbxNewCheckBox.setText("Name:  " + book.getTitle() + "   Author: " + book.getAuthor() +"    price: " +book.getPrice());
-		chckbxNewCheckBox.setBounds(6, 11, 288, 55);
+		chckbxNewCheckBox.setBounds(6, 11, 313, 55);
 		add(chckbxNewCheckBox);
 		
 		RemoveButton = new JButton("Remove");
@@ -99,7 +99,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 					}												
 			}
 		});
-		RemoveButton.setBounds(315, 5, 83, 23);
+		RemoveButton.setBounds(362, 4, 83, 23);
 		add(RemoveButton);
 		
 		btnDownloadBookAgain = new JButton("download",backIcon);
@@ -129,7 +129,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 			}			
 			}
 		});
-		btnDownloadBookAgain.setBounds(300, 32, 146, 34);
+		btnDownloadBookAgain.setBounds(338, 32, 146, 34);
 		btnDownloadBookAgain.setVisible(false);
 		add(btnDownloadBookAgain);
 		 RemoveAfterBuy = new JButton("Remove");
@@ -154,7 +154,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 				
 			}
 		});
-		RemoveAfterBuy.setBounds(315, 5, 83, 23);
+		RemoveAfterBuy.setBounds(362, 4, 83, 23);
 		add(RemoveAfterBuy);		
 	}
 }
