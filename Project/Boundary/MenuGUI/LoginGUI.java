@@ -242,7 +242,7 @@ public class LoginGUI extends JFrame {
 						break;
 					case UserStatus.QUALIFIEDEDITOR: {
 						QualifiedEditorMenu usm = new QualifiedEditorMenu(
-								screen, 4,Integer.parseInt(txtUserID.getText()));
+								screen, 4);
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
@@ -258,7 +258,7 @@ public class LoginGUI extends JFrame {
 					case UserStatus.LIBRRIAN: {
 						 TimerProject y = new TimerProject();
 						y.startTimer(screen);
-						LibrarianMenu usm = new LibrarianMenu(screen, 5,Integer.parseInt(txtUserID.getText()));
+						LibrarianMenu usm = new LibrarianMenu(screen, 5);
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
@@ -276,7 +276,7 @@ public class LoginGUI extends JFrame {
 						 TimerProject y = new TimerProject();
 						y.startTimer(screen);
 						LibraryManagerMenu usm = new LibraryManagerMenu(screen,
-								6,Integer.parseInt(txtUserID.getText()));
+								6);
 						usm.btnDisconnect
 								.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {

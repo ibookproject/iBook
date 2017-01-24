@@ -34,8 +34,8 @@ public class LibraryManagerMenu extends LibrarianMenu {
 	private int Permission;
 	private int UserIdAtDataBase;
 	
-	public LibraryManagerMenu(LoginGUI screen,int permission ,int UserIdAtDataBase) {
-		super(screen,permission,UserIdAtDataBase);
+	public LibraryManagerMenu(LoginGUI screen,int permission ) {
+		super(screen,permission);
 		this.screen=screen;
 		pann=this;
 		this.Permission=permission;

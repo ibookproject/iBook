@@ -123,7 +123,7 @@ public class UpdateUserInfoGUI extends JPanel {
 								"userID=\"" + UserIDTextField.getText() + "\"", screen.getClient())) {
 							JOptionPane.showMessageDialog(screen, "User updated successfully", "Plain",
 									JOptionPane.INFORMATION_MESSAGE);
-							LibraryManagerMenu lmm = new LibraryManagerMenu(screen, permission, userIdAtDataBase);
+							LibraryManagerMenu lmm = new LibraryManagerMenu(screen, permission);
 							screen.setContentPane(lmm);
 						} else
 							JOptionPane.showMessageDialog(screen, "User updated procces faild", "Error",

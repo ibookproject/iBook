@@ -29,8 +29,8 @@ public class QualifiedEditorMenu extends LibraryWorkerMenu {
 
 	private int Permssion;
 	
-	public QualifiedEditorMenu(LoginGUI screen,int permission,int UserIdAtDataBase) {
-		super(screen,UserIdAtDataBase);
+	public QualifiedEditorMenu(LoginGUI screen,int permission) {
+		super(screen,permission);
 		this.screen=screen;
 		pann=this;
 		this.Permssion=permission;
