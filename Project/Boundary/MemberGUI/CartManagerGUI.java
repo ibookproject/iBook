@@ -57,7 +57,9 @@ public class CartManagerGUI extends JPanel {
 /**
  * Consructor- building the panel
  * @param screen
+ *  LoginGUI extends JFrame
  * @param UserIdAtDataBase
+ * 
  */
 	public CartManagerGUI(LoginGUI screen,int UserIdAtDataBase) {
 		super();
@@ -90,12 +92,8 @@ public class CartManagerGUI extends JPanel {
 		{
 			btnBuy.setEnabled(false);
 			LabelMassege.setVisible(true);
-		}
-			
-			
-	//	}
-		//else JOptionPane.showMessageDialog(screen,"NO subscriptionMethod !!! ", "Warning",JOptionPane.WARNING_MESSAGE);
-		/////////////////////
+		}	
+
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

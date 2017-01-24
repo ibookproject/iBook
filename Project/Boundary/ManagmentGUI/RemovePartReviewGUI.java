@@ -51,8 +51,10 @@ public class RemovePartReviewGUI extends JPanel {
 	private int conterOfText;
 	/**
 	 * 
-	 * @param screen
+	 * @param screen 
+	 *  LoginGUI extends JFrame
 	 * @param reviewID
+	 * 
 	 */
 	public RemovePartReviewGUI(LoginGUI screen,int reviewID) {
 		super();

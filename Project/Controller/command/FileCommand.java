@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import client.DBSQLhandler;
-
+/**
+ *  this class create file object for send to server
+ * @author Sagi Entenberg
+ * @author Kfir Girstein
+ */
 public class FileCommand implements Serializable{
 	
 	private byte[] BytesToFile;
