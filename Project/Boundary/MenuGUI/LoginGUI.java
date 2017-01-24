@@ -79,7 +79,7 @@ public class LoginGUI extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 		  	@Override
 			public void windowClosing(WindowEvent e) {
-		  		ImageIcon point=new ImageIcon("bookIcon.png");
+		  		ImageIcon point=new ImageIcon("Extras/Images/bookIcon.png");
 				Object[] options = { "Yes, please", "No" };
 				int result = JOptionPane.showOptionDialog(null, "Would you like exit now?", "Exit",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, point,options,options[0]);
@@ -338,7 +338,7 @@ public class LoginGUI extends JFrame {
 			bntBackground.setEnabled(false);
 			bntBackground.setBounds(131, 273, 553, 154);
 			FirstPanel.add(bntBackground);
-			ImageIcon logo=new ImageIcon("IbookIcon500.png");
+			ImageIcon logo=new ImageIcon("Extras/Images/IbookIcon500.png");
 			JLabel lblNewLabel = new JLabel("");
 			lblNewLabel.setBounds(156, 24, 488, 236);
 			lblNewLabel.setIcon(logo);
