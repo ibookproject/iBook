@@ -23,7 +23,6 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 
 	private static final long serialVersionUID = 1L;
 	private int Permission;
-	//private JFrame screen;
 	private JPanel pann;
 	
 	public LibrarianMenu(LoginGUI screen,int permission) {

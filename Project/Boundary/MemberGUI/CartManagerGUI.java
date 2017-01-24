@@ -151,6 +151,7 @@ public class CartManagerGUI extends JPanel {
 			panel.setVisible(false);
 			scrollPaneMain.setVisible(false);
 			JOptionPane.showMessageDialog(screen,"Your cart is Empty", "no results",JOptionPane.QUESTION_MESSAGE);
+			
 		}
 
 		JLabel lblButFromCart = new JLabel("Buy From Cart");

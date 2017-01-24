@@ -84,10 +84,15 @@ public class BookController {
 	
 	public static boolean AddBook(Book book,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{
-	/*	if (title.getText().isEmpty() || lang.getText().isEmpty() || author.getText().isEmpty()|| summary.getText().isEmpty() || contents.getText().isEmpty()|| keyword.getText().isEmpty() || price.getText().isEmpty())
-				*/
 		if(book.getTitle()==null||book.getLanguage()==null||book.getAuthor()==null||book.getSummary()==null||book.getContent()==null||book.getKeyword()==null||book.getPrice()<0)
 			return false;
+		
+		//check if the title and author of the Book book is already Exists.
+		ArrayList<Book> searchSame = BookController.SearchBook("title,language", book, "title=\""
+				+ book.getTitle() + "\"" + " && " + "author=\"" + book.getAuthor() + "\"",
+				client);// call search book method
+									// from book controller
+		if(searchSame==null||searchSame.isEmpty()){
 			client.insertToDB(new insertCommand<DBtranslation>(book)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
@@ -105,8 +110,10 @@ public class BookController {
 			} catch (SQLException e) {
 				return false;
 			}
-			
 		return true;	// means the book add successful	
+	}
+	else
+		return false;
 	}
 		
 	//new hen 10.1//

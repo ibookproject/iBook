@@ -24,11 +24,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-
-
-
 public class LibraryWorkerMenu extends ReaderMenu {
-
 
 	public LibraryWorkerMenu(LoginGUI screen ,int UserIdAtDataBase) {
 		super(screen,UserIdAtDataBase);
@@ -62,8 +58,7 @@ public class LibraryWorkerMenu extends ReaderMenu {
 		});
 		btnCreateNewAcount.setBounds(12, 318, 193, 53);
 		btnCreateNewAcount.setFont(new Font("Tahoma", Font.BOLD, 13));
-		add(btnCreateNewAcount);
-		
+		add(btnCreateNewAcount);	
 		
 		JButton btnSetAcountSubscription = new JButton("Set Subscription");
 		btnSetAcountSubscription.setIcon(new ImageIcon("Extras/Images/ok.png"));
