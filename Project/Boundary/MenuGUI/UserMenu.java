@@ -61,7 +61,7 @@ public class UserMenu extends JPanel {
 
 		
 		lblBack = new JLabel("");
-		lblBack.setIcon(new ImageIcon("libraryPhoto.png"));
+		lblBack.setIcon(new ImageIcon("Extras/Images/libraryPhoto.png"));
 		lblBack.setBounds(207, 66, 443, 514);
 		add(lblBack);
 		
@@ -74,7 +74,7 @@ public class UserMenu extends JPanel {
 		this.setLayout(null);
 		
 		btnSearchBook = new JButton("Search Book");
-		btnSearchBook.setIcon(new ImageIcon("Search50.png"));
+		btnSearchBook.setIcon(new ImageIcon("Extras/Images/Search50.png"));
 		btnSearchBook.setFont(new Font("Tahoma", Font.BOLD, 13));
 		
 		btnSearchBook.addActionListener(new ActionListener() {
@@ -98,7 +98,7 @@ public class UserMenu extends JPanel {
 				///---///
 		
 		 btnSearchReview = new JButton("Search Review");
-		 btnSearchReview.setIcon(new ImageIcon("Search50.png"));
+		 btnSearchReview.setIcon(new ImageIcon("Extras/Images/Search50.png"));
 		 btnSearchReview.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSearchReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

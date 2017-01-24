@@ -49,7 +49,7 @@ public class LibraryManagerMenu extends LibrarianMenu {
 		this.setLayout(null);	
 		
 		JButton btnUpdateUserInfo = new JButton("Update user");
-		btnUpdateUserInfo.setIcon(new ImageIcon("UpdateUser.png"));
+		btnUpdateUserInfo.setIcon(new ImageIcon("Extras/Images/UpdateUser.png"));
 		btnUpdateUserInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -68,7 +68,7 @@ public class LibraryManagerMenu extends LibrarianMenu {
 		add(btnUpdateUserInfo);
 		
 		JButton btnTemporaryRemoveBoojk = new JButton("Hide book");
-		btnTemporaryRemoveBoojk.setIcon(new ImageIcon("delete.png"));
+		btnTemporaryRemoveBoojk.setIcon(new ImageIcon("Extras/Images/delete.png"));
 		btnTemporaryRemoveBoojk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -87,7 +87,7 @@ public class LibraryManagerMenu extends LibrarianMenu {
 		add(btnTemporaryRemoveBoojk);
 		
 		JButton btnBookStatistics = new JButton("Book statistics");
-		btnBookStatistics.setIcon(new ImageIcon("graph.png"));
+		btnBookStatistics.setIcon(new ImageIcon("Extras/Images/graph.png"));
 		btnBookStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -106,7 +106,7 @@ public class LibraryManagerMenu extends LibrarianMenu {
 		add(btnBookStatistics);
 		
 		JButton btnUserStatistics = new JButton("User statistics");
-		btnUserStatistics.setIcon(new ImageIcon("graph.png"));
+		btnUserStatistics.setIcon(new ImageIcon("Extras/Images/graph.png"));
 		btnUserStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 ////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -125,7 +125,7 @@ public class LibraryManagerMenu extends LibrarianMenu {
 		add(btnUserStatistics);
 		
 		JButton btnBookrate = new JButton("Book rate        ");
-		btnBookrate.setIcon(new ImageIcon("rate.png"));
+		btnBookrate.setIcon(new ImageIcon("Extras/Images/rate.png"));
 		btnBookrate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 ////////////////////////button to back panel from panel /////////////////////////////////////////////

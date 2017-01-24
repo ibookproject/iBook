@@ -88,7 +88,7 @@ public class SearchBookGUI extends JPanel {
 			domains[i] = "Domain " + i;
 		}
 
-		backIcon = new ImageIcon("src/images/backIcon.png");
+		backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
@@ -419,10 +419,7 @@ public class SearchBookGUI extends JPanel {
 		btnSearch.setBounds(326, 537, 97, 25);
 		add(btnSearch);
 		
-		JLabel lblSearchBookGif = new JLabel("");
-		lblSearchBookGif.setIcon(new ImageIcon("C:\\Users\\coral\\Downloads\\ibook\\Project\\Search50.png"));
-		lblSearchBookGif.setBounds(480, 27, 69, 62);
-		add(lblSearchBookGif);
+
 	}
 	public void showMessageDialogErrorEmptyField()
 	{

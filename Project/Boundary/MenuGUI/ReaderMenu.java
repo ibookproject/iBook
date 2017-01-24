@@ -73,7 +73,7 @@ public class ReaderMenu extends UserMenu {
 			}
 		});
 		btnDisplayCartManager.setBounds(12, 255, 193, 53);
-		btnDisplayCartManager.setIcon(new ImageIcon("cart.png"));
+		btnDisplayCartManager.setIcon(new ImageIcon("Extras/Images/cart.png"));
 		btnDisplayCartManager.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnDisplayCartManager);
 		

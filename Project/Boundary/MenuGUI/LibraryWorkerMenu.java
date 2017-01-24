@@ -46,7 +46,7 @@ public class LibraryWorkerMenu extends ReaderMenu {
 		this.setLayout(null);	
 		
 		JButton btnCreateNewAcount = new JButton("Create acount");
-		btnCreateNewAcount.setIcon(new ImageIcon("NewAcount.png"));
+		btnCreateNewAcount.setIcon(new ImageIcon("Extras/Images/NewAcount.png"));
 		btnCreateNewAcount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////
@@ -66,7 +66,7 @@ public class LibraryWorkerMenu extends ReaderMenu {
 		
 		
 		JButton btnSetAcountSubscription = new JButton("Set Subscription");
-		btnSetAcountSubscription.setIcon(new ImageIcon("ok.png"));
+		btnSetAcountSubscription.setIcon(new ImageIcon("Extras/Images/ok.png"));
 		btnSetAcountSubscription.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////////////////button to back panel from panel /////////////////////////////////////////////

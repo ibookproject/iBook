@@ -44,7 +44,7 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 		this.setLayout(null);	
 		
 		JButton btnInventoryManagment = new JButton("Inventory");
-		btnInventoryManagment.setIcon(new ImageIcon("inventoy.png"));
+		btnInventoryManagment.setIcon(new ImageIcon("Extras/Images/inventoy.png"));
 		
 		btnInventoryManagment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

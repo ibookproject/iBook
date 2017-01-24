@@ -47,7 +47,7 @@ public class QualifiedEditorMenu extends LibraryWorkerMenu {
 		
 		
 		JButton btnSendingConfirmationReview = new JButton("Confirm Review");
-		btnSendingConfirmationReview.setIcon(new ImageIcon("ok.png"));
+		btnSendingConfirmationReview.setIcon(new ImageIcon("Extras/Images/ok.png"));
 		if(this.Permssion==4){
 		btnSendingConfirmationReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
