@@ -17,6 +17,7 @@ import command.updateCommand;
 /**
  * Review Controller
  * @author Sagi Entenberg
+ * @author Coral Carmeli
  */
 public class ReviewController {
 	
@@ -32,7 +33,7 @@ public class ReviewController {
  * the client who ask the query
  * @return 
  * Array list of result Review
- * 
+ * @author Sagi Entenberg
  */
 	public static ArrayList<Review> SearchReviews(String fromSentence,Review review, String whereSentence, DBSQLhandler client) {
 		client.searchInDB(new searchCommand<Review>(fromSentence, review,whereSentence));
@@ -62,6 +63,7 @@ public class ReviewController {
  * the client who ask the query
  * @return
  * true or false if the update Succeeded
+ * @author Sagi Entenberg
  */
 	public static boolean UpdateReviewContent(Review review, String updateCondition,String searchCondition, DBSQLhandler client) 													
 	{
@@ -84,6 +86,7 @@ public class ReviewController {
  * String of the SQL query "From"
  * @param client
  * the client who ask the query
+ * @author Sagi Entenberg
  */
 	public static void DeleteReview(Review review, String searchCondition,DBSQLhandler client) {
 		client.deleteFromDB(new deleteCommand<DBtranslation>(review, searchCondition));
@@ -106,6 +109,7 @@ public class ReviewController {
  * the client who ask the query
  * @return
  * true or false if the update Succeeded
+ * @author Sagi Entenberg
  */
 
 	public static boolean AddReview(Review review, DBSQLhandler client) // boolean

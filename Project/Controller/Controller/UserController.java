@@ -13,13 +13,30 @@ import command.DBtranslation;
 import command.insertCommand;
 import command.searchCommand;
 import command.updateCommand;
-
+/**
+ * User Controller
+ * @author Sagi Entenberg
+ *
+ */
 public class UserController {
-
-	public static ArrayList<User> SearchUser(String fromSentence,User u,String whereSentence,DBSQLhandler client)
+/**
+ * Search User
+ * @param fromSentence
+ *  String of the SQL query "From"
+ * @param user
+ * the name of the table from this object
+ * @param whereSentence
+ * String of the SQL query "Where"
+ * @param client
+ * the client who ask the query
+ * @return
+ * Array list of result User
+ * @author Sagi Entenberg
+ */
+	public static ArrayList<User> SearchUser(String fromSentence,User user,String whereSentence,DBSQLhandler client)
 	{
 		// filed is need to look like "userID,password,..."
-		client.searchInDB(new searchCommand<User>(fromSentence,u,whereSentence));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<User>(fromSentence,user,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
 			Thread.sleep(50);
@@ -35,9 +52,19 @@ public class UserController {
 			return null;
 		}
 	}
-	public static boolean CreateNewAccount(User u,DBSQLhandler client) // boolean function that return true if user added else false.
+	/**
+	 * Create New User
+	 * @param user
+	 * the name of the table from this object
+	 * @param client
+	 * the client who ask the query
+	 * @return
+	 * true or false if the update Succeeded
+	 * @author Almog Yamin
+	 */
+	public static boolean CreateNewAccount(User user,DBSQLhandler client) // boolean function that return true if user added else false.
 	{
-			client.insertToDB(new insertCommand<DBtranslation>(u)); 	
+			client.insertToDB(new insertCommand<DBtranslation>(user)); 	
 			while(!client.GetGotMessag()){//add user to DB
 				try{
 				Thread.sleep(50);
@@ -50,10 +77,22 @@ public class UserController {
 			}
 			return true;	// means the user add successful	
 	}
-	
-	public static boolean SetStatusSubscription(User u , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
+	/**
+	 * Set Status Subscription
+	 * @param user
+	 * the name of the table from this object
+	 * @param updateCondition
+	 * String of the SQL query "From"
+	 * @param searchCondition
+	 *  String of the SQL query "Where"
+	 * @param client
+	 * the client who ask the query
+	 * @return
+	 * @author Almog Yamin
+	 */
+	public static boolean SetStatusSubscription(User user , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
 	{
-			client.UpdateInDB(new updateCommand<DBtranslation>(u, searchCondition, updateCondition));
+			client.UpdateInDB(new updateCommand<DBtranslation>(user, searchCondition, updateCondition));
 			while(!client.GetGotMessag()){//add user to DB
 				try{
 				Thread.sleep(50);
@@ -68,9 +107,23 @@ public class UserController {
 			return true;	// means the user add successful	
 	}
 	//UpdateUserStatus
-	public static boolean UpdateUserStatus(User u , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
+	/**
+	 * Update User Status
+	 * @param user
+	 * the name of the table from this object
+	 * @param updateCondition
+	 * String of the SQL query "From"
+	 * @param searchCondition
+	 * String of the SQL query "Where"
+	 * @param client
+	 * the client who ask the quer
+	 * @return
+	 * true or false if the update Succeeded
+	 * @author Sagi Entenberg
+	 */
+	public static boolean UpdateUserStatus(User user , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
 	{
-			client.UpdateInDB(new updateCommand<DBtranslation>(u, searchCondition, updateCondition));
+			client.UpdateInDB(new updateCommand<DBtranslation>(user, searchCondition, updateCondition));
 			WaitGif wg=new WaitGif();
 			while(!client.GetGotMessag()){//add user to DB
 				try{
@@ -86,9 +139,23 @@ public class UserController {
 			wg.setVisible(false);
 			return true;	// means the user add successful	
 	}
-	public static boolean UpdateUserInfo(User u , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
+	/**
+	 * Update User Info
+	 * @param user
+	 * the name of the table from this object
+	 * @param updateCondition
+	 *  String of the SQL query "From"
+	 * @param searchCondition
+	 * String of the SQL query "Where"
+	 * @param client
+	 * the client who ask the query
+	 * @return
+	 * true or false if the update Succeeded
+	 * @author Sagi Entenberg
+	 */
+	public static boolean UpdateUserInfo(User user , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
 	{
-			client.UpdateInDB(new updateCommand<DBtranslation>(u, searchCondition, updateCondition));
+			client.UpdateInDB(new updateCommand<DBtranslation>(user, searchCondition, updateCondition));
 			WaitGif wg=new WaitGif();
 			while(!client.GetGotMessag()){//add user to DB
 				try{
