@@ -2,7 +2,9 @@
 /ManagmentGUI/
 /MemberGUI/
 /MenuGUI/
-/Role/
-/command/
-/Controller/
 /Panels/
+/Role/
+/client/
+/command/
+/ocsf/
+/Controller/

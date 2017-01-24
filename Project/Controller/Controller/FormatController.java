@@ -66,7 +66,7 @@ public class FormatController {
 	 * @param client
 	 * the current client that ask the query
 	 * @return
-	 *  The Array list of subject's according the search query the user sends(with the conditions of-select,from and where)
+	 *  The Array list of subject's according the search query the user sends(with the conditions of-select,from and where) - search specific subject
 	 * @author hen saada
 	 */
 	public static ArrayList<Subject> SearchSubject(String fromSentence,Subject subject,String whereSentence,DBSQLhandler client)
@@ -147,10 +147,26 @@ public class FormatController {
 			}
 			return true;	// means the book add successful	
 	}
-	public static ArrayList<Domain> GetAllDomain(Domain d,DBSQLhandler client)// changes
+	
+	
+	/**
+	 * 
+	 * @param fromSentence
+	 * string for the query sql " FROM"
+	 * @param domain
+	 * name of the table that get from this object 
+	 * @param whereSentence
+	 * string for the query sql "WHERE"
+	 * @param client
+	 * the current client that ask the query
+	 * @return
+	 *  The Array list of Domain's name according the search query the user sends(with the conditions of-select,from and where) show all domain table
+	 * @author hen saada 
+	 * @author coral carmeli
+	 */
+	public static ArrayList<Domain> GetAllDomain(Domain domain,DBSQLhandler client)// changes
 	{
-		// filed is need to look like "bookID,author,..."
-		client.getAllTable((new showAllCommand<Domain>(d)));
+		client.getAllTable((new showAllCommand<Domain>(domain)));
 		try{
 		Thread.sleep(50);
 		}
@@ -166,16 +182,22 @@ public class FormatController {
 	}
 	}
 	
-	
 	/**
-	 * @author Coral Carmeli
-	 * @param Subject,client
-	 * @return The ArrayList of Subject - the list of all subject in DB
+	 * @param fromSentence
+	 * string for the query sql " FROM"
+	 * @param subject
+	 * name of the table that get from this object 
+	 * @param whereSentence
+	 * string for the query sql "WHERE"
+	 * @param client
+	 * the current client that ask the query
+	 * @return
+	 *  The Array list of Subject's name according the search query the user sends(with the conditions of-select,from and where) 
+	 * @author coral carmeli
 	 */
-	public static ArrayList<Subject> GetAllSubject(Subject s,DBSQLhandler client)// changes
+	public static ArrayList<Subject> GetAllSubject(Subject subject,DBSQLhandler client)// changes
 	{
-		// filed is need to look like "bookID,author,..."
-		client.getAllTable((new showAllCommand<Subject>(s)));
+		client.getAllTable((new showAllCommand<Subject>(subject)));
 		try{
 		Thread.sleep(50);
 		}
@@ -192,11 +214,24 @@ public class FormatController {
 		}
 	}
 	
-	public static ArrayList<SubjectToBook> SearchBookInSubjectToBookAccordingDomain(String fromSentence,SubjectToBook s,String whereSentence,DBSQLhandler client)
+	/**
+	 * @param fromSentence
+	 * string for the query sql " FROM"
+	 * @param subjectToBook
+	 * name of the  associates Table that get from this object 
+	 * @param whereSentence
+	 * string for the query sql "WHERE"
+	 * @param client
+	 * the current client that ask the query
+	 * @return
+	 *  The Array list of book's name according the search query the user sends(with the conditions of-select,from and where) 
+	 * @author coral carmeli
+	 * @author hensaada hen saada
+	 */
+	public static ArrayList<SubjectToBook> SearchBookInSubjectToBookAccordingDomain(String fromSentence,SubjectToBook subjectToBook,String whereSentence,DBSQLhandler client)
 	{
-		// filed is need to look like "userID,password,..."
-		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,s,whereSentence));//call command and client ask to search a book
-		while(!client.GetGotMessag()){//search user in db
+		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,subjectToBook,whereSentence));//call command and client ask to search a book
+		while(!client.GetGotMessag()){
 			try{
 			Thread.sleep(50);
 			}
@@ -218,9 +253,8 @@ public class FormatController {
 	 */
 	public static ArrayList<Subject> SearchSubjectAtDomain(String fromSentence,Subject s,String condition,DBSQLhandler client)
 	{
-		// filed is need to look like "bookID,author,..."
 		client.searchInDB(new searchCommand<Subject>(fromSentence,s,condition));//call command and client ask to search a book
-		while(!client.GetGotMessag()){//search Subject in db
+		while(!client.GetGotMessag()){
 			try{
 			Thread.sleep(50);
 			}
@@ -230,18 +264,31 @@ public class FormatController {
 			}
 		}
 		try {
-			
 			return  Subject.convertBack((ArrayList<DBgenericObject>) client.getResultObject(), fromSentence);
 		} catch (SQLException e) {
 			return null;
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param fromSentence
+	 * string for the query sql " FROM"
+	 * @param subjectToBook
+	 * name of the  associates Table  that get from this object 
+	 * @param whereSentence
+	 * string for the query sql "WHERE"
+	 * @param client
+	 * the current client that ask the query
+	 * @return
+	 *  The Array list of associates Table "SubjectToBook" according the search query the user sends(with the conditions of-select,from and where) searching specefic subject at the associates Table 
+	 * @author hen saada
+	 */
 	public static ArrayList<SubjectToBook> SearchSubjectAtSubjectToBook(String fromSentence,SubjectToBook s,String whereSentence,DBSQLhandler client)
 	{
-		// filed is need to look like "userID,password,..."
 		client.searchInDB(new searchCommand<SubjectToBook>(fromSentence,s,whereSentence));//call command and client ask to search a book
-		while(!client.GetGotMessag()){//search user in db
+		while(!client.GetGotMessag()){
 			try{
 			Thread.sleep(50);
 			}
@@ -257,10 +304,25 @@ public class FormatController {
 		}
 	}
 
-	public static boolean AddBookIdDomainIdSubjectNameTOSubjectToBookTable(SubjectToBook s,DBSQLhandler client) // boolean function that return true if the add book done else false.
+	
+	/**
+	 * 
+	 * @param fromSentence
+	 * string for the query sql " FROM"
+	 * @param subjectToBook
+	 * name of the  associates Table  that get from this object 
+	 * @param whereSentence
+	 * string for the query sql "WHERE"
+	 * @param client
+	 * the current client that ask the query
+	 * @return
+	 * true if the add bookid and SubjectName to the associates table  , else false
+	 * @author hen saada
+	 */
+	public static boolean AddBookIdDomainIdSubjectNameTOSubjectToBookTable(SubjectToBook subjectToBook,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{
-			client.insertToDB(new insertCommand<DBtranslation>(s)); 	
-			while(!client.GetGotMessag()){//add book to DB
+			client.insertToDB(new insertCommand<DBtranslation>(subjectToBook)); 	
+			while(!client.GetGotMessag()){
 				try{
 				Thread.sleep(50);
 				}
@@ -270,7 +332,7 @@ public class FormatController {
 					return false;
 				}
 			}
-			return true;	// means the book add successful	
+			return true;	
 	}
 	
 	
