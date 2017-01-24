@@ -105,7 +105,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 		btnDownloadBookAgain = new JButton("download",backIcon);
 		btnDownloadBookAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				// ************ SAVE FILE *****************//
+				// ************ SAVE FILE *************//
 				int id = BookID;
 				final JFileChooser fc = new JFileChooser();
 				//fc.setCurrentDirectory(new java.io.File("C:/Users/kfir/Desktop"));;
