@@ -93,8 +93,6 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 						{	
 							((CartCheckBoxBooklistPanel)panel.getComponent(i)).index--;
 						}
-					//	for(int i=0;i<panel.getComponentCount();i++)
-					//		System.out.println("*"+((CartCheckBoxBooklistPanel)panel.getComponent(i)).index);
 						panel.updateUI();
 					}												
 			}
@@ -147,8 +145,6 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 					{	
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).index--;
 					}
-				//	for(int i=0;i<panel.getComponentCount();i++)
-				//		System.out.println("*"+((CartCheckBoxBooklistPanel)panel.getComponent(i)).index);				
 					panel.updateUI();
 				}
 				

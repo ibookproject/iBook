@@ -36,13 +36,15 @@ public class BookController {
 
 	/**
 	 * @author Coral Carmeli
-	 * @param  fromSentence(String),Book,condition(String ),client
-	 * @return The Array list of books according the search query the user sends(with the conditions of-select,from and where)
+	 * @param  
+	 * fromSentence(String),Book,condition(String ),client
+	 * @return 
+	 * The Array list of books according the search query the user sends(with the conditions of-select,from and where)
 	 */
-	public static ArrayList<Book> SearchBook(String fromSentence,Book b,String condition,DBSQLhandler client)
+	public static ArrayList<Book> SearchBook(String fromSentence,Book book,String condition,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
-		client.searchInDB(new searchCommand<Book>(fromSentence,b,condition));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<Book>(fromSentence,book,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search book in db
 			try{
 			Thread.sleep(250);

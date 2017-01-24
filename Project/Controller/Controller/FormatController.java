@@ -15,15 +15,31 @@ import command.DBtranslation;
 import command.insertCommand;
 import command.searchCommand;
 import command.showAllCommand;
-
+/**
+ * format controller
+ * @author hen saada
+ *@author coral carmeli
+ */
 public class FormatController {
 	
-
-	
-	public static ArrayList<Domain> SearchDomain(String fromSentence,Domain d,String whereSentence,DBSQLhandler client)
+/**
+ * 
+ * @param fromSentence
+ * string for the query sql " FROM"
+ * @param domain
+ * name of the table that get from this object 
+ * @param whereSentence
+ * string for the query sql "WHERE"
+ * @param client
+ * the current client that ask the query
+ * @return
+ *  The Array list of books according the search query the user sends(with the conditions of-select,from and where)
+ * @author hen saada 
+ */
+	public static ArrayList<Domain> SearchDomain(String fromSentence,Domain domain,String whereSentence,DBSQLhandler client)
 	{
 		// filed is need to look like "userID,password,..."
-		client.searchInDB(new searchCommand<Domain>(fromSentence,d,whereSentence));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<Domain>(fromSentence,domain,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
 			Thread.sleep(50);
@@ -39,12 +55,24 @@ public class FormatController {
 			return null;
 		}
 	}
-	
-	public static ArrayList<Subject> SearchSubject(String fromSentence,Subject s,String whereSentence,DBSQLhandler client)
+	/**
+	 * 
+	 * @param fromSentence
+	 * string for the query sql " FROM"
+	 * @param subject
+	 * name of the table that get from this object 
+	 * @param whereSentence
+	 * string for the query sql "WHERE"
+	 * @param client
+	 * the current client that ask the query
+	 * @return
+	 *  The Array list of subject's according the search query the user sends(with the conditions of-select,from and where)
+	 * @author hen saada
+	 */
+	public static ArrayList<Subject> SearchSubject(String fromSentence,Subject subject,String whereSentence,DBSQLhandler client)
 	{
-		// filed is need to look like "userID,password,..."
-		client.searchInDB(new searchCommand<Subject>(fromSentence,s,whereSentence));//call command and client ask to search a book
-		while(!client.GetGotMessag()){//search user in db
+		client.searchInDB(new searchCommand<Subject>(fromSentence,subject,whereSentence));//call command and client ask to search a book
+		while(!client.GetGotMessag()){
 			try{
 			Thread.sleep(50);
 			}
@@ -60,9 +88,23 @@ public class FormatController {
 		}
 	}
 	
-	public static boolean AddDomain(Domain d,DBSQLhandler client) // boolean function that return true if the add book done else false.
+	/**
+	 * 
+	 * @param fromSentence
+	 * string for the query sql " FROM"
+	 * @param domain
+	 * name of the table that get from this object 
+	 * @param whereSentence
+	 * string for the query sql "WHERE"
+	 * @param client
+	 * the current client that ask the query
+	 * @return
+	 * true if the add domain query succeed , else false
+	 * @author hen saada
+	 */
+	public static boolean AddDomain(Domain domain,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{
-			client.insertToDB(new insertCommand<DBtranslation>(d)); 	
+			client.insertToDB(new insertCommand<DBtranslation>(domain)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
 				Thread.sleep(50);
@@ -75,9 +117,24 @@ public class FormatController {
 			}
 			return true;	// means the book add successful	
 	}
-	public static boolean AddSubject(Subject s,DBSQLhandler client) // boolean function that return true if the add book done else false.
+	
+	/**
+	 * 
+	 * @param fromSentence
+	 * string for the query sql " FROM"
+	 * @param subject
+	 * name of the table that get from this object 
+	 * @param whereSentence
+	 * string for the query sql "WHERE"
+	 * @param client
+	 * the current client that ask the query
+	 * @return
+	 * true if the add domain query succeed , else false
+	 * @author hen saada
+	 */
+	public static boolean AddSubject(Subject subject,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{
-			client.insertToDB(new insertCommand<DBtranslation>(s)); 	
+			client.insertToDB(new insertCommand<DBtranslation>(subject)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
 				Thread.sleep(50);
