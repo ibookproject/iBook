@@ -346,7 +346,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 			btnAdd.setText("Update book");
 		btnAdd.setBounds(372, 531, 161, 30);
 		add(btnAdd);
-		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
+		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
