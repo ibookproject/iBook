@@ -81,11 +81,7 @@ public class CartManagerGUI extends JPanel {
 			btnBuy.setEnabled(false);
 			LabelMassege.setVisible(true);
 		}
-			
-			
-	//	}
-		//else JOptionPane.showMessageDialog(screen,"NO subscriptionMethod !!! ", "Warning",JOptionPane.WARNING_MESSAGE);
-		/////////////////////
+
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -181,6 +177,15 @@ public class CartManagerGUI extends JPanel {
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveAfterBuy.setVisible(true);
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveButton.setVisible(false);
 						panel.updateUI();
+						
+						// numberOfOrder++ at book table after buy some book 
+						ArrayList<Book> tempBooks;
+				 		tempBooks = BookController.SearchBook("numberOfOrder,bookID",b, "bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\""+" && "+"bookEnable=\""+1+"\"", screen.getClient());
+				 		int temp =(int)tempBooks.get(0).getNumberOfOrder();
+				 		temp++;
+				 		Book b=new Book();
+				 		boolean result = BookController.UpdateBook(b, "numberOfOrder=\""+temp+"\"", "bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\""+" && "+"bookEnable=\""+1+"\"", screen.getClient());
+						
 
 						// ************ SAVE FILE *****************//
 						int id = ((CartCheckBoxBooklistPanel)panel.getComponent(i)).BookID;
