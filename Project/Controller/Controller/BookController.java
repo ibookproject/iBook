@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -10,6 +12,7 @@ import java.util.Comparator;
 import javax.swing.JOptionPane;
 
 import command.DBtranslation;
+import command.FileCommand;
 import command.deleteCommand;
 import command.insertCommand;
 import command.joinCommand;
@@ -42,7 +45,7 @@ public class BookController {
 		client.searchInDB(new searchCommand<Book>(fromSentence,b,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search book in db
 			try{
-			Thread.sleep(50);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -62,7 +65,7 @@ public class BookController {
 		client.searchInDB(new searchCommand<SearchToBook>(fromSentence,btb,condition));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search book in db
 			try{
-			Thread.sleep(50);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -82,7 +85,7 @@ public class BookController {
 			client.insertToDB(new insertCommand<DBtranslation>(b)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(250);
 				}
 				catch(InterruptedException ex)
 				{
@@ -99,7 +102,7 @@ public class BookController {
 			client.UpdateInDB(new updateCommand<DBtranslation>(b, searchCondition, updateCondition));
 			while(!client.GetGotMessag()){//add user to DB
 				try{
-				Thread.sleep(50);
+				Thread.sleep(250);
 				}
 				catch(InterruptedException ex)
 				{
@@ -115,7 +118,7 @@ public class BookController {
 		client.deleteFromDB(new deleteCommand<DBtranslation>(b, searchCondition));
 		while(!client.GetGotMessag()){//add user to DB
 			try{
-			Thread.sleep(50);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -131,7 +134,7 @@ public class BookController {
 		client.getAllTable(new showAllCommand<Book>(b));
 		while(!client.GetGotMessag()){//show table -domain
 			try{
-			Thread.sleep(50);
+			Thread.sleep(250);
 			}
 			catch(InterruptedException ex)
 			{
@@ -303,6 +306,49 @@ public class BookController {
 		}
 		return (ArrayList<DBgenericObject>)client.getResultObject();
 	}
+	/**
+	 * 
+	 *@author Sagi Entenberg
+	 * @param BookID
+	 * @param type
+	 * @param client
+	 * @return temp (bytes for send)
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public static byte[] GetBookFile(int BookID,String type,DBSQLhandler client) throws IOException, SQLException
+	{
+		Object temp ;
+		client.GetFileFromServer(new FileCommand(BookID,type));
+		while (!client.GetGotMessag())
+		{
+			try{
+				Thread.sleep(500);
+				}
+				catch(InterruptedException ex)
+				{
+					System.out.println("InterruptedException "+ex);
+				}
+		}
+		if((temp=client.getResultObject())instanceof byte[])
+			return (byte[])temp;
+		else
+		return null;
+		
+	}
+	/**
+	 * @author Sagi Entenberg
+	 * @param bFile (all bytes for fill)
+	 * @param fileDest (path )
+	 */
+	 public static void writeBytesToFile(byte[] bFile, String fileDest) {
 
+	        try (FileOutputStream fileOuputStream = new FileOutputStream(fileDest)) {
+	            fileOuputStream.write(bFile);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	    }
 	
 }

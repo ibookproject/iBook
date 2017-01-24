@@ -29,12 +29,14 @@ import Role.User;
 import Role.UserStatus;
 
 import java.awt.Font;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
 import javax.swing.ImageIcon;
@@ -104,29 +106,28 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 		btnDownloadBookAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				// ************ SAVE FILE *****************//
+				int id = BookID;
 				final JFileChooser fc = new JFileChooser();
-				fc.setFileFilter(new FileTypeFilter(".txt","Text File"));
-				fc.setDialogTitle( "SAVE THE BOOK !! :   " +"author : " +book.getAuthor()+"  ,  " + " title :  "+ book.getTitle());
+				//fc.setCurrentDirectory(new java.io.File("C:/Users/kfir/Desktop"));;
+				fc.setFileFilter(new FileTypeFilter(".pdf","PDF"));
+				fc.setFileFilter(new FileTypeFilter(".doc","Word Document"));
+				fc.setFileFilter(new FileTypeFilter(".fb2","Fiction Book"));
+				fc.setDialogTitle( "SAVE THE BOOK !! :   " +"author : " +(book.getAuthor()+"  ,  " + " title :  "+ book.getTitle()));
+			//	fc.setFileFilter(new FileTypeFilter(".PDF","PDF"));
 			if(fc.showSaveDialog(null)==JFileChooser.APPROVE_OPTION)
 			{
-				System.out.println(fc.getSelectedFile());
-				System.out.println((FileTypeFilter)fc.getFileFilter());
+				byte[] FileToSave;
 				try {
-					FileWriter fw = new FileWriter(fc.getSelectedFile().getAbsolutePath()+(FileTypeFilter)fc.getFileFilter());
-					PrintWriter pw = new PrintWriter(fw);						
-					pw.println("author : " +book.getAuthor()+"  ,  " + " title :  "+ book.getTitle());
-					pw.println();
-					pw.println("******************The Book Pagess********************");
-					pw.println("******************The Book Pagess********************");
-					pw.println("******************The Book Pagess********************");
-					pw.println("******************The Book Pagess********************");
-					pw.println("******************The Book Pagess********************");
-					pw.println("******************The Book Pagess********************");
-					pw.close();
-				} catch (IOException ex) {
-					System.out.println(ex);
-				}			
-			}}
+					FileToSave=BookController.GetBookFile(id, ((FileTypeFilter)fc.getFileFilter()).toString(), screen.getClient());
+					 BookController.writeBytesToFile(FileToSave,fc.getSelectedFile().getAbsolutePath()+(FileTypeFilter)fc.getFileFilter());
+						
+				} catch (IOException | SQLException ex) {
+					
+					JOptionPane.showMessageDialog(screen,"Cant download File !", "Warning",JOptionPane.WARNING_MESSAGE);
+					
+				}
+			}			
+			}
 		});
 		btnDownloadBookAgain.setBounds(300, 32, 146, 34);
 		btnDownloadBookAgain.setVisible(false);

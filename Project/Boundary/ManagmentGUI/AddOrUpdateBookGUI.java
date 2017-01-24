@@ -1,5 +1,6 @@
 package ManagmentGUI;
 
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -10,16 +11,28 @@ import Controller.UserController;
 import Extras.Validation;
 import Controller.BookController;
 import MenuGUI.LoginGUI;
+import client.DBSQLhandler;
+//import client.AddFileUI;
 import command.DBtranslation;
+import command.FileCommand;
 import command.insertCommand;
 
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
@@ -39,7 +52,8 @@ public class AddOrUpdateBookGUI extends JPanel {
 	private JPanel pann;
 	public LoginGUI screen;
 	private JPanel Mainpann;
-
+	private File srcfile=null;
+//	private AddFileUI af;
 	private int ISUpdateOrAdd;
 
 	/**
@@ -176,6 +190,14 @@ public class AddOrUpdateBookGUI extends JPanel {
 
 				if (ISUpdateOrAdd == 1)// means its add flag page
 				{
+				
+				ArrayList<Book> res = BookController.SearchBook("MAX(bookID)",new Book() ,"1=1",screen.getClient());
+					int NewBookID=res.get(0).getBookID()+1;
+					
+			
+						
+						
+					
 					String warnings = InputValidation();
 					if (title.getText().isEmpty() || lang.getText().isEmpty() || author.getText().isEmpty()
 							|| summary.getText().isEmpty() || contents.getText().isEmpty()
@@ -185,6 +207,29 @@ public class AddOrUpdateBookGUI extends JPanel {
 					else if (!warnings.equalsIgnoreCase("ERROR :\n"))
 						JOptionPane.showMessageDialog(screen, warnings, "Warning", JOptionPane.WARNING_MESSAGE);
 					else {
+						
+						/****************************************************************************************/
+
+						
+						JFileChooser fs=new JFileChooser(new File("c:\\"));
+						fs.setDialogTitle("Upload a file");
+						fs.setBackground(new Color(245, 255, 250));
+						int result=fs.showOpenDialog(null);
+						if (result==JFileChooser.APPROVE_OPTION)
+						{
+							
+							File fileTOSend = new File(fs.getSelectedFile().getAbsolutePath());
+							try {
+								screen.getClient().SendFileToServer(new FileCommand(fileTOSend, NewBookID));
+							} catch (IOException e) {
+								
+								JOptionPane.showMessageDialog(screen,"Cant Upload File !\n "+e.getMessage(), "Warning",JOptionPane.WARNING_MESSAGE);
+							}
+
+						}
+						
+						/****************************************************************************************/
+						
 						Book b = new Book(title.getText().trim(), lang.getText().trim(), author.getText().trim(),
 								summary.getText().trim(), 1, keyword.getText().trim(), contents.getText().trim(),
 								Float.parseFloat(price.getText().trim())); // create new book
@@ -195,8 +240,8 @@ public class AddOrUpdateBookGUI extends JPanel {
 													// from book controller
 						if (temp == null || temp.isEmpty()) {
 
-							boolean result = BookController.AddBook(b, screen.getClient()); // return true or false from the controller DB
-							if (result == false)
+							boolean result1 = BookController.AddBook(b, screen.getClient()); // return true or false from the controller DB
+							if (result1 == false)
 								JOptionPane.showMessageDialog(screen, "Add book process FAILED ! ", "Warning",
 										JOptionPane.WARNING_MESSAGE);
 							else {
@@ -222,7 +267,9 @@ public class AddOrUpdateBookGUI extends JPanel {
 									JOptionPane.WARNING_MESSAGE);
 						}
 					}
-				} else // its update
+					
+				}
+				else // its update
 				{
 					String warnings = InputValidation();
 					if (title.getText().isEmpty() || lang.getText().isEmpty() || author.getText().isEmpty()
@@ -276,7 +323,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 			btnAdd.setText("Update book");
 		btnAdd.setBounds(372, 531, 161, 30);
 		add(btnAdd);
-		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
+		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -277,7 +277,7 @@ public class Book extends DBtranslation  {
 		 for(int i=0;i<fromSentence.length;i++)
 		 {
 			 switch (fromSentence[i]) {
-			case "bookID":
+			case "bookID": case "MAX(bookID)":
 				recover.setBookID((int)ob.getValtoArray(i));
 				break;
 			case "title":

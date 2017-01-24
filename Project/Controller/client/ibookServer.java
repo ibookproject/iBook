@@ -1,7 +1,10 @@
 package client;
 // This file contains material supporting section 3.7 of the textbook:
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,10 +16,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+import javax.swing.Box.Filler;
+
 import com.mysql.jdbc.*;
 
 import Role.User;
 import command.DBquery;
+import command.FileCommand;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
@@ -82,7 +89,26 @@ public class ibookServer extends AbstractServer {
 		int NumOfCol;
 		System.out.println("Message received: " + msg + " from " + client);
 		try {
-			if (msg instanceof DBquery) {
+			if(msg instanceof FileCommand) 
+			{
+				if(((FileCommand)msg).getBytesToFile()!=null)
+				{
+					  writeBytesToFile(((FileCommand)msg).getBytesToFile(), "C:\\Books\\" + ((FileCommand)msg).getBookName() + ".pdf");
+					  writeBytesToFile(((FileCommand)msg).getBytesToFile(), "C:\\Books\\" + ((FileCommand)msg).getBookName() + ".doc");
+					  writeBytesToFile(((FileCommand)msg).getBytesToFile(), "C:\\Books\\" + ((FileCommand)msg).getBookName() + ".fb2");
+					  
+				System.out.println("Message File received:   from " + client);
+				
+				}
+				else
+				{
+					File fileTOSend = new File("C:\\Books\\" + ((FileCommand)msg).getBookName() +((FileCommand)msg).getType());
+					byte[] toSend=DBSQLhandler.getBytesFromFile(fileTOSend);
+					client.sendToClient(toSend);
+				}
+			}
+				
+			else if (msg instanceof DBquery) {
 
 				switch (((DBquery) msg).getType()) {
 				case "insert":
@@ -146,6 +172,7 @@ public class ibookServer extends AbstractServer {
 				conn.close();
 			} else
 				client.sendToClient("You Send wrong message");
+			
 		} catch (Exception e) {
 			if(e instanceof RuntimeException)
 			System.out.println("there is no answer form the query"+msg.toString());
@@ -222,5 +249,14 @@ public class ibookServer extends AbstractServer {
 			System.out.println("ERROR - Could not listen for clients!"+ex.getMessage());
 		}
 	}
+	 private static void writeBytesToFile(byte[] bFile, String fileDest) {
+
+	        try (FileOutputStream fileOuputStream = new FileOutputStream(fileDest)) {
+	            fileOuputStream.write(bFile);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	    }
 }
 // End of EchoServer class

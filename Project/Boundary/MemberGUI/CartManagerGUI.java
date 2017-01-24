@@ -16,6 +16,7 @@ import javax.swing.border.MatteBorder;
 
 import Book.Book;
 import Book.Cart;
+import Controller.BookController;
 import Controller.CartController;
 import Controller.UserController;
 import MenuGUI.LoginGUI;
@@ -30,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -181,34 +183,24 @@ public class CartManagerGUI extends JPanel {
 						panel.updateUI();
 
 						// ************ SAVE FILE *****************//
+						int id = ((CartCheckBoxBooklistPanel)panel.getComponent(i)).BookID;
 						final JFileChooser fc = new JFileChooser();
 						//fc.setCurrentDirectory(new java.io.File("C:/Users/kfir/Desktop"));;
 						fc.setFileFilter(new FileTypeFilter(".pdf","PDF"));
 						fc.setFileFilter(new FileTypeFilter(".doc","Word Document"));
 						fc.setFileFilter(new FileTypeFilter(".fb2","Fiction Book"));
-						fc.setFileFilter(new FileTypeFilter(".txt","Text File"));
 						fc.setDialogTitle( "SAVE THE BOOK !! :   " +"author : " +((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getAuthor()+"  ,  " + " title :  "+ ((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getTitle());
 					//	fc.setFileFilter(new FileTypeFilter(".PDF","PDF"));
 					if(fc.showSaveDialog(null)==JFileChooser.APPROVE_OPTION)
 					{
-						System.out.println(fc.getSelectedFile());
-						System.out.println((FileTypeFilter)fc.getFileFilter());
+						byte[] FileToSave;
 						try {
-							FileWriter fw = new FileWriter(fc.getSelectedFile().getAbsolutePath()+(FileTypeFilter)fc.getFileFilter());
-							PrintWriter pw = new PrintWriter(fw);						
-							pw.println("author : " +((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getAuthor()+"  ,  " + " title :  "+ ((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getTitle());
-							pw.println();
-							pw.println("******************The Book Pagess********************");
-							pw.println("******************The Book Pagess********************");
-							pw.println("******************The Book Pagess********************");
-							pw.println("******************The Book Pagess********************");
-							pw.println("******************The Book Pagess********************");
-							pw.println("******************The Book Pagess********************");
-							pw.close();
-						} 
-						catch (IOException ex)
-						{
-							System.out.println(ex);
+							FileToSave=BookController.GetBookFile(id, ((FileTypeFilter)fc.getFileFilter()).toString(), screen.getClient());
+							 BookController.writeBytesToFile(FileToSave,fc.getSelectedFile().getAbsolutePath()+(FileTypeFilter)fc.getFileFilter());
+								
+						} catch (IOException | SQLException e) {
+							
+							JOptionPane.showMessageDialog(screen,"Cant download File !", "Warning",JOptionPane.WARNING_MESSAGE);
 						}
 					}			
 					}

@@ -4,7 +4,11 @@
 
 package client;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
 
@@ -85,6 +89,26 @@ public class DBSQLhandler extends AbstractClient {
 							message.getToInsert().getAttributeToInsert(), message.getToInsert().getValToInsert()),
 					"insert");
 			sendToServer(dbq);
+		} catch (IOException e) {
+			System.out.println("Could not send message to server.  Terminating client.\n" + e);
+			quit();
+		}
+	}
+	public void SendFileToServer(FileCommand message) {
+		try {
+			setGotMessage(false);
+			
+			sendToServer(message);
+		} catch (IOException e) {
+			System.out.println("Could not send message to server.  Terminating client.\n" + e);
+			quit();
+		}
+	}
+	public void GetFileFromServer(FileCommand message) {
+		try {
+			setGotMessage(false);
+			
+			sendToServer(message);
 		} catch (IOException e) {
 			System.out.println("Could not send message to server.  Terminating client.\n" + e);
 			quit();
@@ -185,6 +209,7 @@ public class DBSQLhandler extends AbstractClient {
 			throw new NullPointerException("no user is sent.. this null pointer");
 		this.nowRunUser = nowRunUser;
 	}
+	
 
 	/**
 	 * This method terminates the client.
@@ -196,6 +221,42 @@ public class DBSQLhandler extends AbstractClient {
 		}
 		System.exit(0);
 	}
+	   public static byte[] getBytesFromFile(File file) throws IOException {        
+	        // Get the size of the file
+	        long length = file.length();
 
+	        // You cannot create an array using a long type.
+	        // It needs to be an int type.
+	        // Before converting to an int type, check
+	        // to ensure that file is not larger than Integer.MAX_VALUE.
+	        if (length > Integer.MAX_VALUE) {
+	            // File is too large
+	            throw new IOException("File is too large!");
+	        }
+
+	        // Create the byte array to hold the data
+	        byte[] bytes = new byte[(int)length];
+
+	        // Read in the bytes
+	        int offset = 0;
+	        int numRead = 0;
+
+	        InputStream is = new FileInputStream(file);
+	        try {
+	            while (offset < bytes.length
+	                   && (numRead=is.read(bytes, offset, bytes.length-offset)) >= 0) {
+	                offset += numRead;
+	            }
+	        } finally {
+	            is.close();
+	        }
+
+	        // Ensure all the bytes have been read in
+	        if (offset < bytes.length) {
+	            throw new IOException("Could not completely read file "+file.getName());
+	        }
+	        return bytes;
+	    }
+	   
 }
 // End of DBSQLhandler class
