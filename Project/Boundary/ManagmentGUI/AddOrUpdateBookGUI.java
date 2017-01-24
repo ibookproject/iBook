@@ -191,8 +191,8 @@ public class AddOrUpdateBookGUI extends JPanel {
 				if (ISUpdateOrAdd == 1)// means its add flag page
 				{
 				
-				ArrayList<Book> res = BookController.SearchBook("MAX(bookID)",new Book() ,"1=1",screen.getClient());
-					int NewBookID=res.get(0).getBookID()+1;
+				//ArrayList<Book> res = BookController.SearchBook("MAX(bookID)",new Book() ,"1=1",screen.getClient());
+					//int NewBookID=res.get(0).getBookID()+1;
 					
 			
 						
@@ -208,27 +208,6 @@ public class AddOrUpdateBookGUI extends JPanel {
 						JOptionPane.showMessageDialog(screen, warnings, "Warning", JOptionPane.WARNING_MESSAGE);
 					else {
 						
-						/****************************************************************************************/
-
-						
-						JFileChooser fs=new JFileChooser(new File("c:\\"));
-						fs.setDialogTitle("Upload a file");
-						fs.setBackground(new Color(245, 255, 250));
-						int result=fs.showOpenDialog(null);
-						if (result==JFileChooser.APPROVE_OPTION)
-						{
-							
-							File fileTOSend = new File(fs.getSelectedFile().getAbsolutePath());
-							try {
-								screen.getClient().SendFileToServer(new FileCommand(fileTOSend, NewBookID));
-							} catch (IOException e) {
-								
-								JOptionPane.showMessageDialog(screen,"Cant Upload File !\n "+e.getMessage(), "Warning",JOptionPane.WARNING_MESSAGE);
-							}
-
-						}
-						
-						/****************************************************************************************/
 						
 						Book b = new Book(title.getText().trim(), lang.getText().trim(), author.getText().trim(),
 								summary.getText().trim(), 1, keyword.getText().trim(), contents.getText().trim(),
@@ -245,6 +224,46 @@ public class AddOrUpdateBookGUI extends JPanel {
 								JOptionPane.showMessageDialog(screen, "Add book process FAILED ! ", "Warning",
 										JOptionPane.WARNING_MESSAGE);
 							else {
+								/****************************************************************************************/
+
+								 temp = BookController.SearchBook("bookID", b, "title=\""
+										+ title.getText().trim() + "\"" + " && " + "author=\"" + author.getText().trim() + "\"",
+								
+										screen.getClient());
+								 boolean cancel=false;
+								 do{
+								JFileChooser fs=new JFileChooser(new File("c:\\"));
+								fs.setDialogTitle("Upload a file");
+								fs.setBackground(new Color(245, 255, 250));
+								int result=fs.showOpenDialog(null);
+								
+								
+								if (result==JFileChooser.APPROVE_OPTION)
+								{
+									int NewBookID=temp.get(0).getBookID();
+									File fileTOSend = new File(fs.getSelectedFile().getAbsolutePath());
+									try {
+								
+										screen.getClient().SendFileToServer(new FileCommand(fileTOSend, NewBookID));
+										JOptionPane.showMessageDialog(screen,"Upload in server done! ", "Warning",JOptionPane.INFORMATION_MESSAGE);
+										cancel=false;
+									}
+									catch (IOException e) {
+										
+										JOptionPane.showMessageDialog(screen,"Cant Upload File !\n "+e.getMessage(), "Warning",JOptionPane.ERROR_MESSAGE);
+										cancel=true;
+									}
+
+								}
+								else
+								{
+									JOptionPane.showMessageDialog(screen,"You must Upload Book File !\n ", "Warning",JOptionPane.ERROR_MESSAGE);
+									cancel=true;
+								}
+								}while(cancel);
+								
+								/****************************************************************************************/
+								
 								title.setText("");
 								lang.setText("");
 								author.setText("");
@@ -252,8 +271,10 @@ public class AddOrUpdateBookGUI extends JPanel {
 								contents.setText("");
 								keyword.setText("");
 								price.setText("");
+								
 								JOptionPane.showMessageDialog(screen, "The book was added successfully to DB !", "done",
 										JOptionPane.INFORMATION_MESSAGE);
+								
 							}
 						} else {
 							title.setText("");
@@ -266,6 +287,8 @@ public class AddOrUpdateBookGUI extends JPanel {
 									"the book is already exist. Try to add another book\n", "Warning",
 									JOptionPane.WARNING_MESSAGE);
 						}
+
+						
 					}
 					
 				}
