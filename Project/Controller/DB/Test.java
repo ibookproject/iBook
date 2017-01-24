@@ -20,7 +20,7 @@ public class Test {
 		try {
 			host = args[0];
 		} catch (ArrayIndexOutOfBoundsException e) {
-			host = "192.168.10.85";
+			host = "localhost";
 		}// take the IP of server the host
 		
 		//
