@@ -2,10 +2,6 @@ package Controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import Book.Book;
-import DB.WaitGif;
-import MenuGUI.LoginGUI;
 import Role.User;
 import client.DBSQLhandler;
 import client.DBgenericObject;
@@ -35,7 +31,6 @@ public class UserController {
  */
 	public static ArrayList<User> SearchUser(String fromSentence,User user,String whereSentence,DBSQLhandler client)
 	{
-		// filed is need to look like "userID,password,..."
 		client.searchInDB(new searchCommand<User>(fromSentence,user,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
@@ -124,11 +119,10 @@ public class UserController {
 	public static boolean UpdateUserStatus(User user , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
 	{
 			client.UpdateInDB(new updateCommand<DBtranslation>(user, searchCondition, updateCondition));
-			WaitGif wg=new WaitGif();
+			
 			while(!client.GetGotMessag()){//add user to DB
 				try{
 				Thread.sleep(50);
-				wg.setVisible(true);
 				}
 				catch(InterruptedException ex)
 				{
@@ -136,7 +130,6 @@ public class UserController {
 					return false;
 				}
 			}
-			wg.setVisible(false);
 			return true;	// means the user add successful	
 	}
 	/**
@@ -156,11 +149,9 @@ public class UserController {
 	public static boolean UpdateUserInfo(User user , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
 	{
 			client.UpdateInDB(new updateCommand<DBtranslation>(user, searchCondition, updateCondition));
-			WaitGif wg=new WaitGif();
 			while(!client.GetGotMessag()){//add user to DB
 				try{
 				Thread.sleep(50);
-				wg.setVisible(true);
 				}
 				catch(InterruptedException ex)
 				{
@@ -168,7 +159,6 @@ public class UserController {
 					return false;
 				}
 			}
-			wg.setVisible(false);
 			return true;	// means the user add successful	
 	}
 	
