@@ -20,16 +20,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-import client.DBSQLhandler;
 import Book.Review;
 import Controller.ReviewController;
-import Controller.UserController;
 import MenuGUI.LoginGUI;
-import Role.User;
-import Role.UserStatus;
-
 import javax.swing.border.MatteBorder;
-
 import java.awt.Color;
 
 
@@ -44,16 +38,16 @@ public class RemovePartReviewGUI extends JPanel {
 	public JButton btnBack;
 	private LoginGUI screen;
 	private JPanel pann;
-	private Review r;
-	private ReviewController r1;
+	private Review review;
 	private int ReviewID;
 	private String oldReview = new String();
 	private int conterOfText;
 	/**
-	 * 
+	 * Remove Part Review GUI
 	 * @param screen 
 	 *  LoginGUI extends JFrame
 	 * @param reviewID
+	 * number of review ID
 	 * 
 	 */
 	public RemovePartReviewGUI(LoginGUI screen,int reviewID) {
@@ -70,8 +64,8 @@ public class RemovePartReviewGUI extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);	
 		
-		 r = new Review();// create review
-			ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, ""+ "reviewID=\""+ReviewID+"\"", screen.getClient());
+		review = new Review();// create review
+			ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", review, ""+ "reviewID=\""+ReviewID+"\"", screen.getClient());
 		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 
 		JLabel Counterlabel = new JLabel("200");
@@ -172,10 +166,10 @@ public class RemovePartReviewGUI extends JPanel {
 					if(!(oldReview.equals(textReview.getText())))
 						{
 						
-						boolean result = ReviewController.UpdateReviewContent(r, "reviewContent=\""+textReview.getText()+"\"", "reviewID=\""+ReviewID+"\"",screen.getClient());
-						boolean result1 = ReviewController.UpdateReviewContent(r, "reviewStatus=\""+1+"\"", "reviewID=\""+ReviewID+"\"",screen.getClient());
+						boolean result = ReviewController.UpdateReviewContent(review, "reviewContent=\""+textReview.getText()+"\"", "reviewID=\""+ReviewID+"\"",screen.getClient());
+						boolean result1 = ReviewController.UpdateReviewContent(review, "reviewStatus=\""+1+"\"", "reviewID=\""+ReviewID+"\"",screen.getClient());
 						oldReview=textReview.getText();
-						if(result)
+						if(result&&result1)
 						{
 							JOptionPane.showMessageDialog(screen,"The new Review update sucsseccfully", "",JOptionPane.INFORMATION_MESSAGE);
 							
@@ -191,6 +185,13 @@ public class RemovePartReviewGUI extends JPanel {
 	
 	
 	}
+	/**
+	 * 
+	 * @param name
+	 * String from Text Field
+	 * @return
+	 * true or false if the String is legal
+	 */
 	public static boolean ContentValidation(String name) {
 		boolean status = false;
 		String namePattern = "[|%\"'&=]";

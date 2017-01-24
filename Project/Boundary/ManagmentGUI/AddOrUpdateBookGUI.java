@@ -210,13 +210,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 				if (ISUpdateOrAdd == 1)// means its add flag page
 				{
 				
-				//ArrayList<Book> res = BookController.SearchBook("MAX(bookID)",new Book() ,"1=1",screen.getClient());
-					//int NewBookID=res.get(0).getBookID()+1;
-					
-			
-						
-						
-					
+	
 					String warnings = InputValidation();
 					if (title.getText().isEmpty() || lang.getText().isEmpty() || author.getText().isEmpty()
 							|| summary.getText().isEmpty() || contents.getText().isEmpty()
@@ -392,10 +386,6 @@ public class AddOrUpdateBookGUI extends JPanel {
 			warnings += "author field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
 		if (Validation.AuthorValidation(author.getText(), 20) == false)
 			warnings += "author field - Must contain only English letters \n";
-
-		// if(Validation.regularValidation(price.getText())==false)
-		// warnings += "price field - The following characters are not allowed :
-		// |,%,\\," + "\",',&,=\n";
 		String answer = Validation.PriceValidation(price.getText());
 		if (answer != "")
 			warnings += answer;
