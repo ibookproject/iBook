@@ -16,13 +16,30 @@ public class FileCommand implements Serializable{
 	private String BookName;
 	private String Type;
 	
-	
-	public FileCommand(File f,int BookID) throws IOException
+	/**
+	 * Constructor
+	 * @param file
+	 * file to convert to bytes
+	 * @param BookID
+	 * the new book id to save in server
+	 * @throws IOException
+	 * exception if the process failed 
+	 */
+	public FileCommand(File file,int BookID) throws IOException
 	{
-		BytesToFile=DBSQLhandler.getBytesFromFile(f);
+		BytesToFile=DBSQLhandler.getBytesFromFile(file);
 		this.BookName=Integer.toString(BookID);
 		
 	}
+	/**
+	 * Constructor
+	 * @param BookID
+	 * the book id for Download
+	 * @param type
+	 * type of the format to Download 
+	 * @throws IOException
+	 * exception if the process failed
+	 */
 	public FileCommand(int BookID,String type) throws IOException
 	{
 		this.BookName=Integer.toString(BookID);
