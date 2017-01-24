@@ -40,7 +40,7 @@ public class LoginGUI extends JFrame {
 
 	/**
 	 * 
-	 * @author Sagi EntenbergS
+	 * @author Sagi Entenberg
 	 *
 	 */
 	private static final long serialVersionUID = 1L;

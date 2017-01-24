@@ -31,11 +31,7 @@ import ocsf.server.ConnectionToClient;
  * This class overrides some of the methods in the abstract superclass in order
  * to give more functionality to the server.
  *
- * @author Dr Timothy C. Lethbridge
- * @author Dr Robert Lagani&egrave;re
- * @author Fran&ccedil;ois B&eacute;langer
- * @author Paul Holden
- * @version July 2000
+
  */
 public class ibookServer extends AbstractServer {
 	/*
@@ -187,6 +183,8 @@ public class ibookServer extends AbstractServer {
 	/**
 	 * This method overrides the one in the superclass. Called when the server
 	 * starts listening for connections.
+	 * @author Sagi Entenberg
+	 * @author Kfir Girestein
 	 */
 	protected void serverStarted() {
 		System.out.println("Server listening for connections on port " + getPort());
@@ -249,6 +247,14 @@ public class ibookServer extends AbstractServer {
 			System.out.println("ERROR - Could not listen for clients!"+ex.getMessage());
 		}
 	}
+	/**
+	 * 
+	 * @param bFile
+	 * the bytes to write
+	 * @param fileDest
+	 * the path of the file Direction
+	 * @author Sagi Entenberg
+	 */
 	 private static void writeBytesToFile(byte[] bFile, String fileDest) {
 
 	        try (FileOutputStream fileOuputStream = new FileOutputStream(fileDest)) {

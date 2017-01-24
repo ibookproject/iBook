@@ -36,7 +36,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
-
+/**
+ * The panel of Cart
+ * @author Sagi Entenberg
+ * @author Hen Saada
+ * @category download a book from server
+ *  
+ */
 public class CartManagerGUI extends JPanel {
 
 	public static JPanel panel;
@@ -48,7 +54,11 @@ public class CartManagerGUI extends JPanel {
 	private int cnt;
 	private JButton btnBuy;
 
-
+/**
+ * Consructor- building the panel
+ * @param screen
+ * @param UserIdAtDataBase
+ */
 	public CartManagerGUI(LoginGUI screen,int UserIdAtDataBase) {
 		super();
 		this.screen=screen;
@@ -81,7 +91,11 @@ public class CartManagerGUI extends JPanel {
 			btnBuy.setEnabled(false);
 			LabelMassege.setVisible(true);
 		}
-
+			
+			
+	//	}
+		//else JOptionPane.showMessageDialog(screen,"NO subscriptionMethod !!! ", "Warning",JOptionPane.WARNING_MESSAGE);
+		/////////////////////
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -177,15 +191,6 @@ public class CartManagerGUI extends JPanel {
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveAfterBuy.setVisible(true);
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveButton.setVisible(false);
 						panel.updateUI();
-						
-						// numberOfOrder++ at book table after buy some book 
-						ArrayList<Book> tempBooks;
-				 		tempBooks = BookController.SearchBook("numberOfOrder,bookID",b, "bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\""+" && "+"bookEnable=\""+1+"\"", screen.getClient());
-				 		int temp =(int)tempBooks.get(0).getNumberOfOrder();
-				 		temp++;
-				 		Book b=new Book();
-				 		boolean result = BookController.UpdateBook(b, "numberOfOrder=\""+temp+"\"", "bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\""+" && "+"bookEnable=\""+1+"\"", screen.getClient());
-						
 
 						// ************ SAVE FILE *****************//
 						int id = ((CartCheckBoxBooklistPanel)panel.getComponent(i)).BookID;
@@ -194,7 +199,7 @@ public class CartManagerGUI extends JPanel {
 						fc.setFileFilter(new FileTypeFilter(".pdf","PDF"));
 						fc.setFileFilter(new FileTypeFilter(".doc","Word Document"));
 						fc.setFileFilter(new FileTypeFilter(".fb2","Fiction Book"));
-						fc.setDialogTitle( "SAVE THE BOOK !! :   " +"author : " +((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getAuthor()+"  ,  " + " title :  "+ ((CartCheckBoxBooklistPanel)panel.getComponent(i)).book.getTitle());
+						fc.setDialogTitle( "Save As: ");
 					//	fc.setFileFilter(new FileTypeFilter(".PDF","PDF"));
 					if(fc.showSaveDialog(null)==JFileChooser.APPROVE_OPTION)
 					{

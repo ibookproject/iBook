@@ -57,7 +57,14 @@ public class AddOrUpdateBookGUI extends JPanel {
 	private int ISUpdateOrAdd;
 
 	/**
-	 * @wbp.parser.constructor
+	 * The class of build the panel gui to delete or Update Book
+	 * @param screen 
+	 * LoginGUI extends JFrame
+	 * @param ISUpdateOrAdd
+	 * flag what selected in the Previous panel
+	 * @author Sagi Entenberg
+	 * @author Hen Saada
+	 * 
 	 */
 	public AddOrUpdateBookGUI(LoginGUI screen, int ISUpdateOrAdd) {
 		super();
@@ -67,7 +74,19 @@ public class AddOrUpdateBookGUI extends JPanel {
 		pann = this;
 		initialize();
 	}
-
+	/**
+	 * the class of build the panel gui to Add or Update Book
+	 * @param screen
+	 *  LoginGUI extends JFrame
+	 * @param ISUpdateOrAdd
+	 * flag what selected in the Previous panel
+	 * @param Bookid
+	 * get the book for update
+	 * @param Mainpann
+	 * main panel
+	 * @author Sagi Entenberg
+	 * @author Hen Saada
+	 */
 	public AddOrUpdateBookGUI(LoginGUI screen, int ISUpdateOrAdd, int Bookid, JPanel Mainpann) {
 		super();
 		this.Bookid = Bookid; // get back the book from the search and now upddate

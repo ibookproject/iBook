@@ -34,9 +34,9 @@ import java.awt.Color;
 
 
 /**
- * 
- * @author Sagi Entenberg
  * build the window of Remove Part Review
+ * @author Sagi Entenberg
+ * 
  */
 public class RemovePartReviewGUI extends JPanel {
 
@@ -49,7 +49,11 @@ public class RemovePartReviewGUI extends JPanel {
 	private int ReviewID;
 	private String oldReview = new String();
 	private int conterOfText;
-	
+	/**
+	 * 
+	 * @param screen
+	 * @param reviewID
+	 */
 	public RemovePartReviewGUI(LoginGUI screen,int reviewID) {
 		super();
 		this.screen=screen;
