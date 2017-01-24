@@ -121,6 +121,7 @@ public class ReviewPanel extends JPanel{
 		});
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setAutoscrolls(true);
 		scrollPane.setBounds(240, 36, 322, 100);
 		add(scrollPane);
 		

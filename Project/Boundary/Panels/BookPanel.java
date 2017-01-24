@@ -126,7 +126,7 @@ public class BookPanel extends JPanel{
 		
 		lblNewAutor = new JLabel(b.getAuthor());
 		lblNewAutor.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewAutor.setBounds(495, 51, 104, 31);
+		lblNewAutor.setBounds(495, 51, 130, 31);
 		add(lblNewAutor);
 		
 		lblSummary = new JLabel("Summary:");
@@ -141,6 +141,7 @@ public class BookPanel extends JPanel{
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setAutoscrolls(true);
 		scrollPane.setBounds(124, 83, 289, 116);
 		add(scrollPane);
 		

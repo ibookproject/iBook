@@ -101,6 +101,7 @@ public class SearchReviewPanel extends JPanel{
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setAutoscrolls(true);
 		scrollPane.setBounds(284, 36, 333, 87);
 		add(scrollPane);
 		JTextArea textArea = new JTextArea();
