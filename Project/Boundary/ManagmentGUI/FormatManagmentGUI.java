@@ -147,15 +147,7 @@ public class FormatManagmentGUI extends JPanel {
 						}	 
 					}
 				}
-				//print for now.... 
-				
-				for(int i=0;i<AllBookList.size();i++)
-				System.out.println(AllBookList.get(i).getBookID());
-				System.out.println();
-				if(specificBooksWtihSelectedSubject!=null)
-				for(int i=0;i<specificBooksWtihSelectedSubject.size();i++)
-				System.out.println(specificBooksWtihSelectedSubject.get(i).getBookID());
-			
+
 				panel.removeAll();
 				panel.setVisible(true);
 				scrollPaneMain.setVisible(true);
@@ -279,9 +271,7 @@ public class FormatManagmentGUI extends JPanel {
 					int id=((Domain) DomainBox.getSelectedItem()).getDomainID();/// here is the problem
 					//////////////////////////////////////
 				Subject sub = new Subject(id,s); // create new Subject	
-				ArrayList<Subject> temp = FormatController.SearchSubject("domainID,nameSubject",sub, "nameSubject=\""+s+ "\"" ,screen.getClient());
-				System.out.println("///"+temp+"//");
-				
+				ArrayList<Subject> temp = FormatController.SearchSubject("domainID,nameSubject",sub, "nameSubject=\""+s+ "\"" ,screen.getClient());				
 				if(temp==null)
 				{
 		 		boolean result=FormatController.AddSubject(sub,screen.getClient()); // return true or false from the controller DB 
@@ -338,15 +328,7 @@ public class FormatManagmentGUI extends JPanel {
 						}
 					}
 			
-					//print for now....
-					System.out.println("books after deleting: ");
-					for(int i=0;i<AllBookList.size();i++)
-					System.out.println(AllBookList.get(i).getBookID());
-					System.out.println();
-					System.out.println("subject from  tavla mekasheret");
-					if(specificBooksWtihSelectedSubject!=null)
-					for(int i=0;i<specificBooksWtihSelectedSubject.size();i++)
-					System.out.println(specificBooksWtihSelectedSubject.get(i).getBookID());
+
 						if(AllBookList!=null)
 						{
 							panel.removeAll();
