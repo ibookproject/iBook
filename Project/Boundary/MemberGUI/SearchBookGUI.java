@@ -246,6 +246,15 @@ public class SearchBookGUI extends JPanel {
 				ArrayList<Book> bookKeywordsDomains=new ArrayList<Book>();
 				ArrayList<Book> bookDomainList=new 	ArrayList<Book>();
 				
+				
+				
+				
+				
+				
+				
+				
+				
+				////////////////////////////////////////////////////////////////////////////////
 				if(chckbxDomain.isSelected())
 				{	
 					SubjectToBook s=new SubjectToBook();
@@ -271,6 +280,7 @@ public class SearchBookGUI extends JPanel {
 						{
 						JOptionPane.showMessageDialog(screen,"Theres no books in the chosen domain", "Warning",JOptionPane.WARNING_MESSAGE);
 						flagNotFoundBook=1;
+						flagIfNotFill=1;
 						}
 						
 				}
@@ -414,12 +424,29 @@ public class SearchBookGUI extends JPanel {
 				flagIfNotFill=0;
 				flagNotFoundBook=0;
 				flag=0;
+				textFieldLanguage.setText("");
+				textFieldKeywords.setText("");
+				textFieldSummary.setText("");
+				textFieldContents.setText("");
+				textTitle.setText("");
+				textAuthor.setText("");
+				chckbxContents.setSelected(false);
+				chckbxTitle.setSelected(false);
+				chckbxAuthor.setSelected(false);
+				chckbxLanguage.setSelected(false);
+				chckbxSummary.setSelected(false);
+				chckbxKeywords.setSelected(false);
+				chckbxDomain.setSelected(false);
+				
 			}
 		});
 		btnSearch.setBounds(326, 537, 97, 25);
 		add(btnSearch);
 		
-
+		JLabel lblSearchBookGif = new JLabel("");
+		lblSearchBookGif.setIcon(new ImageIcon("Extras/Images/Search50.png"));
+		lblSearchBookGif.setBounds(480, 27, 69, 62);
+		add(lblSearchBookGif);
 	}
 	public void showMessageDialogErrorEmptyField()
 	{
