@@ -60,7 +60,7 @@ public class SearchBookTest extends TestCase {
 	
 	/**
 	 * @author kfir
-	 * check for the book with the following details in setup
+	 * check for the book form the data base form the data base with the following details in setup
 	 * check if the number of result is 1(the size of the arrayList)
 	 */
 	public void testOnlyOneResult() {
@@ -73,7 +73,7 @@ public class SearchBookTest extends TestCase {
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following author that initailize at SetUp
+	 * check for the book form the data base form the data base with the following author that initailize at SetUp
 	 * check if the number of result is more then one 1(the size of the arrayList)
 	 */
 	public void testMoreThenOneResultByAuthor() {
@@ -89,7 +89,7 @@ public class SearchBookTest extends TestCase {
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following Language that initailize at SetUp
+	 * check for the book form the data base form the data base with the following Language that initailize at SetUp
 	 */
 	public void testSearchByLanguage() {
 		Book expectedBook= new Book();
@@ -102,10 +102,12 @@ public class SearchBookTest extends TestCase {
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following Summary that initailize at SetUp
+	 * check for the book form the data base form the data base with the following Summary that initailize at SetUp
 	 */
 	public void testSearchBySummary() {
 		Book expectedBook= new Book();
+		
+		///change to like
 		ArrayList<Book> result=BookController.SearchBook("bookID,Summary", searchBook, "Summary=\""+summary, client);
 		for(int i=0;i<result.size();i++)
 		{
@@ -115,7 +117,7 @@ public class SearchBookTest extends TestCase {
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following author that initailize at SetUp
+	 * check for the book form the data base with the following author that initailize at SetUp
 	 * check if the number of result is more then one 1(the size of the arrayList)
 	 */
 	public void testSearchByDomain() {
@@ -129,7 +131,7 @@ public class SearchBookTest extends TestCase {
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following Keywords that initailize at SetUp
+	 * check for the book form the data base with the following Keywords that initailize at SetUp
 	 */
 	public void testSearchByKeywords() {
 		Book expectedBook= new Book();
@@ -142,7 +144,7 @@ public class SearchBookTest extends TestCase {
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following author and title that initailize at SetUp
+	 * check for the book form the data base with the following author and title that initailize at SetUp
 	 */
 	public void testCombination() {
 		Book expectedBook= new Book();
@@ -156,7 +158,7 @@ public class SearchBookTest extends TestCase {
 	}
 	/**
 	 * @author kfir
-	 * check for the book with the following title titleNoAns that initailize at SetUp
+	 * check for the book form the data base with the following title titleNoAns that initailize at SetUp
 	 * check if the result size if 0 --> there is no one with the title: titleNoAns
 	 */
 	public void testNoResult() {
