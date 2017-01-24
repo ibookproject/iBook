@@ -44,6 +44,7 @@ public class CartManagerGUI extends JPanel {
 	private ArrayList <User> searcRes;
 	private Date date;
 	private int cnt;
+	private JButton btnBuy;
 
 
 	public CartManagerGUI(LoginGUI screen,int UserIdAtDataBase) {
@@ -62,11 +63,26 @@ public class CartManagerGUI extends JPanel {
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);
 		User u= new User();
+		btnBuy = new JButton("Buy");
+		
+		JLabel LabelMassege = new JLabel("NO subscription Method");
+		LabelMassege.setForeground(Color.RED);
+		LabelMassege.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		LabelMassege.setBounds(360, 547, 273, 54);
+		LabelMassege.setVisible(false);
+		add(LabelMassege);
 		
 		//checking if there is any subscription method
 		searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionMethod,privilege",u,"subscriptionMethod<>\"" + 0 + "\""+" && " + "userID=\"" + screen.getTempID() + "\"", screen.getClient());//call search book method from book controller
-		if(searcRes!=null)
+		if(searcRes==null)
 		{
+			btnBuy.setEnabled(false);
+			LabelMassege.setVisible(true);
+		}
+			
+			
+	//	}
+		//else JOptionPane.showMessageDialog(screen,"NO subscriptionMethod !!! ", "Warning",JOptionPane.WARNING_MESSAGE);
 		/////////////////////
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
@@ -136,7 +152,7 @@ public class CartManagerGUI extends JPanel {
 		lblChooseBooksFrom.setBounds(379, 107, 151, 14);
 		add(lblChooseBooksFrom);
 		
-		JButton btnBuy = new JButton("Buy");
+		 
 		btnBuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int flag=0;
@@ -214,7 +230,6 @@ public class CartManagerGUI extends JPanel {
 });		
 		btnBuy.setBounds(417, 519, 80, 39);
 		add(btnBuy);		
-	}
-	else JOptionPane.showMessageDialog(screen,"NO subscriptionMethod !!! ", "Warning",JOptionPane.WARNING_MESSAGE);
+
 	}	
 }

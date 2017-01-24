@@ -47,7 +47,7 @@ public class TimerProject {
 	public void startTimer(LoginGUI screen) {
 		// TODO Auto-generated method stub
 		this.client = screen;
-		timer.scheduleAtFixedRate(task, 10000, 10000);
+		timer.scheduleAtFixedRate(task, 60000, 60000);
 		TimerFlag=true;
 	}
 	public void endTimer(){

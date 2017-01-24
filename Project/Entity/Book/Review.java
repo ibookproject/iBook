@@ -47,7 +47,7 @@ public class Review extends DBtranslation {
 		return reviewDate;
 	}
 	public void setReviewDate(String reviewDate) {
-		if (reviewDate == null || reviewDate.equals("") || Validation.DateValidation(reviewDate) == false)
+		if (reviewDate == null || reviewDate.equals("")/* || Validation.DateValidation(reviewDate) == false*/)
 			throw new InputMismatchException("you have inserted wrong review date");
 		this.reviewDate=reviewDate;
 	}
