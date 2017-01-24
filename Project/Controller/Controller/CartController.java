@@ -74,7 +74,7 @@ public class CartController {
 		while(!client.GetGotMessag()){
 			try
 			{
-				Thread.sleep(500);
+				Thread.sleep(50);
 			}
 			catch(InterruptedException ex)
 			{
@@ -180,7 +180,7 @@ public class CartController {
 		client.joinSearchInDB(new joinCommand<Cart>("book.bookID,book.title,book.author,cart.buyDate",cart,temp,"cart.userID=\""+userId +"\""+" && "+"cart.status=1"+" && "+"cart.buyDate>'"+date+"'"));
 		while(!	client.GetGotMessag()){//search book in db
 			try{
-			Thread.sleep(500);
+			Thread.sleep(50);
 			}
 			catch(InterruptedException ex)
 			{

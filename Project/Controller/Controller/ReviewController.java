@@ -156,7 +156,7 @@ public class ReviewController {
 		while(!	client.GetGotMessag())
 		{//search book in db
 			try{
-			Thread.sleep(500);
+			Thread.sleep(50);
 			}
 			catch(InterruptedException ex)
 			{
