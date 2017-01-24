@@ -45,7 +45,7 @@ public class InventoryManagmentGUI extends JPanel {
 		add(lblNewLabel);
 
 		JLabel lblinventoryGif = new JLabel("");
-		lblinventoryGif.setIcon(new ImageIcon("inventory.gif"));
+		lblinventoryGif.setIcon(new ImageIcon("Extras/Images/inventory.gif"));
 		lblinventoryGif.setBounds(555, 155, 375, 505);
 		add(lblinventoryGif);
 		
@@ -86,7 +86,7 @@ public class InventoryManagmentGUI extends JPanel {
 		});
 		btnAddupdate.setBounds(366, 176, 122, 30);
 		add(btnAddupdate);
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
+		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		 btnBack = new JButton(backIcon);
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);

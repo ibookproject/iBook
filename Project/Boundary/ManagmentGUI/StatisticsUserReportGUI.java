@@ -78,7 +78,7 @@ public class StatisticsUserReportGUI extends JPanel
 		userReportLbl.setBounds(355, 49, 236, 22);
 		add(userReportLbl);
 		
-		backIcon =new ImageIcon("src/images/backIcon.png");
+		backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);

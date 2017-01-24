@@ -53,7 +53,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);
 
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png"); 
+		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png"); 
 		 btnBack = new JButton(backIcon);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -66,7 +66,7 @@ public class RemovePartReviewGUI extends JPanel {
 		
 		 r = new Review();// create review
 			ArrayList<Review> temp = (ArrayList<Review>) ReviewController.SearchReviews("reviewContent", r, ""+ "reviewID=\""+ReviewID+"\"", screen.getClient());
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
+		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 
 		JLabel Counterlabel = new JLabel("200");
 		Counterlabel.setFont(new Font("Tahoma", Font.PLAIN, 15));

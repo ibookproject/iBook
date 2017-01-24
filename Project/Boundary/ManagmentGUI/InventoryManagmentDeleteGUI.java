@@ -61,7 +61,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);
 
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png"); 
+		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png"); 
 		 btnBack = new JButton(backIcon);
 			SearchBook sb = new SearchBook(screen,tempBooks);
 		sb.btnBack.addActionListener(new ActionListener() {

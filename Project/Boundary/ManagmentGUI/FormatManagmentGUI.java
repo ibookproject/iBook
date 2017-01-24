@@ -389,7 +389,7 @@ public class FormatManagmentGUI extends JPanel {
 		btnAtachBook.setBounds(311, 440, 165, 32);
 		add(btnAtachBook);
 	
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
+		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.setBounds(84, 44, 67, 20);
 		add(btnBack);

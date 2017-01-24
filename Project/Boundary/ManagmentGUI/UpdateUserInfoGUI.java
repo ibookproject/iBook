@@ -81,7 +81,7 @@ public class UpdateUserInfoGUI extends JPanel {
 		lblTitel.setBounds(341, 30, 263, 45);
 		add(lblTitel);
 
-		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
+		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.setBounds(34, 33, 89, 23);
 		add(btnBack);

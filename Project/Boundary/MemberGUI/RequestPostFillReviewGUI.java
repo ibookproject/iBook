@@ -66,7 +66,7 @@ public class RequestPostFillReviewGUI extends JPanel
 	{	
 		this.setSize(850, 625);
 		this.setLayout(null);	
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
+		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		
 		JLabel Counterlabel = new JLabel("50");
 		Counterlabel.setFont(new Font("Tahoma", Font.PLAIN, 15));

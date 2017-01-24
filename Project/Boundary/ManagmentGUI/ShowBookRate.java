@@ -42,7 +42,7 @@ public class ShowBookRate extends JPanel {
 		add(lblNewLabel);
 		
 		
-		backIcon =new ImageIcon("src/images/backIcon.png");
+		backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);

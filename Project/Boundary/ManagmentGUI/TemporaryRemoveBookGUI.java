@@ -292,7 +292,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		btnSearch.setBounds(125, 288, 120, 39);
 		add(btnSearch);
 
-		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
+		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);

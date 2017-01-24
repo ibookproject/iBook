@@ -59,7 +59,7 @@ public class BookRateGUI extends JPanel {
 
 		this.setSize(850, 625);
 		this.setLayout(null);	
-		ImageIcon backIcon =new ImageIcon("src/images/backIcon.png");
+		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
 		btnBack.setBounds(39, 52, 89, 23);
 		add(btnBack);

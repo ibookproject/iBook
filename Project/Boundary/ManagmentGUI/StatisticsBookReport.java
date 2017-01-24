@@ -69,7 +69,7 @@ public class StatisticsBookReport extends JPanel {
 		lblHeader.setBounds(355, 49, 240, 22);
 		add(lblHeader);
 
-		ImageIcon backIcon = new ImageIcon("src/images/backIcon.png");
+		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
