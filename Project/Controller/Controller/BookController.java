@@ -82,9 +82,13 @@ public class BookController {
 		}
 	}
 	
-	public static boolean AddBook(Book b,DBSQLhandler client) // boolean function that return true if the add book done else false.
+	public static boolean AddBook(Book book,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{
-			client.insertToDB(new insertCommand<DBtranslation>(b)); 	
+	/*	if (title.getText().isEmpty() || lang.getText().isEmpty() || author.getText().isEmpty()|| summary.getText().isEmpty() || contents.getText().isEmpty()|| keyword.getText().isEmpty() || price.getText().isEmpty())
+				*/
+		if(book.getTitle()==null||book.getLanguage()==null||book.getAuthor()==null||book.getSummary()==null||book.getContent()==null||book.getKeyword()==null||book.getPrice()<0)
+			return false;
+			client.insertToDB(new insertCommand<DBtranslation>(book)); 	
 			while(!client.GetGotMessag()){//add book to DB
 				try{
 				Thread.sleep(250);
@@ -95,7 +99,14 @@ public class BookController {
 					return false;
 				}
 			}
-			return true;	// means the book add successful	
+			try {
+				if (client.getResultObject() instanceof Throwable)
+					return false;
+			} catch (SQLException e) {
+				return false;
+			}
+			
+		return true;	// means the book add successful	
 	}
 		
 	//new hen 10.1//
