@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
 
 import java.awt.Color;
@@ -43,7 +45,6 @@ import client.DBgenericObject;
 public class ReviewPanel extends JPanel{
 	
 	private LoginGUI screen;
-	private Review review;
 	private JLabel lblNewTitle;
 	private JLabel lblNewDate;
 	private JLabel lblDate;
@@ -80,13 +81,10 @@ public class ReviewPanel extends JPanel{
 		
 		lblContent = new JLabel("\nContent:");
 		lblContent.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
-		lblContent.setBounds(254, 10, 81, 23);
+		lblContent.setBounds(240, 10, 81, 23);
 		add(lblContent);
 		
-		textAreaContent = new JTextArea();
-		textAreaContent.setText(reviewContent);
-		textAreaContent.setBounds(338, 12, 203, 102);
-		add(textAreaContent);
+		
 		
 		lblBookTitle = new JLabel("Book Name:");
 		lblBookTitle.setFont(new Font("VAGRounded BT", Font.BOLD, 17));
@@ -99,9 +97,9 @@ public class ReviewPanel extends JPanel{
 		add(chckbxChooseReview);
 		
 		btnRemovePartOf = new JButton("Remove Part Of Review");
-		btnRemovePartOf.setBounds(548, 47, 173, 25);
+		btnRemovePartOf.setBounds(563, 47, 173, 25);
 		btnRemovePartOf.addActionListener(new ActionListener() 
-	{
+		{
 		public void actionPerformed(ActionEvent e) 
 		{
 ////////////////////////button to back to confirmation review from remove part of review /////////////////////////////////////////////
@@ -120,11 +118,27 @@ public class ReviewPanel extends JPanel{
 	
 				screen.setContentPane(Rpr);			
 		}
-	});
-	
-	if(this.Permission==5){
+		});
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(318, 12, 244, 102);
+		add(scrollPane);
+		
+		textAreaContent = new JTextArea();
+		textAreaContent.setEditable(false);
+		textAreaContent.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		textAreaContent.setLineWrap(true);
+		textAreaContent.setWrapStyleWord(true);
+		scrollPane.setViewportView(textAreaContent);
+		textAreaContent.setRows(4);
+		textAreaContent.setBackground(Color.YELLOW);
+		textAreaContent.setForeground(new Color(0, 0, 0));
+		textAreaContent.setText(reviewContent);
+		
+	if(this.Permission==5)
+	{
 		add(btnRemovePartOf);
-		}
+	}
 	
 	}
 	public int getchbxChoose()

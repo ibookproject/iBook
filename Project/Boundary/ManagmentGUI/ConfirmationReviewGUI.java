@@ -105,6 +105,13 @@ public class ConfirmationReviewGUI extends JPanel {
 		scrollPaneMain.setViewportView(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
+
+		if(Permission>=5)
+		{
+			Review r=new Review();
+			ReviewController.UpdateReviewContent(r,"reviewStatus=\""+0+"\"","reviewStatus=\""+-1+"\"",screen.getClient());/*needs to update the reviewStatus not content!*/
+		}	
+
 		try {
 			showReviews();
 		} catch (SQLException e2) {
@@ -168,7 +175,7 @@ public class ConfirmationReviewGUI extends JPanel {
 					}
 					if(flagReviewChoose==1)
 					{
-						JOptionPane.showMessageDialog(screen,"The review was Confirmed\n", "Success",JOptionPane.YES_OPTION);	
+						JOptionPane.showMessageDialog(screen,"The review was Confirmed\n", "Success",JOptionPane.INFORMATION_MESSAGE);	
 						//panel.updateUI();
 						panel.removeAll();
 						try {
