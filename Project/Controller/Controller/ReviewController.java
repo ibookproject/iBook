@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 import Book.Book;
 import Book.Review;
-import Book.SubjectToBook;
-import Role.User;
 import client.DBSQLhandler;
 import client.DBgenericObject;
 import command.DBtranslation;
@@ -17,24 +15,28 @@ import command.joinObject;
 import command.searchCommand;
 import command.updateCommand;
 /**
- * 
+ * Review Controller
  * @author Sagi Entenberg
  */
 public class ReviewController {
+	
 /**
- * 
+ * Search Reviews
  * @param fromSentence
- * @param r
+ * String of the SQL query "From"
+ * @param review
+ * the name of the table from this object
  * @param whereSentence
+ * String of the SQL query "Where"
  * @param client
- * @return null if SQLException or result Review
+ * the client who ask the query
+ * @return 
+ * Array list of result Review
+ * 
  */
-	public static ArrayList<Review> SearchReviews(String fromSentence,Review r, String whereSentence, DBSQLhandler client) {
-		// filed is need to look like "bookID"
-		client.searchInDB(new searchCommand<Review>(fromSentence, r,
-				whereSentence));// call command and client ask to search a
-								// review
-		while (!client.GetGotMessag()) {// search user in db
+	public static ArrayList<Review> SearchReviews(String fromSentence,Review review, String whereSentence, DBSQLhandler client) {
+		client.searchInDB(new searchCommand<Review>(fromSentence, review,whereSentence));
+		while (!client.GetGotMessag()) {
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException ex) {
@@ -43,27 +45,28 @@ public class ReviewController {
 		}
 		try {
 			return Review.convertBack(
-					(ArrayList<DBgenericObject>) client.getResultObject(),
-					fromSentence);
+					(ArrayList<DBgenericObject>) client.getResultObject(),fromSentence);
 		} catch (SQLException e) {
 			return null;
 		}
 	}
 /**
- * 
- * @param r
+ * Update Review Content
+ * @param review
+ * the name of the table from this object
  * @param updateCondition
+ * String of the SQL query "From"
  * @param searchCondition
+ *  String of the SQL query "Where"
  * @param client
- * @return boolean (true if successfully/false if not successfully)
+ * the client who ask the query
+ * @return
+ * true or false if the update Succeeded
  */
-	public static boolean UpdateReviewContent(Review r, String updateCondition,String searchCondition, DBSQLhandler client) // boolean function
-															// that return true
-															// if user updated
-															// else false.
+	public static boolean UpdateReviewContent(Review review, String updateCondition,String searchCondition, DBSQLhandler client) 													
 	{
-		client.UpdateInDB(new updateCommand<DBtranslation>(r, searchCondition,updateCondition));
-		while (!client.GetGotMessag()) {// add user to DB
+		client.UpdateInDB(new updateCommand<DBtranslation>(review, searchCondition,updateCondition));
+		while (!client.GetGotMessag()) {
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException ex) {
@@ -74,14 +77,17 @@ public class ReviewController {
 		return true; // means the review update successful
 	}
 /**
- * 
- * @param r
+ * Delete Review
+ * @param review
+ * the name of the table from this object
  * @param searchCondition
+ * String of the SQL query "From"
  * @param client
+ * the client who ask the query
  */
-	public static void DeleteReview(Review r, String searchCondition,DBSQLhandler client) {
-		client.deleteFromDB(new deleteCommand<DBtranslation>(r, searchCondition));
-		while (!client.GetGotMessag()) {// add user to DB
+	public static void DeleteReview(Review review, String searchCondition,DBSQLhandler client) {
+		client.deleteFromDB(new deleteCommand<DBtranslation>(review, searchCondition));
+		while (!client.GetGotMessag()) {
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException ex) {
@@ -93,16 +99,19 @@ public class ReviewController {
 	}
 
 /**
- * @author Sagi Entenberg
- * @param r
+ * Add New Review
+ * @param review
+ * the name of the table from this object
  * @param client
- * @return boolean (true if successfully/false if not successfully)
+ * the client who ask the query
+ * @return
+ * true or false if the update Succeeded
  */
 
-	public static boolean AddReview(Review r, DBSQLhandler client) // boolean
+	public static boolean AddReview(Review review, DBSQLhandler client) // boolean
 	{
-		client.insertToDB(new insertCommand<DBtranslation>(r));
-		while (!client.GetGotMessag()) {// add book to DB
+		client.insertToDB(new insertCommand<DBtranslation>(review));
+		while (!client.GetGotMessag()) {
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException ex) {
@@ -114,9 +123,12 @@ public class ReviewController {
 	}
 
 	/**
-	 * @author Coral Carmeli
+	 *
 	 * @param client
-	 * @return The result of join between the 2 tables:'Book','Review' according the same bookID,return the requested fields.
+	 * the client who ask the query
+	 * @return 
+	 * The result of join between the 2 tables:'Book','Review' according the same bookID,return the requested fields.
+	 *  @author Coral Carmeli
 	 */
 	public static ArrayList<DBgenericObject> searchJoinReviewBook(DBSQLhandler client) /*throws SQLException*/
 	{
