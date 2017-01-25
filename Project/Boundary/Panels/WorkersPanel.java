@@ -1,0 +1,127 @@
+
+package Panels;
+
+import javax.swing.JPanel;
+
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.border.MatteBorder;
+
+import java.awt.Color;
+
+import javax.swing.border.LineBorder;
+import javax.swing.JCheckBox;
+
+import Book.Book;
+import Book.Domain;
+import Controller.UserController;
+import Controller.BookController;
+import MenuGUI.LoginGUI;
+import Role.User;
+import Role.UserStatus;
+
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.spi.CalendarNameProvider;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.awt.event.ActionEvent;
+
+public class WorkersPanel extends JPanel{
+	private ArrayList<Book> Books;
+	private LoginGUI screen;
+//	private java.util.Date date;
+	
+	public WorkersPanel(LoginGUI screen,User u) {
+		setBackground(Color.WHITE);
+		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 139, 87)));
+		setPreferredSize(new Dimension(577, 138));
+		setLayout(null);
+		
+		JLabel lblWorkerID = new JLabel("Worker ID:");
+		lblWorkerID.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblWorkerID.setBounds(22, 10, 147, 20);
+		add(lblWorkerID);
+		
+		JLabel lblWorkerIDdb = new JLabel(u.getUserID());
+		lblWorkerIDdb.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblWorkerIDdb.setBounds(157, 10, 141, 20);
+		add(lblWorkerIDdb);
+		
+		JLabel lblFirstName = new JLabel("First Name:");
+		lblFirstName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblFirstName.setBounds(22, 40, 147, 20);
+		add(lblFirstName);
+		
+		JLabel lblFirstnamedb = new JLabel(u.getFirstName());
+		lblFirstnamedb.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblFirstnamedb.setBounds(157, 40, 141, 20);
+		add(lblFirstnamedb);
+		
+		JLabel lblLastName = new JLabel("Last Name:");
+		lblLastName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblLastName.setBounds(22, 70, 147, 20);
+		add(lblLastName);
+		
+		JLabel lblLastnamedb = new JLabel(u.getLastName());
+		lblLastnamedb.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblLastnamedb.setBounds(157, 70, 141, 20);
+		add(lblLastnamedb);
+		
+		String choose="";
+		switch(u.getSubscriptionRequest())
+		{
+			case UserStatus.SINGLE:
+				choose = "Single";
+				break;
+			case UserStatus.MONTHLY:
+				choose = "Monthly";
+				break;
+			case UserStatus.YEARLY:
+				choose = "Yearly";
+				break;
+		};
+		
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblEmail.setBounds(260, 10, 147, 20);
+		add(lblEmail);
+		
+		JLabel lblRole = new JLabel("Role:");
+		lblRole.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblRole.setBounds(260, 40, 147, 20);
+		add(lblRole);
+		
+		JLabel lblDepartment = new JLabel("Department:");
+		lblDepartment.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblDepartment.setBounds(22, 100, 147, 20);
+		add(lblDepartment);
+		
+		JLabel lblEmailDB = new JLabel((String) null);
+		lblEmailDB.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblEmailDB.setBounds(415, 10, 141, 20);
+		add(lblEmailDB);
+		
+		JLabel lblRoleDB = new JLabel((String) null);
+		lblRoleDB.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblRoleDB.setBounds(415, 40, 141, 20);
+		add(lblRoleDB);
+		
+		JLabel lblDepartmentDB = new JLabel((String) null);
+		lblDepartmentDB.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblDepartmentDB.setBounds(157, 100, 141, 20);
+		add(lblDepartmentDB);
+		
+			
+	}
+}
+//how to print the date right now:
+//String dateRightNow = new SimpleDateFormat("yyyy/MM/dd").format(cal.getTime());
+
+
+

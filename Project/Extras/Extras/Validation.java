@@ -58,7 +58,23 @@ public class Validation {
 		
 		return false;
 	}
+	/**
+	 * @author Almog Yamin
+	 * @param email, the input to validate
+	 * @param len ,the lenght you want to validate
+	 * @return true if contain only engish letters and the lenght is not above len.(len under 128)
+	 * @return false in any other situation  
+	 */	
+	public static boolean EmailValidation(String name) {
+		String namePattern = 	"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		Pattern pattern = Pattern.compile(namePattern);
+		Matcher matcher = pattern.matcher(name);
 
+		if (matcher.matches())
+			return true;
+		
+		return false;
+	}
 	/**
 	 * @author Kfir Girstein
 	 * @param name, the input to validate
