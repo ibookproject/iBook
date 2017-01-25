@@ -10,10 +10,12 @@ import client.DBgenericObject;
 import command.DBtranslation;
 
 public class LibraryWorker extends DBtranslation implements UserStatus {
-	private String userID;
+	private String workerID;
 	private int role;
 	private String department;
 	private String email;
+	private String firstName;
+	private String lastName;
 	
 	
 	public LibraryWorker() {
@@ -21,24 +23,42 @@ public class LibraryWorker extends DBtranslation implements UserStatus {
 	}
 	
 
-	public LibraryWorker(String userID, int role, String department, String email) {
+	public LibraryWorker(String workerID, int role, String department, String email, String firstName, String lastName) {
 		super();
-		setUserID(userID);
+		setWorkerID(workerID);
 		setDepartment(department);
 		setEmail(email);
 		setRole(role);
 		}
 
-	public String getUserID() {
-		return userID;
+	public String getWorkerID() {
+		return workerID;
 	}
 
-	public void setUserID(String userID) {
-		if (userID == null || userID.equals("") || Validation.regularValidation(userID) == false)
+	public void setWorkerID(String workerID) {
+		if (workerID == null || workerID.equals("") || Validation.regularValidation(workerID) == false)
 			throw new InputMismatchException("you have inserted wrong userName");
-		this.userID = userID;
+		this.workerID = workerID;
 	}
 
+	public String getFirstName() {
+		return department;
+	}
+
+	public void setFirstName(String firstName) {
+		if (firstName == null || firstName.equals("") || Validation.NameValidation(firstName , 20) == false)
+			throw new InputMismatchException("you have  inserted wrong firstName");
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		if (lastName == null || lastName.equals("") || Validation.NameValidation(lastName , 20) == false)
+			throw new InputMismatchException("you have  inserted wrong lastName");
+		this.lastName = lastName;
+	}
 	public String getdepartment() {
 		return department;
 	}
@@ -77,13 +97,13 @@ public class LibraryWorker extends DBtranslation implements UserStatus {
 
 	@Override
 	public String getAttributeToInsert() {
-		return "(userID,department,role,email)";
+		return "(workerID,department,firstName,lastName,role,email)";
 	}
 
 	@Override
 	public String getValToInsert() {
 		
-		return String.format("(\"%s\",\"%s\",\"%d\",\"%s\")", userID, department, role, email);
+		return String.format("(\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%s\")", workerID, department, firstName, lastName, role, email);
 	}
 
 	// convert array Which was obtained from DB to an actual User
@@ -110,11 +130,17 @@ public class LibraryWorker extends DBtranslation implements UserStatus {
 		String[] fromSentence = fromSentenceArray.split(",");
 		for (int i = 0; i < fromSentence.length; i++) {
 			switch (fromSentence[i]) {
-			case "userID":
-				recover.setUserID((String) ob.getValtoArray(i));
+			case "workerID":
+				recover.setWorkerID((String) ob.getValtoArray(i));
 				break;
 			case "department":
 				recover.setDepartment((String) ob.getValtoArray(i));
+				break;
+			case "firstName":
+				recover.setFirstName((String) ob.getValtoArray(i));
+				break;
+			case "lastName":
+				recover.setLastName((String) ob.getValtoArray(i));
 				break;
 			case "email":
 				recover.setEmail((String) ob.getValtoArray(i));
@@ -132,7 +158,7 @@ public class LibraryWorker extends DBtranslation implements UserStatus {
 
 	@Override
 	public String toString() {
-		return "User [userID=" + userID + ", department=" + department + ", email=" + email + ", role=" + role + "]";
+		return "User [workerID=" + workerID + ", department=" + department + ", email=" + email + ", role=" + role + "]";
 	}
 
 

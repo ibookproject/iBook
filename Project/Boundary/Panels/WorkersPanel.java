@@ -20,6 +20,7 @@ import Book.Domain;
 import Controller.UserController;
 import Controller.BookController;
 import MenuGUI.LoginGUI;
+import Role.LibraryWorker;
 import Role.User;
 import Role.UserStatus;
 
@@ -37,7 +38,7 @@ public class WorkersPanel extends JPanel{
 	private LoginGUI screen;
 //	private java.util.Date date;
 	
-	public WorkersPanel(LoginGUI screen,User u) {
+	public WorkersPanel(LoginGUI screen,LibraryWorker lw) {
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 139, 87)));
 		setPreferredSize(new Dimension(577, 138));
@@ -48,7 +49,7 @@ public class WorkersPanel extends JPanel{
 		lblWorkerID.setBounds(22, 10, 147, 20);
 		add(lblWorkerID);
 		
-		JLabel lblWorkerIDdb = new JLabel(u.getUserID());
+		JLabel lblWorkerIDdb = new JLabel(lw.getWorkerID());
 		lblWorkerIDdb.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblWorkerIDdb.setBounds(157, 10, 141, 20);
 		add(lblWorkerIDdb);
@@ -58,7 +59,7 @@ public class WorkersPanel extends JPanel{
 		lblFirstName.setBounds(22, 40, 147, 20);
 		add(lblFirstName);
 		
-		JLabel lblFirstnamedb = new JLabel(u.getFirstName());
+		JLabel lblFirstnamedb = new JLabel(lw.getFirstName());
 		lblFirstnamedb.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblFirstnamedb.setBounds(157, 40, 141, 20);
 		add(lblFirstnamedb);
@@ -68,22 +69,25 @@ public class WorkersPanel extends JPanel{
 		lblLastName.setBounds(22, 70, 147, 20);
 		add(lblLastName);
 		
-		JLabel lblLastnamedb = new JLabel(u.getLastName());
+		JLabel lblLastnamedb = new JLabel(lw.getLastName());
 		lblLastnamedb.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblLastnamedb.setBounds(157, 70, 141, 20);
 		add(lblLastnamedb);
 		
-		String choose="";
-		switch(u.getSubscriptionRequest())
+		String roleName="";
+		switch(lw.getRole())
 		{
-			case UserStatus.SINGLE:
-				choose = "Single";
+			case UserStatus.QUALIFIEDEDITOR:
+				roleName = "QUALIFIED EDITOR";
 				break;
-			case UserStatus.MONTHLY:
-				choose = "Monthly";
+			case UserStatus.LIBARYWORKER:
+				roleName = "LIBARY WORKER";
 				break;
-			case UserStatus.YEARLY:
-				choose = "Yearly";
+			case UserStatus.LIBRRIAN:
+				roleName = "LIBRRIAN";
+				break;
+			case UserStatus.MANAGER:
+				roleName = "MANAGER";
 				break;
 		};
 		
@@ -102,17 +106,17 @@ public class WorkersPanel extends JPanel{
 		lblDepartment.setBounds(22, 100, 147, 20);
 		add(lblDepartment);
 		
-		JLabel lblEmailDB = new JLabel((String) null);
+		JLabel lblEmailDB = new JLabel(lw.getEmail());
 		lblEmailDB.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblEmailDB.setBounds(415, 10, 141, 20);
 		add(lblEmailDB);
 		
-		JLabel lblRoleDB = new JLabel((String) null);
+		JLabel lblRoleDB = new JLabel(roleName);
 		lblRoleDB.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblRoleDB.setBounds(415, 40, 141, 20);
 		add(lblRoleDB);
 		
-		JLabel lblDepartmentDB = new JLabel((String) null);
+		JLabel lblDepartmentDB = new JLabel(lw.getdepartment());
 		lblDepartmentDB.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblDepartmentDB.setBounds(157, 100, 141, 20);
 		add(lblDepartmentDB);
