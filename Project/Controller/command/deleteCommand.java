@@ -1,20 +1,64 @@
 package command;
 
-
+/**
+*@Category
+*data base 
+*communication
+*
+*@Extends
+*Command<E>
+*
+*this class is do define the delete actions and to get the generic parameters to make 
+*a delete quary
+* @param <E>
+* the type of the entity to send,
+* the entity extend the class DBtranslation, to make the quary
+* @author
+*  kfir Girstein
+**/
 public class deleteCommand<E extends DBtranslation> extends command<E> {
 	protected String[] conditions;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * constractor with the actual object
+	 * 
+	 * @param
+	 *  table1
+	  * the actual class/table to make the quary on
+	 * @param 
+	 * condition
+	   the condition of the quary, insert the coditions of the values
+	 *  with ' && ' between the make the spcipic and oprator
+ 
+	 *  @author
+	 *   kfir Girstein
+	 */
+	public deleteCommand(E table1,String condition) {
+		super(table1);
+		conditions=condition.split(" && ");
+	}
+	
+	/**
+	 * constractor to make quary,
+	 * without specipic values
+	 *  @param condition
+	 *  the condition of the quary, insert the coditions of the values
+	 *  with ' && ' between the make the spcipic and oprator
+ 
+	 *  @author
+	 *   kfir Girstein
+	 */
+	public deleteCommand(String condition) {
+		super();
+		conditions=condition.split(" && ");
+	}
 	/**
 	 * 
+	 *  @author 
+	 *  kfir Girstein
+	 * @return
+	 * the condition of the quary in the format for SQL
 	 */
-	private static final long serialVersionUID = 1L;
-	public deleteCommand(E table1,String conds) {
-		super(table1);
-		conditions=conds.split(" && ");
-	}
-	public deleteCommand(String conds) {
-		super();
-		conditions=conds.split(" && ");
-	}
 	public String getCondition()
 	{
 		String st=new String();
