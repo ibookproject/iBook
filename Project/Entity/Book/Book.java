@@ -41,6 +41,8 @@ public class Book extends DBtranslation  {
 		setTitle(title);
 		setAuthor(author);
 	}
+	
+	
 	public Book(String title, String language, String author, String summary, int bookEnable) {
 		this(title,author);
 		setLanguage(language);
@@ -76,7 +78,11 @@ public class Book extends DBtranslation  {
 		
 	}
 	
-	
+	public Book(String title, String language, String author, String summary,String keyword,String content,float price)
+	{
+		this(title,language,author,summary,ENABLE,keyword,content,price);
+		this.numberOfOrder=0;
+	}
 	public Book(Book b)
 	{
 		this.bookID = b.getBookID();
@@ -252,14 +258,19 @@ public class Book extends DBtranslation  {
 
 //convert array Which was obtained from DB to an actual book
 //need to implement in all tables.!!!
-	
 	public static ArrayList<Book> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
 		 ArrayList<Book> convertedArr=new ArrayList<Book>();
 		 
 		 if(fromSentence.indexOf('*')>=0)
 			 for(DBgenericObject ob:arr)
 			 {
-				 convertedArr.add(new Book((int)ob.getValtoArray(0),(String)ob.getValtoArray(1),(String)ob.getValtoArray(2),(String)ob.getValtoArray(3),(String)ob.getValtoArray(4),(int)ob.getValtoArray(5)));
+				 Book temp=new Book((int)ob.getValtoArray(0),(String)ob.getValtoArray(1),(String)ob.getValtoArray(2),(String)ob.getValtoArray(3),(String)ob.getValtoArray(4),(int)ob.getValtoArray(5));
+				temp.setKeyword((String)ob.getValtoArray(6));
+				temp.setContent((String)ob.getValtoArray(7));
+				temp.setPrice((float)ob.getValtoArray(8));
+				temp.setNumberOfOrder((long)ob.getValtoArray(9));
+				 convertedArr.add(temp);
+				 
 			 }
 		else
 		for(DBgenericObject ob:arr)

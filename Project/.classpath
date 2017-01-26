@@ -8,8 +8,8 @@
 	<classpathentry kind="src" path="Entity"/>
 	<classpathentry kind="src" path="src/images"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/hensaada/git/iBookc/Project/Jars/fitlibraryRunner.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hensaada/git/iBookc/Project/Jars/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hensaada/git/iBookc/Project/Jars/mysql-connector-java-3.1.11-bin.jar"/>
+	<classpathentry kind="lib" path="Jars/fitlibraryRunner.jar"/>
+	<classpathentry kind="lib" path="Jars/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="Jars/mysql-connector-java-3.1.11-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
