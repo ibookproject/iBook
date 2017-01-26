@@ -16,7 +16,10 @@ import Panels.BookPanel;
 import Role.User;
 import client.DBgenericObject;
 import command.showAllCommand;
-
+/**
+ * The class take care of the show of the results of search book window 
+ * @author  Coral Carmeli
+ */
 public class SearchBook extends JPanel {
 
 
@@ -30,19 +33,23 @@ public class SearchBook extends JPanel {
 	private JScrollPane scrollPaneMain;
 	private int userPrivelege=0;
 	private User u;
-
-	public SearchBook(LoginGUI screen,ArrayList<Book> books) {
+	/**
+	 * Constructor of the SearchBook class
+	 * @param screen This is the main window-login
+	 * @param list is an array list of books which send to the class to initialize the window with the results of the search
+	 * @author  Coral Carmeli
+	 */	
+	public SearchBook(LoginGUI screen,ArrayList<Book> list) {
 		super();
 		setForeground(Color.LIGHT_GRAY);
 		this.screen=screen;
 		initialize();
 	}
 	/**
-	 * 
+	 *@return void
+	 *@param no parameters 
 	 *@author CoralCarmeli
-	 *@return nothing
-	 *@param nothing 
-	 *initialize the SearchBook
+	 * This method initialize The window of search book window-put the list on the screen 
 	 **/
 	private void initialize()
 	{
@@ -75,7 +82,11 @@ public class SearchBook extends JPanel {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 	}
-
+/**
+ * @param list is an array list of books which send to the class to initialize the window with the results of the search
+ * @return void
+ * @author Coral Carmeli
+ */
 	public void setList(ArrayList<Book> list)
 	{	
 		this.searchRes=list;

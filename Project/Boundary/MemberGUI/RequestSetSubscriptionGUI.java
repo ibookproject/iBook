@@ -25,13 +25,13 @@ import javax.swing.border.MatteBorder;
 import javax.swing.SwingConstants;
 
 
-
+/**
+ * @author  Sagi Entenberg
+ * The class show the user 3 options to choose a kind of subscription and when he choose the request send to autorize
+ */
 
 public class RequestSetSubscriptionGUI extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
 	private int radioButtonChoose = 0;// integer to sent what the radio button
@@ -39,7 +39,11 @@ public class RequestSetSubscriptionGUI extends JPanel {
 	private JPanel pann;
 	private JLabel lblFinishSubscriptionDate;
 	private ArrayList<User> temp;
-	
+	/**
+	 * Constructor of the RequestSetSubscriptionGUI class
+	 * @param screen This is the main window-login
+	 * @author  Sagi Entenberg
+	 */	
 	public RequestSetSubscriptionGUI(LoginGUI screen) {
 		super();
 		this.screen = screen;
@@ -48,7 +52,8 @@ public class RequestSetSubscriptionGUI extends JPanel {
 	}
 
 	/**
-	 * This method initializes StudentForm
+	 * This method initialize The window of request to set subscription-put the components on the screen and set their functionality
+	 * @author Sagi Entenberg
 	 */
 	private void initialize() {
 		
@@ -100,6 +105,15 @@ public class RequestSetSubscriptionGUI extends JPanel {
 		group.add(rdbtnMonthly);
 		group.add(rdbtnYearly);
 		User u = new User(screen.getTempID());
+		
+		
+		/**
+		 * This button is the 'send request' button- when the user choose the kind of subscription he want he press on this button and the
+		 * action is to first,check what kind is chose and according to the details of the user-the action update the 
+		 * requested subscription.
+		 * @author   Sagi Entenberg
+		 * 
+		 */	
 		JButton btnSendRequest = new JButton("Send Request");
 		btnSendRequest.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
 		btnSendRequest.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -184,7 +198,12 @@ public class RequestSetSubscriptionGUI extends JPanel {
 		btnBorderButtonYearly.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
 		btnBorderButtonYearly.setBounds(568, 209, 209, 73);
 		add(btnBorderButtonYearly);
-		
+		/**
+		 * This label is the lblFinishSubscriptionDate label- when the user wants to get to this window and he already have a subscription
+		 * The label show him he already have one. 
+		 * @author Sagi Entenberg
+		 * 
+		 */	
 		lblFinishSubscriptionDate = new JLabel("");
 		temp = UserController.SearchUser("subscriptionMethod,finishDateOfSubscription", u, "userID=\"" + screen.getTempID() + "\"", screen.getClient());
 		if(temp.get(0).getSubscriptionMethod() != 0)

@@ -47,15 +47,29 @@ public class BookPanel extends JPanel{
 	private JButton btnAddToCart;
 	private JTextArea textAreaSummary;
 	private ArrayList<Cart> carts;
+
 	
-	
+	/**
+	 * This is the constructor of the class BookPanel-put the components on the screen and set their functionality
+	 * @param screen This is the main window-login
+	 * @param b is the Book which the panel shown his details
+	 * @param pan is the previous window of the search
+	 * @param User is the permission of the user-if above or equal 2 its means the user is a reader and can see the buttons-'Post review' 
+	 * and 'add to cart'
+	 * @author  Coral Carmeli
+	 */
 	public BookPanel(LoginGUI screen,Book b,SearchBook pan,int User) {
 		pann=pan;
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(51, 102, 204)));
 		setPreferredSize(new Dimension(731, 212));
 		setLayout(null);
-		
+		/**
+		 * This button is the Post Review button- when the user press on him he goes to a window there 
+		 * he can ass a new review for the specific book
+		 * @author  Coral Carmeli
+		 * 
+		 */	
 		if(User>=2)
 		{
 		btnPostReview = new JButton("Post Review");
@@ -74,10 +88,14 @@ public class BookPanel extends JPanel{
 		});
 		btnPostReview.setBounds(601, 120, 117, 23);
 		add(btnPostReview);
+		
+		
+		
 		/**
-		 * @author Coral Carmeli
-		 * This Button 'Add to cart' insert a new record to the table 'Cart' according user ID and requested Book		
+		 * This Button 'Add to cart' insert a new record to the table 'Cart' according user ID and requested Book	
+		 * @author Coral Carmeli	
 		 */
+		
 		btnAddToCart = new JButton("Add to Cart");
 		btnAddToCart.setBounds(601, 156, 117, 25);
 		
@@ -90,39 +108,11 @@ public class BookPanel extends JPanel{
 		carts=new ArrayList<Cart>();
 		carts=CartController.SearchCart("userID,bookID,buyDate", c, "userID=\""+screen.getTempID()+"\" && bookID=\""+b.getBookID()+"\" && buyDate=\""+timeRightNow+"\"", screen.getClient());
 		if(carts==null||carts.isEmpty())
-		{
 			add(btnAddToCart);
-		}
-		
-		
 		
 		btnAddToCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-			/*	Calendar time = Calendar.getInstance();
-		        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
-				
-				System.out.println("The date is:"+timeRightNow);	
-				Cart c=new Cart();
-				ArrayList<Cart> carts=new ArrayList<Cart>();
-				carts=CartController.SearchCart("userID", c, "userID=\""+screen.getTempID()+"\" && bookID=\""+b.getBookID()+"\" && buyDate=\""+timeRightNow+"\"", screen.getClient());
-				if(carts==null||carts.isEmpty())
-				{
-					if((CartController.AddToCart(new Cart(screen.getTempID(),b.getBookID(),0,timeRightNow), screen.getClient()))==true)
-						JOptionPane.showMessageDialog(screen,"Add new Record to The Cart Done! ", "",JOptionPane.INFORMATION_MESSAGE);
-					else
-						JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed!", "Warning",JOptionPane.WARNING_MESSAGE);
-				}
-				else
-				{
-					btnAddToCart.setEnabled(false);
-					btnAddToCart.setText("Already in cart");
-					JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed-There is allready this book for this user!", "Warning",JOptionPane.WARNING_MESSAGE);
-			
-				}*/
-				
-				/*if(carts==null||carts.isEmpty())
-				{*/
 					if((CartController.AddToCart(new Cart(screen.getTempID(),b.getBookID(),0,timeRightNow), screen.getClient()))==true)
 					{
 						JOptionPane.showMessageDialog(screen,"Add new Record to The Cart Done! ", "",JOptionPane.INFORMATION_MESSAGE);
@@ -130,18 +120,10 @@ public class BookPanel extends JPanel{
 					}
 					else
 						JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed!", "Warning",JOptionPane.WARNING_MESSAGE);
-				/*}
-				else
-				{
-					btnAddToCart.setEnabled(false);
-					btnAddToCart.setText("Already in cart");
-					JOptionPane.showMessageDialog(screen,"The insert of a new record to the Cart was failed-There is allready this book for this user!", "Warning",JOptionPane.WARNING_MESSAGE);
-			
-				}*/
+				
 					pann.updateUI();
 			}
 		});
-		//add(btnAddToCart);
 		}
 		lblLanguage = new JLabel("Language:");
 		lblLanguage.setFont(new Font("VAGRounded BT", Font.BOLD, 21));

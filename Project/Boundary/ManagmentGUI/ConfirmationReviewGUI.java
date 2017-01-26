@@ -44,11 +44,9 @@ import javax.swing.border.MatteBorder;
 import client.DBgenericObject;
 
 /**
- * @author  Coral Carmeli
- * 
- * The class take care of the confirm of the review- where the review status=0 its needed to 
+ * The class take care of the Confirmation of the review- where the review status=0 its needed to 
  * confirm/not confirm(Qualified Editor) or remove Part of Review(Librarian/Library manager)
- * 
+ * @author  Coral Carmeli
  */
 public class ConfirmationReviewGUI extends JPanel {
 
@@ -65,7 +63,12 @@ public class ConfirmationReviewGUI extends JPanel {
 	private JScrollPane scrollPaneMain;
 	private JPanel panel;
 	private ArrayList<ReviewPanel> reviewPanels;
-	
+/**
+ * Constructor of the ConfirmationReviewGUI class
+ * @param screen This is the main window-login
+ * @param permission This is flag which decide who is the user right now-check if this is qualified editor or librarian 
+ * @author  Coral Carmeli
+ */	
 	
 	public ConfirmationReviewGUI(LoginGUI screen,int permission) {
 		super();
@@ -74,7 +77,10 @@ public class ConfirmationReviewGUI extends JPanel {
 		this.Permission=permission;
 		initialize();
 	}
-
+	/**
+	 * This method initialize The window of confirmation review-put the components on the screen and set their functionality
+	 * @author  Coral Carmeli
+	 */
 	private void initialize() {
 		
 		this.setSize(850, 625);
@@ -118,7 +124,12 @@ public class ConfirmationReviewGUI extends JPanel {
 			panel.removeAll();
 			JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
 		}
-		
+		/**
+		 * This button is the NOT confirm button- when the user choose the review that he want to NOT confirm- he press on this button 
+		 * and the functionality of this is to remove the review from the list.
+		 * @author  Coral Carmeli
+		 * 
+		 */		
 		btnNotConfirm = new JButton("Not Confirm");
 		btnNotConfirm.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNotConfirm.setBounds(477, 544, 152, 30);
@@ -157,7 +168,12 @@ public class ConfirmationReviewGUI extends JPanel {
 			}
 		});
 		add(btnNotConfirm);
-		
+		/**
+		 * This button is the Confirm button- when the user choose the review that he want confirm- he press on this button 
+		 * and the functionality of this is to Change the review status to 1.
+		 * @author  Coral Carmeli
+		 * 
+		 */	
 		btnConfirm = new JButton("Confirm");
 		btnConfirm.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnConfirm.addActionListener(new ActionListener() 
@@ -181,15 +197,11 @@ public class ConfirmationReviewGUI extends JPanel {
 						panel.removeAll();
 						showReviews();
 						panel.updateUI();
-						
 						JOptionPane.showMessageDialog(screen,"The review was Confirmed\n", "Success",JOptionPane.INFORMATION_MESSAGE);	
-					//	
-						
-							
-						} catch (SQLException e1) {
+						} 
+						catch (SQLException e1) {
 							panel.removeAll();
 							JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
-							
 						}
 					}
 					
@@ -206,7 +218,8 @@ public class ConfirmationReviewGUI extends JPanel {
 	/**
 	 * @author  Coral Carmeli
 	 * @param no parameters
-	 * Show the reviews which the review status=0 
+	 * @throws SQLException
+	 * Show the reviews where the review status=0 
 	 */
 	public void showReviews() throws SQLException
 	{
@@ -215,8 +228,6 @@ public class ConfirmationReviewGUI extends JPanel {
 		if((joinAnswerReviewBook==null)||(joinAnswerReviewBook.isEmpty()))
 		{
 			panel.removeAll();
-	
-		
 			JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
 		}
 			

@@ -4,14 +4,11 @@ import java.awt.Font;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
-
 import Book.Book;
 import Book.Review;
 import Controller.ReviewController;
@@ -21,14 +18,10 @@ import MenuGUI.LoginGUI;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
@@ -37,10 +30,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.UIManager;
-
-
-
-
+/**
+ * The class take care of the request post and fill the review- when the user wants to post a new review he comes to this window-
+ * wrote his review and post this with the day of today-default
+ * @author Sagi Entenberg
+ */
 public class RequestPostFillReviewGUI extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
@@ -52,6 +46,14 @@ public class RequestPostFillReviewGUI extends JPanel
 	private Date date;
 	private SearchBook pan;
 	private int conterOfText;
+	
+	/**
+	 * The constructor of RequestPostFillReviewGUI
+	 * @param screen This is the main window-login
+	 * @param bookId this is the ID of the specific book of the review the user want to post 
+	 * @param sp this is the previous window which the user needs to return
+	 * @author Sagi Entenberg
+	 */
 	public RequestPostFillReviewGUI(LoginGUI screen,int bookId,SearchBook sp) {
 		super();
 		bookID=bookId;
@@ -61,6 +63,12 @@ public class RequestPostFillReviewGUI extends JPanel
 		this.screen=screen;
 		initialize();
 	}
+	/**
+	 * @param no parameters
+	 * @return void
+	 * This method initialize The window of RequestPostFillReviewGUI-put the components on the screen and set their functionality
+	 * @author Sagi Entenberg
+	 */
 
 	private void initialize() 
 	{	
@@ -108,7 +116,11 @@ public class RequestPostFillReviewGUI extends JPanel
 		add(textFieldReviewDate);
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd"); 
 		date = new Date(txtDate);
-			
+		
+		/**
+		 * This is the text area where the user needs to insert the content of his new review
+		 */
+		
 		JTextArea textAreaReviewContent = new JTextArea();
 		textAreaReviewContent.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
 		textAreaReviewContent.setLineWrap(true);
@@ -165,6 +177,13 @@ public class RequestPostFillReviewGUI extends JPanel
 		});
 		textAreaReviewContent.setBounds(263, 263, 431, 233);
 		add(textAreaReviewContent);
+		
+		/**
+		 * This button is the 'post' button- when the user press, there is some input valdition and than if its OK-
+		 * insert the new review to DB
+		 * @author Sagi Entenberg
+		 * 
+		 */	
 		
 		JButton btnPost = new JButton("Post");
 		btnPost.setFont(new Font("Tahoma", Font.BOLD, 18));

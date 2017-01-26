@@ -1,10 +1,5 @@
 package Panels;
 
-/**
- * 
- * @author Coral Carmeli
- * This panel presents the details of the review in the method 'Confirmation Review'
- */
 import javax.swing.JPanel;
 
 import java.awt.Dimension;
@@ -25,6 +20,7 @@ import Book.Book;
 import Book.Domain;
 import Book.Review;
 import Controller.BookController;
+import ManagmentGUI.ConfirmationReviewGUI;
 import ManagmentGUI.RemovePartReviewGUI;
 import MenuGUI.LoginGUI;
 
@@ -41,7 +37,10 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.CompoundBorder;
 
 import client.DBgenericObject;
-
+/**
+ * @author Coral Carmeli
+ * This panel presents the details of the review in the method 'Confirmation Review'
+ */
 public class ReviewPanel extends JPanel{
 	
 	private LoginGUI screen;
@@ -56,6 +55,7 @@ public class ReviewPanel extends JPanel{
 	private int reviewId;
 	private int Permission;
 	private JPanel pann;
+	private ConfirmationReviewGUI crg;
 	
 	public ReviewPanel(LoginGUI screen,int reviewID,String reviewContent,String bookTitle,int permission,JPanel pan,String reviewDate) {
 		setBackground(Color.WHITE);
@@ -109,6 +109,8 @@ public class ReviewPanel extends JPanel{
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
+					//crg=new ConfirmationReviewGUI(screen, Permission);
+					
 					screen.setContentPane(pann);
 				}
 			});

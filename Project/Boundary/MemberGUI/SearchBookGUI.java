@@ -36,9 +36,11 @@ import java.awt.event.ItemListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 /**
- * @author  Coral Carmel
- * The class responsible to the search book of the user
+ * The class take care of the Search book functionality- after the user insert the details he want search according to them-
+ * the method gather all the information and do the requested manipultions to give the user the requested results.
+ * @author  Coral Carmeli
  */
 public class SearchBookGUI extends JPanel {
 
@@ -73,7 +75,11 @@ public class SearchBookGUI extends JPanel {
 	private ArrayList<Book> temp1 = null;	
 	private ArrayList<Book> temp2 = null;
 	private ArrayList<Book> temp3 = null;
-
+	/**
+	 * Constructor of the SearchBookGUI class
+	 * @param screen This is the main window-login
+	 * @author  Coral Carmeli
+	 */	
 	public SearchBookGUI(LoginGUI screen) {
 		super();
 		this.screen = screen;
@@ -81,9 +87,8 @@ public class SearchBookGUI extends JPanel {
 		initialize();	
 	}
 	/**
+	 * This method initialize The window of search book-puts the components on the screen and set their functionality
 	 * @author  Coral Carmeli
-	 * The method initialize the window of search
-	 * 
 	 */
 	private void initialize() {
 
@@ -180,10 +185,14 @@ public class SearchBookGUI extends JPanel {
 		textFieldLanguage.setColumns(10);
 		
 		/**
-		 * @author  Coral Carmeli
-		 * 
-		 * The button "search" responsible on the functionality of the method
-		 * The logic of the search is in this listener
+		 * The button 'search' responsible on the functionality of the method
+		 * The logic of the search is in this listener.
+		 * first,the action check if one of the check boxs are chose and if not show an error message.
+		 * next, the action notice who of the first 5 check box is chosen and compose some condition.
+		 * according to the check box selectedd- the condition gather togheter with some intersections if needed.
+		 * finally-the method show the user the requested search.
+		 * @author Coral Carmeli
+		 * @author Almog Yamin
 		 */
 		ArrayList<Book> bookss=new ArrayList<Book>();
 		btnSearch = new JButton("Search");
@@ -276,20 +285,6 @@ public class SearchBookGUI extends JPanel {
 							flagIsEmpty = 1;
 						else
 						{
-								/*Book b2=new Book();
-								ArrayList<Book> bookKeywords=BookController.SearchBook("bookID,title,language,author,summary,content,keyword,price", b2, "bookEnable=\""+1+"\"", screen.getClient());
-								if(bookKeywords!=null)
-								{
-									bookKeywordsChoose = new ArrayList<Book> ();
-									for(Book b1:bookKeywords)
-										for(int i=0;i<b1.getKeyword().length;i++)//
-											if(textFieldKeywords.getText().equalsIgnoreCase(b1.getKeyword()[i]))
-												bookKeywordsChoose.add(b1);	
-									if(bookKeywordsChoose.isEmpty())
-										flagNotFoundBook = 1;
-								}
-								else
-									flagError=1;		*/
 							bookKeywordsChoose = new ArrayList<Book> ();
 							bookKeywordsChoose=BookController.searchKeywords(textFieldKeywords.getText(),screen.getClient());
 							if(bookKeywordsChoose==null)

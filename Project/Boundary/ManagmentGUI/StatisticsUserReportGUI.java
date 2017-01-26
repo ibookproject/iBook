@@ -35,10 +35,11 @@ import javax.swing.SwingConstants;
 
 
 /**
- * 
- * @author Coral Carmeli
- * Give to the manager the user statistics per ID and date
+ * The class take care of show the user statistics- The library manager first need to insert user ID and than the requested Dates.
+ * When the fields checked-the functionality of the class is to show the manager what he asked for according the specific details.
+ * @author  Coral Carmeli
  */
+
 public class StatisticsUserReportGUI extends JPanel
 {
 	private static final long serialVersionUID = 1L;
@@ -53,7 +54,11 @@ public class StatisticsUserReportGUI extends JPanel
 	private JScrollPane scrollPaneMain;
 	private JPanel panel;
 	private JTextField txtFromDate;
-	
+	/**
+	 * Constructor of the StatisticsUserReportGUI class
+	 * @param screen This is the main window-login
+	 * @author  Coral Carmeli
+	 */		
 	public StatisticsUserReportGUI(LoginGUI screen) 
 	{
 		super();
@@ -62,9 +67,9 @@ public class StatisticsUserReportGUI extends JPanel
 	}
 	/**
 	 * @author Coral Carmeli
-	 * @param null
+	 * @param no parameters
 	 * @return void
-	 * The method initialize the window of user statistics		
+	 * This method initialize The window of StatisticsUserReportGUI-put the components on the screen and set their functionality	
 	 */
 
 	private void initialize() 
@@ -122,7 +127,11 @@ public class StatisticsUserReportGUI extends JPanel
 		txtFromDate.setBounds(320, 181, 116, 30);
 		add(txtFromDate);
 		txtFromDate.setColumns(10);
-		
+		/**
+		 * This button is the Choose date button- when the user press, open to him calender which he need to choose the requested date
+		 * @author  Coral Carmeli
+		 * 
+		 */	
 		JButton btnChooseFromDate = new JButton("Choose Date");
 		btnChooseFromDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnChooseFromDate.addActionListener(new ActionListener() 
@@ -138,7 +147,12 @@ public class StatisticsUserReportGUI extends JPanel
 		});
 		btnChooseFromDate.setBounds(435, 181, 143, 30);
 		add(btnChooseFromDate);
-		
+		/**
+		 * This button is the get report button- when the user press, after the input validation the action is to show to the user
+		 * The requested details on the user,according the specific date he chose.
+		 * @author  Coral Carmeli
+		 * 
+		 */	
 	
 		btnGetReports = new JButton("Get report");
 		btnGetReports.setFont(new Font("Tahoma", Font.BOLD, 16));

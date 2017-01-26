@@ -23,7 +23,6 @@ import javax.swing.JRadioButton;
 
 /**
  * @author  Coral Carmeli
- * 
  * The class show the library manager the rate of the book according two options- 
  * 1.Absolute rate is against all the books in the library .
  * 2.Proportion rate is against the all books in the same domain.
@@ -46,7 +45,11 @@ public class BookRateGUI extends JPanel {
 	private JComboBox comboBoxChooseBook;
 	private JRadioButton rdbtnAbsoluteRate;
 	private JRadioButton rdbtnProportionRate ;
-
+	/**
+	 * Constructor of the BookRateGUI class
+	 * @param screen This is the main window-login
+	 * @author  Coral Carmeli
+	 */	
 	public BookRateGUI(LoginGUI screen) {
 		super();
 		this.screen=screen;
@@ -54,7 +57,10 @@ public class BookRateGUI extends JPanel {
 		pann=this;
 		initialize();
 	}
-	
+	/**
+	 * This method initialize The window of Book Rate-put the components on the screen and set their functionality
+	 * @author  Coral Carmeli
+	 */
 	private void initialize() {
 
 		this.setSize(850, 625);
@@ -121,7 +127,12 @@ public class BookRateGUI extends JPanel {
 		});
 		comboBoxChooseBook.setBounds(225, 141, 412, 30);
 		add(comboBoxChooseBook);
-		
+		/**
+		 * This button is the search button- The user need first to choose the book he wants to get a rate on him.
+		 * The functionality of the button- first check the input-if the fields are empty,if not-check what
+		 *  the user insert and do the search according that.
+		 * @author  Coral Carmeli
+		 */	
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSearch.addActionListener(new ActionListener() {
@@ -159,7 +170,11 @@ public class BookRateGUI extends JPanel {
 			}); 
 		btnSearch.setBounds(687, 90, 89, 30);
 		add(btnSearch);
-		
+		/**
+		 * This button is the Select button- next,after the search-the user need to choose the kind of the rate and than when the 'select'
+		 * button is pressed- the action is: check what is checked and show the specific details to the user.
+		 * @author  Coral Carmeli
+		 */	
 		JButton btnSelect = new JButton("Select");
 		btnSelect.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSelect.addActionListener(new ActionListener() 

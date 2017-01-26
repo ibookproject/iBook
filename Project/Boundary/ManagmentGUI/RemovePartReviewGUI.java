@@ -26,12 +26,14 @@ import MenuGUI.LoginGUI;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 
-
 /**
- * build the window of Remove Part Review
- * @author Sagi Entenberg
+ * The class take care of the Remove part of the review-only the librarian can remove part of the review before he confirm/not confirm the review.
+ * The librarian get the details of the review and update a new content.
+ * When the librarian finish the removment he set the review status to 1.
+ * @author  Sagi Entenberg
  * 
  */
+
 public class RemovePartReviewGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -42,14 +44,14 @@ public class RemovePartReviewGUI extends JPanel {
 	private int ReviewID;
 	private String oldReview = new String();
 	private int conterOfText;
+
 	/**
-	 * Remove Part Review GUI
-	 * @param screen 
-	 *  LoginGUI extends JFrame
-	 * @param reviewID
-	 * number of review ID
+	 * Constructor of the RemovePartReviewGUI class
+	 * @param screen This is the main window-login extends JFrame
+	 * @param reviewID number of review ID
+	 * @author  Sagi Entenberg
 	 * 
-	 */
+	 */	
 	public RemovePartReviewGUI(LoginGUI screen,int reviewID) {
 		super();
 		this.screen=screen;
@@ -57,7 +59,10 @@ public class RemovePartReviewGUI extends JPanel {
 		ReviewID=reviewID;
 		initialize();
 	}
-
+	/**
+	 * This method initialize The window of remove part of review-put the components on the screen and set their functionality
+	 * @author Sagi Entenberg
+	 */
 	
 	private void initialize() {
 		

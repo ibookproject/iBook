@@ -20,7 +20,9 @@ import MenuGUI.LoginGUI;
 import javax.swing.SwingConstants;
 
 /**
- * Temporary Remove Book GUI
+ * Temporary Remove Book GUI - this class is take care of hiding temporary the book  or set him available,there is a search of the book first
+ * and than if the status of the book is now 1-the button 'hide' is presented to the user and if the status of the book is now 0-
+ * the 'show' button presented to the user.
  * @author Sagi Entenberg
  * @author Almog Yamin
  */
@@ -48,8 +50,7 @@ public class TemporaryRemoveBookGUI extends JPanel {
 
 	/**
 	 * Constructor
-	 * @param screen
-	 * LoginGUI extends JFram to build the panel
+	 * @param screen This is the main window-login extends JFrame
 	 * 
 	 */
 	public TemporaryRemoveBookGUI(LoginGUI screen) {
@@ -61,6 +62,12 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		initialize();
 	}
 
+/**
+ * @author  Sagi Entenberg
+ * @param no parameters
+ * @return void
+ * This method initialize The window of TemporaryRemoveBookGUI-put the components on the screen and set their functionality	
+ */
 	
 	private void initialize() {
 
@@ -115,6 +122,14 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		comboBoxOfBooks.setBounds(387, 125, 441, 39);
 		add(comboBoxOfBooks);
 
+		
+		/**
+		 * This button is the 'hide' button- when the user press,the status of the book is 
+		 * set to 0 which say that the book is temporary not availabe
+		 * @author Sagi Entenberg
+		 * 
+		 */	
+		
 		btnHide = new JButton("Hide");
 		btnHide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,6 +147,13 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		btnHide.setBounds(242, 505, 127, 49);
 		add(btnHide);
 
+		/**
+		 * This button is the 'show' button- when the user press,the status of the book is 
+		 * set to 1 which say that the book is now availabe
+		 * @author  Almog Yamin
+		 * 
+		 */	
+		
 		btnShow = new JButton("Show");
 		btnShow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,6 +170,11 @@ public class TemporaryRemoveBookGUI extends JPanel {
 		btnShow.setBounds(515, 505, 127, 49);
 		add(btnShow);
 
+		/**
+		 * This button is the 'search' button- when the user press, this is the search of the book
+		 * @author Sagi Entenberg
+		 * 
+		 */	
 		btnSearch = new JButton("Search");
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSearch.addActionListener(new ActionListener() {
