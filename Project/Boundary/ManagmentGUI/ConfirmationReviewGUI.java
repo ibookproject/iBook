@@ -140,9 +140,11 @@ public class ConfirmationReviewGUI extends JPanel {
 					if(flagReviewChoose==1)
 					{
 						JOptionPane.showMessageDialog(screen,"The review was Not confirmed\n", "Warning",JOptionPane.WARNING_MESSAGE);	
-						panel.removeAll();
 						try {
+							panel.removeAll();
 							showReviews();
+							panel.updateUI();
+							
 						} catch (SQLException e1) {
 							panel.removeAll();
 							JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -169,17 +171,21 @@ public class ConfirmationReviewGUI extends JPanel {
 					{
 						if(rp.getchbxChoose()==1)
 						{	
-							ReviewController.UpdateReviewContent(r,"reviewStatus=\""+1+"\"","reviewID=\""+rp.getReviewId()+"\"" ,screen.getClient());/*needs to update the reviewStatus not content!*/
+							ReviewController.UpdateReviewContent(r,"reviewStatus=\""+1+"\"","reviewID=\""+rp.getReviewId()+"\"" ,screen.getClient());
 							flagReviewChoose=1;
 						}
 					}
 					if(flagReviewChoose==1)
 					{
-						JOptionPane.showMessageDialog(screen,"The review was Confirmed\n", "Success",JOptionPane.INFORMATION_MESSAGE);	
-						//panel.updateUI();
-						panel.removeAll();
 						try {
-							showReviews();
+						panel.removeAll();
+						showReviews();
+						panel.updateUI();
+						
+						JOptionPane.showMessageDialog(screen,"The review was Confirmed\n", "Success",JOptionPane.INFORMATION_MESSAGE);	
+					//	
+						
+							
 						} catch (SQLException e1) {
 							panel.removeAll();
 							JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -208,8 +214,9 @@ public class ConfirmationReviewGUI extends JPanel {
 		joinAnswerReviewBook = ReviewController.searchJoinReviewBook(screen.getClient());
 		if((joinAnswerReviewBook==null)||(joinAnswerReviewBook.isEmpty()))
 		{
-			panel.updateUI();
-			//panel.removeAll();
+			panel.removeAll();
+	
+		
 			JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
 		}
 			
@@ -221,7 +228,7 @@ public class ConfirmationReviewGUI extends JPanel {
 			for(int i=0;i<joinAnswerReviewBook.size();i++)
 			{
 				//send to reviewPanel:reviewID,reviewContent,BookTitle,permission,pann,ReviewDate
-			
+				panel.updateUI();
 				Date d = (Date)(joinAnswerReviewBook.get(i).getValtoArray(3));
 				String txtDate = new SimpleDateFormat("dd/MM/yyyy").format(d);
 					reviewPanels.add(new ReviewPanel(this.screen,(int)joinAnswerReviewBook.get(i).getValtoArray(1),(String)joinAnswerReviewBook.get(i).getValtoArray(2),(String)joinAnswerReviewBook.get(i).getValtoArray(4),Permission,pann,txtDate));	
