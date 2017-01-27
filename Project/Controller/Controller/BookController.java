@@ -35,12 +35,17 @@ import Panels.BookPerCart;
 public class BookController {
 
 	/**
+	 * This method do search book according the condition sentence which sent to her.
+	 * The method return the list of books she found according the 'Where' sentence.
 	 * @author Coral Carmeli
-	 * @param  
-	 * fromSentence(String),Book,condition(String ),client
+	 * @param fromSentence is the parameters we want to get details on him(Select)
+	 * @param book is just a kind of book to get the name of the table
+	 * @param condition this is the 'Where' sentence  we search according to him
+	 * @param client the current client that ask the query
 	 * @return 
 	 * The Array list of books according the search query the user sends(with the conditions of-select,from and where)
 	 */
+
 	public static ArrayList<Book> SearchBook(String fromSentence,Book book,String condition,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
@@ -62,9 +67,12 @@ public class BookController {
 		}
 	}
 	/**
+	 * This method search book in the table searchToBook according the specifec conditions and return the search results
 	 * @author Almog Yamin
-	 * @param  
-	 * fromSentence(String),SearchToBook,condition(String ),client
+	 * @param fromSentence is the parameters we want to get details on him(Select)
+	 * @param btb  is just a kind of book to get the name of the table
+	 * @param condition this is the 'Where' sentence  we search according to him
+	 * @param client the current client that ask the query
 	 * @return 
 	 * The Array list of SearchToBook according the search query the user sends(with the conditions of-select,from and where)
 	 */
@@ -190,7 +198,13 @@ public class BookController {
 			}
 			return true;	// means the user add successful	
 	}
-
+	/**
+	 * This method search the books with the keywords which sent to the search
+	 * @param g is the keyword we want to search
+	 * @param client the current client that ask the query
+	 * @return ArrayList<Book> which is the Books with the keyword that was sent to method
+	 * @author Coral Carmeli
+	 */
 	public static ArrayList<Book> searchKeywords(String g,DBSQLhandler client)
 	{
 		ArrayList<Book> bookKeywordsChoose=new ArrayList<Book>();
@@ -246,6 +260,8 @@ public class BookController {
 		}
 	}
 	/**
+	 * This comparator is used in the user statistics method in the absolute rate-with this comparator we
+	 *  sort the array of books according the number of orders
 	 * @author Coral Carmeli
 	 * @param not get
 	 * @return the array list sorted according the Comparator logic(number of orders of the book  with Book sent)
@@ -262,8 +278,10 @@ public class BookController {
 		}
 	};
 	/**
+	 * This comparator is used in the user statistics method in the propotion rate-with this comparator we sort 
+	 * the array of books according the number of orders
 	 * @author Coral Carmeli
-	 * @param not get
+	 * @param no parameters
 	 * @return the array list sorted according the Comparator logic(number of orders of the book but with generic object sent)
 	 */
 	public static Comparator<DBgenericObject> numOfOrdersCompare = new Comparator<DBgenericObject>() {
@@ -278,10 +296,15 @@ public class BookController {
 			return (int) idNum2 - (int) idNum1;
 		}
 	};
+
 	/**
-	 * @author Coral Carmeli
-	 * @param bookID(integer),client,LoginGUI -screen
+	 * This method is used in the book rate method- the function get book id and return the rate of this specific book
+	 * against all the book in the inventory.
+	 * @param bookID which is the book we want to get the rate in him
+	 * @param client is the current client that ask the query
+	 * @param screen The login menu
 	 * @return the rate of the book agains all the books in the library
+	 * @author Coral Carmeli
 	 */
 	public static int absoluteBookRate(int bookID,DBSQLhandler client,LoginGUI screen)
 	{
@@ -319,10 +342,15 @@ public class BookController {
 		}
 		return rate;
 	}
+	
 	/**
-	 * @author Coral Carmeli
-	 * @param bookID(integer),client,LoginGUI -screen
+	 * This method is used in the book rate method- the function get book id and return the rate of this specific book
+	 * against all the book with the same domain.
+	 * @param bookID which is the book we want to get the rate in him
+	 * @param client is the current client that ask the query
+	 * @param screen The login menu
 	 * @return the rate of the book agains all the books in the same domain
+	 * @author Coral Carmeli
 	 */
 	public static int propotionBookRate(int bookID,DBSQLhandler client,LoginGUI screen)
 	{
@@ -376,12 +404,17 @@ public class BookController {
 		}
 		return -1;
 	}	
-	/**
-	 * @author Coral Carmeli
-	 * @param domainID(int),bookID(int),client
-	 * @return the result of the join between the 'Book' table and 'SubjectToBook' table
-	 */
 
+/**
+ * This method is used in the book rate method
+ * This method get book and domain ID's and return the result of the join between the specific tables.
+ * @param domainID this is the domain we want to get the book for him
+ * @param bookID is the book we want to do join according to him
+ * @param client is the current client that ask the query
+ * @return the result of the join between the 'Book' table and 'SubjectToBook' table
+ * @throws SQLException
+ * @author Coral Carmeli
+ */
 	public static ArrayList<DBgenericObject> searchJoinSubjectBook(int domainID,int bookID,DBSQLhandler client) throws SQLException
 	{
 		Book b=new Book();
@@ -391,7 +424,7 @@ public class BookController {
 		//the first object is the assosiation class and the second is to join with
 		temp.add(new joinObject(s.getClassName(), b.getClassName(), "bookID"));
 		
-		client.joinSearchInDB(new joinCommand<SubjectToBook>("book.bookID,book.numberOfOrder,SubjectToBook.domainID",s,temp,"SubjectToBook.domainID=\""+domainID +"\""/*+" && "+"SubjectToBook.bookID=\"" +bookID+ "\""*/));
+		client.joinSearchInDB(new joinCommand<SubjectToBook>("book.bookID,book.numberOfOrder,SubjectToBook.domainID",s,temp,"SubjectToBook.domainID=\""+domainID +"\""));
 		while(!	client.GetGotMessag()){//search book in db
 			try{
 			Thread.sleep(10);
