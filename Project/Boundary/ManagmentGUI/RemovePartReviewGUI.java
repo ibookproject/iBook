@@ -80,12 +80,12 @@ public class RemovePartReviewGUI extends JPanel {
 		Counterlabel.setBounds(704, 450, 41, 23);
 		add(Counterlabel);
 		 btnBack = new JButton(backIcon);
-		 btnBack.setBounds(39, 52, 89, 23);
+		 btnBack.setBounds(35, 25, 89, 30);
 		 add(btnBack);
 		 
 		 JLabel lblRemovePartOf = new JLabel("REMOVE PART OF REVIEW");
-		 lblRemovePartOf.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
-		 lblRemovePartOf.setBounds(252, 79, 304, 57);
+		 lblRemovePartOf.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		 lblRemovePartOf.setBounds(288, 40, 291, 40);
 		 add(lblRemovePartOf);
 		 
 		 JTextArea textReview = new JTextArea();
@@ -152,7 +152,7 @@ public class RemovePartReviewGUI extends JPanel {
 		 JButton btnSubmit = new JButton("Submit");
 		 btnSubmit.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 191, 255)));
 		 btnSubmit.setFont(new Font("Tahoma", Font.BOLD, 16));
-		 btnSubmit.setBounds(369, 517, 106, 37);
+		 btnSubmit.setBounds(369, 517, 106, 30);
 		 add(btnSubmit);
 		 
 		 JButton button = new JButton("");

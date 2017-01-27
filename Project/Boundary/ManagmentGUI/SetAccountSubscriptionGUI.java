@@ -68,7 +68,7 @@ public class SetAccountSubscriptionGUI extends JPanel {
 
 		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(25, 35, 89, 30);
 		add(btnBack);
 
 		// Group the radio buttons.
