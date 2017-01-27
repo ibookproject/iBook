@@ -53,6 +53,12 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 	private int index;
 	
 
+	/**
+	 * the class of build the panel GUI to Delete book
+	 * @param screen
+	 *  LoginGUI extends JFrame
+	 * @author Hen Saada
+	 */
 	public InventoryManagmentDeleteGUI(LoginGUI screen ) {
 		super();
 		bookId=-1;

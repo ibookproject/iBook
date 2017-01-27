@@ -62,7 +62,6 @@ public class AddOrUpdateBookGUI extends JPanel {
 	public LoginGUI screen;
 	private JPanel Mainpann;
 	private File srcfile=null;
-//	private AddFileUI af;
 	private int ISUpdateOrAdd;
 
 	/**
@@ -115,7 +114,9 @@ public class AddOrUpdateBookGUI extends JPanel {
 	/**
 	 * This method initialize The window of Add OR UPDATE book at the SAME CLASS,puts the components on the screen and set their functionality
 	 * flag that set the MODE of the page ,means if we want to use this window to add a new book we will constructor this object with ISUpdateOrAdd= 1
+	 * the user must fill all the Book Fields , by the correct Validation , and choose the file location  of the book to load to the server 
 	 * else if want  to constructor object for update MODE we will send ISUpdateOrAdd=0
+	 * the method check all input Validation and will not succeed until the user will fill all the Fields Correct.
 	 * @author  hen saada
 	 * @param null
 	 * @return null
