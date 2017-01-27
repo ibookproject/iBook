@@ -93,7 +93,7 @@ public class ConfirmationReviewGUI extends JPanel {
 				
 			}
 		});
-		btnBack.setBounds(35, 25, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 		
 		lblHeader = new JLabel("Confirmation Review");

@@ -91,7 +91,7 @@ public class AllUsersGUI extends JPanel {
 
 		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
-		btnBack.setBounds(35, 25, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 
 		JScrollPane scrollPaneMain = new JScrollPane();

@@ -75,46 +75,52 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnBack.setBounds(11, 33, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 		
 		JLabel lblSearchBookFor = new JLabel("Search Book For Update");
-		lblSearchBookFor.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblSearchBookFor.setBounds(361, 33, 195, 46);
+		lblSearchBookFor.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblSearchBookFor.setBounds(325, 40, 265, 40);
 		add(lblSearchBookFor);
 		
 		JLabel lblNameOfAuthor = new JLabel("name of author:");
-		lblNameOfAuthor.setBounds(400, 90, 89, 19);
+		lblNameOfAuthor.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNameOfAuthor.setBounds(392, 135, 140, 19);
 		add(lblNameOfAuthor);
 		
 		textFieldAutohr = new JTextField();
-		textFieldAutohr.setBounds(499, 89, 86, 20);
+		textFieldAutohr.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldAutohr.setBounds(536, 132, 150, 30);
 		add(textFieldAutohr);
 		textFieldAutohr.setColumns(10);
 		
 		JLabel lblNameOfBook = new JLabel("name of book:");
-		lblNameOfBook.setBounds(213, 94, 111, 19);
+		lblNameOfBook.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNameOfBook.setBounds(81, 135, 131, 20);
 		add(lblNameOfBook);
 		
 		textFieldBook = new JTextField();
-		textFieldBook.setBounds(300, 90, 86, 20);
+		textFieldBook.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldBook.setBounds(208, 132, 150, 30);
 		add(textFieldBook);
 		textFieldBook.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.addActionListener(new ActionListener() {
+		JComboBox comboBoxBooks = new JComboBox();
+		comboBoxBooks.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		comboBoxBooks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int index=comboBox.getSelectedIndex();
+				int index=comboBoxBooks.getSelectedIndex();
 				if (index!=-1)
 					bookId=tempBooks.get(index).getBookID();
 				else
 					bookId=-1;		 
 			}
 		});
-		comboBox.setBounds(225, 141, 412, 20);
-		add(comboBox);
+		comboBoxBooks.setBounds(226, 220, 412, 30);
+		add(comboBoxBooks);
 		
 		JButton btnSearch = new JButton("Search");
+		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			 
@@ -122,7 +128,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 	 if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty())
 			 	 {
 						JOptionPane.showMessageDialog(screen,"you must fill the name/author of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
-		 				comboBox.removeAllItems();
+		 				comboBoxBooks.removeAllItems();
 			 	 }
 				 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)
 				 	{
@@ -133,13 +139,13 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 				 		 {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 								textFieldBook.setText("");textFieldAutohr.setText("");
-				 				comboBox.removeAllItems();
+				 				comboBoxBooks.removeAllItems();
 				 		 }
 				 		 else
 				 		 {
-				 				comboBox.removeAllItems();
+				 				comboBoxBooks.removeAllItems();
 							for(int i=0;i<tempBooks.size();i++)
-								comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+								comboBoxBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 				 		 }
 				 		} else 
 				 		{
@@ -156,13 +162,13 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 		 {
 							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 							textFieldBook.setText("");textFieldAutohr.setText("");
-			 				comboBox.removeAllItems();
+			 				comboBoxBooks.removeAllItems();
 			 		 }
 			 		 else
 			 		 {
-			 			 if(comboBox.getSize() != null)	comboBox.removeAllItems();
+			 			 if(comboBoxBooks.getSize() != null)	comboBoxBooks.removeAllItems();
 			 			 	for(int i=0;i<tempBooks.size();i++)
-			 			 		comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+			 			 		comboBoxBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
 			 		}
 		 		else {JOptionPane.showMessageDialog(screen," Iligal title field! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldBook.setText("");}
@@ -177,24 +183,25 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			 		 {
 							JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 							textFieldBook.setText("");textFieldAutohr.setText("");
-			 				comboBox.removeAllItems();
+			 				comboBoxBooks.removeAllItems();
 
 			 		 }
 			 		 else
 			 		 {
-			 			 if(comboBox.getSize() != null)	comboBox.removeAllItems();
+			 			 if(comboBoxBooks.getSize() != null)	comboBoxBooks.removeAllItems();
 			 			 	for(int i=0;i<tempBooks.size();i++)
-			 			 		comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+			 			 		comboBoxBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 			 		 }
 			 		} else {JOptionPane.showMessageDialog(screen,"Iligal author field!! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldAutohr.setText("");}
 
 			 	}
 			}
 			}); 
-		btnSearch.setBounds(612, 86, 89, 23);
+		btnSearch.setBounds(704, 132, 89, 30);
 		add(btnSearch);
 		
 		JButton btnSelect = new JButton("Select");
+		btnSelect.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -213,7 +220,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 			}
 	
 		});
-		btnSelect.setBounds(377, 250, 89, 23);
+		btnSelect.setBounds(653, 220, 89, 30);
 		add(btnSelect);
 
 	}

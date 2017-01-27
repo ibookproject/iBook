@@ -32,6 +32,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
 
 
 /**
@@ -90,36 +91,42 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnBack.setBounds(11, 33, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 		
 		JLabel lblSearchBookFor = new JLabel("Delete Book");
-		lblSearchBookFor.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblSearchBookFor.setBounds(361, 33, 195, 46);
+		lblSearchBookFor.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSearchBookFor.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblSearchBookFor.setBounds(361, 40, 195, 40);
 		add(lblSearchBookFor);
 		
 		JLabel lblNameOfAuthor = new JLabel("name of author:");
-		lblNameOfAuthor.setBounds(400, 90, 89, 19);
+		lblNameOfAuthor.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNameOfAuthor.setBounds(416, 135, 140, 19);
 		add(lblNameOfAuthor);
 		
 		textFieldAutohr = new JTextField();
-		textFieldAutohr.setBounds(499, 89, 86, 20);
+		textFieldAutohr.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldAutohr.setBounds(560, 132, 150, 30);
 		add(textFieldAutohr);
 		textFieldAutohr.setColumns(10);
 		
 		JLabel lblNameOfBook = new JLabel("name of book:");
-		lblNameOfBook.setBounds(213, 94, 111, 19);
+		lblNameOfBook.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNameOfBook.setBounds(105, 135, 131, 20);
 		add(lblNameOfBook);
 		
 		textFieldBook = new JTextField();
-		textFieldBook.setBounds(300, 90, 86, 20);
+		textFieldBook.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldBook.setBounds(232, 132, 150, 30);
 		add(textFieldBook);
 		textFieldBook.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.addActionListener(new ActionListener() {
+		JComboBox comboBoxBooks = new JComboBox();
+		comboBoxBooks.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		comboBoxBooks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				index=comboBox.getSelectedIndex();
+				index=comboBoxBooks.getSelectedIndex();
 				if (index!=-1)
 					bookId=tempBooks.get(index).getBookID();
 				else
@@ -130,10 +137,11 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				 
 			}
 		});
-		comboBox.setBounds(225, 141, 412, 20);
-		add(comboBox);
+		comboBoxBooks.setBounds(250, 220, 412, 30);
+		add(comboBoxBooks);
 		
 		JButton btnSearch = new JButton("Search");
+		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 
@@ -142,7 +150,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				 	 if(textFieldAutohr.getText().isEmpty()&&textFieldBook.getText().isEmpty())
 				 	 {
 							JOptionPane.showMessageDialog(screen,"you must fill the name of the book !! ", "Warning",JOptionPane.WARNING_MESSAGE);
-			 				comboBox.removeAllItems();
+			 				comboBoxBooks.removeAllItems();
 				 	 }
 					 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)
 					 	{
@@ -153,13 +161,13 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 					 		 {
 									JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 									textFieldBook.setText("");textFieldAutohr.setText("");
-					 				comboBox.removeAllItems();
+					 				comboBoxBooks.removeAllItems();
 					 		 }
 					 		 else
 					 		 {
-					 				comboBox.removeAllItems();
+					 				comboBoxBooks.removeAllItems();
 								for(int i=0;i<tempBooks.size();i++)
-									comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+									comboBoxBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 					 		 }	 
 					 		} else 
 					 		{
@@ -176,13 +184,13 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				 		 {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 								textFieldBook.setText("");textFieldAutohr.setText("");
-				 				comboBox.removeAllItems();
+				 				comboBoxBooks.removeAllItems();
 				 		 }
 				 		 else
 				 		 {
-				 			 if(comboBox.getSize() != null)	comboBox.removeAllItems();
+				 			 if(comboBoxBooks.getSize() != null)	comboBoxBooks.removeAllItems();
 				 			 	for(int i=0;i<tempBooks.size();i++)
-				 			 		comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+				 			 		comboBoxBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 				 		 }
 				 		}
 				 		else {JOptionPane.showMessageDialog(screen," Iligal title field! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldBook.setText("");}
@@ -198,23 +206,24 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				 		 {
 								JOptionPane.showMessageDialog(screen,"no book results were found ", "Warning",JOptionPane.WARNING_MESSAGE);
 								textFieldBook.setText("");textFieldAutohr.setText("");
-				 				comboBox.removeAllItems();
+				 				comboBoxBooks.removeAllItems();
 				 		 }
 				 		 else
 				 		 {
-				 			 if(comboBox.getSize() != null)	comboBox.removeAllItems();
+				 			 if(comboBoxBooks.getSize() != null)	comboBoxBooks.removeAllItems();
 				 			 	for(int i=0;i<tempBooks.size();i++)
-				 			 		comboBox.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
+				 			 		comboBoxBooks.addItem("Name: "+tempBooks.get(i).getTitle().trim() + " , " +"Author: "+ tempBooks.get(i).getAuthor().trim());
 				 		 }
 				 		} else {JOptionPane.showMessageDialog(screen,"Iligal author field!! ", "Warning",JOptionPane.WARNING_MESSAGE);textFieldAutohr.setText("");}
 
 				 	}
 				}
 			}); 
-		btnSearch.setBounds(612, 86, 89, 23);
+		btnSearch.setBounds(733, 132, 89, 30);
 		add(btnSearch);
 		
 		JButton btnDelet = new JButton("Delete");
+		btnDelet.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnDelet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(bookId!=-1)
@@ -228,16 +237,16 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 						BookController.DeleteBook(b,"bookID=\""+bookId+"\""+ " && "+"bookEnable=\""+1+"\"",screen.getClient());
 					//	comboBox.removeAllItems();
 						tempBooks.remove(index);
-						comboBox.removeItemAt(index);
+						comboBoxBooks.removeItemAt(index);
 					}
 				}
 				else JOptionPane.showMessageDialog(screen,"there is no book to select ", "Warning",JOptionPane.WARNING_MESSAGE);
 
 			}
 		});
-		btnDelet.setBounds(377, 250, 89, 23);
+		btnDelet.setBounds(672, 220, 89, 30);
 		add(btnDelet);
-		comboBox.removeAllItems();
+		comboBoxBooks.removeAllItems();
 		
 	
 	}

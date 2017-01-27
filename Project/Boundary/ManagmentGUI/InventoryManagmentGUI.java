@@ -64,10 +64,10 @@ public class InventoryManagmentGUI extends JPanel {
 		this.setSize(850, 625);
 		this.setLayout(null);	
 		
-		JLabel lblNewLabel = new JLabel("Inventory Managment");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(355, 49, 175, 22);
-		add(lblNewLabel);
+		JLabel lblHeader = new JLabel("Inventory Managment");
+		lblHeader.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblHeader.setBounds(325, 40, 255, 40);
+		add(lblHeader);
 
 		JLabel lblinventoryGif = new JLabel("");
 		lblinventoryGif.setIcon(new ImageIcon("Extras/Images/inventory.gif"));
@@ -90,7 +90,7 @@ public class InventoryManagmentGUI extends JPanel {
 		});
 	
 		
-		btnDelete.setBounds(191, 176, 145, 30);
+		btnDelete.setBounds(191, 110, 145, 30);
 		add(btnDelete);
 		JButton btnAddupdate = new JButton("Add book");
 		btnAddupdate.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -105,11 +105,11 @@ public class InventoryManagmentGUI extends JPanel {
 				screen.setContentPane(aOu);//send to search book window
 			}
 		});
-		btnAddupdate.setBounds(366, 176, 122, 30);
+		btnAddupdate.setBounds(366, 110, 122, 30);
 		add(btnAddupdate);
 		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		 btnBack = new JButton(backIcon);
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 23);
 		add(btnBack);
 		
 		JButton btnUpdateBook = new JButton("Update book");
@@ -125,7 +125,7 @@ public class InventoryManagmentGUI extends JPanel {
 				screen.setContentPane(search);//send to search book window
 			}
 		});
-		btnUpdateBook.setBounds(512, 176, 145, 30);
+		btnUpdateBook.setBounds(512, 110, 145, 30);
 		add(btnUpdateBook);
 	
 	}

@@ -393,7 +393,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 
 			}
 		});
-		btnBack.setBounds(11, 33, 89, 23);
+		btnBack.setBounds(11, 33, 89, 30);
 		add(btnBack);
 	}
 
