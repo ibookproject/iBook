@@ -11,7 +11,10 @@ import Book.Review;
 import Controller.ReviewController;
 import MenuGUI.LoginGUI;
 import client.DBSQLhandler;
-
+/**
+ * @author Web
+ * This class create the Timer feature that we used for send a "notification" about new review request post.
+ */
 public class TimerProject {
 	
 	private LoginGUI client;

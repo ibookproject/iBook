@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.*;
-
+/**
+ * @author Web
+ * This class create the Histogram Panel feature			
+ */
 public class HistogramPanel extends JPanel
 {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int histogramHeight = 200;
     private int barWidth = 50;
@@ -136,27 +136,4 @@ public class HistogramPanel extends JPanel
         }
     }
 
- /*   private static void createAndShowGUI()
-    {
-        HistogramPanel panel = new HistogramPanel();
-        panel.addHistogramColumn("Kokoriko", 100, Color.RED);
-        panel.addHistogramColumn("B", 690, Color.YELLOW);
-        //panel.addHistogramColumn("C", 510, Color.BLUE);
-      //  panel.addHistogramColumn("D", 570, Color.ORANGE);
-      //  panel.addHistogramColumn("E", 180, Color.MAGENTA);
-        //panel.addHistogramColumn("F", 504, Color.CYAN);
-        panel.layoutHistogram();
-
-        JFrame frame = new JFrame("Histogram Panel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add( panel );
-      //  frame.setLocationByPlatform( true );
-        frame.pack();
-        frame.setVisible( true );
-    }
-
-    public static void main(String[] args)
-    {
-    	createAndShowGUI();
-    }*/
 }

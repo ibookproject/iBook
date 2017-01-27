@@ -3,7 +3,10 @@ package Extras;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
- 
+/**
+ * @author Web
+ * This class create the Calendar feature			
+ */
 //create class
 public class DatePicker 
 {
