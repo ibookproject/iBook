@@ -354,7 +354,7 @@ public class SearchReviewGUI extends JPanel {
 				}
 			}
 			}); 
-		btnSearch.setBounds(636, 109, 89, 23);
+		btnSearch.setBounds(636, 109, 89, 30);
 		add(btnSearch);
 
 		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
