@@ -145,12 +145,12 @@ public class BookRateGUI extends JPanel {
 					 
 				 	Book b = new Book();
 				 	if(textFieldBook.getText().isEmpty()==false&&textFieldAutohr.getText().isEmpty())//just title inserted
-				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim()+"%'", screen.getClient());
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim()+"%'"+" && bookEnable=\""+1+"\"", screen.getClient());
 				 	else if(textFieldBook.getText().isEmpty()&&textFieldAutohr.getText().isEmpty()==false)	//just author inserted
-				 		tempBooks = BookController.SearchBook("title,author,bookID",b,"author LIKE '%"+textFieldAutohr.getText().trim()+"%'", screen.getClient());
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b,"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+" && bookEnable=\""+1+"\"", screen.getClient());
 				 		
 				 	else if(textFieldAutohr.getText().isEmpty()==false&&textFieldBook.getText().isEmpty()==false)//the 2 fields are not empty
-				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim()+"%'" +" && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'", screen.getClient());
+				 		tempBooks = BookController.SearchBook("title,author,bookID",b, "title LIKE '%"+textFieldBook.getText().trim()+"%'" +" && "+"author LIKE '%"+textFieldAutohr.getText().trim()+"%'"+" && bookEnable=\""+1+"\"", screen.getClient());
 
 					 if(tempBooks==null)
 			 		 {

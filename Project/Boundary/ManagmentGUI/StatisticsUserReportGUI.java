@@ -164,7 +164,9 @@ public class StatisticsUserReportGUI extends JPanel
 				Cart t=new Cart();
 				if( txtFromDate.getText().isEmpty()||textFieldID.getText().isEmpty())
 					{
-					if(txtFromDate.getText().isEmpty())
+					if(txtFromDate.getText().isEmpty()&& textFieldID.getText().isEmpty())
+						JOptionPane.showMessageDialog(screen,"Please fill the fields!", "Warning",JOptionPane.WARNING_MESSAGE);
+					else if(txtFromDate.getText().isEmpty())
 						JOptionPane.showMessageDialog(screen,"Please fill the date field!", "Warning",JOptionPane.WARNING_MESSAGE);
 					else if(textFieldID.getText().isEmpty())
 						JOptionPane.showMessageDialog(screen,"Please fill the user ID field!", "Warning",JOptionPane.WARNING_MESSAGE);
