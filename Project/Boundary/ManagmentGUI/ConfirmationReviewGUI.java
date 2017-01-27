@@ -88,6 +88,11 @@ public class ConfirmationReviewGUI extends JPanel {
 		
 		backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnBack.setBounds(35, 25, 89, 23);
 		add(btnBack);
 		
