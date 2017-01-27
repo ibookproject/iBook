@@ -61,7 +61,7 @@ public class RequestSetSubscriptionGUI extends JPanel {
 		this.setLayout(null);	
 		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
-		btnBack.setBounds(48, 47, 84, 23);
+		btnBack.setBounds(35, 25, 84, 30);
 		add(btnBack);
 		
 		JRadioButton rdbtnSingl = new JRadioButton("Single subscription");
@@ -97,7 +97,7 @@ public class RequestSetSubscriptionGUI extends JPanel {
 		
 		JLabel lblRequestToSet = new JLabel("REQUEST TO SET SUBSCRIPTION");
 		lblRequestToSet.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		lblRequestToSet.setBounds(242, 92, 398, 54);
+		lblRequestToSet.setBounds(270, 40, 365, 40);
 		add(lblRequestToSet);
 		
 		ButtonGroup group = new ButtonGroup();

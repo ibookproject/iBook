@@ -74,15 +74,16 @@ public class CartManagerGUI extends JPanel {
 		this.setLayout(null);	
 		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 		User u= new User();
 		btnBuy = new JButton("Buy");
+		btnBuy.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		JLabel LabelMassege = new JLabel("NO subscription Method");
 		LabelMassege.setForeground(Color.RED);
 		LabelMassege.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		LabelMassege.setBounds(360, 547, 273, 54);
+		LabelMassege.setBounds(360, 547, 226, 54);
 		LabelMassege.setVisible(false);
 		add(LabelMassege);
 		
@@ -98,7 +99,7 @@ public class CartManagerGUI extends JPanel {
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
-		scrollPaneMain.setBounds(205, 132, 517, 355);
+		scrollPaneMain.setBounds(186, 133, 517, 355);
 		scrollPaneMain.setVisible(false);
 		add(scrollPaneMain);
 
@@ -155,12 +156,13 @@ public class CartManagerGUI extends JPanel {
 		}
 
 		JLabel lblButFromCart = new JLabel("Buy From Cart");
-		lblButFromCart.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblButFromCart.setBounds(379, 52, 163, 23);
+		lblButFromCart.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblButFromCart.setBounds(350, 40, 165, 40);
 		add(lblButFromCart);
 		
 		JLabel lblChooseBooksFrom = new JLabel("Choose book's from cart :");
-		lblChooseBooksFrom.setBounds(379, 107, 151, 14);
+		lblChooseBooksFrom.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblChooseBooksFrom.setBounds(340, 101, 198, 20);
 		add(lblChooseBooksFrom);
 		
 		 

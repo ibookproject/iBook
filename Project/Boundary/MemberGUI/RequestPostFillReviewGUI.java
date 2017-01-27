@@ -76,30 +76,31 @@ public class RequestPostFillReviewGUI extends JPanel
 		this.setLayout(null);	
 		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		
-		JLabel Counterlabel = new JLabel("50");
+		JLabel Counterlabel = new JLabel("200");
 		Counterlabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		Counterlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		Counterlabel.setForeground(Color.RED);
-		Counterlabel.setBounds(717, 469, 27, 23);
+		Counterlabel.setBounds(711, 384, 27, 23);
 		add(Counterlabel);
 		btnBack = new JButton(backIcon);// declaration of back button
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 		
 		JLabel lblFillAReview = new JLabel("Fill a review");
-		lblFillAReview.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 22));
-		lblFillAReview.setBounds(357, 67, 166, 83);
+		lblFillAReview.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFillAReview.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblFillAReview.setBounds(350, 40, 166, 40);
 		add(lblFillAReview);
 		
 		
 		JLabel lblReviewDate = new JLabel("Review Date:");
 		lblReviewDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblReviewDate.setBounds(123, 238, 128, 19);
+		lblReviewDate.setBounds(117, 153, 128, 19);
 		add(lblReviewDate);
 		
 		JLabel lblReviewContent = new JLabel("Review Content:");
 		lblReviewContent.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblReviewContent.setBounds(123, 263, 128, 29);
+		lblReviewContent.setBounds(117, 178, 128, 29);
 		add(lblReviewContent);
 		
 		textFieldReviewDate = new JTextField();
@@ -108,7 +109,7 @@ public class RequestPostFillReviewGUI extends JPanel
 		textFieldReviewDate.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(240, 240, 240)));
 		textFieldReviewDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldReviewDate.setEnabled(false);
-		textFieldReviewDate.setBounds(263, 236, 89, 23);
+		textFieldReviewDate.setBounds(257, 151, 89, 23);
 
 		date = new Date();
 		String txtDate = new SimpleDateFormat("yyyy/MM/dd").format(date);
@@ -147,8 +148,8 @@ public class RequestPostFillReviewGUI extends JPanel
 				{
 					
 					conterOfText--;
-					if(conterOfText<=50)
-						Counterlabel.setText(Integer.toString((50-conterOfText)));
+					if(conterOfText<=200)
+						Counterlabel.setText(Integer.toString((200-conterOfText)));
 				
 				}
 				else 
@@ -167,7 +168,7 @@ public class RequestPostFillReviewGUI extends JPanel
 						else
 						{
 							conterOfText++;
-							Counterlabel.setText(Integer.toString((50-conterOfText)));
+							Counterlabel.setText(Integer.toString((200-conterOfText)));
 						}
 					}
 					
@@ -175,7 +176,7 @@ public class RequestPostFillReviewGUI extends JPanel
 			}
 		
 		});
-		textAreaReviewContent.setBounds(263, 263, 431, 233);
+		textAreaReviewContent.setBounds(257, 178, 431, 233);
 		add(textAreaReviewContent);
 		
 		/**
@@ -229,13 +230,13 @@ public class RequestPostFillReviewGUI extends JPanel
 			}
 			
 		});
-		btnPost.setBounds(351, 529, 123, 40);
+		btnPost.setBounds(345, 444, 123, 40);
 		add(btnPost);
 		
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(250, 128, 114)));
 		btnNewButton.setEnabled(false);
-		btnNewButton.setBounds(706, 467, 50, 29);
+		btnNewButton.setBounds(700, 382, 50, 29);
 		add(btnNewButton);
 		
 		
