@@ -11,9 +11,8 @@ import client.DBgenericObject;
 import command.searchCommand;
 import command.showAllCommand;
 /**
- * User Controller
+ * This class is the Worker Controller- here is the functionality that connected to workers 
  * @author Almog Yamin
- *
  */
 public class WorkerController {
 	/**

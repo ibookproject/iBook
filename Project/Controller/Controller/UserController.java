@@ -10,9 +10,9 @@ import command.insertCommand;
 import command.searchCommand;
 import command.updateCommand;
 /**
- * User Controller
+ * This class is the User Controller- here is the functionality that connected to users 
  * @author Sagi Entenberg
- *
+ * @author Almog Yamin
  */
 public class UserController {
 /**

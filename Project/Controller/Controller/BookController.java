@@ -30,7 +30,13 @@ import Book.SubjectToBook;
 import Book.Book;
 import MenuGUI.LoginGUI;
 import Panels.BookPerCart;
-
+/**
+ * This class is the Book Controller- here is the functionality that connected to books 
+ * @author Sagi Entenberg
+ * @author Almog Yamin
+ * @author Coral Carmeli
+ * @author Hen Saada
+ */
 
 public class BookController {
 

@@ -16,6 +16,11 @@ import command.joinObject;
 import command.searchCommand;
 import command.updateCommand;
 
+/**
+ * This class is the Cart Controller- here is the functionality that connected to carts
+ * @author Hen Saada
+ * @author Coral Carmeli
+ */
 public class CartController {
 
 	/** 

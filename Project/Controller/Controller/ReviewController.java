@@ -15,7 +15,7 @@ import command.joinObject;
 import command.searchCommand;
 import command.updateCommand;
 /**
- * Review Controller
+ * This class is the Review Controller- here is the functionality that connected to reviews
  * @author Sagi Entenberg
  * @author Coral Carmeli
  */

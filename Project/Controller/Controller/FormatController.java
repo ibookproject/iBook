@@ -16,7 +16,7 @@ import command.insertCommand;
 import command.searchCommand;
 import command.showAllCommand;
 /**
- * format controller
+ * This class is the Format Controller- here is the functionality that connected to domains and subjects
  * @author hen saada
  *@author coral carmeli
  */
