@@ -47,6 +47,11 @@ public class Domain extends DBtranslation {
 		return DomainID;
 	}
 
+	
+	/**
+	 * Setter of the Domain ID
+	 * @param domainID Which is the domain ID we want to update/insert
+	 */
 	public void setDomainID(int domainID) {
 		if (domainID < 0)
 			throw new InputMismatchException("you have  inserted wrong domain ID");
@@ -59,6 +64,11 @@ public class Domain extends DBtranslation {
 		return DomainName;
 	}
 
+	
+	/**
+	 * Setter of the Domain Name
+	 * @param domainName Which is the  domain Name we want to update/insert
+	 */
 	public void setDomainName(String domainName) {
 		if (domainName == null || domainName.equals("") || Validation.NameValidation(domainName, DNAMESIZE) == false)
 			throw new InputMismatchException("you have  inserted wrong domain name");
@@ -138,8 +148,6 @@ public class Domain extends DBtranslation {
 	 */
 	@Override
 	public String toString() {
-		// return "Domain [DomainID=" + DomainID + ", DomainName=" + DomainName
-		// + "]";
 		return String.format("%s", DomainName);
 	}
 
