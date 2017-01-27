@@ -261,7 +261,8 @@ public class SearchBookGUI extends JPanel {
 							condition += "content LIKE '%" +textFieldContents.getText() + "%'";//add "content" to condition
 						}
 					}
-
+					if (!condition.equals(""))
+						condition+=" && bookEnable=\""+1+"\"";
 					if (chckbxDomain.isSelected()) 
 						{	
 							SubjectToBook s=new SubjectToBook();
