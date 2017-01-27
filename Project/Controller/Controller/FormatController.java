@@ -24,7 +24,7 @@ public class FormatController {
 	
 /** 
  * @param fromSentence
- * string for the query sql " FROM"
+ * string for the query sql " SELECT"
  * @param domain
  * name of the table that get from this object 
  * @param whereSentence
@@ -57,7 +57,7 @@ public class FormatController {
 	/**
 	 * 
 	 * @param fromSentence
-	 * string for the query sql " FROM"
+	 * string for the query sql " SELECT"
 	 * @param subject
 	 * name of the table that get from this object 
 	 * @param whereSentence
@@ -141,6 +141,7 @@ public class FormatController {
 	
 	
 	/**
+	 * This method return all the domain in the table domain in DB
 	 * @param domain
 	 * name of the table that get from this object 
 	 * @param client
@@ -171,6 +172,7 @@ public class FormatController {
 	}
 	
 	/**
+	 * This method return all the subjects in the table subject in the DB
 	 * @param subject
 	 * name of the table that get from this object 
 	 * @param client
@@ -202,7 +204,7 @@ public class FormatController {
 	
 	/**
 	 * @param fromSentence
-	 * string for the query sql " FROM"
+	 * string for the query sql " SELECT"
 	 * @param subjectToBook
 	 * name of the  associates Table that get from this object 
 	 * @param whereSentence
@@ -212,7 +214,7 @@ public class FormatController {
 	 * @return
 	 *  The result Array list of book's name according the search query the user sends(with the conditions of-select,from and where) 
 	 * @author coral carmeli
-	 * @author hensaada hen saada
+	 * @author hen saada
 	 */
 	public static ArrayList<SubjectToBook> SearchBookInSubjectToBookAccordingDomain(String fromSentence,SubjectToBook subjectToBook,String whereSentence,DBSQLhandler client)
 	{
@@ -235,7 +237,7 @@ public class FormatController {
 
 	/**
 	 * @param fromSentence
-	 * string for the query sql " FROM"
+	 * string for the query sql "Select"
 	 * @param subjectToBook
 	 * name of the  associates Table  that get from this object 
 	 * @param whereSentence
@@ -269,7 +271,7 @@ public class FormatController {
 	/**
 	 * 
 	 * @param fromSentence
-	 * string for the query sql " FROM"
+	 * string for the query sql "SELECT"
 	 * @param subjectToBook
 	 * name of the  associates Table  that get from this object 
 	 * @param whereSentence

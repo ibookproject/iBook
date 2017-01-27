@@ -2,8 +2,10 @@
 /Controller/
 /DB/
 /Extras/
+/FitResult/
 /FitTests/
 /Fixtures/
+/Images/
 /ManagmentGUI/
 /MemberGUI/
 /MenuGUI/
@@ -12,4 +14,3 @@
 /TestCase/
 /client/
 /command/
-/ocsf/

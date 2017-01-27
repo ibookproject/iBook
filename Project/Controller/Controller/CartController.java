@@ -144,24 +144,13 @@ public class CartController {
 		}
 		return true; 
 	}
-
-	
-	
-	/**
-	 * @author Coral Carmeli
-	 * @param date(String), status(int),userId(String ),client
-	 * @return The result of join between the 2 tables:'Book','Cart' according the same bookID and the query conditions,return the requested fields.
-	 */
-
-	
-	
 	/** 
+	 * this method return the result of join between the 2 tables:'Book','Cart' according the same bookID and the query conditions,return the requested fields.
 	 * @param date
 	 * string for the query sql " FROM"
-	 * @param status
-	 * 
+	 * @param status not used
 	 * @param userId
-	 * 
+	 * is the user ID we want to get records on him
 	 * @param client
 	 * the current client that ask the query
 	 * @return
