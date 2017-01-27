@@ -36,7 +36,10 @@ import client.DBgenericObject;
 import javax.swing.JTextArea;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
-
+/**
+ * The class shows the HISTOGRAMA panel for a specific book which get from the first panel of the statistics books.
+ * @author  Almog Yamin 
+ */
 public class StatisticsBookReport extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -50,6 +53,11 @@ public class StatisticsBookReport extends JPanel {
 	private JPanel insidePanel;
 	private JLabel lblResult;
 
+	/**
+	 * Constructor of the StatisticsBookReport class
+	 * @param screen This is the main window-login extends JFrame
+	 * @author  Almog Yamin
+	 */	
 	public StatisticsBookReport(LoginGUI screen) {
 		super();
 		this.screen = screen;
@@ -57,7 +65,10 @@ public class StatisticsBookReport extends JPanel {
 
 		initialize();
 	}
-
+	/**
+	 * This method initialize The statistics book report-put the components on the screen and set their functionality
+	 * @author Sagi Entenberg
+	 */
 	private void initialize() {
 
 		this.setSize(850, 625);
@@ -66,7 +77,7 @@ public class StatisticsBookReport extends JPanel {
 		JLabel lblHeader = new JLabel("Statistics Book Report");
 		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHeader.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		lblHeader.setBounds(355, 49, 240, 22);
+		lblHeader.setBounds(325, 49, 240, 22);
 		add(lblHeader);
 
 		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
@@ -76,16 +87,8 @@ public class StatisticsBookReport extends JPanel {
 
 			}
 		});
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
-
-	/*	lblOrdersdb = new JLabel("");
-		lblOrdersdb.setBounds(236, 182, 46, 14);
-		add(lblOrdersdb);
-
-		lblSearchersdb = new JLabel("");
-		lblSearchersdb.setBounds(236, 224, 46, 14);
-		add(lblSearchersdb);*/
 
 		insidePanel = new JPanel();
 		insidePanel.setBounds(241, 156, 430, 427);
@@ -98,7 +101,17 @@ public class StatisticsBookReport extends JPanel {
 		lblResult.setFont(new Font("Tahoma", Font.BOLD, 16));
 
 	}
-
+	/**
+	 * setResult of the StatisticsBookReport class
+	 * * this method build an HISTOGRAMA panel that shows the statistics book of chosen book (from other panel) by his searches and purchases
+	 * @param purchase
+	 * get from other panel the number of purchases of the book by dates
+	 * @param searches
+	 * get from other panel the number of searches of the book by dates
+	 * @param bookid
+	 * get from other panel the book id of the book statistics shown
+	 * @author Almog Yamin
+	 */
 	public void setResult(int purchase, int searches , int bookid) {
 		if (purchase != 0 || searches != 0) {
 			HistogramPanel histogramPan = new HistogramPanel();

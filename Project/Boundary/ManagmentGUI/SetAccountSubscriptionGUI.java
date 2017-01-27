@@ -37,8 +37,7 @@ import java.awt.event.ActionEvent;
 /**
  * The class take care of the request subscription that comes from the user.
  * After the worker get answer from the Credit Company  he accept or decline the request of the user for new subscription by clicking on the buttons.
- * @author  Almog Yamin
- * 
+ * @author  Almog Yamin 
  */
 public class SetAccountSubscriptionGUI extends JPanel {
 
@@ -63,9 +62,9 @@ public class SetAccountSubscriptionGUI extends JPanel {
 		initialize();
 	}
 	/**
-	 * This method initialize The window of remove part of review-put the components on the screen and set their functionality
+	 * This method initialize The window of set subscription gui - put the components on the screen and set their functionality
 	 * The Worker get a list of all the users that wait for confirmation review, and click on a button to accept or decline each one of the users.
-	 * @author Sagi Entenberg
+	 * @author Almog Yamin
 	 */
 	private void initialize() {
 
