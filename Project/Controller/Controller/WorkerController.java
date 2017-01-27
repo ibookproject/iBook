@@ -10,12 +10,29 @@ import client.DBSQLhandler;
 import client.DBgenericObject;
 import command.searchCommand;
 import command.showAllCommand;
-
+/**
+ * User Controller
+ * @author Almog Yamin
+ *
+ */
 public class WorkerController {
-	
-	public static ArrayList<LibraryWorker> SearchWorker(String fromSentence,LibraryWorker user,String whereSentence,DBSQLhandler client)
+	/**
+	 * Search User
+	 * @param fromSentence
+	 *  String of the SQL query "From"
+	 * @param worker
+	 * the name of the table from this object
+	 * @param whereSentence
+	 * String of the SQL query "Where"
+	 * @param client
+	 * the client who ask the query
+	 * @return
+	 * Array list of LibraryWorker
+	 * @author Almog Yamin
+	 */
+	public static ArrayList<LibraryWorker> SearchWorker(String fromSentence,LibraryWorker worker,String whereSentence,DBSQLhandler client)
 	{
-		client.searchInDB(new searchCommand<LibraryWorker>(fromSentence,user,whereSentence));//call command and client ask to search a book
+		client.searchInDB(new searchCommand<LibraryWorker>(fromSentence,worker,whereSentence));//call command and client ask to search a book
 		while(!client.GetGotMessag()){//search user in db
 			try{
 			Thread.sleep(10);

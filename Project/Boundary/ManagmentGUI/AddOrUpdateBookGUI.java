@@ -48,13 +48,13 @@ import javax.swing.SwingConstants;
 public class AddOrUpdateBookGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField title;
-	private JTextField lang;
-	private JTextField contents;
-	private JTextField keyword;
-	private JTextField author;
-	private JTextField price;
-	private JTextArea summary;
+	private JTextField txtFieldTitle;
+	private JTextField txtFieldLang;
+	private JTextField txtFieldContents;
+	private JTextField txtFieldKeyword;
+	private JTextField txtFieldAuthor;
+	private JTextField txtFieldPrice;
+	private JTextArea txtFieldSummary;
 	public JButton btnBack;
 	private ArrayList<Book> tempBooks;
 	private int Bookid;
@@ -78,6 +78,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 	 * main panel
 	 * @author Sagi Entenberg
 	 * @author Hen Saada
+	 * @wbp.parser.constructor
 	 */
 	public AddOrUpdateBookGUI(LoginGUI screen, int ISUpdateOrAdd) {
 		super();
@@ -136,10 +137,10 @@ public class AddOrUpdateBookGUI extends JPanel {
 		lblAddUpdate.setBounds(246, 26, 411, 30);
 		add(lblAddUpdate);
 
-		summary = new JTextArea();
-		summary.setLineWrap(true);
-		summary.setBounds(119, 430, 169, 99);
-		add(summary);
+		txtFieldSummary = new JTextArea();
+		txtFieldSummary.setLineWrap(true);
+		txtFieldSummary.setBounds(119, 430, 169, 99);
+		add(txtFieldSummary);
 
 		JLabel lblPrice = new JLabel("Price:");
 		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -180,35 +181,35 @@ public class AddOrUpdateBookGUI extends JPanel {
 		lblAuthor.setBounds(26, 330, 74, 30);
 		add(lblAuthor);
 
-		title = new JTextField();
-		title.setBounds(138, 130, 121, 30);
-		add(title);
-		title.setColumns(10);
+		txtFieldTitle = new JTextField();
+		txtFieldTitle.setBounds(138, 130, 121, 30);
+		add(txtFieldTitle);
+		txtFieldTitle.setColumns(10);
 
-		lang = new JTextField();
-		lang.setBounds(138, 180, 121, 30);
-		add(lang);
-		lang.setColumns(10);
+		txtFieldLang = new JTextField();
+		txtFieldLang.setBounds(138, 180, 121, 30);
+		add(txtFieldLang);
+		txtFieldLang.setColumns(10);
 
-		contents = new JTextField();
-		contents.setBounds(138, 230, 121, 30);
-		add(contents);
-		contents.setColumns(10);
+		txtFieldContents = new JTextField();
+		txtFieldContents.setBounds(138, 230, 121, 30);
+		add(txtFieldContents);
+		txtFieldContents.setColumns(10);
 
-		keyword = new JTextField();
-		keyword.setBounds(138, 280, 121, 30);
-		add(keyword);
-		keyword.setColumns(10);
+		txtFieldKeyword = new JTextField();
+		txtFieldKeyword.setBounds(138, 280, 121, 30);
+		add(txtFieldKeyword);
+		txtFieldKeyword.setColumns(10);
 
-		author = new JTextField();
-		author.setBounds(138, 330, 121, 30);
-		add(author);
-		author.setColumns(10);
+		txtFieldAuthor = new JTextField();
+		txtFieldAuthor.setBounds(138, 330, 121, 30);
+		add(txtFieldAuthor);
+		txtFieldAuthor.setColumns(10);
 
-		price = new JTextField();
-		price.setBounds(138, 380, 121, 30);
-		add(price);
-		price.setColumns(10);
+		txtFieldPrice = new JTextField();
+		txtFieldPrice.setBounds(138, 380, 121, 30);
+		add(txtFieldPrice);
+		txtFieldPrice.setColumns(10);
 
 		if (ISUpdateOrAdd == 0) {
 
@@ -216,16 +217,16 @@ public class AddOrUpdateBookGUI extends JPanel {
 			tempBooks = BookController.SearchBook("bookID,title,author,language,summary,keyword,content,price",
 					tempObject, "bookID=\"" + Bookid + "\"", screen.getClient());
 
-			title.setText(tempBooks.get(0).getTitle());
+			txtFieldTitle.setText(tempBooks.get(0).getTitle());
 
-			price.setText(String.valueOf(tempBooks.get(0).getPrice()));
-			author.setText(tempBooks.get(0).getAuthor());
-			summary.setText(tempBooks.get(0).getSummary());
+			txtFieldPrice.setText(String.valueOf(tempBooks.get(0).getPrice()));
+			txtFieldAuthor.setText(tempBooks.get(0).getAuthor());
+			txtFieldSummary.setText(tempBooks.get(0).getSummary());
 			String arrKeyword[] = tempBooks.get(0).getKeyword();
-			keyword.setText(arrKeyword[0]);
+			txtFieldKeyword.setText(arrKeyword[0]);
 			String arrContent[] = tempBooks.get(0).getKeyword();
-			contents.setText(arrContent[0]);
-			lang.setText(tempBooks.get(0).getLanguage());
+			txtFieldContents.setText(arrContent[0]);
+			txtFieldLang.setText(tempBooks.get(0).getLanguage());
 		}
 
 		JButton btnAdd = new JButton();
@@ -238,9 +239,9 @@ public class AddOrUpdateBookGUI extends JPanel {
 				
 	
 					String warnings = InputValidation();
-					if (title.getText().isEmpty() || lang.getText().isEmpty() || author.getText().isEmpty()
-							|| summary.getText().isEmpty() || contents.getText().isEmpty()
-							|| keyword.getText().isEmpty() || price.getText().isEmpty())
+					if (txtFieldTitle.getText().isEmpty() || txtFieldLang.getText().isEmpty() || txtFieldAuthor.getText().isEmpty()
+							|| txtFieldSummary.getText().isEmpty() || txtFieldContents.getText().isEmpty()
+							|| txtFieldKeyword.getText().isEmpty() || txtFieldPrice.getText().isEmpty())
 						JOptionPane.showMessageDialog(screen, "please fill all the book fields!! ", "Warning",
 								JOptionPane.WARNING_MESSAGE);
 					else if (!warnings.equalsIgnoreCase("ERROR :\n"))
@@ -248,12 +249,12 @@ public class AddOrUpdateBookGUI extends JPanel {
 					else {
 						
 						
-						Book b = new Book(title.getText().trim(), lang.getText().trim(), author.getText().trim(),
-								summary.getText().trim(), 1, keyword.getText().trim(), contents.getText().trim(),
-								Float.parseFloat(price.getText().trim())); // create new book
+						Book b = new Book(txtFieldTitle.getText().trim(), txtFieldLang.getText().trim(), txtFieldAuthor.getText().trim(),
+								txtFieldSummary.getText().trim(), 1, txtFieldKeyword.getText().trim(), txtFieldContents.getText().trim(),
+								Float.parseFloat(txtFieldPrice.getText().trim())); // create new book
 
 						ArrayList<Book> temp = BookController.SearchBook("title,language", b, "title=\""
-								+ title.getText().trim() + "\"" + " && " + "author=\"" + author.getText().trim() + "\"",
+								+ txtFieldTitle.getText().trim() + "\"" + " && " + "author=\"" + txtFieldAuthor.getText().trim() + "\"",
 								screen.getClient());// call search book method
 													// from book controller
 						if (temp == null || temp.isEmpty()) {
@@ -266,7 +267,7 @@ public class AddOrUpdateBookGUI extends JPanel {
 								/****************************************************************************************/
 
 								 temp = BookController.SearchBook("bookID", b, "title=\""
-										+ title.getText().trim() + "\"" + " && " + "author=\"" + author.getText().trim() + "\"",
+										+ txtFieldTitle.getText().trim() + "\"" + " && " + "author=\"" + txtFieldAuthor.getText().trim() + "\"",
 								
 										screen.getClient());
 								 boolean cancel=false;
@@ -303,25 +304,25 @@ public class AddOrUpdateBookGUI extends JPanel {
 								
 								/****************************************************************************************/
 								
-								title.setText("");
-								lang.setText("");
-								author.setText("");
-								summary.setText("");
-								contents.setText("");
-								keyword.setText("");
-								price.setText("");
+								txtFieldTitle.setText("");
+								txtFieldLang.setText("");
+								txtFieldAuthor.setText("");
+								txtFieldSummary.setText("");
+								txtFieldContents.setText("");
+								txtFieldKeyword.setText("");
+								txtFieldPrice.setText("");
 								
 								JOptionPane.showMessageDialog(screen, "The book was added successfully to DB !", "done",
 										JOptionPane.INFORMATION_MESSAGE);
 								
 							}
 						} else {
-							title.setText("");
-							lang.setText("");
-							author.setText("");
-							summary.setText("");
-							contents.setText("");
-							keyword.setText("");
+							txtFieldTitle.setText("");
+							txtFieldLang.setText("");
+							txtFieldAuthor.setText("");
+							txtFieldSummary.setText("");
+							txtFieldContents.setText("");
+							txtFieldKeyword.setText("");
 							JOptionPane.showMessageDialog(screen,
 									"the book is already exist. Try to add another book\n", "Warning",
 									JOptionPane.WARNING_MESSAGE);
@@ -334,35 +335,35 @@ public class AddOrUpdateBookGUI extends JPanel {
 				else // its update
 				{
 					String warnings = InputValidation();
-					if (title.getText().isEmpty() || lang.getText().isEmpty() || author.getText().isEmpty()
-							|| summary.getText().isEmpty() || contents.getText().isEmpty()
-							|| keyword.getText().isEmpty() || price.getText().isEmpty())
+					if (txtFieldTitle.getText().isEmpty() || txtFieldLang.getText().isEmpty() || txtFieldAuthor.getText().isEmpty()
+							|| txtFieldSummary.getText().isEmpty() || txtFieldContents.getText().isEmpty()
+							|| txtFieldKeyword.getText().isEmpty() || txtFieldPrice.getText().isEmpty())
 						JOptionPane.showMessageDialog(screen, "please fill all the book fields!! ", "Warning",
 								JOptionPane.WARNING_MESSAGE);
 					else if (!warnings.equalsIgnoreCase("ERROR :\n"))
 						JOptionPane.showMessageDialog(screen, warnings, "Warning", JOptionPane.WARNING_MESSAGE);
 					else {
-						Book b = new Book(title.getText(), lang.getText(), author.getText(), summary.getText(), 1,
-								keyword.getText(), contents.getText()); // create new book
-						boolean result = BookController.UpdateBook(b, "title=\"" + title.getText().trim() + "\""
-								+ " && " + "author=\"" + author.getText().trim() + "\"" + " && " + "language=\""
-								+ lang.getText().trim() + "\"" + " && " + "summary=\"" + summary.getText().trim() + "\""
-								+ " && " + "content=\"" + contents.getText().trim() + "\"" + " && " + "summary=\""
-								+ summary.getText().trim() + "\"" + " && " + "keyword=\"" + keyword.getText().trim()
-								+ "\"" + " && " + "price=\"" + Float.parseFloat(price.getText().trim()) + "\"",
+						Book b = new Book(txtFieldTitle.getText(), txtFieldLang.getText(), txtFieldAuthor.getText(), txtFieldSummary.getText(), 1,
+								txtFieldKeyword.getText(), txtFieldContents.getText()); // create new book
+						boolean result = BookController.UpdateBook(b, "title=\"" + txtFieldTitle.getText().trim() + "\""
+								+ " && " + "author=\"" + txtFieldAuthor.getText().trim() + "\"" + " && " + "language=\""
+								+ txtFieldLang.getText().trim() + "\"" + " && " + "summary=\"" + txtFieldSummary.getText().trim() + "\""
+								+ " && " + "content=\"" + txtFieldContents.getText().trim() + "\"" + " && " + "summary=\""
+								+ txtFieldSummary.getText().trim() + "\"" + " && " + "keyword=\"" + txtFieldKeyword.getText().trim()
+								+ "\"" + " && " + "price=\"" + Float.parseFloat(txtFieldPrice.getText().trim()) + "\"",
 								"bookID=\"" + Bookid + "\"", screen.getClient()); // return true or false from the controller DB
 
 						if (result == false)
 							JOptionPane.showMessageDialog(screen, "Update book process FAILED ! ", "Warning",
 									JOptionPane.WARNING_MESSAGE);
 						else {
-							title.setText("");
-							lang.setText("");
-							author.setText("");
-							summary.setText("");
-							contents.setText("");
-							keyword.setText("");
-							price.setText("");
+							txtFieldTitle.setText("");
+							txtFieldLang.setText("");
+							txtFieldAuthor.setText("");
+							txtFieldSummary.setText("");
+							txtFieldContents.setText("");
+							txtFieldKeyword.setText("");
+							txtFieldPrice.setText("");
 							JOptionPane.showMessageDialog(screen, "The book was Updated successfully to DB !", "done",
 									JOptionPane.INFORMATION_MESSAGE);
 
@@ -405,24 +406,24 @@ public class AddOrUpdateBookGUI extends JPanel {
 	 */
 	public String InputValidation() {
 		String warnings = "ERROR :\n";
-		if (Validation.regularValidation(title.getText()) == false)
+		if (Validation.regularValidation(txtFieldTitle.getText()) == false)
 			warnings += "title field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-		if (Validation.TitleValidation(title.getText(), 20) == false)
+		if (Validation.TitleValidation(txtFieldTitle.getText(), 20) == false)
 			warnings += "title field - Must contain only English letters or numbers\n";
 
-		if (Validation.regularValidation(lang.getText()) == false)
+		if (Validation.regularValidation(txtFieldLang.getText()) == false)
 			warnings += "language field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-		if (Validation.NameValidation(lang.getText(), 20) == false)
+		if (Validation.NameValidation(txtFieldLang.getText(), 20) == false)
 			warnings += "language field - Must contain only English letters \n";
 
-		if (Validation.regularValidation(author.getText()) == false)
+		if (Validation.regularValidation(txtFieldAuthor.getText()) == false)
 			warnings += "author field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
-		if (Validation.AuthorValidation(author.getText(), 20) == false)
+		if (Validation.AuthorValidation(txtFieldAuthor.getText(), 20) == false)
 			warnings += "author field - Must contain only English letters \n";
-		String answer = Validation.PriceValidation(price.getText());
+		String answer = Validation.PriceValidation(txtFieldPrice.getText());
 		if (answer != "")
 			warnings += answer;
-		if (Validation.regularValidation(keyword.getText()) == false)
+		if (Validation.regularValidation(txtFieldKeyword.getText()) == false)
 			warnings += "keword field - The following characters are not allowed :  |,%,\\," + "\",',&,=\n";
 		return warnings;
 	}

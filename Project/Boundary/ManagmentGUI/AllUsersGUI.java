@@ -38,7 +38,13 @@ import client.DBgenericObject;
 
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-
+/**
+ * The class of build the panel GUI to Show all users and workers
+ * @param screen 
+ * LoginGUI extends JFrame
+ * @author Almog Yamin
+ * 
+ */
 public class AllUsersGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -47,7 +53,14 @@ public class AllUsersGUI extends JPanel {
 	private JPanel pann;
 	private ArrayList<User> tempUsers;
 	private ArrayList<LibraryWorker> tempWorkers;
-
+	
+	/**
+	 * The class of build the panel GUI to Show all users and workers
+	 * @param screen 
+	 * LoginGUI extends JFrame
+	 * @author Almog Yamin
+	 * 
+	 */
 	public AllUsersGUI(LoginGUI screen) {
 		super();
 		this.screen = screen;
@@ -56,6 +69,15 @@ public class AllUsersGUI extends JPanel {
 		initialize();
 	}
 
+	/**
+	 * This method initialize the window of AllUsersGUI
+	 * this windows shows us 2 lists by clicking 2 buttons.
+	 * the first is list of workers
+	 * the second is list of users
+	 * this 2 lists are made from other panels and sent here with the "answers" of the sql by list mode.
+	 * @author Almog Yamin
+	 * 
+	 */
 	private void initialize() {
 
 		this.setSize(850, 625);
@@ -64,18 +86,18 @@ public class AllUsersGUI extends JPanel {
 		JLabel lblHeader = new JLabel("All Users");
 		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHeader.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		lblHeader.setBounds(355, 49, 234, 22);
+		lblHeader.setBounds(359, 40, 149, 22);
 		add(lblHeader);
 
 		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 23);
 		add(btnBack);
 
 		JScrollPane scrollPaneMain = new JScrollPane();
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
-		scrollPaneMain.setBounds(125, 159, 690, 393);
+		scrollPaneMain.setBounds(90, 159, 690, 393);
 		add(scrollPaneMain);
 
 		JPanel panel = new JPanel();
@@ -117,7 +139,7 @@ public class AllUsersGUI extends JPanel {
 							}
 		}});
 		btnUsers.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnUsers.setBounds(206, 90, 149, 30);
+		btnUsers.setBounds(190, 100, 149, 30);
 		add(btnUsers);
 		
 		JButton btnWorkers = new JButton("Show Workers");
@@ -150,7 +172,7 @@ public class AllUsersGUI extends JPanel {
 							}
 		}});
 		btnWorkers.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnWorkers.setBounds(562, 90, 184, 30);
+		btnWorkers.setBounds(500, 100, 184, 30);
 		add(btnWorkers);
 		Book b = new Book();
 

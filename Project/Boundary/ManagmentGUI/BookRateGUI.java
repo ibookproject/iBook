@@ -67,46 +67,46 @@ public class BookRateGUI extends JPanel {
 		this.setLayout(null);	
 		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 23);
 		add(btnBack);
 		
 		
 		lblBookRate = new JLabel("Book Rate");
 		lblBookRate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		lblBookRate.setBounds(361, 33, 117, 46);
+		lblBookRate.setBounds(360, 40, 117, 30);
 		add(lblBookRate);
 		
 		lblNameOfAuthor = new JLabel("name of author:");
 		lblNameOfAuthor.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNameOfAuthor.setBounds(415, 90, 131, 30);
+		lblNameOfAuthor.setBounds(383, 115, 131, 30);
 		add(lblNameOfAuthor);
 		
 		textFieldAutohr = new JTextField();
 		textFieldAutohr.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldAutohr.setBounds(550, 90, 86, 30);
+		textFieldAutohr.setBounds(518, 115, 86, 30);
 		add(textFieldAutohr);
 		textFieldAutohr.setColumns(10);
 		
 		lblNameOfBook = new JLabel("name of book:");
 		lblNameOfBook.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNameOfBook.setBounds(161, 90, 117, 30);
+		lblNameOfBook.setBounds(129, 115, 117, 30);
 		add(lblNameOfBook);
 		
 		textFieldBook = new JTextField();
 		textFieldBook.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldBook.setBounds(285, 90, 86, 30);
+		textFieldBook.setBounds(253, 115, 86, 30);
 		add(textFieldBook);
 		textFieldBook.setColumns(10);
 		
 		
 		rdbtnAbsoluteRate = new JRadioButton("Absolute Rate");
 		rdbtnAbsoluteRate.setFont(new Font("Tahoma", Font.BOLD, 16));
-		rdbtnAbsoluteRate.setBounds(225, 188, 146, 30);
+		rdbtnAbsoluteRate.setBounds(193, 213, 146, 30);
 		add(rdbtnAbsoluteRate);
 		
 		rdbtnProportionRate = new JRadioButton("Proportion Rate");
 		rdbtnProportionRate.setFont(new Font("Tahoma", Font.BOLD, 16));
-		rdbtnProportionRate.setBounds(468, 193, 157, 25);
+		rdbtnProportionRate.setBounds(436, 218, 157, 25);
 		add(rdbtnProportionRate);
 		
 		ButtonGroup group = new ButtonGroup();
@@ -125,7 +125,7 @@ public class BookRateGUI extends JPanel {
 				System.out.println(bookId);
 			}
 		});
-		comboBoxChooseBook.setBounds(225, 141, 412, 30);
+		comboBoxChooseBook.setBounds(193, 166, 412, 30);
 		add(comboBoxChooseBook);
 		/**
 		 * This button is the search button- The user need first to choose the book he wants to get a rate on him.
@@ -168,7 +168,7 @@ public class BookRateGUI extends JPanel {
 				 	}
 				 }
 			}); 
-		btnSearch.setBounds(687, 90, 89, 30);
+		btnSearch.setBounds(655, 115, 89, 30);
 		add(btnSearch);
 		/**
 		 * This button is the Select button- next,after the search-the user need to choose the kind of the rate and than when the 'select'
@@ -197,7 +197,7 @@ public class BookRateGUI extends JPanel {
 
 			}
 		});
-		btnSelect.setBounds(377, 250, 89, 23);
+		btnSelect.setBounds(345, 275, 90, 30);
 		add(btnSelect);
 	}
 }

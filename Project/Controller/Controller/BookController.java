@@ -61,6 +61,13 @@ public class BookController {
 			return null;
 		}
 	}
+	/**
+	 * @author Almog Yamin
+	 * @param  
+	 * fromSentence(String),SearchToBook,condition(String ),client
+	 * @return 
+	 * The Array list of SearchToBook according the search query the user sends(with the conditions of-select,from and where)
+	 */
 	public static ArrayList<SearchToBook> SearchSearchToBook(String fromSentence,SearchToBook btb,String condition,DBSQLhandler client)
 	{
 		// filed is need to look like "bookID,author,..."
@@ -132,6 +139,15 @@ public class BookController {
 			}
 			return true;	// means the user add successful	
 	}
+	/** 
+	 * @param stb
+	 * name of the table that get from this object 
+	 * @param client
+	 * the current client that ask the query
+	 * @return
+	 *  The result of adding a SearchToBook to the list-success or not
+	 * @author Almog Yamin
+	 */
 	public static boolean InsertSearchToBook(SearchToBook stb,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{
 			client.insertToDB(new insertCommand<DBtranslation>(stb)); 	
@@ -147,9 +163,21 @@ public class BookController {
 			}
 			return true;	// means the book add successful	
 	}
-	public static boolean UpdateSearchToBook(SearchToBook btb , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
+	
+	/** 
+	 * @param stb
+	 * name of the table that get from this object 
+	 * @param client
+	 * the current client that ask the query
+	 * @param
+	 * the update Condition - means search what row to update by this condition
+	 * @return
+	 *  true if the update was success else false
+	 * @author Almog Yamin
+	 */
+	public static boolean UpdateSearchToBook(SearchToBook stb , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
 	{
-			client.UpdateInDB(new updateCommand<DBtranslation>(btb, searchCondition, updateCondition));
+			client.UpdateInDB(new updateCommand<DBtranslation>(stb, searchCondition, updateCondition));
 			while(!client.GetGotMessag()){//add user to DB
 				try{
 				Thread.sleep(10);

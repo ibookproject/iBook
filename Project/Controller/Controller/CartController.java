@@ -29,7 +29,7 @@ public class CartController {
 	 * the current client that ask the query
 	 * @return
 	 *  The result  Array list of Cart by userId and bookid
-	 * @author coral carmeli
+	 * @author Coral Carmeli
 	 */
 	public static ArrayList<Cart> SearchCart(String fromSentence,Cart cart,String condition,DBSQLhandler client)
 	{

@@ -56,7 +56,7 @@ public class ConfirmationReviewGUI extends JPanel {
 	private JPanel pann;
 	private int Permission;
 	private ImageIcon backIcon;
-	private JLabel confirmLbl ;
+	private JLabel lblHeader ;
 	private JButton btnNotConfirm;
 	private JButton btnConfirm ;
 	private int flagReviewChoose=0;
@@ -88,16 +88,16 @@ public class ConfirmationReviewGUI extends JPanel {
 		
 		backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
-		btnBack.setBounds(40, 35, 89, 23);
+		btnBack.setBounds(35, 25, 89, 23);
 		add(btnBack);
 		
-		confirmLbl = new JLabel("Confirmation Review");
-		confirmLbl.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		confirmLbl.setBounds(355, 35, 219, 22);
-		add(confirmLbl);
+		lblHeader = new JLabel("Confirmation Review");
+		lblHeader.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblHeader.setBounds(315, 40, 238, 22);
+		add(lblHeader);
 		
 		scrollPaneMain = new JScrollPane();
-		scrollPaneMain.setBounds(55, 86, 763, 414);
+		scrollPaneMain.setBounds(55, 106, 763, 394);
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);

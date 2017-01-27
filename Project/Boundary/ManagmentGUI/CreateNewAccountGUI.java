@@ -20,7 +20,11 @@ import MenuGUI.LoginGUI;
 import Role.User;
 
 import javax.swing.SwingConstants;
-
+/**
+ * The class take care of the create new account 
+ * after fill the fields and check validation, new user is add to DB
+ *@author  Almog Yamin
+ */
 public class CreateNewAccountGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -33,14 +37,24 @@ public class CreateNewAccountGUI extends JPanel {
 	private JTextField txtPassword;
 	private JTextField txtIdentity;
 
+	/**
+	 * Constructor of the CreateNewAccountGUI class
+	 * @param screen This is the main window-login
+	 * @author  Almog Yamin
+	 */	
 	public CreateNewAccountGUI(LoginGUI screen) {
 		super();
 		this.screen = screen;
 		pann = this;
-
 		initialize();
 	}
-
+	/**
+	 * This method initialize The window of create new account -put the components on the screen and set their functionality
+	 * there is a button calles "CREATE" that after the worker fill the new user details he click on this button.
+	 * if there is validation error, the worker will get an error message with the exactly wrong details
+	 * and after that the new user will add to the DB
+	 * @author  Almog Yamin
+	 */
 	private void initialize() {
 
 		this.setSize(850, 625);
@@ -49,18 +63,18 @@ public class CreateNewAccountGUI extends JPanel {
 		JLabel lblNewLabel = new JLabel("Create New Account");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		lblNewLabel.setBounds(355, 49, 257, 26);
+		lblNewLabel.setBounds(320, 40, 257, 26);
 		add(lblNewLabel);
 
 		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 23);
 		add(btnBack);
 
 		JButton btnCreate = new JButton("Create");
 		btnCreate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-		btnCreate.setBounds(708, 531, 89, 37);
+		btnCreate.setBounds(400, 489, 89, 37);
 		add(btnCreate);
 
 		JLabel lblFirstName = new JLabel("First Name:");
