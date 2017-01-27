@@ -17,14 +17,30 @@ import java.awt.Font;
 
 
 
-
+/**
+ * The class represent a mini  GUI menu  for inventory management
+ * @param screen 
+ * LoginGUI extends JFrame
+ * @param ISUpdateOrAdd
+ * flag what selected in the Previous panel
+ * @author Hen Saada
+ * 
+ */
 public class InventoryManagmentGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack;
 	private LoginGUI screen;
 	private JPanel pann;
-
+	/**
+	 * The class of build the panel GUI to mini menu for inventory management
+	 * @param screen 
+	 * LoginGUI extends JFrame
+	 * @param ISUpdateOrAdd
+	 * flag what selected in the Previous panel
+	 * @author Hen Saada
+	 * 
+	 */
 	public InventoryManagmentGUI(LoginGUI screen) {
 		super();
 		this.screen=screen;
@@ -34,6 +50,15 @@ public class InventoryManagmentGUI extends JPanel {
 	}
 
 	
+	
+	/**
+	 * This method initialize The window of inventory manager,puts the components on the screen and set their functionality that is add ,delete or update a book
+
+	 * @author  hen saada
+	 * @param null
+	 * @return null
+	 * 
+	 */
 	private void initialize() {
 		
 		this.setSize(850, 625);
@@ -53,13 +78,11 @@ public class InventoryManagmentGUI extends JPanel {
 		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				////////////////////////button to back panel from panel /////////////////////////////////////////////
 				InventoryManagmentDeleteGUI del=new InventoryManagmentDeleteGUI(screen); 
 				del.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
 					}
-				////////////////////////button to back panel from panel/////////////////////////////////////////////
 				});
 				screen.setContentPane(del);//send to search book window
 			}
@@ -73,13 +96,11 @@ public class InventoryManagmentGUI extends JPanel {
 		btnAddupdate.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnAddupdate.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
-				////////////////////////button to back panel from panel /////////////////////////////////////////////
 				AddOrUpdateBookGUI aOu=new AddOrUpdateBookGUI(screen,1); // 1 means add 
 				aOu.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
 					}
-				////////////////////////button to back panel from panel/////////////////////////////////////////////
 				});
 				screen.setContentPane(aOu);//send to search book window
 			}
@@ -95,13 +116,11 @@ public class InventoryManagmentGUI extends JPanel {
 		btnUpdateBook.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnUpdateBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				////////////////////////button to back panel from panel /////////////////////////////////////////////
 				InventoryManagmentSearchForUpdateGUI search=new InventoryManagmentSearchForUpdateGUI(screen,pann); // 0 means update
 				search.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
 					}
-				////////////////////////button to back panel from panel/////////////////////////////////////////////
 				});
 				screen.setContentPane(search);//send to search book window
 			}

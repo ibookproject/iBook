@@ -35,7 +35,16 @@ import java.nio.file.Files;
 
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-
+/**
+ * The class of build the panel GUI to add or Update Book
+ * @param screen 
+ * LoginGUI extends JFrame
+ * @param ISUpdateOrAdd
+ * flag what selected in the Previous panel
+ * @author Sagi Entenberg
+ * @author Hen Saada
+ * 
+ */
 public class AddOrUpdateBookGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -57,14 +66,19 @@ public class AddOrUpdateBookGUI extends JPanel {
 	private int ISUpdateOrAdd;
 
 	/**
-	 * The class of build the panel gui to delete or Update Book
-	 * @param screen 
-	 * LoginGUI extends JFrame
+	 * the class of build the panel GUI to Add or Update Book
+	 * @param screen
+	 *  LoginGUI extends JFrame
 	 * @param ISUpdateOrAdd
-	 * flag what selected in the Previous panel
+	 * flag that set the MODE of the page ,means if we want to use this window to add a new book we will constructor this object with ISUpdateOrAdd= 1
+	 * else if want  to constructor object for update MODE we will send ISUpdateOrAdd=0
+	 *this specific constructor  method is for Addbook
+	 *@param Bookid
+	 * get the book for update
+	 * @param Mainpann
+	 * main panel
 	 * @author Sagi Entenberg
 	 * @author Hen Saada
-	 * 
 	 */
 	public AddOrUpdateBookGUI(LoginGUI screen, int ISUpdateOrAdd) {
 		super();
@@ -75,11 +89,13 @@ public class AddOrUpdateBookGUI extends JPanel {
 		initialize();
 	}
 	/**
-	 * the class of build the panel gui to Add or Update Book
+	 * the class of build the panel GUI to Add or Update Book
 	 * @param screen
 	 *  LoginGUI extends JFrame
 	 * @param ISUpdateOrAdd
-	 * flag what selected in the Previous panel
+	 * flag that set the MODE of the page ,means if we want to use this window to add a new book we will constructor this object with ISUpdateOrAdd= 1
+	 * else if want  to constructor object for update MODE we will send ISUpdateOrAdd=0
+	 * this specific constructor made for the Update MODE , and get bookId to update and then load his details from the DB to the currect fields
 	 * @param Bookid
 	 * get the book for update
 	 * @param Mainpann
@@ -96,6 +112,15 @@ public class AddOrUpdateBookGUI extends JPanel {
 		initialize();
 	}
 
+	/**
+	 * This method initialize The window of Add OR UPDATE book at the SAME CLASS,puts the components on the screen and set their functionality
+	 * flag that set the MODE of the page ,means if we want to use this window to add a new book we will constructor this object with ISUpdateOrAdd= 1
+	 * else if want  to constructor object for update MODE we will send ISUpdateOrAdd=0
+	 * @author  hen saada
+	 * @param null
+	 * @return null
+	 * 
+	 */
 	private void initialize() {
 
 		this.setSize(850, 625);
@@ -370,6 +395,13 @@ public class AddOrUpdateBookGUI extends JPanel {
 		add(btnBack);
 	}
 
+	/**
+	 * This method check validation about all the book fields
+	 * @author  hen saada
+	 * @param null
+	 * @return String include the errors that we collect from all the validation fields
+	 * @author Hen Saada
+	 */
 	public String InputValidation() {
 		String warnings = "ERROR :\n";
 		if (Validation.regularValidation(title.getText()) == false)

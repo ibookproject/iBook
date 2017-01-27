@@ -23,6 +23,11 @@ import java.awt.Font;
 
 
 
+/**
+ * The class take care of Update book , and search a book first for update him.
+ * 
+ * @author  hen saada
+ */
 
 public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 
@@ -47,7 +52,18 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 		initialize();
 	}
 
-	
+	/**
+	 * This method initialize The window of update book ,puts the components on the screen and set their functionality , 
+	 * the user can search book to update by the title, or author , or both. and select to update the book.
+	 * the method send the BookID that selected  with flag 0 to the class AddOrUpdateBookGUI for update
+	 * the method also check validation about the input fields - author and title .
+	 * title can include numbers and English letter only 
+	 * author can include English letters only
+	 * @author  hen saada
+	 * @param null
+	 * @return null
+	 * 
+	 */
 	private void initialize() {
 		
 		this.setSize(850, 625);
@@ -92,9 +108,7 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 				if (index!=-1)
 					bookId=tempBooks.get(index).getBookID();
 				else
-					bookId=-1;	
-				System.out.println(bookId);
-	 
+					bookId=-1;		 
 			}
 		});
 		comboBox.setBounds(225, 141, 412, 20);
@@ -186,13 +200,11 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 				
 				if(bookId!=-1)
 				{
-				////////////////////////button to back panel from panel /////////////////////////////////////////////
 				AddOrUpdateBookGUI goback=new AddOrUpdateBookGUI(screen,0, bookId,Mainpann); 
 				goback.btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						screen.setContentPane(pann);
 					}
-				////////////////////////button to back panel from panel/////////////////////////////////////////////
 				});
 				screen.setContentPane(goback);//send to search book window
 				}

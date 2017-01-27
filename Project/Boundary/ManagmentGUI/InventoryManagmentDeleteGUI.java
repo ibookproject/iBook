@@ -34,7 +34,11 @@ import java.awt.GridLayout;
 import javax.swing.JComboBox;
 
 
-
+/**
+ * The class take care of Delete book from the system.
+ * 
+ * @author  hen saada
+ */
 
 public class InventoryManagmentDeleteGUI extends JPanel {
 
@@ -56,6 +60,18 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		initialize();
 	}
 
+	
+	/**
+	 * This method initialize The window of Delete book ,puts the components on the screen and set their functionality , 
+	 * the user can search book to delete by the title, or author , or both. and select to delete the book.
+	 * the method also check validation about the input fields - author and title .
+	 * title can include numbers and English letter only 
+	 * author can include English letters only
+	 * @author  hen saada
+	 * @param null
+	 * @return null
+	 * 
+	 */
 	private void initialize() {
 		
 		this.setSize(850, 625);

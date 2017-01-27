@@ -41,7 +41,11 @@ import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-
+/**
+ * The class take care of the format manager  functionality- add new domain and subject , and attaching a numbers of book to some subject that is still not belong.
+ * 
+ * @author  hen saada
+ */
 
 public class FormatManagmentGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -63,6 +67,21 @@ public class FormatManagmentGUI extends JPanel {
 		this.screen=screen;
 		initialize();
 	}
+	
+	/**
+	 * This method initialize The window of Format manager,puts the components on the screen and set their functionality
+	 * the functionality is to add a new subject to domain , add new domain , choose from exist domain subject and attach books to the subject that is no belong
+	 * When the window first loads, loads any domain already exists already and according to its load are subject through ComboBox's so its start work like a automate machine
+	 * When the user chooses to add a new subject or field, or choose a subject from an existing domain, 
+	 * the window of the list of books loaded automatic his discretion is only the book THAT NOT ATTACHED YET TO THE CHOOSEN SUBJECT,
+	 *  so that we get maximum efficiency and user comfort
+	 *  also the method check validation about wrong letter at input of new subject and domain 
+	 *  and also check if the domain or the subject is already exist at the system.
+	 * @author  hen saada
+	 * @param null
+	 * @return null
+	 * 
+	 */
 	private void initialize() {	
 		this.setLayout(null);	
 		this.setSize(850, 600);
@@ -303,8 +322,7 @@ public class FormatManagmentGUI extends JPanel {
 					SubjectToBook btemp=new SubjectToBook();													
 					specificBooksWtihSelectedSubject=FormatController.SearchSubjectAtSubjectToBook("nameSubject,domainID,bookID", btemp, "nameSubject=\"" +((Subject)SubjectBox.getSelectedItem()).getNameSubject()+"\"", screen.getClient());
 
-			
-					//make haluka !
+					//////Query division///////
 					if(specificBooksWtihSelectedSubject!=null)
 					for(int i=0;i<AllBookList.size();i++)
 					{
@@ -313,7 +331,6 @@ public class FormatManagmentGUI extends JPanel {
 							if(specificBooksWtihSelectedSubject.get(j).getBookID()==AllBookList.get(i).getBookID())
 							{
 								AllBookList.remove(i);
-								//if(i==0)
 								i--;
 								break;
 							}	 
@@ -329,7 +346,6 @@ public class FormatManagmentGUI extends JPanel {
 								panel.add(new FormatCheckBoxBooklistPanel(screen,b,((Domain) DomainBox.getSelectedItem()).getDomainID()));
 						}
 						else JOptionPane.showMessageDialog(screen,"All books at the System is already Attached to the chossen subject", "Warning",JOptionPane.WARNING_MESSAGE);
- 
 				}
 				else
 				{
@@ -358,7 +374,6 @@ public class FormatManagmentGUI extends JPanel {
 								tempBooksId.add(((FormatCheckBoxBooklistPanel)panel.getComponent(i)).book.getBookID());
 								flag=1;
 								panel.remove(i);
-								//if(i==0)
 									i--;
 							}
 							panel.updateUI();
