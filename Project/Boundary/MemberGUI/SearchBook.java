@@ -58,12 +58,12 @@ public class SearchBook extends JPanel {
 		
 		backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 		
 		lblSearchBook = new JLabel("Search Book");
-		lblSearchBook.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblSearchBook.setBounds(355, 49, 175, 22);
+		lblSearchBook.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblSearchBook.setBounds(355, 40, 149, 40);
 		add(lblSearchBook);
 		
 		scrollPaneMain = new JScrollPane();

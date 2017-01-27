@@ -65,43 +65,48 @@ public class SearchReviewGUI extends JPanel {
 		this.setLayout(null);	
 		
 		JLabel lblKeyWord = new JLabel("Key Word : ");
-		lblKeyWord.setBounds(334, 101, 73, 19);
+		lblKeyWord.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblKeyWord.setBounds(335, 85, 86, 30);
 		add(lblKeyWord);
 		
 		textFieldKeyWord = new JTextField();
-		textFieldKeyWord.setBounds(406, 100, 86, 20);
+		textFieldKeyWord.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldKeyWord.setBounds(460, 85, 150, 30);
 		add(textFieldKeyWord);
 		textFieldKeyWord.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Search Review's of book");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(352, 59, 211, 14);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblNewLabel.setBounds(325, 40, 264, 40);
 		add(lblNewLabel);
 		
 		JLabel lblNameOfAuthor = new JLabel("name of author:");
-		lblNameOfAuthor.setBounds(513, 88, 89, 19);
+		lblNameOfAuthor.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNameOfAuthor.setBounds(335, 120, 120, 30);
 		add(lblNameOfAuthor);
 		
 		textFieldAutohr = new JTextField();
-		textFieldAutohr.setBounds(614, 87, 86, 20);
+		textFieldAutohr.setBounds(460, 127, 150, 30);
 		add(textFieldAutohr);
 		textFieldAutohr.setColumns(10);
 		
 		JLabel lblNameOfBook = new JLabel("title of book:");
-		lblNameOfBook.setBounds(334, 88, 111, 19);
+		lblNameOfBook.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNameOfBook.setBounds(335, 85, 111, 30);
 		add(lblNameOfBook);
 		
 		textFieldBook = new JTextField();
-		textFieldBook.setBounds(417, 87, 86, 20);
+		textFieldBook.setBounds(460, 87, 150, 30);
 		add(textFieldBook);
 		textFieldBook.setColumns(10);
 		
 		JComboBox comboBoxOfBooks = new JComboBox();
-		comboBoxOfBooks.setBounds(360, 118, 348, 20);
+		comboBoxOfBooks.setBounds(289, 178, 348, 20);
 		add(comboBoxOfBooks);
 		
 		
 		JRadioButton rdbtnSearchByTitleauthor = new JRadioButton("Search By Title/Author");
+		rdbtnSearchByTitleauthor.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		rdbtnSearchByTitleauthor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				radioButtonChoose=1;
@@ -116,10 +121,11 @@ public class SearchReviewGUI extends JPanel {
 				textFieldKeyWord.setVisible(false);
 			}
 		});
-		rdbtnSearchByTitleauthor.setBounds(151, 86, 158, 23);
+		rdbtnSearchByTitleauthor.setBounds(125, 85, 185, 30);
 		add(rdbtnSearchByTitleauthor);
 		
 		JRadioButton rdbtnSearchByBook = new JRadioButton("Search By Book KeyWord");
+		rdbtnSearchByBook.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		rdbtnSearchByBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				radioButtonChoose=2;
@@ -134,7 +140,7 @@ public class SearchReviewGUI extends JPanel {
 				textFieldKeyWord.setVisible(true);
 			}
 		});
-		rdbtnSearchByBook.setBounds(151, 117, 185, 23);
+		rdbtnSearchByBook.setBounds(125, 120, 203, 30);
 		add(rdbtnSearchByBook);
 		
 		
@@ -197,7 +203,7 @@ public class SearchReviewGUI extends JPanel {
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
-		scrollPaneMain.setBounds(125, 160, 682, 392);
+		scrollPaneMain.setBounds(125, 220, 682, 332);
 		scrollPaneMain.setVisible(false);
 		add(scrollPaneMain);
 		
@@ -211,6 +217,7 @@ public class SearchReviewGUI extends JPanel {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 	
 		JButton btnSearch = new JButton("Search");
+		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -347,12 +354,12 @@ public class SearchReviewGUI extends JPanel {
 				}
 			}
 			}); 
-		btnSearch.setBounds(710, 84, 89, 23);
+		btnSearch.setBounds(636, 109, 89, 23);
 		add(btnSearch);
 
 		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 		
 
