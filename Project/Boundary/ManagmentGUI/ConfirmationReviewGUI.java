@@ -166,6 +166,8 @@ public class ConfirmationReviewGUI extends JPanel {
 							JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
 						}
 					}
+					else
+						JOptionPane.showMessageDialog(screen,"You need to choose review first\n", "Warning",JOptionPane.WARNING_MESSAGE);
 				}
 				else
 					JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
@@ -209,6 +211,9 @@ public class ConfirmationReviewGUI extends JPanel {
 							JOptionPane.showMessageDialog(screen,"Sorry,there is no list to show!\n", "Warning",JOptionPane.WARNING_MESSAGE);
 						}
 					}
+					else
+						JOptionPane.showMessageDialog(screen,"You need to choose review first\n", "Warning",JOptionPane.WARNING_MESSAGE);
+						
 					
 				}
 				else
