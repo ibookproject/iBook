@@ -5,10 +5,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.InputMismatchException;
-
 import Extras.Validation;
 import client.DBgenericObject;
 import command.DBtranslation;
+/**
+ * This class is the entity 'Review',here saved all the fields like they presents in the DB
+ * In this class there are all the getters and setters of the entity Review.
+ * When we use the DB-When we insert,delete and update from there we convert the data to be like it saved
+ *  in DB and in this class it all happens.
+ * @author Coral Carmeli
+ *
+ */
 public class Review extends DBtranslation {
 
 	private int reviewID;
@@ -20,15 +27,26 @@ public class Review extends DBtranslation {
 	public static final int CONFIREMED=1;
 	public static final int NOTCONFIREMED=0;
 	public static final int NOTIFICATION=-1;
-	//empty constactor
+	
+	/**
+	 * Empty constructor of Review
+	 */
 	public Review(){
 		super();
 	}
 	
+	
+	/**
+	 *constructor of Review with 5 parameteres - reviewID & reviewDate & reviewContent & reviewStatus & bookID
+	 */
 	public Review(int reviewID, String reviewDate, String reviewContent,int reviewStatus, int bookID) {
 		this(reviewDate,reviewContent,reviewStatus,bookID);
 		setReviewID(reviewID);
 	}
+	
+	/**
+	 *constructor of Review with 4 parameteres - reviewDate & reviewContent & reviewStatus & bookID
+	 */
 	public Review( String reviewDate, String reviewContent,int reviewStatus, int bookID) {
 		super();
 		setReviewDate(reviewDate);
@@ -36,6 +54,11 @@ public class Review extends DBtranslation {
 		setReviewStatus(reviewStatus);
 		setBookID(bookID);
 	}
+	
+	/**
+	 *constructor of Review with 3 parameteres - userSign & reviewContent & bookID
+	 *this ctor set the status of the review to NOTIFICATION=-1
+	 */
 	public Review( String reviewContent, int bookID,String userSign) {
 		super();
 		Calendar time = Calendar.getInstance();
@@ -47,6 +70,10 @@ public class Review extends DBtranslation {
 		setUserSign(userSign);
         
 	}
+	
+	/**
+	 *Getter of Domain ID
+	 */
 	public int getReviewID() {
 		return reviewID;
 	}

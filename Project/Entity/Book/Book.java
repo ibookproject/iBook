@@ -362,6 +362,7 @@ public class Book extends DBtranslation  {
 	 * @param arr this is array of DBgenericObject which will convert to suitable to Book entity
 	 * @param fromSentence This is 'Select' query we want to get back.
 	 * @return  ArrayList<Book> which is the converted list the method create
+	 * @author Kfir Girstein
 	 */
 	public static ArrayList<Book> convertBack(ArrayList<DBgenericObject> arr,String fromSentence) {
 		 ArrayList<Book> convertedArr=new ArrayList<Book>();
@@ -389,6 +390,7 @@ public class Book extends DBtranslation  {
 	 * @param ob This is a DBgenericObject which we need to get value from him- it is the object who return from DB
 	 * @param fromSentenceArray This is 'Select' query we want to get back.
 	 * @return Book This book is ready with the parameters from DB
+	 * @author Kfir Girstein
 	 */
 	
 	private static Book convertDBObject(DBgenericObject ob,String fromSentenceArray)
@@ -440,9 +442,7 @@ public class Book extends DBtranslation  {
 	 */
 	@Override
 	public String toString() {
-		/*return "book [bookID=" + bookID + ", title=" + title + ", language=" + language + ", author=" + author
-				+ ", summary=" + summary + ", bookEnable=" + bookEnable + "]";
-	*/
+	
 	String temp="Book ID  : ";
 	temp += String.format("%d",bookID);
 	if(title!=null)

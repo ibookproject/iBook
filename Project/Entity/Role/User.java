@@ -43,7 +43,9 @@ public class User extends DBtranslation implements UserStatus {
 		super();
 		setUserID(userID);
 	}
-
+	/**
+	 *constructor of User with 2 parameteres
+	 */
 	public User(String userID, String password) {
 		super();
 		setUserID(userID);
@@ -87,7 +89,10 @@ public class User extends DBtranslation implements UserStatus {
 	public String getUserID() {
 		return userID;
 	}
-
+/**
+ * Setter of user ID
+ * @param userID which is the user ID we want to update/insert
+ */
 	public void setUserID(String userID) {
 		if (userID == null || userID.equals("") || Validation.regularValidation(userID) == false)
 			throw new InputMismatchException("you have  inserted wrong userName");
@@ -99,7 +104,10 @@ public class User extends DBtranslation implements UserStatus {
 	public String getPassword() {
 		return password;
 	}
-
+	/**
+	 * Setter of user Password
+	 * @param password which is the user password we want to update/insert
+	 */
 	public void setPassword(String password) {
 		if (password == null || password.equals("") || Validation.PasswordValidation(password) == false)
 			throw new InputMismatchException("you have  inserted wrong password");
@@ -111,7 +119,10 @@ public class User extends DBtranslation implements UserStatus {
 	public String getIdentityNumber() {
 		return identityNumber;
 	}
-
+	/**
+	 * Setter of user Identity Number
+	 * @param identityNumber which is the user identity Number we want to update/insert
+	 */
 	public void setIdentityNumber(String identityNumber) {
 		if (identityNumber == null || identityNumber.equals("") || Validation.UserIDValidation(identityNumber) == false)
 			throw new InputMismatchException("you have  inserted wrong identity Number");
@@ -123,7 +134,10 @@ public class User extends DBtranslation implements UserStatus {
 	public String getFirstName() {
 		return firstName;
 	}
-
+	/**
+	 * Setter of user First Name
+	 * @param firstName which is the user first Name we want to update/insert
+	 */
 	public void setFirstName(String firstName) {
 		if (firstName == null || firstName.equals("")
 				|| Validation.NameValidation(firstName, UserStatus.FNAMESIZE) == false)
@@ -136,7 +150,10 @@ public class User extends DBtranslation implements UserStatus {
 	public String getLastName() {
 		return lastName;
 	}
-
+	/**
+	 * Setter of user Last Name
+	 * @param lastName which is the user last Name we want to update/insert
+	 */
 	public void setLastName(String lastName) {
 		if (lastName == null || lastName.equals("")
 				|| Validation.NameValidation(lastName, UserStatus.LNAMESIZE) == false)
@@ -149,7 +166,10 @@ public class User extends DBtranslation implements UserStatus {
 	public int getUserStatus() {
 		return userStatus;
 	}
-
+	/**
+	 * Setter of user Status
+	 * @param userStatus which is the user Status we want to update/insert
+	 */
 	public void setUserStatus(int userStatus) {
 		switch (userStatus) {
 		case CONNECTED:
@@ -172,7 +192,10 @@ public class User extends DBtranslation implements UserStatus {
 	public int getSubscriptionMethod() {
 		return subscriptionMethod;
 	}
-
+	/**
+	 * Setter of user Subscription Method
+	 * @param subscriptionMethod which is the user subscription Method we want to update/insert
+	 */
 	public void setSubscriptionMethod(int subscriptionMethod) {
 		switch (subscriptionMethod) {
 		case NONE:
@@ -192,7 +215,10 @@ public class User extends DBtranslation implements UserStatus {
 		}
 
 	}
-
+	/**
+	 * Setter of user Privilege
+	 * @param privilege which is the user privilege we want to update/insert
+	 */
 	public void setPrivilege(int privilege) {
 		switch (privilege) {
 		case USER:
@@ -223,7 +249,10 @@ public class User extends DBtranslation implements UserStatus {
 	public int getSubscriptionRequest() {
 		return subscriptionRequest;
 	}
-
+	/**
+	 * Setter of user SubscriptionRequest
+	 * @param subscriptionRequest which is the user subscription Request we want to update/insert
+	 */
 	public void setSubscriptionRequest(int subscriptionRequest) {
 		switch (subscriptionRequest) {
 		case NONE:
@@ -248,7 +277,10 @@ public class User extends DBtranslation implements UserStatus {
 	public Date getFinishDateOfSubscription() {
 		return finishDateOfSubscription;
 	}
-
+	/**
+	 * Setter of user Finish Date Of Subscription
+	 * @param finishDateOfSubscription which is the user finish Date Of Subscription we want to update/insert
+	 */
 	public void setFinishDateOfSubscription(Date finishDateOfSubscription) {
 		if (finishDateOfSubscription /*!*/== null/* && finishDateOfSubscription.before(Calendar.getInstance().getTime())*/)// almog change it becouse i think this check is not right.
 			throw new InputMismatchException("you insert wrong date");
@@ -292,6 +324,7 @@ public class User extends DBtranslation implements UserStatus {
 	 * @param arr this is array of DBgenericObject which will convert to suitable to User entity
 	 * @param fromSentence This is 'Select' query we want to get back.
 	 * @return  ArrayList<User> which is the converted list the method create
+	 * @author Kfir Girstein
 	 */
 	public static ArrayList<User> convertBack(ArrayList<DBgenericObject> arr, String selectSentence) {
 		ArrayList<User> convertedArr = new ArrayList<User>();
@@ -312,6 +345,7 @@ public class User extends DBtranslation implements UserStatus {
 	 * @param ob This is a DBgenericObject which we need to get value from him- it is the object who return from DB
 	 * @param fromSentenceArray This is 'Select' query we want to get back.
 	 * @return User This User is ready with the parameters from DB
+	 * @author Kfir Girstein
 	 */
 	private static User convertDBObject(DBgenericObject ob, String fromSentenceArray) {
 		User recover = new User();
