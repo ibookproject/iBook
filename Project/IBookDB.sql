@@ -110,14 +110,14 @@ DROP TABLE IF EXISTS `libraryworker`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `libraryworker` (
-  `workerID` bigint(19) NOT NULL AUTO_INCREMENT,
-  `role` varchar(255) NOT NULL DEFAULT '1',
+  `workerID` varchar(255) NOT NULL,
+  `role` int(11) NOT NULL,
   `department` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `firstName` varchar(45) NOT NULL,
   `lastName` varchar(45) NOT NULL,
   PRIMARY KEY (`workerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `libraryworker` (
 
 LOCK TABLES `libraryworker` WRITE;
 /*!40000 ALTER TABLE `libraryworker` DISABLE KEYS */;
-INSERT INTO `libraryworker` (`workerID`, `role`, `department`, `email`, `firstName`, `lastName`) VALUES (3,'3','library worker','3@gmail.com','',''),(4,'4','library worker','4@gmail.com','',''),(5,'5','library worker','5@gmail.com','',''),(6,'6','manager','6@gmail.com','','');
+INSERT INTO `libraryworker` (`workerID`, `role`, `department`, `email`, `firstName`, `lastName`) VALUES ('3',3,'library worker','3@gmail.com','a','a'),('4',4,'library worker','4@gmail.com','b','b'),('5',5,'library worker','5@gmail.com','c','c'),('6',6,'manager','6@gmail.com','d','d');
 /*!40000 ALTER TABLE `libraryworker` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` (`reviewID`, `reviewDate`, `reviewContent`, `reviewStatus`, `bookID`, `userSign`) VALUES (1,'2016-05-09','Good summary!',0,1,'1'),(2,'2016-05-04','excellent author',0,1,'2'),(3,'2015-06-07','One of the finest books made in recent years.',0,1,'4'),(4,'2016-05-06','He shines when it is his time to go back into the world.',0,2,'5'),(5,'2015-06-08','This is simply one of the best books ever made and I know.',1,3,'6'),(6,'2016-05-09','very boring book!',0,4,'7'),(7,'2015-06-07','awsome!!',0,4,'8'),(8,'2016-07-06','I have never seen such an amazing book since I saw The Shawshank Redemption.',0,12,'1'),(9,'2017-01-21','What makes this book one of the best ever made is the message it conveys.',0,1,'2'),(10,'2016-04-03','It is a simple book, yet it has an everlasting message.',0,14,'3'),(11,'2016-04-03','Set aside a little over two hours tonight and buy this book.',0,15,'4'),(12,'2015-04-23','Can Hollywood, usually creating things for entertainment purposes only, create art?',0,17,'5'),(13,'2016-04-03','While maintaining some of the poetic and moving dialogue of the novella',0,19,'6'),(14,'2015-11-15','The story begins with the trial of a young banker, Andy Dufrense, victimized by circumstantial evidence',0,18,'1'),(15,'2015-11-15','With work from vast array of talented scene designers, costume designers, composers, cinematographers.',0,12,'4'),(16,'2015-12-16','This book manages to redeem Hollywood in the eyes of people who feared it long lost in a dark sea of clichés and predictability.',0,12,'5'),(17,'2015-12-22','Firstly, its setting. The opening aerial shots of the prison are a total eye-opener. This is an amazing piece of architecture, strong and Gothic in design. Immediately, the prison becomes a character.',0,12,'6'),(18,'2015-11-28','With themes of faith and hope, there is a definite religious subtext to be found here.',0,12,'4'),(19,'2016-04-03','The reason I became a member of this database is because I finally found a book ranking that recognized the true greatness of this book.',0,1,'3'),(20,'2015-11-15','I was so impressed with how every single subplot was given a great deal of respect and attention from the author.',0,1,'2'),(21,'2015-01-09','One of my all time favorites.',0,1,'6'),(22,'2014-10-12','If you haven\'t read this book,GO AND buy IT NOW. ',0,3,'5'),(23,'2014-05-04','It is the story of Andy Dufresne, played by Tim Robbins and his time at Shawshank Prison. It is a perspective of what it is to be human and to have hope for the future even in the face of insurmountable adversity. ',0,23,'2'),(24,'2014-09-08','If there is a book by which other books should be judged.',0,25,'3'),(25,'2016-04-03','I don\'t know how to write a good book review so I guess telling you what I feel about it may do better.',0,27,'1'),(26,'2015-11-15','What I don`t like about it is the amount of cliches.',0,26,'1'),(27,'2014-10-12','There`s also some outstanding touches from author.',0,26,'5'),(34,'2017-01-25','sdfa',0,1,'6'),(35,'2017-01-25','asfd',0,1,'6'),(36,'2017-01-25','dsfds',0,1,'6'),(37,'2017-01-25','sdf',0,1,'6');
+INSERT INTO `review` (`reviewID`, `reviewDate`, `reviewContent`, `reviewStatus`, `bookID`, `userSign`) VALUES (1,'2016-05-09','Good summary',1,1,'1'),(2,'2016-05-04','excellent author',1,1,'2'),(3,'2015-06-07','One of the finest books made in recent years.',0,1,'4'),(4,'2016-05-06','He shines when it is his time to go back into the world.',0,2,'5'),(5,'2015-06-08','This is simply one of the best books ever made and I know.',1,3,'6'),(6,'2016-05-09','very boring book!',0,4,'7'),(7,'2015-06-07','awsome!!',0,4,'8'),(8,'2016-07-06','I have never seen such an amazing book since I saw The Shawshank Redemption.',0,12,'1'),(9,'2017-01-21','What makes this book one of the best ever made is the message it conveys.',0,1,'2'),(10,'2016-04-03','It is a simple book, yet it has an everlasting message.',0,14,'3'),(11,'2016-04-03','Set aside a little over two hours tonight and buy this book.',0,15,'4'),(12,'2015-04-23','Can Hollywood, usually creating things for entertainment purposes only, create art?',0,17,'5'),(13,'2016-04-03','While maintaining some of the poetic and moving dialogue of the novella',0,19,'6'),(14,'2015-11-15','The story begins with the trial of a young banker, Andy Dufrense, victimized by circumstantial evidence',0,18,'1'),(15,'2015-11-15','With work from vast array of talented scene designers, costume designers, composers, cinematographers.',0,12,'4'),(16,'2015-12-16','This book manages to redeem Hollywood in the eyes of people who feared it long lost in a dark sea of clichés and predictability.',0,12,'5'),(17,'2015-12-22','Firstly, its setting. The opening aerial shots of the prison are a total eye-opener. This is an amazing piece of architecture, strong and Gothic in design. Immediately, the prison becomes a character.',0,12,'6'),(18,'2015-11-28','With themes of faith and hope, there is a definite religious subtext to be found here.',0,12,'4'),(19,'2016-04-03','The reason I became a member of this database is because I finally found a book ranking that recognized the true greatness of this book.',0,1,'3'),(20,'2015-11-15','I was so impressed with how every single subplot was given a great deal of respect and attention from the author.',0,1,'2'),(21,'2015-01-09','One of my all time favorites.',0,1,'6'),(22,'2014-10-12','If you haven\'t read this book,GO AND buy IT NOW. ',0,3,'5'),(23,'2014-05-04','It is the story of Andy Dufresne, played by Tim Robbins and his time at Shawshank Prison. It is a perspective of what it is to be human and to have hope for the future even in the face of insurmountable adversity. ',0,23,'2'),(24,'2014-09-08','If there is a book by which other books should be judged.',0,25,'3'),(25,'2016-04-03','I don\'t know how to write a good book review so I guess telling you what I feel about it may do better.',0,27,'1'),(26,'2015-11-15','What I don`t like about it is the amount of cliches.',0,26,'1'),(27,'2014-10-12','There`s also some outstanding touches from author.',0,26,'5'),(34,'2017-01-25','sdfa',0,1,'6'),(35,'2017-01-25','asfd',0,1,'6'),(36,'2017-01-25','dsfds',0,1,'6'),(37,'2017-01-25','sdf',0,1,'6');
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,4 +283,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-25 16:30:04
+-- Dump completed on 2017-01-27 11:51:50

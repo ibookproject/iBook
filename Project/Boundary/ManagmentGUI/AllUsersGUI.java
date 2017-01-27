@@ -24,11 +24,15 @@ import javax.swing.border.MatteBorder;
 import Book.Book;
 import Book.Domain;
 import Controller.UserController;
+import Controller.WorkerController;
 import Extras.Validation;
 import Controller.BookController;
 import MenuGUI.LoginGUI;
 import Panels.BookStatisticsPanel;
 import Panels.UserSubscriptionPanel;
+import Panels.UsersPanel;
+import Panels.WorkersPanel;
+import Role.LibraryWorker;
 import Role.User;
 import client.DBgenericObject;
 
@@ -41,7 +45,8 @@ public class AllUsersGUI extends JPanel {
 	public JButton btnBack;
 	private LoginGUI screen;
 	private JPanel pann;
-	private ArrayList<Book> tempBooks;
+	private ArrayList<User> tempUsers;
+	private ArrayList<LibraryWorker> tempWorkers;
 
 	public AllUsersGUI(LoginGUI screen) {
 		super();
@@ -83,11 +88,69 @@ public class AllUsersGUI extends JPanel {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JButton btnUsers = new JButton("Show Users");
-		btnUsers.setBounds(206, 88, 108, 30);
+		btnUsers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//////////////////////// button to back panel from panel
+				//////////////////////// /////////////////////////////////////////////
+				StatisticsBookReport sbr = new StatisticsBookReport(screen);
+				sbr.btnBack.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						screen.setContentPane(pann);
+					}
+					//////////////////////// button to back panel from
+					//////////////////////// panel/////////////////////////////////////////////
+				});
+				panel.removeAll();
+
+							User u = new User(); // create
+							tempUsers = UserController.SearchUser("userID,identityNumber,firstName,lastName", u,"userID <> 0" ,screen.getClient());
+							
+							if (tempUsers != null) {
+								for (User ut : tempUsers)
+									panel.add(new UsersPanel(screen, ut));
+								panel.updateUI();
+							} else
+							{
+								JOptionPane.showMessageDialog(screen, "The request FAILD", "Warning",
+										JOptionPane.WARNING_MESSAGE);
+								panel.updateUI();
+							}
+		}});
+		btnUsers.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnUsers.setBounds(206, 90, 149, 30);
 		add(btnUsers);
 		
 		JButton btnWorkers = new JButton("Show Workers");
-		btnWorkers.setBounds(562, 92, 108, 30);
+		btnWorkers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//////////////////////// button to back panel from panel
+				//////////////////////// /////////////////////////////////////////////
+				StatisticsBookReport sbr = new StatisticsBookReport(screen);
+				sbr.btnBack.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						screen.setContentPane(pann);
+					}
+					//////////////////////// button to back panel from
+					//////////////////////// panel/////////////////////////////////////////////
+				});
+				panel.removeAll();
+
+							LibraryWorker lu = new LibraryWorker(); // create
+							tempWorkers = WorkerController.SearchWorker("workerID,department,firstName,lastName,role,email",lu,"workerID <> 0",screen.getClient());
+							
+							if (tempWorkers != null) {
+								for (LibraryWorker lut : tempWorkers)
+									panel.add(new WorkersPanel(screen, lut));
+								panel.updateUI();
+							} else
+							{
+								JOptionPane.showMessageDialog(screen, "The request FAILD", "Warning",
+										JOptionPane.WARNING_MESSAGE);
+								panel.updateUI();
+							}
+		}});
+		btnWorkers.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnWorkers.setBounds(562, 90, 184, 30);
 		add(btnWorkers);
 		Book b = new Book();
 

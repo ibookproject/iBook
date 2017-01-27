@@ -92,7 +92,7 @@ public class LibraryWorker extends DBtranslation implements UserStatus {
 
 	@Override
 	public String getClassName() {
-		return "user";
+		return "libraryworker";
 	}
 
 	@Override

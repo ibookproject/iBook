@@ -33,7 +33,6 @@ import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
 public class UsersPanel extends JPanel{
-	private ArrayList<Book> Books;
 	private LoginGUI screen;
 	private JLabel lblAnswerfromserver;
 //	private java.util.Date date;

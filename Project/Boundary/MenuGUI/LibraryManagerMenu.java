@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Rectangle;
 
+import ManagmentGUI.AllUsersGUI;
 import ManagmentGUI.BookRateGUI;
 import ManagmentGUI.StatisticsBookReportGUI;
 import ManagmentGUI.StatisticsUserReportGUI;
@@ -143,6 +144,25 @@ public class LibraryManagerMenu extends LibrarianMenu {
 		btnBookrate.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnBookrate);
 	
+		JButton btnAllUsers = new JButton("All Users");
+		btnAllUsers.setIcon(new ImageIcon("Extras/Images/allUsers.png"));
+		btnAllUsers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+////////////////////////button to back panel from panel /////////////////////////////////////////////
+				AllUsersGUI au=new AllUsersGUI(screen);
+				au.btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				screen.setContentPane(pann);
+			}
+		////////////////////////button to back panel from panel/////////////////////////////////////////////
+		});
+		screen.setContentPane(au);//send to search book window
+			}
+		});
+		btnAllUsers.setBounds(651, 444, 189, 53);
+		btnAllUsers.setFont(new Font("Tahoma", Font.BOLD, 13));
+		add(btnAllUsers);
+		
 	}
 
 

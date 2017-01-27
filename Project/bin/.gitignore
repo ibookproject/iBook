@@ -1,14 +1,6 @@
-/Book/
-/Controller/
-/DB/
-/Extras/
-/Fixtures/
+/Images/
 /ManagmentGUI/
-/MemberGUI/
 /MenuGUI/
-/Panels/
 /Role/
-/TestCase/
-/client/
-/command/
-/ocsf/
+/Panels/
+/Controller/
