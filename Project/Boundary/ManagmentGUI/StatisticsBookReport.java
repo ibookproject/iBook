@@ -65,9 +65,12 @@ public class StatisticsBookReport extends JPanel {
 
 		initialize();
 	}
+
 	/**
-	 * This method initialize The statistics book report-put the components on the screen and set their functionality
-	 * @author Sagi Entenberg
+	 * This method initialize The statistics book report-put the components on
+	 * the screen and set their functionality
+	 * 
+	 * @author Almog Yamin
 	 */
 	private void initialize() {
 
@@ -77,7 +80,7 @@ public class StatisticsBookReport extends JPanel {
 		JLabel lblHeader = new JLabel("Statistics Book Report");
 		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHeader.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		lblHeader.setBounds(325, 49, 240, 22);
+		lblHeader.setBounds(325, 40, 240, 40);
 		add(lblHeader);
 
 		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");

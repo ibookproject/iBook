@@ -76,8 +76,8 @@ public class TemporaryRemoveBookGUI extends JPanel {
 
 		JLabel lblHeader = new JLabel("Temporary Remove Book");
 		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHeader.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 21));
-		lblHeader.setBounds(242, 32, 257, 53);
+		lblHeader.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
+		lblHeader.setBounds(325, 40, 279, 40);
 		add(lblHeader);
 
 		JLabel lblNameOfAuthor = new JLabel("name of author:");
@@ -223,12 +223,12 @@ public class TemporaryRemoveBookGUI extends JPanel {
 			}
 			
 		});
-		btnSearch.setBounds(125, 288, 120, 39);
+		btnSearch.setBounds(125, 288, 120, 30);
 		add(btnSearch);
 
 		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 
 		JButton btnNewButton = new JButton("");

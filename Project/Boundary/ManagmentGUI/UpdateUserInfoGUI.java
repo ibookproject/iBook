@@ -74,7 +74,7 @@ public class UpdateUserInfoGUI extends JPanel {
 
 		JLabel lblTitel = new JLabel("Update User Information");
 		lblTitel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		lblTitel.setBounds(341, 30, 263, 45);
+		lblTitel.setBounds(325, 40, 276, 40);
 		add(lblTitel);
 
 		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
@@ -133,7 +133,7 @@ public class UpdateUserInfoGUI extends JPanel {
 			}
 		});
 		btnUpdate.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnUpdate.setBounds(690, 553, 115, 40);
+		btnUpdate.setBounds(675, 539, 115, 40);
 		add(btnUpdate);
 
 		PrivilagecomboBox = new JComboBox();

@@ -80,12 +80,12 @@ public class StatisticsUserReportGUI extends JPanel
 		userReportLbl = new JLabel("Statistics User Report");
 		userReportLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		userReportLbl.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		userReportLbl.setBounds(355, 49, 236, 22);
+		userReportLbl.setBounds(325, 40, 236, 40);
 		add(userReportLbl);
 		
 		backIcon =new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);// declaration of back button
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 		
 

@@ -35,6 +35,12 @@ import client.DBgenericObject;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+/**
+ * The Class shows all the books by searching book by his author or title and
+ * the manager can make an statistics report by date (HISTOGRAMA) of each book.
+ * 
+ * @author Almog Yamin
+ */
 public class StatisticsBookReportGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -45,6 +51,13 @@ public class StatisticsBookReportGUI extends JPanel {
 	private JTextField textFieldAuthor;
 	private ArrayList<Book> tempBooks;
 
+	/**
+	 * Constructor of the StatisticsBookReportGUI class
+	 * 
+	 * @param screen
+	 *            This is the main window-login extends JFrame
+	 * @author Almog Yamin
+	 */
 	public StatisticsBookReportGUI(LoginGUI screen) {
 		super();
 		this.screen = screen;
@@ -53,6 +66,15 @@ public class StatisticsBookReportGUI extends JPanel {
 		initialize();
 	}
 
+	/**
+	 * This method initialize The statistics book report gui-put the components
+	 * on the screen and set their functionality. the manager can search a book
+	 * by his title or author and get a list of books. then he choose from a
+	 * calendar dates and go to other panel that shows him the statistics book
+	 * for this book.
+	 * 
+	 * @author Almog Yamin
+	 */
 	private void initialize() {
 
 		this.setSize(850, 625);
@@ -61,39 +83,39 @@ public class StatisticsBookReportGUI extends JPanel {
 		JLabel lblNewLabel = new JLabel("Statistics Book Report");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
-		lblNewLabel.setBounds(355, 49, 234, 22);
+		lblNewLabel.setBounds(325, 40, 245, 40);
 		add(lblNewLabel);
 
 		ImageIcon backIcon = new ImageIcon("Extras/Images/backIcon.png");
 		btnBack = new JButton(backIcon);
-		btnBack.setBounds(39, 52, 89, 23);
+		btnBack.setBounds(35, 25, 89, 30);
 		add(btnBack);
 
 		JLabel lblBookName = new JLabel("Book title:");
 		lblBookName.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblBookName.setBounds(147, 111, 91, 19);
+		lblBookName.setBounds(122, 110, 91, 19);
 		add(lblBookName);
 
 		textFieldBookTitle = new JTextField();
 		textFieldBookTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textFieldBookTitle.setColumns(10);
-		textFieldBookTitle.setBounds(245, 105, 148, 30);
+		textFieldBookTitle.setBounds(220, 104, 148, 30);
 		add(textFieldBookTitle);
 
 		JLabel lblAuthor = new JLabel("Author name:");
 		lblAuthor.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblAuthor.setBounds(417, 111, 112, 19);
+		lblAuthor.setBounds(392, 110, 112, 19);
 		add(lblAuthor);
 
 		textFieldAuthor = new JTextField();
 		textFieldAuthor.setColumns(10);
-		textFieldAuthor.setBounds(535, 105, 148, 30);
+		textFieldAuthor.setBounds(510, 104, 148, 30);
 		add(textFieldAuthor);
 
 		JScrollPane scrollPaneMain = new JScrollPane();
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
-		scrollPaneMain.setBounds(125, 159, 690, 393);
+		scrollPaneMain.setBounds(100, 158, 690, 393);
 		add(scrollPaneMain);
 
 		JPanel panel = new JPanel();
@@ -121,7 +143,11 @@ public class StatisticsBookReportGUI extends JPanel {
 				});
 				panel.removeAll();
 
-				if ((textFieldBookTitle.getText().isEmpty()) && (textFieldAuthor.getText().isEmpty()))// check if field are empty
+				if ((textFieldBookTitle.getText().isEmpty()) && (textFieldAuthor.getText().isEmpty()))// check
+																										// if
+																										// field
+																										// are
+																										// empty
 					JOptionPane.showMessageDialog(screen, "you must fill one field at least ", "Warning",
 							JOptionPane.WARNING_MESSAGE);
 				else {
@@ -129,46 +155,45 @@ public class StatisticsBookReportGUI extends JPanel {
 					if (Validation.AuthorValidation(textFieldAuthor.getText().trim(), 20) == false)
 						if (!textFieldAuthor.getText().isEmpty())
 							warnings += "author field - Must contain only English letters \n";
-					if (Validation.TitleValidation(textFieldBookTitle.getText().trim(), 20) == false) // check validation fields
+					if (Validation.TitleValidation(textFieldBookTitle.getText().trim(), 20) == false) // check
+																										// validation
+																										// fields
 						if (!textFieldBookTitle.getText().isEmpty())
 							warnings += "title field - Must contain only English letters or numbers\n";
-						if (warnings == "ERROR :\n") {
-							Book b = new Book(); // create
-							if (textFieldBookTitle.getText().isEmpty())
-								tempBooks = BookController.SearchBook("title,author,bookID", b,
-										"author LIKE '%" + textFieldAuthor.getText().trim() + "%'", screen.getClient());
-							else if (textFieldAuthor.getText().isEmpty())
-								tempBooks = BookController.SearchBook("title,author,bookID", b,
-										"title LIKE '%" + textFieldBookTitle.getText().trim() + "%'",
-										screen.getClient());
-							else {
-								tempBooks = BookController.SearchBook("title,author,bookID", b,
-										"title LIKE '%" + textFieldBookTitle.getText().trim() + "%'" + " && "
-												+ "author LIKE '%" + textFieldAuthor.getText().trim() + "%'",
-										screen.getClient());
-							}
-							if (tempBooks != null) {
-								for (Book bt : tempBooks)
-									panel.add(new BookStatisticsPanel(screen, bt, pann));
-								panel.updateUI();
-							} else
-							{
-								JOptionPane.showMessageDialog(screen, "The book is not found!", "Warning",
-										JOptionPane.WARNING_MESSAGE);
-								panel.updateUI();
-							}
-							textFieldBookTitle.setText("");
-							textFieldAuthor.setText("");
-							
+					if (warnings == "ERROR :\n") {
+						Book b = new Book(); // create
+						if (textFieldBookTitle.getText().isEmpty())
+							tempBooks = BookController.SearchBook("title,author,bookID", b,
+									"author LIKE '%" + textFieldAuthor.getText().trim() + "%'", screen.getClient());
+						else if (textFieldAuthor.getText().isEmpty())
+							tempBooks = BookController.SearchBook("title,author,bookID", b,
+									"title LIKE '%" + textFieldBookTitle.getText().trim() + "%'", screen.getClient());
+						else {
+							tempBooks = BookController.SearchBook("title,author,bookID", b,
+									"title LIKE '%" + textFieldBookTitle.getText().trim() + "%'" + " && "
+											+ "author LIKE '%" + textFieldAuthor.getText().trim() + "%'",
+									screen.getClient());
 						}
-					else {
+						if (tempBooks != null) {
+							for (Book bt : tempBooks)
+								panel.add(new BookStatisticsPanel(screen, bt, pann));
+							panel.updateUI();
+						} else {
+							JOptionPane.showMessageDialog(screen, "The book is not found!", "Warning",
+									JOptionPane.WARNING_MESSAGE);
+							panel.updateUI();
+						}
+						textFieldBookTitle.setText("");
+						textFieldAuthor.setText("");
+
+					} else {
 						JOptionPane.showMessageDialog(screen, warnings, "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
 
 		});
-		btnSearch.setBounds(710, 103, 89, 30);
+		btnSearch.setBounds(685, 102, 89, 30);
 		add(btnSearch);
 
 	}
