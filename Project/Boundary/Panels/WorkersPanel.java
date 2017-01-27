@@ -40,7 +40,7 @@ public class WorkersPanel extends JPanel{
 	
 	public WorkersPanel(LoginGUI screen,LibraryWorker lw) {
 		setBackground(Color.WHITE);
-		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 139, 87)));
+		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(50, 100, 150)));
 		setPreferredSize(new Dimension(577, 138));
 		setLayout(null);
 		
@@ -51,7 +51,7 @@ public class WorkersPanel extends JPanel{
 		
 		JLabel lblWorkerIDdb = new JLabel(lw.getWorkerID());
 		lblWorkerIDdb.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblWorkerIDdb.setBounds(157, 10, 141, 20);
+		lblWorkerIDdb.setBounds(140, 10, 141, 20);
 		add(lblWorkerIDdb);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
@@ -60,8 +60,8 @@ public class WorkersPanel extends JPanel{
 		add(lblFirstName);
 		
 		JLabel lblFirstnamedb = new JLabel(lw.getFirstName());
-		lblFirstnamedb.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblFirstnamedb.setBounds(157, 40, 141, 20);
+		lblFirstnamedb.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblFirstnamedb.setBounds(140, 40, 141, 20);
 		add(lblFirstnamedb);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
@@ -70,8 +70,8 @@ public class WorkersPanel extends JPanel{
 		add(lblLastName);
 		
 		JLabel lblLastnamedb = new JLabel(lw.getLastName());
-		lblLastnamedb.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblLastnamedb.setBounds(157, 70, 141, 20);
+		lblLastnamedb.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblLastnamedb.setBounds(140, 70, 141, 20);
 		add(lblLastnamedb);
 		
 		String roleName="";
@@ -93,12 +93,12 @@ public class WorkersPanel extends JPanel{
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblEmail.setBounds(260, 10, 147, 20);
+		lblEmail.setBounds(275, 10, 147, 20);
 		add(lblEmail);
 		
 		JLabel lblRole = new JLabel("Role:");
 		lblRole.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblRole.setBounds(260, 40, 147, 20);
+		lblRole.setBounds(275, 40, 147, 20);
 		add(lblRole);
 		
 		JLabel lblDepartment = new JLabel("Department:");
@@ -108,17 +108,17 @@ public class WorkersPanel extends JPanel{
 		
 		JLabel lblEmailDB = new JLabel(lw.getEmail());
 		lblEmailDB.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblEmailDB.setBounds(415, 10, 141, 20);
+		lblEmailDB.setBounds(374, 10, 141, 20);
 		add(lblEmailDB);
 		
 		JLabel lblRoleDB = new JLabel(roleName);
 		lblRoleDB.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblRoleDB.setBounds(415, 40, 141, 20);
+		lblRoleDB.setBounds(374, 40, 183, 20);
 		add(lblRoleDB);
 		
 		JLabel lblDepartmentDB = new JLabel(lw.getdepartment());
 		lblDepartmentDB.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDepartmentDB.setBounds(157, 100, 141, 20);
+		lblDepartmentDB.setBounds(140, 100, 141, 20);
 		add(lblDepartmentDB);
 		
 			

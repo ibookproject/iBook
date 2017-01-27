@@ -42,7 +42,7 @@ public class LibraryWorker extends DBtranslation implements UserStatus {
 	}
 
 	public String getFirstName() {
-		return department;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {

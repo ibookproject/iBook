@@ -39,7 +39,7 @@ public class UsersPanel extends JPanel{
 	
 	public UsersPanel(LoginGUI screen,User u) {
 		setBackground(Color.WHITE);
-		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 139, 87)));
+		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 200, 200)));
 		setPreferredSize(new Dimension(577, 138));
 		setLayout(null);
 		
@@ -50,7 +50,7 @@ public class UsersPanel extends JPanel{
 		
 		JLabel lblUderiddb = new JLabel(u.getUserID());
 		lblUderiddb.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblUderiddb.setBounds(191, 10, 141, 20);
+		lblUderiddb.setBounds(170, 10, 141, 20);
 		add(lblUderiddb);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
@@ -59,8 +59,8 @@ public class UsersPanel extends JPanel{
 		add(lblFirstName);
 		
 		JLabel lblFirstnamedb = new JLabel(u.getFirstName());
-		lblFirstnamedb.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblFirstnamedb.setBounds(191, 40, 141, 20);
+		lblFirstnamedb.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblFirstnamedb.setBounds(170, 40, 141, 20);
 		add(lblFirstnamedb);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
@@ -69,32 +69,19 @@ public class UsersPanel extends JPanel{
 		add(lblLastName);
 		
 		JLabel lblLastnamedb = new JLabel(u.getLastName());
-		lblLastnamedb.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblLastnamedb.setBounds(191, 70, 141, 20);
+		lblLastnamedb.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblLastnamedb.setBounds(170, 70, 141, 20);
 		add(lblLastnamedb);
 		
 		JLabel lblIdentityNumber = new JLabel("Identity Number:");
 		lblIdentityNumber.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblIdentityNumber.setBounds(22, 100, 161, 20);
 		add(lblIdentityNumber);
-		
-		String choose="";
-		switch(u.getSubscriptionRequest())
-		{
-			case UserStatus.SINGLE:
-				choose = "Single";
-				break;
-			case UserStatus.MONTHLY:
-				choose = "Monthly";
-				break;
-			case UserStatus.YEARLY:
-				choose = "Yearly";
-				break;
-		};
 
-		JLabel lblIdentityNumberdb = new JLabel(choose);
-		lblIdentityNumberdb.setForeground(Color.BLUE);
-		lblIdentityNumberdb.setBounds(191, 100, 141, 20);
+		JLabel lblIdentityNumberdb = new JLabel(u.getIdentityNumber());
+		lblIdentityNumberdb.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblIdentityNumberdb.setForeground(Color.BLACK);
+		lblIdentityNumberdb.setBounds(170, 100, 141, 20);
 		add(lblIdentityNumberdb);
 		
 		lblAnswerfromserver = new JLabel();
