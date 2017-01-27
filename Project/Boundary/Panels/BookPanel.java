@@ -27,6 +27,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 /**
  * @author Coral Carmeli
  * This class presents the panel of the book which shown in the Search book method			
@@ -35,12 +37,12 @@ import javax.swing.ScrollPaneConstants;
 public class BookPanel extends JPanel{
 	
 	private LoginGUI screen;
-	private JLabel lblNewTitle;
-	private JLabel lblNewLanguage;
+	private JLabel lblTitleDB;
+	private JLabel lblLanguageDB;
 	private JLabel lblLanguage;
 	private JButton btnPostReview;
-	private JLabel lblAutor;
-	private JLabel lblNewAutor;
+	private JLabel lblAuthor;
+	private JLabel lblAuthorDB;
 	private JLabel lblSummary;
 	private SearchBook pann;
 	private JLabel lblTitle;
@@ -62,7 +64,7 @@ public class BookPanel extends JPanel{
 		pann=pan;
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(51, 102, 204)));
-		setPreferredSize(new Dimension(731, 212));
+		setPreferredSize(new Dimension(731, 214));
 		setLayout(null);
 		/**
 		 * This button is the Post Review button- when the user press on him he goes to a window there 
@@ -126,54 +128,54 @@ public class BookPanel extends JPanel{
 		});
 		}
 		lblLanguage = new JLabel("Language:");
-		lblLanguage.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
-		lblLanguage.setBounds(203, 41, 117, 37);
+		lblLanguage.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblLanguage.setBounds(10, 45, 117, 30);
 		add(lblLanguage);
 		
-		lblNewTitle = new JLabel(b.getTitle());
-		lblNewTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewTitle.setBounds(69, 51, 122, 23);
-		add(lblNewTitle);
+		lblTitleDB = new JLabel(b.getTitle());
+		lblTitleDB.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTitleDB.setBounds(125, 15, 130, 30);
+		add(lblTitleDB);
 		
-		lblNewLanguage = new JLabel(b.getLanguage());
-		lblNewLanguage.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLanguage.setBounds(317, 51, 109, 23);
-		add(lblNewLanguage);
+		lblLanguageDB = new JLabel(b.getLanguage());
+		lblLanguageDB.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLanguageDB.setBounds(125, 45, 130, 30);
+		add(lblLanguageDB);
 		
-		lblAutor = new JLabel("Autor:");
-		lblAutor.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
-		lblAutor.setBounds(424, 52, 70, 22);
-		add(lblAutor);
+		lblAuthor = new JLabel("Author:");
+		lblAuthor.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblAuthor.setBounds(10, 75, 77, 30);
+		add(lblAuthor);
 		
-		lblNewAutor = new JLabel(b.getAuthor());
-		lblNewAutor.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewAutor.setBounds(495, 51, 130, 31);
-		add(lblNewAutor);
+		lblAuthorDB = new JLabel(b.getAuthor());
+		lblAuthorDB.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblAuthorDB.setBounds(125, 75, 130, 31);
+		add(lblAuthorDB);
 		
 		lblSummary = new JLabel("Summary:");
-		lblSummary.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
-		lblSummary.setBounds(12, 80, 122, 37);
+		lblSummary.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblSummary.setBounds(10, 105, 122, 30);
 		add(lblSummary);
 		
 		lblTitle = new JLabel("Title:");
-		lblTitle.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
-		lblTitle.setBounds(12, 48, 56, 23);
+		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTitle.setBounds(10, 15, 56, 30);
 		add(lblTitle);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setAutoscrolls(true);
-		scrollPane.setBounds(124, 83, 289, 116);
+		scrollPane.setBounds(125, 110, 289, 90);
 		add(scrollPane);
 		
 		textAreaSummary = new JTextArea();
 		textAreaSummary.setEditable(false);
-		textAreaSummary.setFont(new Font("Monospaced", Font.PLAIN, 17));
+		textAreaSummary.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		textAreaSummary.setLineWrap(true);
 		textAreaSummary.setWrapStyleWord(true);
 		scrollPane.setViewportView(textAreaSummary);
 		textAreaSummary.setRows(4);
-		textAreaSummary.setBackground(new Color(153, 204, 255));
+		textAreaSummary.setBackground(new Color(0, 250, 154));
 		textAreaSummary.setForeground(new Color(0, 0, 0));
 		textAreaSummary.setText(b.getSummary());  
 	}

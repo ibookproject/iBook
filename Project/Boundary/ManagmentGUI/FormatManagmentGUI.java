@@ -404,7 +404,7 @@ public class FormatManagmentGUI extends JPanel {
 					else JOptionPane.showMessageDialog(screen,"no Chossen Subject & any book's", "Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		});
-		btnAtachBook.setBounds(49, 533, 215, 32);
+		btnAtachBook.setBounds(31, 533, 252, 32);
 		add(btnAtachBook);
 	
 		ImageIcon backIcon =new ImageIcon("Extras/Images/backIcon.png");

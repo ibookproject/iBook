@@ -35,7 +35,7 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 //	public LibrarianMenu() {} // empty constructor just for "labriran manager worker" that extend will no have errors ... 
 
 	/**
-	 * This method initializes StudentForm
+	 * This method initializes QualifiedEditorMenu
 	 */
 	private void initialize() {
 		
