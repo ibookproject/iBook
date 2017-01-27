@@ -103,12 +103,9 @@ public class ReviewController {
 
 /**
  * Add New Review
- * @param review
- * the name of the table from this object
- * @param client
- * the client who ask the query
- * @return
- * true or false if the update Succeeded
+ * @param review the name of the table from this object
+ * @param client the client who ask the query
+ * @return  true or false if the update Succeeded
  * @author Sagi Entenberg
  */
 
@@ -132,11 +129,9 @@ public class ReviewController {
 	}
 
 	/**
-	 *
-	 * @param client
-	 * the client who ask the query
-	 * @return 
-	 * The result of join between the 2 tables:'Book','Review' according the same bookID,return the requested fields.
+	 *The method does a join between 2 tables:'Book','Review' according the same bookID,return the requested fields.
+	 * @param client the client who ask the query
+	 * @return  ArrayList of DBgenericObject  which is the result of the join.
 	 *  @author Coral Carmeli
 	 */
 	public static ArrayList<DBgenericObject> searchJoinReviewBook(DBSQLhandler client) /*throws SQLException*/

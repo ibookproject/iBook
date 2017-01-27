@@ -247,10 +247,28 @@ public class ConfirmationReviewGUI extends JPanel {
 				panel.updateUI();
 				Date d = (Date)(joinAnswerReviewBook.get(i).getValtoArray(3));
 				String txtDate = new SimpleDateFormat("dd/MM/yyyy").format(d);
-					reviewPanels.add(new ReviewPanel(this.screen,(int)joinAnswerReviewBook.get(i).getValtoArray(1),(String)joinAnswerReviewBook.get(i).getValtoArray(2),(String)joinAnswerReviewBook.get(i).getValtoArray(4),Permission,pann,txtDate));	
+					reviewPanels.add(new ReviewPanel(this.screen,(int)joinAnswerReviewBook.get(i).getValtoArray(1),(String)joinAnswerReviewBook.get(i).getValtoArray(2),(String)joinAnswerReviewBook.get(i).getValtoArray(4),Permission,this,txtDate));	
 					panel.add(reviewPanels.get(i));
 				
 			}
+		}
+	}
+	/**
+	 * @author  Coral Carmeli
+	 * @param no parameters
+	 * This method just refresh the panel where the list of reviews is shown,for the return to this method
+	 */
+	public void refreshPanel()
+	{
+		System.out.println("The panel is refreshed");
+		panel.removeAll();
+		panel.updateUI();
+		try {
+			showReviews();
+		} catch (SQLException e) {
+			System.out.println("There is nothing to show");
+			panel.removeAll();
+			JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
 		}
 	}
 }

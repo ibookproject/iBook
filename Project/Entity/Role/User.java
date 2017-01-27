@@ -11,8 +11,12 @@ import client.DBgenericObject;
 import command.DBtranslation;
 
 /**
- * @author Sagi Entenberg
- * 
+ * This class is the entity 'User',here saved all the fields like they presents in the DB.
+ * In this class there are all the getters and setters of the entity User.
+ * When we use the DB-When we insert,delete and update from there we convert the data to be like it saved
+ *  in DB and in this class it all happens.
+ * @author Sagi  Entenberg
+ *
  */
 public class User extends DBtranslation implements UserStatus {
 	private String userID;
@@ -27,14 +31,14 @@ public class User extends DBtranslation implements UserStatus {
 	private Date finishDateOfSubscription;
 
 	/**
-	 * 
-	 * 
+	 * Empty constructor of User
 	 */
-	// empty constructor
 	public User() {
 		super();
 	}
-
+	/**
+	 *constructor of User with one parametr
+	 */
 	public User(String userID) {
 		super();
 		setUserID(userID);
@@ -45,7 +49,10 @@ public class User extends DBtranslation implements UserStatus {
 		setUserID(userID);
 		setPassword(password);
 	}
-
+	/**
+	 *constructor of User with 6 parametres-userID & identityNumber &  password & firstName & lastName & privilege
+	 *this ctor update the user status too
+	 */
 	public User(String userID, String identityNumber, String password, String firstName, String lastName,
 			int privilege) {
 		super();
@@ -61,7 +68,10 @@ public class User extends DBtranslation implements UserStatus {
 		this.userStatus = DISCONNECTED;
 		setFinishDateOfSubscription(d);
 	}
-
+	/**
+	 *constructor of User with 10 parametres-userID & identityNumber &  password & firstName & lastName & privilege
+	 * userStatus & subscriptionRequest & subscriptionMethod & finishDateOfSubscription
+	 */
 	public User(String userID, String password, String identityNumber, String firstName, String lastName,
 			int userStatus, int privilege, int subscriptionRequest, int subscriptionMethod,
 			Date finishDateOfSubscription) {
@@ -71,7 +81,9 @@ public class User extends DBtranslation implements UserStatus {
 		setSubscriptionMethod(subscriptionMethod);
 		this.finishDateOfSubscription = finishDateOfSubscription;
 	}
-
+	/**
+	 *Getter of User ID
+	 */
 	public String getUserID() {
 		return userID;
 	}
@@ -81,7 +93,9 @@ public class User extends DBtranslation implements UserStatus {
 			throw new InputMismatchException("you have  inserted wrong userName");
 		this.userID = userID;
 	}
-
+	/**
+	 *Getter of User Password
+	 */
 	public String getPassword() {
 		return password;
 	}
@@ -91,7 +105,9 @@ public class User extends DBtranslation implements UserStatus {
 			throw new InputMismatchException("you have  inserted wrong password");
 		this.password = password;
 	}
-
+	/**
+	 *Getter of User Identity Number
+	 */
 	public String getIdentityNumber() {
 		return identityNumber;
 	}
@@ -101,7 +117,9 @@ public class User extends DBtranslation implements UserStatus {
 			throw new InputMismatchException("you have  inserted wrong identity Number");
 		this.identityNumber = identityNumber;
 	}
-
+	/**
+	 *Getter of User First Name
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
@@ -112,7 +130,9 @@ public class User extends DBtranslation implements UserStatus {
 			throw new InputMismatchException("you have inserted wrong first name");
 		this.firstName = firstName;
 	}
-
+	/**
+	 *Getter of User Last Name
+	 */
 	public String getLastName() {
 		return lastName;
 	}
@@ -123,7 +143,9 @@ public class User extends DBtranslation implements UserStatus {
 			throw new InputMismatchException("you have inserted wrong last name");
 		this.lastName = lastName;
 	}
-
+	/**
+	 *Getter of User Status
+	 */
 	public int getUserStatus() {
 		return userStatus;
 	}
@@ -144,7 +166,9 @@ public class User extends DBtranslation implements UserStatus {
 
 		}
 	}
-
+	/**
+	 *Getter of User Subscription  Method
+	 */
 	public int getSubscriptionMethod() {
 		return subscriptionMethod;
 	}
@@ -193,7 +217,9 @@ public class User extends DBtranslation implements UserStatus {
 			throw new InputMismatchException("wrong privilege inserted");
 		}
 	}
-
+	/**
+	 *Getter of User Subscription Request
+	 */
 	public int getSubscriptionRequest() {
 		return subscriptionRequest;
 	}
@@ -216,7 +242,9 @@ public class User extends DBtranslation implements UserStatus {
 			throw new InputMismatchException("wrong subscription inserted");
 		}
 	}
-
+	/**
+	 *Getter of User Finish Date Of Subscription
+	 */
 	public Date getFinishDateOfSubscription() {
 		return finishDateOfSubscription;
 	}
@@ -227,21 +255,31 @@ public class User extends DBtranslation implements UserStatus {
 
 		this.finishDateOfSubscription = finishDateOfSubscription;
 	}
-
+	/**
+	 *Getter of User Priviliege
+	 */
 	public int getPriviliege() {
 		return privilege;
 	}
-
+	/**
+	 *Overrides the method of get Class Name
+	 */
 	@Override
 	public String getClassName() {
 		return "user";
 	}
-
+	/**
+	 *method who get attributes to insert to DB with the specific fields-suitable to the User Entity!
+	 *@return string with the specific fields of the entity User
+	 */
 	@Override
 	public String getAttributeToInsert() {
 		return "(userID,password,identityNumber,firstName,lastName,privilege,subscriptionMethod,finishDateOfSubscription)";
 	}
-
+	/**
+	 *method who get values to insert to DB with the specific fields-suitable to the User Entity!
+	 *@return String with specific format of User
+	 */
 	@Override
 	public String getValToInsert() {
 		
@@ -249,9 +287,12 @@ public class User extends DBtranslation implements UserStatus {
 				lastName, privilege, subscriptionMethod, new SimpleDateFormat("yyyy/MM/dd").format(finishDateOfSubscription));
 	}
 
-	// convert array Which was obtained from DB to an actual User
-	// need to implement in all tables.!!!
-
+	/**
+	 * convert array Which was obtained from DB to an actual User
+	 * @param arr this is array of DBgenericObject which will convert to suitable to User entity
+	 * @param fromSentence This is 'Select' query we want to get back.
+	 * @return  ArrayList<User> which is the converted list the method create
+	 */
 	public static ArrayList<User> convertBack(ArrayList<DBgenericObject> arr, String selectSentence) {
 		ArrayList<User> convertedArr = new ArrayList<User>();
 
@@ -266,8 +307,12 @@ public class User extends DBtranslation implements UserStatus {
 
 	}
 
-	// this convert specific DBgenericObject to Subject according the
-	// fromSentence
+	/**
+	 * This convert specific  DBgenericObject to User according the fromSentence
+	 * @param ob This is a DBgenericObject which we need to get value from him- it is the object who return from DB
+	 * @param fromSentenceArray This is 'Select' query we want to get back.
+	 * @return User This User is ready with the parameters from DB
+	 */
 	private static User convertDBObject(DBgenericObject ob, String fromSentenceArray) {
 		User recover = new User();
 		String[] fromSentence = fromSentenceArray.split(",");
@@ -310,7 +355,9 @@ public class User extends DBtranslation implements UserStatus {
 		return recover;
 
 	}
-
+	/**
+	 * This method overrides the method toString() and changed the string who Represents the entity User.
+	 */
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", password=" + password + ", firstName=" + firstName + ", lastName="

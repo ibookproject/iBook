@@ -27,6 +27,7 @@ import MenuGUI.LoginGUI;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JTextArea;
@@ -54,10 +55,10 @@ public class ReviewPanel extends JPanel{
 	private JButton btnRemovePartOf;
 	private int reviewId;
 	private int Permission;
-	private JPanel pann;
+	private ConfirmationReviewGUI pann;
 	private ConfirmationReviewGUI crg;
 	
-	public ReviewPanel(LoginGUI screen,int reviewID,String reviewContent,String bookTitle,int permission,JPanel pan,String reviewDate) {
+	public ReviewPanel(LoginGUI screen,int reviewID,String reviewContent,String bookTitle,int permission,ConfirmationReviewGUI pan,String reviewDate) {
 		setBackground(Color.WHITE);
 		setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 200, 0))));
 		setPreferredSize(new Dimension(731, 149));
@@ -109,8 +110,7 @@ public class ReviewPanel extends JPanel{
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					//crg=new ConfirmationReviewGUI(screen, Permission);
-					
+					pann.refreshPanel();
 					screen.setContentPane(pann);
 				}
 			});
