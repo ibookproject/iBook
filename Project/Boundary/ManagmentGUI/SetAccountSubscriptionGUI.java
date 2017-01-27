@@ -1,5 +1,3 @@
-
-
 package ManagmentGUI;
 
 import javax.swing.JPanel;
@@ -36,7 +34,12 @@ import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * The class take care of the request subscription that comes from the user.
+ * After the worker get answer from the Credit Company  he accept or decline the request of the user for new subscription by clicking on the buttons.
+ * @author  Almog Yamin
+ * 
+ */
 public class SetAccountSubscriptionGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -47,7 +50,11 @@ public class SetAccountSubscriptionGUI extends JPanel {
 	private JScrollPane scrollPaneMain;
 	private ArrayList<User> searcRes;
 	private User u;
-
+	/**
+	 * Constructor of the SetAccountSubscriptionGUI class
+	 * @param screen This is the main window-login extends JFrame
+	 * @author  Almog Yamin
+	 */	
 	public SetAccountSubscriptionGUI(LoginGUI screen) {
 		super();
 		this.screen = screen;
@@ -55,7 +62,11 @@ public class SetAccountSubscriptionGUI extends JPanel {
 
 		initialize();
 	}
-
+	/**
+	 * This method initialize The window of remove part of review-put the components on the screen and set their functionality
+	 * The Worker get a list of all the users that wait for confirmation review, and click on a button to accept or decline each one of the users.
+	 * @author Sagi Entenberg
+	 */
 	private void initialize() {
 
 		this.setSize(850, 625);
