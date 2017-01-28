@@ -92,7 +92,7 @@ public class UserSubscriptionPanel extends JPanel {
 					// and set privilege to 2 (READER) if its under 2
 					if (u.getPriviliege() == 1)
 						result = UserController.SetStatusSubscription(u,
-								"subscriptionMethod=\"" + u.getSubscriptionRequest() + "\" && privilege=\""
+								"subscriptionMethod=\"" + (u.getSubscriptionRequest()*-1) + "\" && privilege=\""
 										+ UserStatus.READER + "\"" + " && subscriptionRequest=\"" + 0 + "\""
 										+ " && finishDateOfSubscription=\""
 										+ new SimpleDateFormat("yyyy/MM/dd").format(time.getTime()) + "\"",

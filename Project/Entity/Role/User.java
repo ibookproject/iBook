@@ -210,6 +210,15 @@ public class User extends DBtranslation implements UserStatus {
 		case SINGLE:
 			this.subscriptionMethod = SINGLE;
 			break;
+		case -1:
+			this.subscriptionMethod = -1;
+			break;
+		case -2:
+			this.subscriptionMethod = -2;
+			break;
+		case -3:
+			this.subscriptionMethod = -3;
+			break;
 		default:
 			throw new InputMismatchException("wrong subscription inserted");
 		}

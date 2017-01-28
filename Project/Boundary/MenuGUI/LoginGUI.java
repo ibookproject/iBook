@@ -186,12 +186,32 @@ public class LoginGUI extends JFrame {
 							//	date = new Date(txtDate);
 								temp.get(0).setUserStatus(UserStatus.CONNECTED);
 								if(temp.get(0).getSubscriptionMethod()!=UserStatus.NONE)
-									if(temp.get(0).getFinishDateOfSubscription().before(date))
+								{
+									if(temp.get(0).getSubscriptionMethod() == -1)
+									{
+										UserController.UpdateUserStatus(u, "subscriptionMethod=1", "userID=\""+ txtUserID.getText()+"\"", screen.client);
+										JOptionPane.showMessageDialog(screen,"Your subscription has been update Succssefully!", "Warning",JOptionPane.INFORMATION_MESSAGE);
+
+									}
+									else if(temp.get(0).getSubscriptionMethod() == -2)
+									{
+										UserController.UpdateUserStatus(u, "subscriptionMethod=2", "userID=\""+ txtUserID.getText()+"\"", screen.client);
+										JOptionPane.showMessageDialog(screen,"Your subscription has been update Succssefully!", "Warning",JOptionPane.INFORMATION_MESSAGE);
+
+									}
+									else if(temp.get(0).getSubscriptionMethod() == -3)
+									{
+										UserController.UpdateUserStatus(u, "subscriptionMethod=3", "userID=\""+ txtUserID.getText()+"\"", screen.client);
+										JOptionPane.showMessageDialog(screen,"Your subscription has been update Succssefully!", "Warning",JOptionPane.INFORMATION_MESSAGE);
+
+									}
+									else if(temp.get(0).getFinishDateOfSubscription().before(date))
 									{
 										UserController.UpdateUserStatus(u, "subscriptionMethod=0", "subscriptionMethod<>0 && userID=\""+ txtUserID.getText()+"\"", screen.client);
 										JOptionPane.showMessageDialog(screen,"SORRY! your subscription has been finished !", "Warning",JOptionPane.WARNING_MESSAGE);
 
 									}
+								}
 							setTempID(temp.get(0).getUserID());
 							UserController.UpdateUserStatus(u, "userStatus=\""+"1"+"\"", "userID=\""+txtUserID.getText()+"\"", screen.client);
 							Test.setExitID(temp.get(0).getUserID());
