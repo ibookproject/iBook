@@ -111,7 +111,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 		add(textFieldAutohr);
 		textFieldAutohr.setColumns(10);
 		
-		JLabel lblNameOfBook = new JLabel("name of book:");
+		JLabel lblNameOfBook = new JLabel("Title of book:");
 		lblNameOfBook.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNameOfBook.setBounds(105, 135, 131, 20);
 		add(lblNameOfBook);

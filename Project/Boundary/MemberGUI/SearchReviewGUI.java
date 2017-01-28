@@ -28,7 +28,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JRadioButton;
-
+/**
+ * The class take care of Search Review functionality search reviews by there book
+ * 
+ * @author  hen saada
+ */
 public class SearchReviewGUI extends JPanel {
 	private JTextField textFieldAutohr;
 	private JTextField textFieldBook;
@@ -48,7 +52,12 @@ public class SearchReviewGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public JButton btnBack ;
 	private JTextField textFieldKeyWord;
-	
+	/**
+	 * the class of build the panel GUI to Search review
+	 * @param screen
+	 *  LoginGUI extends JFrame
+	 * @author Hen Saada
+	 */
 	public SearchReviewGUI(LoginGUI screen) {
 		super();
 		bookId=-1;
@@ -58,7 +67,16 @@ public class SearchReviewGUI extends JPanel {
 		initialize();
 	}
 
-	
+	/**
+	 * This method initialize The window of Search Review ,puts the components on the screen and set their functionality
+	 * the user Can Search Review's By title/author OR keyword of the book's
+	 * title can include numbers and English letter only 
+	 * author can include English letters only
+	 * @author  hen saada
+	 * @param null
+	 * @return null
+	 * 
+	 */
 	private void initialize() {
 		
 		this.setSize(850, 625);

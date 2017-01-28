@@ -103,6 +103,16 @@ public class BookController {
 		}
 	}
 	
+	/**
+	 * This method get a object from type book , that include all the fiiled filds that exsit at the DB and take all the relevant fields and add to the DB
+	 * @author hen saada
+	 * @param fromSentence is the parameters we want to get details on him(Select)
+	 * @param book the book we want to add
+	 * @param client the current client that ask the query
+	 * @return 
+	 * The true if the book was added success
+	 */
+	
 	public static boolean AddBook(Book book,DBSQLhandler client) // boolean function that return true if the add book done else false.
 	{
 		if(book.getTitle()==null||book.getLanguage()==null||book.getAuthor()==null||book.getSummary()==null||book.getContent()==null||book.getKeyword()==null||book.getPrice()<0)
@@ -137,7 +147,17 @@ public class BookController {
 		return false;
 	}
 		
-	//new hen 10.1//
+	/** 
+	 * @param b
+	 * name of the table that get from this object 
+	 * @param client
+	 * the current client that ask the query
+	 * @param
+	 * the update Condition - means search what row to update by this condition
+	 * @return
+	 *  true if the update was success else false
+	 * @author	hen saada
+	 */
 	public static boolean UpdateBook(Book b , String updateCondition , String searchCondition, DBSQLhandler client) // boolean function that return true if user updated else false.
 	{
 			client.UpdateInDB(new updateCommand<DBtranslation>(b, searchCondition, updateCondition));
@@ -230,6 +250,18 @@ public class BookController {
 		else
 			return null;
 	}
+	
+	/** 
+	 * @param b
+	 * name of the table that get from this object 
+	 * @param client
+	 * the current client that ask the query
+	 * @param searchCondition 
+	 * search Condition to find the wanted book , and the delete it 
+	 * @return
+	 *  true if the delete was success else false
+	 * @author	hen saada
+	 */
 	public static boolean DeleteBook(Book b , String searchCondition, DBSQLhandler client)
 	{
 		client.deleteFromDB(new deleteCommand<DBtranslation>(b, searchCondition));

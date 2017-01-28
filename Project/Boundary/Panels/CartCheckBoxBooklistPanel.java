@@ -42,7 +42,10 @@ import javax.swing.DropMode;
 import javax.swing.ImageIcon;
 
 import java.awt.SystemColor;
-
+/**
+ * @author hen saada 
+ * This panel presents the details of the Cart book's List
+ */
 public class CartCheckBoxBooklistPanel extends JPanel{
 	private LoginGUI screen;
 	private JLabel lblAnswerfromserver;
@@ -56,6 +59,18 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 	public JButton btnDownloadBookAgain;
 	public  JButton RemoveAfterBuy;
 
+	
+	
+	/**
+	 * This is the constructor of the class CartManager-put the components on the screen and set their functionality
+	 * @param screen This is the main window-login
+	 * @param book is the Book which the panel shown his details
+	 * @param BookID save the book id of the represented book at the current panel
+	 * @param pan is the previous window of the search
+	 * @param save the index that this panel available at the main panel components list
+	 * @param IsBought mark if the book is bought
+	 * @author  hen saada
+	 */
 	public CartCheckBoxBooklistPanel(LoginGUI screen,Book book,int BookID,JPanel panel,int indeex,int IsBought) {
 		this.book=book;
 		this.IsBought=IsBought;
@@ -75,7 +90,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 		
 		 chckbxNewCheckBox = new JCheckBox();
 		 chckbxNewCheckBox.setBackground(SystemColor.inactiveCaptionBorder);
-		chckbxNewCheckBox.setText("Name:  " + book.getTitle() + "   Author: " + book.getAuthor() +"    price: " +book.getPrice());
+		chckbxNewCheckBox.setText("Title:  " + book.getTitle() + "   Author: " + book.getAuthor() +"    price: " +book.getPrice());
 		chckbxNewCheckBox.setBounds(6, 11, 313, 55);
 		add(chckbxNewCheckBox);
 		

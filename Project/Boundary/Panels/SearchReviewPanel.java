@@ -34,12 +34,22 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
 import javax.swing.border.CompoundBorder;
-
+/**
+ * @author hen saada
+ * This panel presents the details of the review in the class SearchReviewGUI
+ */
 public class SearchReviewPanel extends JPanel{
 	private ArrayList<Book> Books;
 	private LoginGUI screen;
 	private JLabel lblAnswerfromserver;
 	
+	/**
+	 * This is the constructor of the class SearchReview-put the components on the screen and set their functionality
+	 * @param screen This is the main window-login
+	 * @param r is the Review which the panel shown his details
+	 * @param titleBook the title of the back that this review is belong
+	 * @author  hen saada
+	 */
 	public SearchReviewPanel(LoginGUI screen,Review r,String titleBook) {
 		setBackground(Color.WHITE);
 		setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 0))));

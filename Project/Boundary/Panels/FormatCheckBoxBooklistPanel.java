@@ -31,7 +31,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
 import java.awt.SystemColor;
-
+/**
+ * @author hen saada 
+ * This panel presents the details of each panel at  List at Format manager class 
+ */
 public class FormatCheckBoxBooklistPanel extends JPanel{
 	private LoginGUI screen;
 	private JLabel lblAnswerfromserver;
@@ -40,6 +43,13 @@ public class FormatCheckBoxBooklistPanel extends JPanel{
 	public Book book;
 	
 	
+	/**
+	 * This is the constructor of the class FormatManager-put the components on the screen and set their functionality
+	 * @param screen This is the main window-login
+	 * @param book is the Book which the panel shown his details
+	 * @param DomainID save the domain id that this book is belong
+	 * @author  hen saada
+	 */
 	public FormatCheckBoxBooklistPanel(LoginGUI screen,Book book,int DomainID) {
 		this.book=book;
 		this.DomainID=DomainID;
@@ -54,7 +64,7 @@ public class FormatCheckBoxBooklistPanel extends JPanel{
 		
 		 chckbxNewCheckBox = new JCheckBox();
 		 chckbxNewCheckBox.setBackground(SystemColor.inactiveCaptionBorder);
-		chckbxNewCheckBox.setText("Name: " + book.getTitle() + "  Author: " + book.getAuthor());
+		chckbxNewCheckBox.setText("Title: " + book.getTitle() + "  Author: " + book.getAuthor());
 		chckbxNewCheckBox.setBounds(6, 7, 237, 23);
 		add(chckbxNewCheckBox);
 		

@@ -109,9 +109,9 @@ public class FormatManagmentGUI extends JPanel {
 		lblFormatManagment.setBounds(322, 40, 234, 32);
 		add(lblFormatManagment);
 		
-		JLabel lblChooseBook = new JLabel("Choose book for ataching subject :");
+		JLabel lblChooseBook = new JLabel("Choose book's for ataching subject :");
 		lblChooseBook.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblChooseBook.setBounds(31, 99, 252, 20);
+		lblChooseBook.setBounds(10, 99, 273, 20);
 		add(lblChooseBook);
 		
 		JList<?> list = new JList<Object>();
@@ -122,7 +122,7 @@ public class FormatManagmentGUI extends JPanel {
 		JLabel lblChooseDomain = new JLabel("Choose Domain : ");
 		lblChooseDomain.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblChooseDomain.setForeground(Color.BLACK);
-		lblChooseDomain.setBounds(387, 240, 138, 20);
+		lblChooseDomain.setBounds(388, 137, 138, 20);
 		add(lblChooseDomain);
 		
 		JComboBox DomainBox = new JComboBox();
@@ -207,22 +207,22 @@ public class FormatManagmentGUI extends JPanel {
 				else SubjectBox.removeAllItems();
 			}
 		});
-		DomainBox.setBounds(375, 270, 150, 30);
+		DomainBox.setBounds(376, 167, 150, 30);
 		add(DomainBox);
-		SubjectBox.setBounds(618, 270, 150, 30);
+		SubjectBox.setBounds(380, 366, 150, 30);
 		add(SubjectBox);
 		JLabel lblChooseSubjectAt = new JLabel("Choose subject at Domain:");
 		lblChooseSubjectAt.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblChooseSubjectAt.setBounds(595, 240, 212, 20);
+		lblChooseSubjectAt.setBounds(357, 336, 212, 20);
 		add(lblChooseSubjectAt);
 		JLabel lblNewDomain = new JLabel("Add new domain : ");
 		lblNewDomain.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewDomain.setBounds(443, 160, 149, 20);
+		lblNewDomain.setBounds(462, 279, 149, 20);
 		add(lblNewDomain);
 		
 		DomainTextField = new JTextField();
 		DomainTextField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		DomainTextField.setBounds(621, 155, 128, 30);
+		DomainTextField.setBounds(621, 274, 128, 30);
 		add(DomainTextField);
 		DomainTextField.setColumns(10);
 		
@@ -265,19 +265,19 @@ public class FormatManagmentGUI extends JPanel {
 			}
 		});
 		
-		btnAddNewDomain.setBounds(759, 155, 67, 30);
+		btnAddNewDomain.setBounds(759, 274, 67, 30);
 		add(btnAddNewDomain);
 		
 
 		JLabel lblNewSubjectAt = new JLabel("new subject at CHOSSEN domain : ");
 		lblNewSubjectAt.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewSubjectAt.setForeground(Color.BLACK);
-		lblNewSubjectAt.setBounds(340, 457, 252, 20);
+		lblNewSubjectAt.setBounds(340, 473, 252, 20);
 		add(lblNewSubjectAt);
 		
 		SubjectTextField = new JTextField();
 		SubjectTextField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		SubjectTextField.setBounds(621, 452, 128, 30);
+		SubjectTextField.setBounds(621, 468, 128, 30);
 		add(SubjectTextField);
 		SubjectTextField.setColumns(10);
 		
@@ -369,10 +369,10 @@ public class FormatManagmentGUI extends JPanel {
 			}
 		});
 			
-		btnAddNewSubject.setBounds(759, 452, 67, 30);
+		btnAddNewSubject.setBounds(759, 468, 67, 30);
 		add(btnAddNewSubject);
 		
-		JButton btnAtachBook = new JButton("attach book to subject");
+		JButton btnAtachBook = new JButton("attach book's to subject");
 		btnAtachBook.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnAtachBook.addActionListener(new ActionListener() { //attach Button Lisner  !!!!!!!!!!!!!!
 			public void actionPerformed(ActionEvent arg0) {
@@ -414,12 +414,12 @@ public class FormatManagmentGUI extends JPanel {
 		
 		addDomainTableBackground = new JTable();
 		addDomainTableBackground.setBackground(new Color(204, 255, 153));
-		addDomainTableBackground.setBounds(316, 130, 527, 80);
+		addDomainTableBackground.setBounds(316, 130, 527, 182);
 		add(addDomainTableBackground);
 		
 		attachTableBackground = new JTable();
 		attachTableBackground.setBackground(new Color(51, 255, 153));
-		attachTableBackground.setBounds(316, 221, 527, 288);
+		attachTableBackground.setBounds(316, 323, 527, 186);
 		add(attachTableBackground);
 	
 	}

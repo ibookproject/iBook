@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 /**
- * The panel of Cart
+ * The class take care of the Cart   functionality- Buy and downloads books, and remove them
  * @author Sagi Entenberg
  * @author Hen Saada
  * @category download a book from server
@@ -67,7 +67,16 @@ public class CartManagerGUI extends JPanel {
 		cnt=0;
 		initialize();
 	}
-
+	/**
+	 * This method initialize The window of Format manager,puts the components on the screen and set their functionality
+	 * When the user get in to this window, all of his book's that he added to the cart will show up at the list, all the book that there border is GREEN 
+	 * are those who have been purchased already . the user can delete them from the cart , and delete book's that he still didn't bought (only was added to the cart)
+	 * the user can download again the book's that he already have bought
+	 * @author  hen saada
+	 * @param null
+	 * @return null
+	 * 
+	 */
 	private void initialize() {
 		
 		this.setSize(850, 625);
