@@ -79,7 +79,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(0, 0, 0)));
 
-		setPreferredSize(new Dimension(494, 73));
+		setPreferredSize(new Dimension(701, 120));
 		setLayout(null);
 		ImageIcon backIcon =new ImageIcon("Extras/Images/download.png");
 
@@ -88,12 +88,14 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 		add(lblAnswerfromserver);
 		
 		 chckbxNewCheckBox = new JCheckBox();
+		 chckbxNewCheckBox.setFont(new Font("Tahoma", Font.BOLD, 16));
 		 chckbxNewCheckBox.setBackground(SystemColor.inactiveCaptionBorder);
 		chckbxNewCheckBox.setText("Title:  " + book.getTitle() + "   Author: " + book.getAuthor() +"    price: " +book.getPrice());
-		chckbxNewCheckBox.setBounds(6, 11, 313, 55);
+		chckbxNewCheckBox.setBounds(6, 11, 468, 88);
 		add(chckbxNewCheckBox);
 		
 		RemoveButton = new JButton("Remove");
+		RemoveButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		RemoveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -111,10 +113,11 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 					}												
 			}
 		});
-		RemoveButton.setBounds(361, 9, 83, 23);
+		RemoveButton.setBounds(538, 21, 124, 30);
 		add(RemoveButton);
 		
 		btnDownloadBookAgain = new JButton("download",backIcon);
+		btnDownloadBookAgain.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnDownloadBookAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				// ************ SAVE FILE *************//
@@ -141,7 +144,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 			}			
 			}
 		});
-		btnDownloadBookAgain.setBounds(338, 32, 146, 34);
+		btnDownloadBookAgain.setBounds(507, 59, 184, 40);
 		btnDownloadBookAgain.setVisible(false);
 		add(btnDownloadBookAgain);
 	}

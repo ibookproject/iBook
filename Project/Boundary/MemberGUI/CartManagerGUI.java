@@ -92,7 +92,7 @@ public class CartManagerGUI extends JPanel {
 		JLabel LabelMassege = new JLabel("NO subscription Method");
 		LabelMassege.setForeground(Color.RED);
 		LabelMassege.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		LabelMassege.setBounds(360, 547, 226, 54);
+		LabelMassege.setBounds(312, 560, 226, 54);
 		LabelMassege.setVisible(false);
 		add(LabelMassege);
 		
@@ -108,7 +108,7 @@ public class CartManagerGUI extends JPanel {
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPaneMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneMain.setAutoscrolls(true);
-		scrollPaneMain.setBounds(186, 133, 517, 355);
+		scrollPaneMain.setBounds(35, 133, 749, 355);
 		scrollPaneMain.setVisible(false);
 		add(scrollPaneMain);
 
@@ -238,7 +238,7 @@ public class CartManagerGUI extends JPanel {
 			else JOptionPane.showMessageDialog(screen,"no Chossen book's to buy", "Warning",JOptionPane.WARNING_MESSAGE);
 	}
 });		
-		btnBuy.setBounds(417, 519, 80, 39);
+		btnBuy.setBounds(372, 516, 80, 39);
 		add(btnBuy);		
 
 	}	
