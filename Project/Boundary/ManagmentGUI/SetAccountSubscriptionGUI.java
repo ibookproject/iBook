@@ -104,7 +104,6 @@ public class SetAccountSubscriptionGUI extends JPanel {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		u = new User();
 		searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionRequest,privilege",u,"subscriptionRequest <> \"" + 0 + "\"", screen.getClient());//call search book method from book controller
-		//panel.add(new UserSubscriptionPanel(screen , u));
 		if (searcRes != null) {
 			for(User ut:searcRes)
 				panel.add(new UserSubscriptionPanel(this.screen,ut));

@@ -78,7 +78,6 @@ public class UserSubscriptionPanel extends JPanel{
 								result = UserController.SetStatusSubscription(u, "subscriptionMethod=\""+u.getSubscriptionRequest()+"\""+ " && subscriptionRequest=\""+ 0 +"\"" + " && finishDateOfSubscription=\"" + new SimpleDateFormat("yyyy/MM/dd").format(time.getTime()) + "\"", "userID=\""+u.getUserID()+"\"", screen.getClient());
 							if(result)
 							{
-								//lblAnswerfromserver.setText("Confirmed successfully!");
 								lblAnswerfromserver.setText("Confirmed successfully!");
 								lblAnswerfromserver.setForeground(Color.GREEN);
 								btnConfirmSubscription.setVisible(false);
