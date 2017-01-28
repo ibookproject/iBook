@@ -129,8 +129,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 					bookId=tempBooks.get(index).getBookID();
 				else
 					bookId=-1;
-				System.out.println(index);
-				System.out.println(bookId);
+
 				
 				 
 			}
@@ -227,7 +226,7 @@ public class InventoryManagmentDeleteGUI extends JPanel {
 				if(bookId!=-1)
 				{
 					int answer=JOptionPane.showConfirmDialog(null, "are you sure you want to delte this book ?","Warning !!", JOptionPane.YES_NO_OPTION);
-				System.out.println(answer);
+
 					if(answer==0)
 					{
 						//means delete ..... 

@@ -185,7 +185,6 @@ public class FormatManagmentGUI extends JPanel {
 				if(DomainBox.getItemAt(0)!=null)
 				{	
 				resultSubjects=FormatController.SearchSubjectAtDomain("nameSubject", s,"domainID="+((Domain) DomainBox.getSelectedItem()).getDomainID(), screen.getClient());
-				//System.out.println(resultSubjects); // print it at the console ... i cant print it at "subjects" list becuz there is problm
 				if(resultSubjects!=null) // if there is no result 
 				{
 					SubjectBox.removeAllItems(); // first clear all the subject result from the checkbox 

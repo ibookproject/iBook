@@ -253,8 +253,6 @@ public class CartManagerGUI extends JPanel {
 					}
 
 				}
-				System.out.println(cnt);
-				System.out.println(panel.getComponentCount());
 				if(cnt==panel.getComponentCount()) 
 					JOptionPane.showMessageDialog(screen,"You Bought all your Cart Book's list !", "Warning",JOptionPane.WARNING_MESSAGE);
 				else if(flag==1)
