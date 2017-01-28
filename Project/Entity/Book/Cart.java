@@ -39,6 +39,12 @@ public class Cart extends DBtranslation {
 	 *constructor of Cart with 4 parameteres - userID & bookID & status & date
 	 *this ctor ignore the status whos sent to him and set the status uf cart to be ORDERD=0
 	 */
+	/**
+	 * @param userID
+	 * @param bookID
+	 * @param status
+	 * @param date
+	 */
 	public Cart(String userID, int bookID,  int status, String date) {
 		this(userID, bookID);
 		this.status = ORDERD;
@@ -49,6 +55,10 @@ public class Cart extends DBtranslation {
 	 *constructor of Cart with 2 parameteres - userID & bookID 
 	 */
 
+	/**
+	 * @param userID
+	 * @param bookID
+	 */
 	public Cart(String userID, int bookID) {
 		super();
 		setUserID(userID);

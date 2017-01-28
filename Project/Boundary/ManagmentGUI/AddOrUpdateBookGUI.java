@@ -1,40 +1,30 @@
 package ManagmentGUI;
 
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
-import Book.Book;
-import Controller.UserController;
-import Extras.Validation;
-import Controller.BookController;
-import MenuGUI.LoginGUI;
-import client.DBSQLhandler;
-//import client.AddFileUI;
-import command.DBtranslation;
-import command.FileCommand;
-import command.insertCommand;
-
-import javax.swing.JFrame;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import Book.Book;
+import Controller.BookController;
+import Extras.Validation;
+import MenuGUI.LoginGUI;
+
+import command.FileCommand;
+//import client.AddFileUI;
 /**
  * The class of build the panel GUI to add or Update Book
  * @param screen 

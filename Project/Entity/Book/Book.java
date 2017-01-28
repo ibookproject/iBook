@@ -38,16 +38,21 @@ public class Book extends DBtranslation  {
 	{
 		super();	
 	}
+	
 	/**
-	 *constructor of Book with one parametr
+	 * constructor of Book with one parametr
+	 * @param bookID
 	 */
 	public Book(int bookID)
 	{
 		super();	
 		setBookID(bookID);
 	}
+	
 	/**
-	 *constructor of Book with 2 parametres-title & author
+	 * constructor of Book with 2 parametres-title , author
+	 * @param title
+	 * @param author
 	 */
 	public Book(String title, String author) {
 		super();
@@ -55,8 +60,15 @@ public class Book extends DBtranslation  {
 		setAuthor(author);
 	}
 	
+	
 	/**
-	 *constructor of Book with 5 parametres-title & author & language  & summary & bookEnable
+	 * 
+	 *constructor of Book with 5 parametres-title , author , language  , summary , bookEnable
+	 * @param title
+	 * @param language
+	 * @param author
+	 * @param summary
+	 * @param bookEnable
 	 */
 	public Book(String title, String language, String author, String summary, int bookEnable) {
 		this(title,author);
@@ -64,19 +76,33 @@ public class Book extends DBtranslation  {
 		setSummary(summary);
 		setBookEnable(bookEnable);
 	}
+	
 	/**
-	 *constructor of Book with 6 parametres- book ID & title & author & language  & summary & bookEnable
+	 * constructor of Book with 6 parametres- book ID ,title ,author , language  , summary , bookEnable
 	 *This constructor is for the insert to DB/take from DB without keyword and content
+	 * @param bookID
+	 * @param title
+	 * @param language
+	 * @param author
+	 * @param summary
+	 * @param bookEnable
 	 */
 	public Book(int bookID, String title, String language, String author, String summary, int bookEnable) {
 		this(title,language,author,summary,bookEnable);
 		setBookID(bookID);
 	}
 
-	/**
-	 *constructor of Book with 7 parametres- keyword & content & title & author & language  & summary & bookEnable
-	 *This constructor is for take from DB/insert to DB with keyword and content
-	 */
+/**
+ * constructor of Book with 7 parametres- keyword ,title ,author , language  , summary , bookEnable,content
+ *This constructor is for the insert to DB/take from DB without keyword and content
+ * @param title
+ * @param language
+ * @param author
+ * @param summary
+ * @param bookEnable
+ * @param keyword
+ * @param content
+ */
 	public Book( String title, String language, String author, String summary, int bookEnable,String keyword,String content)
 	{
 		this(title,language,author,summary,bookEnable);
@@ -84,9 +110,18 @@ public class Book extends DBtranslation  {
 		setContent(content);
 		
 	}
+	
 	/**
-	 *constructor of Book with 8 parametres- keyword & content & title & author & language  & summary & bookEnable & price
+	 * constructor of Book with 8 parametres- keyword , content , title , author, language  , summary , bookEnable ,price
 	 *This constructor is for take from DB/insert to DB with keyword and content and price and numberOfOrders
+	 * @param title
+	 * @param language
+	 * @param author
+	 * @param summary
+	 * @param bookEnable
+	 * @param keyword
+	 * @param content
+	 * @param price
 	 */
 	public Book( String title, String language, String author, String summary, int bookEnable,String keyword,String content,float price)
 	{
@@ -95,18 +130,28 @@ public class Book extends DBtranslation  {
 		this.numberOfOrder=0;
 		
 	}
+	
 	/**
-	 *constructor of Book with 8 parametres- keyword & content & title & author & language  & summary & bookEnable & price
-	 *This constructor is for take from DB/insert to DB with keyword and content and price and numberOfOrders with default enable=1
+	 * constructor of Book with 8 parametres- keyword , content , title ,author , language  ,summary , bookEnable , price
+	 * This constructor is for take from DB/insert to DB with keyword and content and price and numberOfOrders with default enable=1
+	 * @param title 
+	 * @param language
+	 * @param author
+	 * @param summary
+	 * @param keyword
+	 * @param content
+	 * @param price
 	 */
 	public Book(String title, String language, String author, String summary,String keyword,String content,float price)
 	{
 		this(title,language,author,summary,ENABLE,keyword,content,price);
 		this.numberOfOrder=0;
 	}
+	
 	/**
-	 *constructor of Book with one parametr-book
-	 *initialize all the field of the entity book in the code
+	 * constructor of Book with one parametr-book
+	 * initialize all the field of the entity book in the code
+	 * @param b
 	 */
 	public Book(Book b)
 	{

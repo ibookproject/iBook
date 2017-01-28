@@ -244,7 +244,7 @@ public class ConfirmationReviewGUI extends JPanel {
 		
 		else
 		{
-			System.out.print("joinAnswerReviewBook is not empty!");
+			//System.out.print("joinAnswerReviewBook is not empty!");
 			reviewPanels=new ArrayList<ReviewPanel>();
 			for(int i=0;i<joinAnswerReviewBook.size();i++)
 			{
@@ -265,13 +265,13 @@ public class ConfirmationReviewGUI extends JPanel {
 	 */
 	public void refreshPanel()
 	{
-		System.out.println("The panel is refreshed");
+		//System.out.println("The panel is refreshed");
 		panel.removeAll();
 		panel.updateUI();
 		try {
 			showReviews();
 		} catch (SQLException e) {
-			System.out.println("There is nothing to show");
+			//System.out.println("There is nothing to show");
 			panel.removeAll();
 			JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
 		}

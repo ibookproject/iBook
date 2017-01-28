@@ -79,7 +79,7 @@ public class LoginGUI extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 		  	@Override
 			public void windowClosing(WindowEvent e) {
-		  		ImageIcon point=new ImageIcon("Extras/Images/bookIcon.png");
+		  		ImageIcon point=new ImageIcon("bookIcon.png");//Extras/Images/
 				Object[] options = { "Yes, please", "No" };
 				int result = JOptionPane.showOptionDialog(null, "Would you like exit now?", "Exit",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, point,options,options[0]);

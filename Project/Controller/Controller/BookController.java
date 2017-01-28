@@ -62,7 +62,7 @@ public class BookController {
 			}
 			catch(InterruptedException ex)
 			{
-				System.out.println("InterruptedException "+ex);
+			//	System.out.println("InterruptedException "+ex);
 			}
 		}
 		try {
@@ -356,7 +356,7 @@ public class BookController {
 		
 		Collections.sort(allBooks, BookController.numOfOrdersCompareBook);
 		
-		System.out.println("After sort:");
+		//System.out.println("After sort:");
 		
 		for(Book b4:allBooks)
 		{
@@ -365,7 +365,7 @@ public class BookController {
 				numOfOrder=b4.getNumberOfOrder();
 				title=b4.getTitle();
 				}
-			System.out.print (b4.getNumberOfOrder()+" ");
+			//System.out.print (b4.getNumberOfOrder()+" ");
 		}
 		for(int i=0;i<allBooks.size();i++)
 			if(allBooks.get(i).getNumberOfOrder()==numOfOrder)
@@ -375,8 +375,8 @@ public class BookController {
 			}
 		if (rate!=-1)
 		{
-			JOptionPane.showMessageDialog(screen,"The rate of " +title+" is "+ rate +":"+allBooks.size(), "Success",JOptionPane.YES_NO_CANCEL_OPTION);
-			System.out.println("The rate of " +title+" is "+ rate +":"+allBooks.size());
+			JOptionPane.showMessageDialog(screen,"The rate of " +title+" is "+ rate +" from "+allBooks.size()+" books in the library", "Success",JOptionPane.YES_NO_CANCEL_OPTION);
+			//System.out.println("The rate of " +title+" is "+ rate +":"+allBooks.size());
 		}
 		return rate;
 	}
@@ -387,7 +387,7 @@ public class BookController {
 	 * @param bookID which is the book we want to get the rate in him
 	 * @param client is the current client that ask the query
 	 * @param screen The login menu
-	 * @return the rate of the book agains all the books in the same domain
+	 * @return the rate of the book against all the books in the same domain
 	 * @author Coral Carmeli
 	 */
 	public static int propotionBookRate(int bookID,DBSQLhandler client,LoginGUI screen)
@@ -415,11 +415,6 @@ public class BookController {
 				else
 				{
 					Collections.sort(joinAnswerDomainBook, numOfOrdersCompare);
-					System.out.print("After sorting");
-					for(DBgenericObject j:joinAnswerDomainBook)
-					{
-						System.out.print((long)j.getValtoArray(1)+" ");
-					}
 					for(int i=0;i<joinAnswerDomainBook.size();i++)
 						if((int)joinAnswerDomainBook.get(i).getValtoArray(0)==bookID)
 							{
@@ -428,8 +423,7 @@ public class BookController {
 							}
 					if (rate!=-1)
 					{
-						JOptionPane.showMessageDialog(screen,"The rate of " +title+" is "+ rate +":"+joinAnswerDomainBook.size(), "Success",JOptionPane.YES_NO_CANCEL_OPTION);
-						System.out.println("The rate of " +title+" is "+ rate +":"+joinAnswerDomainBook.size());
+						JOptionPane.showMessageDialog(screen,"The rate of " +title+" is "+ rate +" from "+joinAnswerDomainBook.size()+" Books in the same domain", "Success",JOptionPane.YES_NO_CANCEL_OPTION);
 					}
 					return rate;
 				}	
@@ -437,7 +431,6 @@ public class BookController {
 			catch (SQLException e1) 
 			{
 				JOptionPane.showMessageDialog(screen,"There's nothing to show!", "Warning",JOptionPane.WARNING_MESSAGE);
-				System.out.println("There's no books to this domain!");
 			}
 		}
 		return -1;
@@ -469,7 +462,7 @@ public class BookController {
 			}
 			catch(InterruptedException ex)
 			{
-				System.out.println("InterruptedException "+ex);
+				//System.out.println("InterruptedException "+ex);
 			}
 		}
 		return (ArrayList<DBgenericObject>)client.getResultObject();
@@ -495,7 +488,7 @@ public class BookController {
 				}
 				catch(InterruptedException ex)
 				{
-					System.out.println("InterruptedException "+ex);
+					//System.out.println("InterruptedException "+ex);
 				}
 		}
 		if((temp=client.getResultObject())instanceof byte[])
