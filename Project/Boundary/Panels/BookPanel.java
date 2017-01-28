@@ -104,8 +104,6 @@ public class BookPanel extends JPanel{
 		
 		Calendar time = Calendar.getInstance();
         String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
-		
-		System.out.println("The date is:"+timeRightNow);	
 		Cart c=new Cart();
 		carts=new ArrayList<Cart>();
 		carts=CartController.SearchCart("userID,bookID,buyDate", c, "userID=\""+screen.getTempID()+"\" && bookID=\""+b.getBookID()+"\" && buyDate=\""+timeRightNow+"\"", screen.getClient());
