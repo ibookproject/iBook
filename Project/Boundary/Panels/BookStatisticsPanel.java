@@ -45,8 +45,8 @@ import java.awt.event.ActionEvent;
 
 /**
  * 
- * @author AlmoGSB
- *
+ * This panel presents the book in the Book Statistics page
+ * @author Almog Yamin
  */
 public class BookStatisticsPanel extends JPanel {
 	private ArrayList<Book> Books;

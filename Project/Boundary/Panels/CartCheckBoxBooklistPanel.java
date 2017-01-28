@@ -79,7 +79,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(0, 0, 0)));
 
-		setPreferredSize(new Dimension(701, 120));
+		setPreferredSize(new Dimension(701, 107));
 		setLayout(null);
 		ImageIcon backIcon =new ImageIcon("Extras/Images/download.png");
 
