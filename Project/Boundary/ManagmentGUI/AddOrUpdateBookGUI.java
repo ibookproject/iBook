@@ -1,35 +1,38 @@
 package ManagmentGUI;
-
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
 import Book.Book;
-import Controller.BookController;
+import Controller.UserController;
 import Extras.Validation;
+import Controller.BookController;
 import MenuGUI.LoginGUI;
-
+import client.DBSQLhandler;
+import command.DBtranslation;
 import command.FileCommand;
-//import client.AddFileUI;
+import command.insertCommand;
+import javax.swing.JFrame;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 /**
  * The class of build the panel GUI to add or Update Book
- * @param screen 
  * LoginGUI extends JFrame
- * @param ISUpdateOrAdd
  * flag what selected in the Previous panel
  * @author Sagi Entenberg
  * @author Hen Saada
@@ -62,10 +65,6 @@ public class AddOrUpdateBookGUI extends JPanel {
 	 * flag that set the MODE of the page ,means if we want to use this window to add a new book we will constructor this object with ISUpdateOrAdd= 1
 	 * else if want  to constructor object for update MODE we will send ISUpdateOrAdd=0
 	 *this specific constructor  method is for Addbook
-	 *@param Bookid
-	 * get the book for update
-	 * @param Mainpann
-	 * main panel
 	 * @author Sagi Entenberg
 	 * @author Hen Saada
 	 * @wbp.parser.constructor
@@ -390,7 +389,6 @@ public class AddOrUpdateBookGUI extends JPanel {
 	/**
 	 * This method check validation about all the book fields
 	 * @author  hen saada
-	 * @param null
 	 * @return String include the errors that we collect from all the validation fields
 	 * @author Hen Saada
 	 */

@@ -19,10 +19,6 @@ import java.awt.Font;
 
 /**
  * The class represent a mini  GUI menu  for inventory management
- * @param screen 
- * LoginGUI extends JFrame
- * @param ISUpdateOrAdd
- * flag what selected in the Previous panel
  * @author Hen Saada
  * 
  */

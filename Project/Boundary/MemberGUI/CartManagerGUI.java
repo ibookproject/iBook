@@ -141,7 +141,6 @@ public class CartManagerGUI extends JPanel {
 				((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setSelected(false);
 				((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setEnabled(false);
 				((CartCheckBoxBooklistPanel)panel.getComponent(i)).btnDownloadBookAgain.setVisible(true);
-				((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveAfterBuy.setVisible(true);
 				((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveButton.setVisible(false);
 			}
 		} 
@@ -198,7 +197,6 @@ public class CartManagerGUI extends JPanel {
 						CartController.UpdateCart(c, "status=\""+Cart.BOUGHT+"\"" + " && "+"buyDate=\""+txtDate+"\"", "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+(((CartCheckBoxBooklistPanel)panel.getComponent(i))).BookID+"\"", screen.getClient());
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.setSelected(false);
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).btnDownloadBookAgain.setVisible(true);
-						((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveAfterBuy.setVisible(true);
 						((CartCheckBoxBooklistPanel)panel.getComponent(i)).RemoveButton.setVisible(false);
 						panel.updateUI();
 

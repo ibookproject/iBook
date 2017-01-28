@@ -57,7 +57,6 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 	public JButton RemoveButton;
 	public Book book;
 	public JButton btnDownloadBookAgain;
-	public  JButton RemoveAfterBuy;
 
 	
 	
@@ -112,7 +111,7 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 					}												
 			}
 		});
-		RemoveButton.setBounds(362, 4, 83, 23);
+		RemoveButton.setBounds(361, 9, 83, 23);
 		add(RemoveButton);
 		
 		btnDownloadBookAgain = new JButton("download",backIcon);
@@ -145,28 +144,6 @@ public class CartCheckBoxBooklistPanel extends JPanel{
 		btnDownloadBookAgain.setBounds(338, 32, 146, 34);
 		btnDownloadBookAgain.setVisible(false);
 		add(btnDownloadBookAgain);
-		 RemoveAfterBuy = new JButton("Remove");
-		RemoveAfterBuy.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				int answer=JOptionPane.showConfirmDialog(null, "are you sure??","Warning !!", JOptionPane.YES_NO_OPTION);
-				if(answer==0)//means yes
-				{
-					Cart c=new Cart();
-					CartController.UpdateCart(c, "status=\""+Cart.DELETED+"\"" , "userID=\""+screen.getTempID()+"\""+ " && "+"bookID=\""+BookID+"\"", screen.getClient());
-					System.out.println("index="+index);
-					panel.remove(index);
-					for(int i=index;i<panel.getComponentCount();i++)
-					{	
-						((CartCheckBoxBooklistPanel)panel.getComponent(i)).index--;
-					}
-					panel.updateUI();
-				}
-				
-			}
-		});
-		RemoveAfterBuy.setBounds(362, 4, 83, 23);
-		add(RemoveAfterBuy);		
 	}
 }
 
