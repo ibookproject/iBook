@@ -37,7 +37,16 @@ public class BookPerCart extends JPanel{
 	private JLabel lblDate;
 	private JLabel lblNewDate ;
 	private JLabel lblTitle;
-	
+
+	/**
+	 * This is the constructor of the class BookPerCart-put the components on the screen and set their functionality
+	 * @param screen This is the main window-login
+	 * @param bookId this is the book id which book per cart is presented for
+	 * @param bookTitle this is the book title which book per cart is presented for
+	 * @param bookAutor  this is the book Author which book per cart is presented for
+	 * @param cartDate this is the cart date which book per cart is presented for
+	 * @author  Coral Carmeli
+	 */
 	public BookPerCart(LoginGUI screen,int bookId,String bookTitle, String bookAutor,String cartDate) {
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) Color.ORANGE));

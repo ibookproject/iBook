@@ -58,6 +58,17 @@ public class ReviewPanel extends JPanel{
 	private ConfirmationReviewGUI pann;
 	private ConfirmationReviewGUI crg;
 	
+	/**
+	 * This is the constructor of the class BookPerCart-put the components on the screen and set their functionality
+	 * @param screen This is the main window-login
+	 * @param reviewID this is the review id which review panel present
+	 * @param reviewContent this is the review Content which review panel present
+	 * @param bookTitle this is the book title which review panel present
+	 * @param permission this is the permission that choose what show to the user
+	 * @param pan this is the pannel that return to him from this class
+	 * @param reviewDate this is the review date which review panel present
+	 * @author  Coral Carmeli
+	 */
 	public ReviewPanel(LoginGUI screen,int reviewID,String reviewContent,String bookTitle,int permission,ConfirmationReviewGUI pan,String reviewDate) {
 		setBackground(Color.WHITE);
 		setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 200, 0))));
@@ -97,6 +108,11 @@ public class ReviewPanel extends JPanel{
 		chckbxChooseReview.setBounds(8, 61, 29, 25);
 		add(chckbxChooseReview);
 		
+		
+		/**
+		 * This Button 'Remove Part Of Review' move to another window of remove part of review
+		 * @author Coral Carmeli	
+		 */
 		btnRemovePartOf = new JButton("Remove Part Of Review");
 		btnRemovePartOf.setBounds(563, 47, 173, 25);
 		btnRemovePartOf.addActionListener(new ActionListener() 
