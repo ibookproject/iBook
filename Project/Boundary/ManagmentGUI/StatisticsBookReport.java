@@ -130,7 +130,7 @@ public class StatisticsBookReport extends JPanel {
 		}
 		else
 		{
-			lblResult.setText("There is no purchase or searches to this book :(");
+			lblResult.setText("There is no purchase or searches to this book");
 			lblResult.setForeground(Color.RED);
 		}
 	}

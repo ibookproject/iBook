@@ -90,13 +90,6 @@ public class UpdateUserInfoGUI extends JPanel {
 		btnUpdate.setEnabled(false);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * private JTextField FirstNameTextField; private JTextField
-				 * LastNameTextField; private JTextField UserIDTextField;
-				 * private JTextField PasswordtextField; private JTextField
-				 * txtFinishDate;
-				 */
-
 				String warnings = "ERROR :\n";
 				if (!Validation.PasswordValidation(PasswordtextField.getText()))
 					warnings += "Password - The following characters are not allowed :|,%,\\," + "\",',&,=\n";
@@ -192,7 +185,7 @@ public class UpdateUserInfoGUI extends JPanel {
 									+ "lastName,userStatus,privilege,subscriptionRequest,subscriptionMethod,finishDateOfSubscription",
 							u, "userID=\"" + u.getUserID() + "\"", screen.getClient());
 					if (temp == null || temp.isEmpty())
-						JOptionPane.showMessageDialog(screen, "User ID not found.", "Warning",
+						JOptionPane.showMessageDialog(screen, "User ID not found", "Warning",
 								JOptionPane.WARNING_MESSAGE);
 
 					else {
