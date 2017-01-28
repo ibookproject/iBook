@@ -1,4 +1,3 @@
-
 package Panels;
 
 import javax.swing.JPanel;
@@ -32,12 +31,26 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
-
+/**
+ * 
+ * This panel presents the LibraryWorker in the allUsers page
+ * 
+ * @author Almog Yamin
+ */
 public class WorkersPanel extends JPanel{
 	private ArrayList<Book> Books;
 	private LoginGUI screen;
 //	private java.util.Date date;
 	
+	/**
+	 * This is the constructor of the class WorkersPanel -put the
+	 * components on the screen and set their functionality.
+	 * this panel show the Worker's details
+	 * @param screen
+	 * This is the main window-login
+	 * @param lw
+	 * is a LibraryWorker which the panel shows his details
+	 */
 	public WorkersPanel(LoginGUI screen,LibraryWorker lw) {
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(50, 100, 150)));

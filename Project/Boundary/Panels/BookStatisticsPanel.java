@@ -46,6 +46,7 @@ import java.awt.event.ActionEvent;
 /**
  * 
  * This panel presents the book in the Book Statistics page
+ * 
  * @author Almog Yamin
  */
 public class BookStatisticsPanel extends JPanel {
@@ -59,7 +60,20 @@ public class BookStatisticsPanel extends JPanel {
 	private Date to;
 	// private java.util.Date date;
 
-
+	/**
+	 * This is the constructor of the class BookStatisticsPanel -put the
+	 * components on the screen and set their functionality. here the manager can
+	 * choose a dates (from and to) and click on "get statistics" button, then
+	 * he will direct to other panel where show the statistics of the book by
+	 * this dates.
+	 * 
+	 * @param screen
+	 *            This is the main window-login
+	 * @param b
+	 *            is a Book which the panel shows his details
+	 * @param pann
+	 *            is the previous window of this window
+	 */
 	public BookStatisticsPanel(LoginGUI screen, Book b, JPanel pann) {
 		setBackground(Color.WHITE);
 		setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(46, 139, 87)));

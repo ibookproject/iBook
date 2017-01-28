@@ -34,10 +34,13 @@ import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 /**
  * The class take care of the request subscription that comes from the user.
- * After the worker get answer from the Credit Company  he accept or decline the request of the user for new subscription by clicking on the buttons.
- * @author  Almog Yamin 
+ * After the worker get answer from the Credit Company he accept or decline the
+ * request of the user for new subscription by clicking on the buttons.
+ * 
+ * @author Almog Yamin
  */
 public class SetAccountSubscriptionGUI extends JPanel {
 
