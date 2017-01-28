@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import Controller.UserController;
-import DB.Test;
+import DB.ibookClient;
 import Extras.TimerProject;
 import client.DBSQLhandler;
 
@@ -214,8 +214,8 @@ public class LoginGUI extends JFrame {
 								}
 							setTempID(temp.get(0).getUserID());
 							UserController.UpdateUserStatus(u, "userStatus=\""+"1"+"\"", "userID=\""+txtUserID.getText()+"\"", screen.client);
-							Test.setExitID(temp.get(0).getUserID());
-							Test.setExitCLIENT(screen);
+							ibookClient.setExitID(temp.get(0).getUserID());
+							ibookClient.setExitCLIENT(screen);
 					switch (temp.get(0).getPriviliege()) {
 							
 					case UserStatus.USER: {

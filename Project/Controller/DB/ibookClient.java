@@ -11,7 +11,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 
-public class Test {
+public class ibookClient {
 	private static String exitID;
 	private static LoginGUI exitCLIENT;
 	public static void main( String args[] )
@@ -27,17 +27,7 @@ public class Test {
 		//host="192.168.10.250";
 		//
 		  LoginGUI loginFrame = new LoginGUI(host); // create StudentFrame
-		  /*
-		  loginFrame.addWindowListener(new WindowAdapter() {
-		  	@Override
-		  
-		  	public void windowClosing(WindowEvent e) {
-		  		User u = new User(exitID);
-		  		UserController.UpdateUserStatus(u, "userStatus=\""+"0"+"\"", "userID=\""+exitID+"\"",exitCLIENT.getClient());
-		  		System.out.println(exitID);
-		  	}
-		  });
-		  */
+
 		  
 		  loginFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		  loginFrame.setSize( 850,625 ); // set frame size
@@ -55,7 +45,7 @@ public class Test {
 		return exitCLIENT;
 	}
 	public static void setExitCLIENT(LoginGUI exitCLIENT) {
-		Test.exitCLIENT = exitCLIENT;
+		ibookClient.exitCLIENT = exitCLIENT;
 	}
 
 }
