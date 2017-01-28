@@ -30,7 +30,7 @@ public class Book extends DBtranslation  {
 	public static final int ENABLE=1;
 	public static final int DISEABLE=0;
 	public static final int TITLESIZE=50;
-	public static final int AUTHORSIZE=30;
+	public static final int AUTHORSIZE=100;
 	/**
 	 * Empty constructor of Book
 	 */

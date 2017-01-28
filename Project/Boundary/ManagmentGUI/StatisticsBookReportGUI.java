@@ -152,7 +152,7 @@ public class StatisticsBookReportGUI extends JPanel {
 							JOptionPane.WARNING_MESSAGE);
 				else {
 					String warnings = "ERROR :\n";
-					if (Validation.AuthorValidation(textFieldAuthor.getText().trim(), 20) == false)
+					if (Validation.AuthorValidation(textFieldAuthor.getText().trim(), 100) == false)
 						if (!textFieldAuthor.getText().isEmpty())
 							warnings += "author field - Must contain only English letters \n";
 					if (Validation.TitleValidation(textFieldBookTitle.getText().trim(), 20) == false) // check
