@@ -41,7 +41,14 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 	private ArrayList<Book> tempBooks;
 	private JPanel Mainpann;
 
-
+	/**
+	 * the class of build the panel GUI to Search for Update  book
+	 * @param screen
+	 *  LoginGUI extends JFrame
+	 *  @param 
+	 *  the last panel of the inventorymenu for go back after the update was done 
+	 * @author Hen Saada
+	 */
 
 	public InventoryManagmentSearchForUpdateGUI(LoginGUI screen,JPanel Mainpann) {
 		super();
@@ -60,8 +67,6 @@ public class InventoryManagmentSearchForUpdateGUI extends JPanel {
 	 * title can include numbers and English letter only 
 	 * author can include English letters only
 	 * @author  hen saada
-	 * @param null
-	 * @return null
 	 * 
 	 */
 	private void initialize() {

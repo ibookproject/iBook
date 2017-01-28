@@ -32,8 +32,6 @@ public class InventoryManagmentGUI extends JPanel {
 	 * The class of build the panel GUI to mini menu for inventory management
 	 * @param screen 
 	 * LoginGUI extends JFrame
-	 * @param ISUpdateOrAdd
-	 * flag what selected in the Previous panel
 	 * @author Hen Saada
 	 * 
 	 */
@@ -49,10 +47,7 @@ public class InventoryManagmentGUI extends JPanel {
 	
 	/**
 	 * This method initialize The window of inventory manager,puts the components on the screen and set their functionality that is add ,delete or update a book
-
 	 * @author  hen saada
-	 * @param null
-	 * @return null
 	 * 
 	 */
 	private void initialize() {

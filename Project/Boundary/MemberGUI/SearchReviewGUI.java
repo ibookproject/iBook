@@ -73,8 +73,6 @@ public class SearchReviewGUI extends JPanel {
 	 * title can include numbers and English letter only 
 	 * author can include English letters only
 	 * @author  hen saada
-	 * @param null
-	 * @return null
 	 * 
 	 */
 	private void initialize() {

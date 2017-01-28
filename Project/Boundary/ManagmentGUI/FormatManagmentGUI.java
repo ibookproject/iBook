@@ -79,8 +79,6 @@ public class FormatManagmentGUI extends JPanel {
 	 *  also the method check validation about wrong letter at input of new subject and domain 
 	 *  and also check if the domain or the subject is already exist at the system.
 	 * @author  hen saada
-	 * @param null
-	 * @return null
 	 * 
 	 */
 	private void initialize() {	

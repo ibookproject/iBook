@@ -22,6 +22,7 @@ import Controller.UserController;
 import MenuGUI.LoginGUI;
 import Panels.CartCheckBoxBooklistPanel;
 import Role.User;
+import Role.UserStatus;
 import command.joinObject;
 
 import javax.swing.JOptionPane;
@@ -53,6 +54,7 @@ public class CartManagerGUI extends JPanel {
 	private Date date;
 	private int cnt;
 	private JButton btnBuy;
+	private int SignleSubscriptionGUI;
 
 /**
  * Consructor- building the panel
@@ -63,6 +65,7 @@ public class CartManagerGUI extends JPanel {
  */
 	public CartManagerGUI(LoginGUI screen,int UserIdAtDataBase) {
 		super();
+		SignleSubscriptionGUI=0;
 		this.screen=screen;
 		cnt=0;
 		initialize();
@@ -70,11 +73,9 @@ public class CartManagerGUI extends JPanel {
 	/**
 	 * This method initialize The window of Format manager,puts the components on the screen and set their functionality
 	 * When the user get in to this window, all of his book's that he added to the cart will show up at the list, all the book that there border is GREEN 
-	 * are those who have been purchased already . the user can delete them from the cart , and delete book's that he still didn't bought (only was added to the cart)
+	 * are those who have been purchased already . the user can delete  book's that he still didn't bought (only was added to the cart)
 	 * the user can download again the book's that he already have bought
 	 * @author  hen saada
-	 * @param null
-	 * @return null
 	 * 
 	 */
 	private void initialize() {
@@ -92,17 +93,25 @@ public class CartManagerGUI extends JPanel {
 		JLabel LabelMassege = new JLabel("NO subscription Method");
 		LabelMassege.setForeground(Color.RED);
 		LabelMassege.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		LabelMassege.setBounds(312, 560, 226, 54);
+		LabelMassege.setBounds(311, 543, 226, 54);
 		LabelMassege.setVisible(false);
 		add(LabelMassege);
 		
 		//checking if there is any subscription method
-		searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionMethod,privilege",u,"subscriptionMethod<>\"" + 0 + "\""+" && " + "userID=\"" + screen.getTempID() + "\"", screen.getClient());//call search book method from book controller
-		if(searcRes==null)
+		searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionMethod,privilege",u,"subscriptionMethod=\"" + 1 + "\""+" && " + "userID=\"" + screen.getTempID() + "\"", screen.getClient());//call search book method from book controller
+		if(searcRes!=null)
+			SignleSubscriptionGUI=1;
+			
+	
+		if(SignleSubscriptionGUI==0)
 		{
-			btnBuy.setEnabled(false);
-			LabelMassege.setVisible(true);
-		}	
+			searcRes = UserController.SearchUser("userID,firstName,lastName,subscriptionMethod,privilege",u,"subscriptionMethod<>\"" + 0 + "\""+" && " + "userID=\"" + screen.getTempID() + "\"", screen.getClient());//call search book method from book controller
+			if(searcRes==null)
+			{
+				btnBuy.setEnabled(false);
+				LabelMassege.setVisible(true);
+			}	
+		}
 
 		scrollPaneMain = new JScrollPane();
 		scrollPaneMain.getVerticalScrollBar().setUnitIncrement(16);
@@ -127,7 +136,7 @@ public class CartManagerGUI extends JPanel {
 		int flag=0;
 		ArrayList<Book> bbb;
 		/**JOIN BETWEEN BOOK AND CART**/
-		//get all the book at cart that is status 0 or 1 means not buy or already buy but not buy and then delete
+
 		bbb=CartController.GetCartListForUser("book.bookID,book.title,book.author,book.price",c,temp,"userID=\""+screen.getTempID() +"\""+" && "+"status=\""+Cart.BOUGHT+"\"", screen.getClient());
 		if (bbb != null) {
 			flag=1;
@@ -177,8 +186,21 @@ public class CartManagerGUI extends JPanel {
 		btnBuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int flag=0;
+				int cntSelected=0;
 		ArrayList<Integer> tempBooksId = new 	ArrayList<Integer> ();
-			if(panel.getComponentCount()!=0)
+		
+		for(int i=0;i<panel.getComponentCount();i++)
+		{
+			if((((CartCheckBoxBooklistPanel)panel.getComponent(i)).chckbxNewCheckBox.isSelected())==true)
+				cntSelected++;
+		}
+		
+		if(SignleSubscriptionGUI==1&&panel.getComponentCount()!=0&&cntSelected>1)
+		{
+			JOptionPane.showMessageDialog(screen,"Sorry you can buy only 1 book from the cart.(single subscriptionMethod)", "Warning",JOptionPane.WARNING_MESSAGE);
+			cntSelected=0;	
+		}
+	else if(panel.getComponentCount()!=0)
 			{
 				Cart c= new Cart();
 				date = new Date();
@@ -222,6 +244,14 @@ public class CartManagerGUI extends JPanel {
 						}
 					}			
 					}
+					
+					if(SignleSubscriptionGUI==1&&cntSelected!=0)
+					{
+						UserController.UpdateUserStatus(u, "subscriptionMethod=\""+0+"\"", "userID=\""+screen.getTempID()+"\"", screen.getClient());
+						btnBuy.setEnabled(false);
+						LabelMassege.setVisible(true);	
+					}
+
 				}
 				System.out.println(cnt);
 				System.out.println(panel.getComponentCount());
