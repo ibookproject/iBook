@@ -58,7 +58,7 @@ public class LibrarianMenu extends QualifiedEditorMenu {
 				screen.setContentPane(Im);//
 			}
 		});
-		btnInventoryManagment.setBounds(12, 507, 189, 53);
+		btnInventoryManagment.setBounds(12, 507, 193, 53);
 		btnInventoryManagment.setFont(new Font("Tahoma", Font.BOLD, 13));
 		add(btnInventoryManagment);
 		

@@ -43,6 +43,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
+/**
+ * 
+ * @author AlmoGSB
+ *
+ */
 public class BookStatisticsPanel extends JPanel {
 	private ArrayList<Book> Books;
 	private LoginGUI screen;
@@ -53,6 +58,7 @@ public class BookStatisticsPanel extends JPanel {
 	private Date from;
 	private Date to;
 	// private java.util.Date date;
+
 
 	public BookStatisticsPanel(LoginGUI screen, Book b, JPanel pann) {
 		setBackground(Color.WHITE);

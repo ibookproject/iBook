@@ -61,12 +61,12 @@ public class BookPerCart extends JPanel{
 		
 		lblAutor = new JLabel("Author:");
 		lblAutor.setFont(new Font("VAGRounded BT", Font.BOLD, 21));
-		lblAutor.setBounds(344, 11, 76, 26);
+		lblAutor.setBounds(321, 11, 77, 26);
 		add(lblAutor);
 		
 		lblNewAutor = new JLabel(bookAutor);
 		lblNewAutor.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewAutor.setBounds(421, 11, 116, 29);
+		lblNewAutor.setBounds(407, 11, 130, 29);
 		add(lblNewAutor);
 		
 		lblDate = new JLabel("Date:");

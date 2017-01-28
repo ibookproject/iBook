@@ -138,7 +138,7 @@ public class RequestPostFillReviewGUI extends JPanel
 					
 					
 					}
-				if(textAreaReviewContent.getText().length()>=50)
+				if(textAreaReviewContent.getText().length()>=200)
 					a.consume();
 			
 			}
@@ -154,7 +154,7 @@ public class RequestPostFillReviewGUI extends JPanel
 				}
 				else 
 				{
-					if((pressedChar.getKeyChar()!=8)&&conterOfText<50&&(pressedChar.getKeyCode()!=16))
+					if((pressedChar.getKeyChar()!=8)&&conterOfText<200&&(pressedChar.getKeyCode()!=16))
 					{
 						char c = pressedChar.getKeyChar();
 						String charToString = Character.toString(c);
@@ -195,7 +195,7 @@ public class RequestPostFillReviewGUI extends JPanel
 				Calendar time = Calendar.getInstance();
 		        String timeRightNow = String.format("%1$tY/%1$tm/%1$td", time);
 
-		        if(!(textAreaReviewContent.getText().equals(""))&&(conterOfText<=50))
+		        if(!(textAreaReviewContent.getText().equals(""))&&(conterOfText<=200))
 				{
 		        	
 		        Review r = new Review(textAreaReviewContent.getText(),bookID,screen.getTempID());
@@ -223,7 +223,7 @@ public class RequestPostFillReviewGUI extends JPanel
 				}//yes no option
 			
 				}//else if
-		        else if(conterOfText>=50)
+		        else if(conterOfText>=200)
 		        	JOptionPane.showMessageDialog(screen,"There are too many characters ! ", "Warning",JOptionPane.WARNING_MESSAGE);
 		        else
 		        	JOptionPane.showMessageDialog(screen,"Please insert Review content ! ", "Warning",JOptionPane.WARNING_MESSAGE);

@@ -28,7 +28,7 @@ CREATE TABLE `book` (
   `bookID` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
   `language` varchar(45) NOT NULL,
-  `author` varchar(45) NOT NULL,
+  `author` varchar(500) NOT NULL,
   `summary` varchar(500) NOT NULL,
   `bookEnable` tinyint(2) NOT NULL DEFAULT '1',
   `keyword` varchar(10000) DEFAULT '" "',
@@ -283,4 +283,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-27 11:51:50
+-- Dump completed on 2017-01-28 17:05:55
